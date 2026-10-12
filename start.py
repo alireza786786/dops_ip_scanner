@@ -137,7 +137,7 @@ async def main():
     if alive:
         best = min(alive, key=lambda x: (x.get("ping_ms") or 9999))
         best_ping = str(int(best.get("ping_ms") or 0))
-        caption = format_config_remark(flag="☁️", country="Cloudflare", city="Anycast CDN", ping=best_ping, feature="Clean Edge IP")
+        caption = format_config_remark(flag="☁️", country="Cloudflare", city="Anycast CDN", ping=best_ping, feature=f"تعداد: {len(alive)} آی‌پی سالم")
         send_telegram_file(out_file, caption=caption)
 
 if __name__ == "__main__":
