@@ -27,12 +27,13 @@ def send_telegram_file(file_path: str, caption: str = ""):
     body = (
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"chat_id\"\r\n\r\n{CHAT_ID}\r\n"
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n{caption}\r\n"
+        f"--{boundary}\r\nContent-Disposition: form-data; name=\"parse_mode\"\r\n\r\nMarkdown\r\n"
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"reply_markup\"\r\n\r\n{json.dumps(INLINE_KEYBOARD)}\r\n"
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"document\"; filename=\"{filename}\"\r\nContent-Type: text/plain\r\n\r\n"
     ).encode("utf-8") + file_bytes + f"\r\n--{boundary}--\r\n".encode("utf-8")
     req = urllib.request.Request(url, data=body, headers={"Content-Type": f"multipart/form-data; boundary={boundary}"})
     try:
         with urllib.request.urlopen(req, timeout=30):
-            print(f"✅ فایل {filename} با موفقیت به تلگرام ارسال شد.")
+            print(f"✅ فایل {filename} با ۵ آی‌پی برتر به تلگرام ارسال شد.")
     except Exception as e:
         print(f"❌ خطا در ارسال تلگرام: {e}")
