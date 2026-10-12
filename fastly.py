@@ -8,7 +8,7 @@ from sender import send_telegram_file, format_config_remark
 TEST_HOST = "www.github.com"
 PORT = 443
 OUTPUT_DIR = "outputs"
-SAMPLES_PER_CIDR = 80
+SAMPLES_PER_CIDR = 60
 CONCURRENCY = 150
 FASTLY_IP_LIST_URL = "https://api.fastly.com/public-ip-list"
 
@@ -58,6 +58,7 @@ async def main():
     targets = []
     for c in cidrs: targets.extend(sample_ips(c, SAMPLES_PER_CIDR))
     targets = sorted(set(targets))
+    print(f"📡 Fastly IPs to scan: {len(targets)}")
 
     sem = asyncio.Semaphore(CONCURRENCY)
     async def worker(ip):
@@ -68,8 +69,6 @@ async def main():
 
     results = await asyncio.gather(*[worker(ip) for ip in targets])
     alive = [x for x in results if x["ok"]]
-    
-    # مرتب‌سازی قطعی از کمترین پینگ به بیشترین
     alive.sort(key=lambda x: (x.get("ping_ms") or 9999, x.get("connect_ms") or 9999))
     
     out_file = os.path.join(OUTPUT_DIR, "alive_fastly.txt")
@@ -83,13 +82,12 @@ async def main():
         best_ping = str(int(best.get("ping_ms") or best.get("connect_ms") or 0))
         base_caption = format_config_remark(flag="⚡", country="Fastly CDN", city="Global Edge", ping=best_ping, feature=f"تعداد: {len(alive)} آی‌پی سالم")
         
-        # استخراج ۵ آی‌پی برتر با فرمت تک‌لمس برای کپی
         top5 = alive[:5]
-        top_lines = "\n".join([f"🔹 `{x['ip']}` (⚡ {int(x.get('ping_ms') or x.get('connect_ms') or 0)}ms)" for x in top5])
+        top_lines = "\n".join([f"🔹 <code>{x['ip']}</code> (⚡ {int(x.get('ping_ms') or x.get('connect_ms') or 0)}ms)" for x in top5])
         
         full_caption = (
             f"{base_caption}\n\n"
-            f"👑 ۵ آی‌پی برتر (کلیک روی آی‌پی = کپی):\n"
+            f"👑 <b>۵ آی‌پی برتر (کلیک روی آی‌پی = کپی):</b>\n"
             f"{top_lines}\n\n"
             f"📁 لیست کامل {len(alive)} آی‌پی در فایل بالا قرار دارد."
         )
