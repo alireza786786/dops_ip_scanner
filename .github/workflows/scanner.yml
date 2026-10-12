@@ -1,0 +1,44 @@
+name: Auto CDN Scanner & Telegram Sender
+
+on:
+  schedule:
+    - cron: '0 */3 * * *'  # اجرا خودکار هر ۳ ساعت یک‌بار
+  workflow_dispatch:        # امکان اجرای دستی از داخل سایت گیت‌هاب
+
+permissions:
+  contents: write
+
+jobs:
+  scan-and-publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Cloudflare Scanner
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: |
+          python3 start.py
+
+      - name: Run Fastly Scanner
+        env:
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+        run: |
+          python3 fastly.py
+
+      - name: Commit and Push Outputs
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add outputs/
+          git commit -m "auto: update scan results [skip ci]" || echo "No changes"
+          git push
