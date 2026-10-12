@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 import asyncio, os, random, re, ssl, sys, time, json
 from typing import List, Optional
 from urllib.request import urlopen, Request
@@ -9,10 +10,11 @@ PORT = 443
 OUTPUT_DIR = "outputs"
 SAMPLES_PER_CIDR = 100
 CONCURRENCY = 150
+FASTLY_IP_LIST_URL = "https://api.fastly.com/public-ip-list"
 
 def fetch_fastly_ranges():
     try:
-        req = Request("https://api.fastly.com/public-ip-list", headers={"User-Agent": "fastly-probe/2.1"})
+        req = Request(FASTLY_IP_LIST_URL, headers={"User-Agent": "fastly-probe/2.1"})
         with urlopen(req, timeout=30) as r:
             return json.loads(r.read().decode("utf-8")).get("addresses", [])
     except Exception:
@@ -69,12 +71,20 @@ async def main():
     results = await asyncio.gather(*[worker(ip) for ip in targets])
     alive = [x for x in results if x["ok"]]
     out_file = os.path.join(OUTPUT_DIR, "alive_fastly.txt")
+    
     with open(out_file, "w", encoding="utf-8") as f:
-        for x in alive: f.write(f"{x["ip"]} ping={x.get("ping_ms")}ms connect={x["connect_ms"]}ms\n")
+        for x in alive:
+            ip_val = x['ip']
+            ping_val = x.get('ping_ms')
+            conn_val = x['connect_ms']
+            f.write(f"{ip_val} ping={ping_val}ms connect={conn_val}ms\n")
+            
     print(f"\n✅ Fastly Scan Done. {len(alive)} IPs alive.")
     if alive:
         best = min(alive, key=lambda x: (x.get("ping_ms") or 9999))
-        send_telegram_file(out_file, caption=format_config_remark(flag="⚡", country="Fastly CDN", city="Global Edge", ping=str(int(best.get("ping_ms") or 0)), feature="Optimized Anycast"))
+        best_ping = str(int(best.get("ping_ms") or 0))
+        caption = format_config_remark(flag="⚡", country="Fastly CDN", city="Global Edge", ping=best_ping, feature="Optimized Anycast")
+        send_telegram_file(out_file, caption=caption)
 
 if __name__ == "__main__":
     asyncio.run(main())
