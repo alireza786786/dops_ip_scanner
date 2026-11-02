@@ -2,7 +2,7 @@ name: Auto CDN Scanner & Telegram Sender
 
 on:
   schedule:
-    - cron: '0 */3 * * *'  # اجرا خودکار هر ۳ ساعت یک‌بار
+    - cron: '0 */6 * * *'  # اجرا خودکار هر ۳ ساعت یک‌بار
   workflow_dispatch:        # امکان اجرای دستی از داخل سایت گیت‌هاب
 
 permissions:
