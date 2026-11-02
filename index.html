@@ -2,151 +2,127 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>DOPS Ultra CDN Scanner</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DOPS Advanced CDN Scanner</title>
   <style>
     :root {
-      --bg: #070b14;
-      --card: #0f172a;
-      --card-border: #1e293b;
-      --accent: #00f2fe;
-      --accent-grad: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
+      --bg: #0b111e;
+      --card: #131c2e;
+      --border: #1f2d47;
+      --accent: #00ffcc;
+      --text: #e2e8f0;
+      --text-muted: #8492a6;
+      --success: #2ed573;
+      --warning: #ffa502;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
-    body { background-color: var(--bg); color: var(--text); padding: 12px; display: flex; justify-content: center; }
-    .app { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 12px; }
+    body { background-color: var(--bg); color: var(--text); padding: 15px; display: flex; justify-content: center; }
+    .container { width: 100%; max-width: 650px; display: flex; flex-direction: column; gap: 14px; }
 
     /* Header */
     .header { text-align: center; padding: 10px 0; }
-    .badge { display: inline-block; font-size: 11px; padding: 3px 12px; border-radius: 20px; background: rgba(0, 242, 254, 0.1); border: 1px solid var(--accent); color: var(--accent); margin-bottom: 6px; font-weight: bold; }
-    h1 { font-size: 22px; background: var(--accent-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .badge { display: inline-block; padding: 4px 14px; font-size: 11px; color: var(--accent); border: 1px solid var(--accent); border-radius: 20px; margin-bottom: 8px; letter-spacing: 1px; }
+    h1 { font-size: 26px; color: var(--accent); margin-bottom: 4px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .sub { font-size: 12px; color: var(--text-muted); }
 
     /* Cards */
-    .card { background: var(--card); border: 1px solid var(--card-border); border-radius: 12px; padding: 14px; }
-    .card-title { font-size: 13px; font-weight: bold; margin-bottom: 10px; color: var(--accent); display: flex; justify-content: space-between; align-items: center; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+    .card-title { font-size: 14px; font-weight: bold; color: var(--accent); margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; }
 
     /* ISP Info */
-    .isp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px; }
-    .isp-item b { color: var(--text); }
-    .isp-item span { color: var(--muted); display: block; font-size: 11px; }
-    .alert-vpn { background: rgba(245, 158, 11, 0.15); border: 1px solid var(--warning); color: var(--warning); padding: 8px; border-radius: 8px; font-size: 11px; margin-top: 8px; display: none; }
+    .isp-box { font-size: 13px; line-height: 1.9; }
+    .isp-box span { color: var(--accent); font-weight: bold; }
+    .warn-box { background: rgba(255, 165, 2, 0.1); border: 1px solid var(--warning); color: var(--warning); padding: 8px 12px; border-radius: 8px; font-size: 12px; margin-top: 8px; display: none; }
 
-    /* Settings Controls */
-    .form-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 12px; }
-    select, input[type="text"], input[type="number"] { background: #1e293b; border: 1px solid #334155; color: #fff; padding: 6px 10px; border-radius: 6px; font-size: 12px; outline: none; }
-    input[type="text"] { width: 100%; margin-top: 6px; }
+    /* Controls */
+    .row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px; }
+    select { background: #1a263c; color: #fff; border: 1px solid var(--border); padding: 6px 12px; border-radius: 8px; outline: none; font-size: 13px; }
+    textarea { width: 100%; height: 110px; background: #0b111e; color: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 10px; font-size: 11px; font-family: monospace; outline: none; resize: vertical; margin-top: 6px; }
 
     /* Buttons */
-    .btn { background: var(--accent-grad); color: #000; border: none; padding: 12px; border-radius: 10px; font-weight: bold; font-size: 14px; cursor: pointer; width: 100%; transition: 0.2s; }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .btn-action { background: #1e293b; border: 1px solid #334155; color: #fff; padding: 5px 10px; border-radius: 6px; font-size: 11px; cursor: pointer; }
-    .btn-action:hover { background: var(--accent); color: #000; }
+    .btn { width: 100%; padding: 13px; border-radius: 10px; border: none; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s; }
+    .btn-main { background: var(--accent); color: #000; margin-top: 4px; }
+    .btn-main:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-sm { background: #1f2d47; border: 1px solid #334155; color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; cursor: pointer; }
+    .btn-sm:active { background: var(--accent); color: #000; }
 
-    /* Progress & Stats */
-    .stats-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; color: var(--muted); }
-    .bar-bg { width: 100%; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
-    .bar-fill { height: 100%; width: 0%; background: var(--accent-grad); transition: 0.2s; }
+    /* Progress */
+    .progress-info { display: flex; justify-content: space-between; font-size: 13px; margin-bottom: 6px; color: var(--text-muted); }
+    .bar { width: 100%; height: 6px; background: #1a263c; border-radius: 3px; overflow: hidden; margin-bottom: 12px; }
+    .bar-fill { height: 100%; width: 0%; background: var(--accent); transition: 0.2s; }
 
-    /* Results Table */
-    table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 6px; }
-    th, td { padding: 8px 4px; text-align: right; border-bottom: 1px solid var(--card-border); }
-    th { color: var(--muted); font-size: 11px; }
-    .tag { padding: 2px 6px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-    .tag-ok { background: rgba(16, 185, 129, 0.2); color: var(--success); }
-    .tag-speed { background: rgba(0, 242, 254, 0.15); color: var(--accent); }
-
-    /* Config Injector Output */
-    .config-out { background: #070b14; border: 1px dashed var(--card-border); border-radius: 8px; padding: 10px; margin-top: 8px; font-family: monospace; font-size: 11px; word-break: break-all; color: var(--accent); display: none; }
+    /* Table */
+    table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 6px; }
+    th, td { padding: 10px 6px; text-align: right; border-bottom: 1px solid var(--border); }
+    th { color: var(--text-muted); font-size: 12px; }
+    .ping-tag { padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; background: rgba(46, 213, 115, 0.15); color: var(--success); }
   </style>
 </head>
 <body>
 
-<div class="app">
+<div class="container">
   <!-- Header -->
   <div class="header">
-    <div class="badge">DOPS SCANNER v3.0 PRO</div>
-    <h1>مهندسی اسکن CDN</h1>
-    <p class="sub">تست ۳ مرحله‌ای (Latency, Jitter, Speed) مستقیم از مرورگر</p>
+    <div class="badge">DOPS REPO SCANNER V4</div>
+    <h1>CDN IP 🌐 Scanner</h1>
+    <p class="sub">اسکن مستقیم آی‌پی‌های مخزن شما روی سیم‌کارت و وای‌فای</p>
   </div>
 
-  <!-- کارت اپراتور -->
+  <!-- مشخصات کاربر -->
   <div class="card">
-    <div class="card-title">وضعیت اینترنت شما <span id="ispBadge" style="font-size:10px; color:var(--muted)">درحال دریافت...</span></div>
-    <div class="isp-grid">
-      <div class="isp-item"><span>اپراتور:</span><b id="ispName">-</b></div>
-      <div class="isp-item"><span>آی‌پی:</span><b id="ispIP">-</b></div>
-      <div class="isp-item"><span>کشور:</span><b id="ispCountry">-</b></div>
-      <div class="isp-item"><span>سیستم:</span><b>مستقیم / بدون پراکسی</b></div>
-    </div>
-    <div class="alert-vpn" id="vpnWarning">⚠️ توجه: فیلترشکن شما روشن است! برای دقت واقعی تست، فیلترشکن را خاموش کنید.</div>
+    <div class="isp-box" id="ispInfo">در حال بررسی اتصال اینترنت شما...</div>
+    <div class="warn-box" id="vpnAlert">⚠️ فیلترشکن شما روشن است! برای پیدا کردن آی‌پی سالم مخصوص سیم‌کارت خود، لطفاً VPN را خاموش کنید.</div>
   </div>
 
-  <!-- تنظیمات تست مهندسی -->
+  <!-- تنظیمات منبع -->
   <div class="card">
-    <div class="card-title">تنظیمات اسکن مهندسی</div>
-    <div class="form-row">
-      <span>شبکه CDN:</span>
-      <select id="cdnSelect">
-        <option value="cloudflare">Cloudflare (پیش‌فرض)</option>
-        <option value="cloudfront">Amazon CloudFront</option>
-        <option value="gcore">G-Core</option>
+    <div class="card-title">تنظیمات اسکن آی‌پی‌های مخزن</div>
+    <div class="row">
+      <span>فایل منبع در مخزن:</span>
+      <select id="fileSource">
+        <option value="outputs/alive_cloudflare.txt">alive_cloudflare.txt (کلودفلر)</option>
+        <option value="outputs/alive_fastly.txt">alive_fastly.txt (فستلی)</option>
       </select>
     </div>
-    <div class="form-row">
-      <span>پورت هدف:</span>
-      <select id="portSelect">
-        <option value="80">80 (HTTP عمومی)</option>
-        <option value="443" selected>443 (HTTPS امن)</option>
-        <option value="8080">8080</option>
-        <option value="2053">2053 (TLS)</option>
-        <option value="8443">8443 (TLS)</option>
-      </select>
-    </div>
-    <div class="form-row">
-      <span>تعداد کل آی‌پی برای تست:</span>
-      <select id="ipCount">
-        <option value="30">۳۰ عدد (سریع)</option>
-        <option value="60" selected>۶۰ عدد (استاندارد)</option>
-        <option value="120">۱۲۰ عدد (عمیق)</option>
+    <div class="row">
+      <span>تعداد تست همزمان:</span>
+      <select id="scanLimit">
+        <option value="40">۴۰ آی‌پی اول</option>
+        <option value="80" selected>۸۰ آی‌پی اول (پیشنهادی)</option>
+        <option value="999">تمام آی‌پی‌های فایل</option>
       </select>
     </div>
   </div>
 
-  <!-- تزریق‌گر کانفیگ (Config Injector) -->
+  <!-- جایگذاری چندتایی کانفیگ -->
   <div class="card">
-    <div class="card-title">جایگذاری خودکار در کانفیگ (اختیاری)</div>
-    <input type="text" id="configInput" placeholder="لینک کانفیگ خود را بچسبانید (vless:// یا vmess://)">
-    <div id="configOutput" class="config-out"></div>
+    <div class="card-title">جایگذاری خودکار در چندین کانفیگ (اختیاری)</div>
+    <p style="font-size:12px; color:var(--text-muted);">کانفیگ‌های خود (vless یا vmess یا trojan) را هر کدام در یک خط زیر هم بچسبانید:</p>
+    <textarea id="multiConfigs" placeholder="vless://...&#10;vmess://...&#10;trojan://..."></textarea>
+    <div id="bulkResultBox" style="display:none; margin-top:10px;">
+      <p style="font-size:12px; color:var(--success); margin-bottom:4px;">کانفیگ‌های به‌روز شده با بهترین آی‌پی:</p>
+      <textarea id="bulkOutput" readonly style="border-color:var(--success);"></textarea>
+      <button class="btn btn-sm" style="margin-top:6px; width:100%;" onclick="copyAllConfigs()">📋 کپی یکجای تمام کانفیگ‌ها</button>
+    </div>
   </div>
 
   <!-- دکمه شروع -->
-  <button class="btn" id="startBtn" onclick="toggleScan()">شروع اسکن مهندسی</button>
+  <button class="btn btn-main" id="startBtn" onclick="runScanner()">شروع اسکن آی‌پی‌های مخزن</button>
 
-  <!-- نتایج زنده -->
+  <!-- لیست نتایج -->
   <div class="card" id="resultsBox" style="display:none;">
-    <div class="stats-row">
-      <span id="progressText">درحال پردازش...</span>
-      <span id="foundStats" style="color:var(--success)">سالم: ۰</span>
+    <div class="progress-info">
+      <span id="progressText">درحال دریافت فایل از مخزن...</span>
+      <span id="foundCount" style="color:var(--success)">سالم: ۰</span>
     </div>
-    <div class="bar-bg"><div class="bar-fill" id="progressBar"></div></div>
-
-    <div style="display:flex; gap:6px; margin-bottom:10px;">
-      <button class="btn-action" onclick="copyTop()">کپی ۳ آی‌پی برتر</button>
-      <button class="btn-action" onclick="exportCSV()">دانلود گزارش CSV</button>
-    </div>
+    <div class="bar"><div class="bar-fill" id="progressBar"></div></div>
 
     <table>
       <thead>
         <tr>
-          <th>آی‌پی</th>
-          <th>تأخیر (Jitter)</th>
-          <th>تست سرعت</th>
+          <th>آی‌پی سالم</th>
+          <th>پینگ روی خط شما</th>
+          <th>وضعیت پورت</th>
           <th>عملیات</th>
         </tr>
       </thead>
@@ -156,189 +132,182 @@
 </div>
 
 <script>
-  // پایگاه داده رنج‌های اختصاصی
-  const cdnRanges = {
-    cloudflare: ["104.16.", "104.17.", "104.18.", "104.19.", "104.20.", "104.21.", "172.64.", "172.65.", "172.67.", "162.159.", "198.41.129.", "188.114.96."],
-    cloudfront: ["13.32.", "13.33.", "13.35.", "13.224.", "13.225.", "18.64.", "18.65.", "54.192.", "54.230.", "99.84."],
-    gcore: ["92.223.112.", "92.223.120.", "92.38.169.", "146.185.22."]
-  };
-
-  let isScanning = false;
   let cleanIPs = [];
 
-  // سیستم بوق صوتی هنگام پیدا شدن آی‌پی عالی
-  function playBeep() {
-    try {
-      const ctx = new (window.AudioContext || window.webkitAudioContext)();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.frequency.value = 880;
-      gain.gain.value = 0.05;
-      osc.start();
-      setTimeout(() => { osc.stop(); ctx.close(); }, 120);
-    } catch(e){}
-  }
-
-  // گرفتن مشخصات اینترنت
-  async function fetchISP() {
+  // بررسی وضعیت اپراتور
+  async function loadISP() {
     try {
       const res = await fetch('https://ipwho.is/');
       const data = await res.json();
       if(data.success) {
-        document.getElementById('ispName').innerText = data.connection?.isp || data.org || 'نامشخص';
-        document.getElementById('ispIP').innerText = data.ip;
-        document.getElementById('ispCountry').innerText = data.country;
-        document.getElementById('ispBadge').innerText = 'متصل';
-        if(data.country_code !== 'IR') document.getElementById('vpnWarning').style.display = 'block';
+        document.getElementById('ispInfo').innerHTML = `
+          اپراتور: <span>${data.connection?.isp || data.org || 'نامشخص'}</span> | آی‌پی: <span>${data.ip}</span><br>
+          کشور: <span>${data.country}</span>
+        `;
+        if (data.country_code !== 'IR') {
+          document.getElementById('vpnAlert').style.display = 'block';
+        }
       }
     } catch(e) {
-      document.getElementById('ispBadge').innerText = 'آفلاین یا اینترنت ملی';
+      document.getElementById('ispInfo').innerHTML = "اپراتور: متصل";
     }
   }
 
-  function generateRandomIP(cdn) {
-    const list = cdnRanges[cdn];
-    const prefix = list[Math.floor(Math.random() * list.length)];
-    const parts = prefix.split('.').filter(Boolean);
-    if(parts.length === 2) return `${parts[0]}.${parts[1]}.${Math.floor(Math.random()*254)+1}.${Math.floor(Math.random()*254)+1}`;
-    if(parts.length === 3) return `${parts[0]}.${parts[1]}.${parts[2]}.${Math.floor(Math.random()*254)+1}`;
-    return `104.16.${Math.floor(Math.random()*254)+1}.${Math.floor(Math.random()*254)+1}`;
+  // خواندن فایل و استخراج دقیق آی‌پی‌ها (حذف ping= و connect=)
+  async function fetchRepoIPs(path) {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error("امکان خواندن فایل میسر نشد");
+    const text = await res.text();
+    const lines = text.split('\n');
+    const ips = [];
+
+    for (let line of lines) {
+      line = line.trim();
+      // فرمول برای جدا کردن آی‌پی از ابتدای خط
+      const match = line.match(/^(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/);
+      if (match && !ips.includes(match[1])) {
+        ips.push(match[1]);
+      }
+    }
+    return ips;
   }
 
-  // تست مهندسی: ۳ مرحله سنجش + پکت‌لاس
-  async function probeIP(ip, port) {
-    const times = [];
-    const protocol = (port == 443 || port == 2053 || port == 8443) ? 'https:' : 'http:';
-
-    for(let i=0; i<3; i++) {
+  // تست اتصال پورت روی اینترنت گوشی
+  function pingIP(ip, timeoutMs = 2200) {
+    return new Promise(resolve => {
       const start = performance.now();
-      const ctrl = new AbortController();
-      const to = setTimeout(() => ctrl.abort(), 1800);
-      try {
-        await fetch(`${protocol}//${ip}:${port}/__probe_${Date.now()}`, {
-          mode: 'no-cors',
-          cache: 'no-store',
-          signal: ctrl.signal
+      let done = false;
+
+      const finish = (ok) => {
+        if (done) return;
+        done = true;
+        clearTimeout(timer);
+        const ms = Math.round(performance.now() - start);
+        resolve(ok ? ms : null);
+      };
+
+      const timer = setTimeout(() => finish(false), timeoutMs);
+
+      fetch(`https://${ip}/`, { method: 'HEAD', mode: 'no-cors', cache: 'no-store' })
+        .then(() => finish(true))
+        .catch(() => {
+          const elapsed = performance.now() - start;
+          if (elapsed < timeoutMs * 0.8) {
+            finish(true);
+          } else {
+            finish(false);
+          }
         });
-        clearTimeout(to);
-        times.push(Math.round(performance.now() - start));
-      } catch(err) {
-        // ناموفق
+    });
+  }
+
+  // جایگذاری آی‌پی برتر در چند کانفیگ همزمان
+  function updateAllConfigs(bestIP) {
+    const text = document.getElementById('multiConfigs').value.trim();
+    if (!text) return;
+    const lines = text.split('\n');
+    const updated = [];
+
+    for (let line of lines) {
+      line = line.trim();
+      if (!line) continue;
+      // جایگذاری در VLESS و Trojan
+      if (line.startsWith('vless://') || line.startsWith('trojan://')) {
+        updated.push(line.replace(/@([^:]+):/, `@${bestIP}:`));
+      }
+      // جایگذاری در VMess
+      else if (line.startsWith('vmess://')) {
+        try {
+          const b64 = line.replace('vmess://', '');
+          const json = JSON.parse(atob(b64));
+          json.add = bestIP;
+          updated.push('vmess://' + btoa(JSON.stringify(json)));
+        } catch(e) {
+          updated.push(line);
+        }
+      } else {
+        updated.push(line);
       }
     }
 
-    if(times.length === 0) return { ok: false };
-
-    const avg = Math.round(times.reduce((a,b)=>a+b, 0) / times.length);
-    const min = Math.min(...times);
-    const max = Math.max(...times);
-    const jitter = max - min;
-    const loss = Math.round(((3 - times.length) / 3) * 100);
-
-    return { ok: true, avg, jitter, loss };
-  }
-
-  // تست سرعت دانلود واقعی
-  async function testDownloadSpeed(ip) {
-    const start = performance.now();
-    try {
-      const ctrl = new AbortController();
-      const to = setTimeout(() => ctrl.abort(), 2500);
-      const res = await fetch(`http://${ip}/cdn-cgi/trace`, { mode: 'no-cors', cache: 'no-store', signal: ctrl.signal });
-      clearTimeout(to);
-      const duration = (performance.now() - start) / 1000;
-      const speed = Math.round(50 / duration); // تخمین سرعت واقعی
-      return `${speed} KB/s`;
-    } catch {
-      return `مطلوب`;
+    if (updated.length > 0) {
+      document.getElementById('bulkResultBox').style.display = 'block';
+      document.getElementById('bulkOutput').value = updated.join('\n');
     }
   }
 
-  // تزریق به کانفیگ
-  function updateConfig(bestIP) {
-    const raw = document.getElementById('configInput').value.trim();
-    if(!raw) return;
-    try {
-      let updated = raw;
-      if(raw.startsWith('vless://') || raw.startsWith('vmess://') || raw.startsWith('trojan://')) {
-        updated = raw.replace(/@([^:]+):/, `@${bestIP}:`);
-      }
-      const out = document.getElementById('configOutput');
-      out.style.display = 'block';
-      out.innerHTML = `کانفیگ به‌روز شده با آی‌پی برتر:<br><b>${updated}</b><br><button class="btn-action" style="margin-top:6px;" onclick="navigator.clipboard.writeText('${updated}'); alert('کپی شد!');">کپی کانفیگ جدید</button>`;
-    } catch(e){}
+  function copyAllConfigs() {
+    const val = document.getElementById('bulkOutput').value;
+    navigator.clipboard.writeText(val);
+    alert('تمام کانفیگ‌ها با آی‌پی جدید کپی شدند!');
   }
 
-  async function toggleScan() {
+  // اجرای اسکن
+  async function runScanner() {
     const btn = document.getElementById('startBtn');
-    if(isScanning) { isScanning = false; btn.innerText = "شروع اسکن مهندسی"; return; }
-
-    isScanning = true;
-    btn.innerText = "توقف اسکن";
-    document.getElementById('resultsBox').style.display = 'block';
+    const resultsBox = document.getElementById('resultsBox');
     const tbody = document.getElementById('resultsTable');
-    tbody.innerHTML = '';
+    const progressText = document.getElementById('progressText');
+    const foundCount = document.getElementById('foundCount');
+    const progressBar = document.getElementById('progressBar');
+
+    btn.disabled = true;
+    btn.innerText = "درحال اسکن مخزن...";
+    resultsBox.style.display = "block";
+    tbody.innerHTML = "";
     cleanIPs = [];
 
-    const cdn = document.getElementById('cdnSelect').value;
-    const port = document.getElementById('portSelect').value;
-    const count = parseInt(document.getElementById('ipCount').value);
+    const file = document.getElementById('fileSource').value;
+    const limit = parseInt(document.getElementById('scanLimit').value);
 
-    let tested = 0;
-    for(let i=0; i<count && isScanning; i++) {
-      const ip = generateRandomIP(cdn);
-      tested++;
-      
-      const pct = Math.round((tested / count) * 100);
-      document.getElementById('progressBar').style.width = pct + '%';
-      document.getElementById('progressText').innerText = `اسکن: ${tested} از ${count} (${pct}%)`;
-
-      const result = await probeIP(ip, port);
-      if(result.ok && result.loss < 50) {
-        cleanIPs.push({ ip, ping: result.avg, jitter: result.jitter });
-        document.getElementById('foundStats').innerText = `سالم: ${cleanIPs.length}`;
-        playBeep();
-
-        if(cleanIPs.length === 1) updateConfig(ip);
-
-        const speedText = await testDownloadSpeed(ip);
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><code>${ip}</code></td>
-          <td><span class="tag tag-ok">${result.avg} ms</span> <small style="color:var(--muted)">±${result.jitter}</small></td>
-          <td><span class="tag tag-speed">${speedText}</span></td>
-          <td><button class="btn-action" onclick="navigator.clipboard.writeText('${ip}'); this.innerText='کپی شد';">کپی</button></td>
-        `;
-        tbody.appendChild(tr);
-      }
+    let rawIPs = [];
+    try {
+      rawIPs = await fetchRepoIPs(file);
+    } catch (e) {
+      alert("خطا در خواندن فایل از مخزن. مطمئن شوید مسیر فایل درست است.");
+      btn.disabled = false;
+      btn.innerText = "شروع اسکن آی‌پی‌های مخزن";
+      return;
     }
 
-    isScanning = false;
+    const testList = rawIPs.slice(0, limit);
+    let tested = 0;
+
+    for (let i = 0; i < testList.length; i += 3) {
+      const batch = testList.slice(i, i + 3);
+      await Promise.all(batch.map(async (ip) => {
+        tested++;
+        const pct = Math.round((tested / testList.length) * 100);
+        progressBar.style.width = pct + '%';
+        progressText.innerText = `بررسی: ${tested} از ${testList.length} (${pct}%)`;
+
+        const ping = await pingIP(ip);
+        if (ping !== null && ping > 10) {
+          cleanIPs.push({ ip, ping });
+          foundCount.innerText = `سالم: ${cleanIPs.length}`;
+
+          if (cleanIPs.length === 1) {
+            updateAllConfigs(ip);
+          }
+
+          const tr = document.createElement('tr');
+          tr.innerHTML = `
+            <td><code>${ip}</code></td>
+            <td><span class="ping-tag">${ping} ms</span></td>
+            <td><span style="color:var(--success); font-size:11px;">پورت ۴۴۳ باز ✔️</span></td>
+            <td><button class="btn-sm" onclick="navigator.clipboard.writeText('${ip}'); this.innerText='کپی شد';">کپی</button></td>
+          `;
+          tbody.appendChild(tr);
+        }
+      }));
+    }
+
+    btn.disabled = false;
     btn.innerText = "اسکن مجدد";
-    document.getElementById('progressText').innerText = "اسکن با موفقیت کامل شد ✔️";
+    progressText.innerText = "اسکن به پایان رسید ✔️";
   }
 
-  function copyTop() {
-    if(cleanIPs.length === 0) { alert('هنوز آی‌پی سالمی پیدا نشده است.'); return; }
-    cleanIPs.sort((a,b) => a.ping - b.ping);
-    const top3 = cleanIPs.slice(0, 3).map(x => x.ip).join('\n');
-    navigator.clipboard.writeText(top3);
-    alert('۳ آی‌پی برتر کپی شدند:\n' + top3);
-  }
-
-  function exportCSV() {
-    if(cleanIPs.length === 0) { alert('داده‌ای برای خروجی وجود ندارد.'); return; }
-    let csv = "IP,Ping,Jitter\n" + cleanIPs.map(x => `${x.ip},${x.ping},${x.jitter}`).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' });
-    const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob);
-    a.download = `clean_ips_${Date.now()}.csv`;
-    a.click();
-  }
-
-  fetchISP();
+  loadISP();
 </script>
 </body>
 </html>
