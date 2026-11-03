@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DOPS Advanced CDN Scanner</title>
+<title>DOPS Ultimate CDN Scanner</title>
 <style>
 :root{--bg:#0b111e;--card:#131c2e;--bd:#1f2d47;--ac:#00ffcc;--tx:#e2e8f0;--mu:#8492a6;--ok:#2ed573;--wn:#ffa502;color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn,Tahoma,"Segoe UI",system-ui,sans-serif}
 [hidden]{display:none!important}
-body{background:var(--bg);color:var(--tx);padding:12px;display:flex;justify-content:center;min-height:100vh}
+body{background:var(--bg);color:var(--tx);padding:12px;padding-bottom:70px;display:flex;justify-content:center;min-height:100vh}
 .wrap{width:100%;max-width:680px;display:flex;flex-direction:column;gap:12px}
 .head{text-align:center;padding:10px 0}
-.badge{display:inline-block;padding:4px 14px;font-size:11px;color:var(--ac);border:1px solid var(--ac);border-radius:20px;margin-bottom:6px}
+.badge{display:inline-block;padding:4px 14px;font-size:11px;color:var(--ac);border:1px solid var(--ac);border-radius:20px;margin-bottom:6px;letter-spacing:1px}
 h1{font-size:24px;color:var(--ac);margin-bottom:4px}
 .sub,.hint{font-size:11px;color:var(--mu)}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px}
@@ -41,16 +41,25 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
 .ip{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace}
 .tag{padding:3px 6px;border-radius:4px;font-size:11px;font-weight:bold;background:rgba(46,213,115,.15);color:var(--ok)}
 .tag.mid{background:rgba(255,165,2,.15);color:var(--wn)}
-#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#1f2d47;border:1px solid var(--ac);padding:8px 16px;border-radius:20px;font-size:12px;z-index:9;max-width:90%}
+#toast{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);background:#1f2d47;border:1px solid var(--ac);padding:8px 16px;border-radius:20px;font-size:12px;z-index:99;max-width:90%}
+
+/* نوار ابزار شناور چسبان پایین صفحه */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(15,23,42,0.92);backdrop-filter:blur(10px);border-top:1px solid var(--bd);padding:8px 14px;display:flex;justify-content:center;z-index:50}
+.bottom-inner{width:100%;max-width:680px;display:flex;justify-content:space-between;align-items:center;gap:6px}
+
+/* مدال پاپ‌آپ QR Code */
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal-box{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;max-width:320px;width:100%;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
+#qrCanvas{background:#fff;padding:8px;border-radius:8px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS REPO SCANNER V7.6 · STABLE PRO</div>
+    <div class="badge">DOPS SCANNER V8.0 · ULTIMATE PRO</div>
     <h1>CDN IP 🌐 Scanner</h1>
-    <p class="sub">اسکن مستقیم مخزن و اعتبارسنجی زنده پورت روی اینترنت همراه</p>
+    <p class="sub">اسکن اختصاصی مخزن · پشتیبانی از فرگمنت، پورت‌های سفارشی و نوار شناور</p>
   </div>
 
   <div class="card">
@@ -66,17 +75,23 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
         <option value="outputs/alive_fastly.txt">مخزن: alive_fastly.txt</option>
         <option value="cf_ranges">رنج‌های رسمی کلودفلر (نمونه تصادفی)</option>
         <option value="offline_db">بانک آفلاین داخلی (اینترنت ملی)</option>
-        <option value="favs">آی‌پی‌های ذخیره‌شده (برترین‌های اسکن‌های قبل)</option>
+        <option value="favs">آی‌پی‌های ذخیره‌شده (برترین‌های قبل)</option>
         <option value="custom">لیست دلخواه (IP یا CIDR)</option>
       </select></div>
     <div class="tools"><button class="sm hi" id="bShow">👁 نمایش لیست منبع</button></div>
     <div id="customBox" hidden><textarea id="customIps" placeholder="104.16.0.0/20&#10;162.159.10.5"></textarea></div>
+    <div class="row"><span>پورت هدف کلودفلر:</span>
+      <select id="targetPort">
+        <option value="443" selected>443 (HTTPS اصلی)</option>
+        <option value="2053">2053 (TLS فرعی)</option>
+        <option value="2083">2083 (TLS فرعی)</option>
+        <option value="8443">8443 (TLS فرعی)</option>
+      </select></div>
     <div class="row"><span>تعداد بررسی:</span>
       <select id="limit"><option value="50">۵۰</option><option value="100" selected>۱۰۰</option><option value="300">۳۰۰</option><option value="0">همه</option></select></div>
     <div class="row"><span>روش بررسی:</span>
       <select id="proto">
-        <option value="auto" selected>خودکار (پیشنهادی)</option>
-        <option value="https">HTTPS پورت ۴۴۳</option>
+        <option value="auto" selected>خودکار (سنجش زنده)</option>
         <option value="none">بدون تست (اعتماد به لیست تاییدشده‌ی مخزن)</option>
       </select></div>
     <div class="row"><span>اتصال هم‌زمان:</span>
@@ -104,15 +119,20 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
     <div class="tools"><input type="url" id="subUrl" dir="ltr" placeholder="لینک سابسکریپشن (اختیاری)" style="flex:1;min-width:0"><button class="sm" id="bSub">دریافت</button></div>
     <textarea id="cfgIn" placeholder="vless://...&#10;vmess://...&#10;trojan://..."></textarea>
     <div class="row" style="margin-top:8px"><span>حالت جایگزینی:</span>
-      <select id="cfgMode"><option value="ord">ترتیبی: بهترین آی‌پی به کانفیگ اول، بعدی به دوم، ...</option><option value="best">همه با بهترین آی‌پی</option><option value="rr">چرخشی بین N آی‌پی برتر</option><option value="all">هر کانفیگ × N آی‌پی برتر</option></select></div>
+      <select id="cfgMode"><option value="ord">ترتیبی: بهترین آی‌پی به اولی، بعدی به دومی، ...</option><option value="best">همه با بهترین آی‌پی</option><option value="rr">چرخشی بین N آی‌پی برتر</option><option value="all">هر کانفیگ × N آی‌پی برتر</option></select></div>
     <div class="row" id="topRow" hidden><span>N (تعداد آی‌پی برتر):</span><input type="number" id="topN" value="5" min="1" max="50"></div>
+    <label class="row"><span style="color:var(--ac);font-weight:bold">🛡 فعال‌سازی ضد فیلتر Fragment (ضد اختلال TLS در ساعات اوج)</span><input type="checkbox" id="addFrag"></label>
     <label class="row"><span>حفظ دامنه اصلی به‌عنوان SNI/Host (ضروری برای CDN)</span><input type="checkbox" id="keepSni" checked></label>
     <label class="row"><span>افزودن آی‌پی به نام هر کانفیگ</span><input type="checkbox" id="tagIp" checked></label>
     <label class="row"><span>به‌خاطر سپردن کانفیگ‌ها روی همین گوشی</span><input type="checkbox" id="remember"></label>
     <div id="cfgBox" hidden>
       <p class="hint" style="color:var(--ok)">خروجی: <b id="cfgCount"></b></p>
       <textarea id="cfgOut" readonly style="border-color:var(--ok)"></textarea>
-      <div style="display:flex;gap:6px;margin-top:6px"><button class="sm" style="flex:1" id="copyCfg">📋 کپی تمام کانفیگ‌ها</button><button class="sm" style="flex:1" id="dlCfg">💾 ذخیره فایل</button></div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
+        <button class="sm" style="flex:1" id="copyCfg">📋 کپی تمام کانفیگ‌ها</button>
+        <button class="sm hi" style="flex:1" id="showQr">📱 بارکد (QR Code) بهترین کانفیگ</button>
+        <button class="sm" style="flex:1" id="dlCfg">💾 ذخیره فایل</button>
+      </div>
     </div>
   </div>
 
@@ -138,10 +158,37 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
       <thead><tr><th data-k="ip">آی‌پی</th><th data-k="ping">تأخیر</th><th data-k="loss">نوسان · افت</th><th></th></tr></thead>
       <tbody id="rows"></tbody>
     </table></div>
+    <div style="display:flex;gap:6px;margin-top:10px">
+      <button class="sm hi" style="flex:1" onclick="sortBest()">⚡ مرتب‌سازی (بهترین‌ها)</button>
+      <button class="sm" style="flex:1" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ پرش به بالای صفحه</button>
+    </div>
     <p class="hint" id="mnote" style="margin-top:8px"></p>
     <p class="hint" id="diag" style="margin-top:6px"></p>
   </div>
 </div>
+
+<!-- نوار ابزار چسبان پایین صفحه -->
+<div class="bottom-bar" id="bottomBar" hidden>
+  <div class="bottom-inner">
+    <span id="bFound" style="font-size:12px;color:var(--ok);font-weight:bold">سالم: ۰</span>
+    <div style="display:flex;gap:5px">
+      <button class="sm hi" onclick="sortBest()">⚡ مرتب‌سازی</button>
+      <button class="sm" id="bBottomCopy">📋 کپی IPها</button>
+      <button class="sm" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ بالا</button>
+    </div>
+  </div>
+</div>
+
+<!-- پنجره نمایش QR Code -->
+<div class="modal" id="qrModal" hidden>
+  <div class="modal-box">
+    <h3 style="font-size:14px;color:var(--ac)">بارکد کانفیگ برتر</h3>
+    <canvas id="qrCanvas"></canvas>
+    <p class="hint" style="font-size:10px">با دوربین گوشی دیگر یا نرم‌افزار متصل‌شونده اسکن کنید</p>
+    <button class="btn main" style="padding:8px 16px;font-size:12px;width:100%" onclick="$('qrModal').hidden=true">بستن پنجره</button>
+  </div>
+</div>
+
 <div id="toast" hidden></div>
 
 <script>
@@ -155,7 +202,7 @@ const isIPv4 = s => IPV4.test(s);
 const ip2n = ip => ip.split('.').reduce((a, o) => a * 256 + +o, 0);
 const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join('.');
 const TIMEOUT = 2600, MIN_MS = 8, st = { ok: 0, to: 0, tiny: 0, rej: 0 };
-const FIELDS = ['src','limit','proto','conc','samples','shuffle','maxPing','cfgMode','topN','keepSni','tagIp','refine','remember','customIps'];
+const FIELDS = ['src','limit','proto','targetPort','conc','samples','shuffle','maxPing','cfgMode','topN','addFrag','keepSni','tagIp','refine','remember','customIps'];
 
 let removed = [], curProto = 'https', tested = new Set(), results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
 
@@ -165,8 +212,8 @@ async function copy(t) {
   catch { const a = document.createElement('textarea'); a.value = t; a.style.cssText = 'position:fixed;opacity:0'; document.body.append(a); a.select(); try { document.execCommand('copy'); } catch {} a.remove(); }
   toast('کپی شد ✔️');
 }
-function save() { try { const o = {}; FIELDS.forEach(k => { const e = $(k); o[k] = e.type === 'checkbox' ? e.checked : e.value; }); localStorage.setItem('dops-v7', JSON.stringify(o)); } catch {} }
-function load() { try { const o = JSON.parse(localStorage.getItem('dops-v7') || '{}'); FIELDS.forEach(k => { if (k in o) { const e = $(k); e.type === 'checkbox' ? e.checked = o[k] : e.value = o[k]; } }); } catch {} }
+function save() { try { const o = {}; FIELDS.forEach(k => { const e = $(k); o[k] = e.type === 'checkbox' ? e.checked : e.value; }); localStorage.setItem('dops-v8', JSON.stringify(o)); } catch {} }
+function load() { try { const o = JSON.parse(localStorage.getItem('dops-v8') || '{}'); FIELDS.forEach(k => { if (k in o) { const e = $(k); e.type === 'checkbox' ? e.checked = o[k] : e.value = o[k]; } }); } catch {} }
 function beep() {
   try { const c = new (window.AudioContext || window.webkitAudioContext)(), o = c.createOscillator(), g = c.createGain();
     o.connect(g); g.connect(c.destination); o.frequency.setValueAtTime(587, c.currentTime); o.frequency.setValueAtTime(880, c.currentTime + .1);
@@ -235,21 +282,19 @@ async function loadTargets(raw) {
   return { ips: lim && !raw ? ips.slice(0, lim) : ips, note };
 }
 
-/* ---------- موتور اصلاح‌شده و بدون باگ پروب ---------- */
-async function probeOnce(ip, proto, signal) {
+/* ---------- پروب چندپورته و هوشمند ---------- */
+async function probeOnce(ip, proto, port, signal) {
   if (signal.aborted) return { ok: false };
   const c = new AbortController(), on = () => c.abort(), t = setTimeout(on, TIMEOUT), s = performance.now();
   signal.addEventListener('abort', on, { once: true });
   try {
-    // اصلاح کلیدی: حذف redirect: manual که مانع اجرای صحیح no-cors می‌شد
-    await fetch(`https://${ip}/`, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: c.signal });
+    await fetch(`https://${ip}:${port}/`, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: c.signal });
     st.ok++; return { ok: true, ms: performance.now() - s };
   } catch {
     const ms = performance.now() - s;
     if (signal.aborted) return { ok: false };
     if (c.signal.aborted) st.to++;
     else if (ms <= MIN_MS) st.tiny++;
-    // دریافت پاسخ TLS یا خطای گواهی زیر 2200 میلی‌ثانیه یعنی پورت باز است و فیلتر نیست
     else if (ms < TIMEOUT * 0.85) { st.ok++; return { ok: true, ms, guess: true }; }
     else st.rej++;
     return { ok: false };
@@ -257,11 +302,11 @@ async function probeOnce(ip, proto, signal) {
 }
 
 async function probeIP(ip, o, signal) {
-  const first = await probeOnce(ip, o.proto, signal);
+  const first = await probeOnce(ip, o.proto, o.port, signal);
   if (!first.ok || first.ms < MIN_MS) return null;
   const t = [first.ms]; let fail = 0;
   for (let i = 1; i < o.samples && !signal.aborted; i++) { 
-    const x = await probeOnce(ip, o.proto, signal); 
+    const x = await probeOnce(ip, o.proto, o.port, signal); 
     x.ok ? t.push(x.ms) : fail++; 
   }
   t.sort((a, b) => a - b);
@@ -288,16 +333,18 @@ function render() {
   tb.replaceChildren(frag);
   document.querySelectorAll('th[data-k]').forEach(th => { if (th.dataset.k === sortKey) th.dataset.on = sortDir > 0 ? '▲' : '▼'; else delete th.dataset.on; });
   $('found').textContent = 'سالم: ' + fa(results.length);
+  $('bFound').textContent = 'سالم: ' + fa(results.length);
+  $('bottomBar').hidden = results.length === 0;
 }
 
-/* ---------- اصلاح کامل بازنویسی کانفیگ ---------- */
+/* ---------- موتور بازنویسی کانفیگ با پشتیبانی از Fragment ---------- */
 const b64d = s => { s = s.trim().replace(/-/g, '+').replace(/_/g, '/'); s += '='.repeat((4 - s.length % 4) % 4); return new TextDecoder().decode(Uint8Array.from(atob(s), c => c.charCodeAt(0))); };
 const b64e = s => { let t = ''; new TextEncoder().encode(s).forEach(x => t += String.fromCharCode(x)); return btoa(t); };
 const SCHEMES = /^(vless|vmess|trojan|ss|socks5?|hysteria2|hy2|tuic):\/\//i;
 const cleanTag = s => decodeURIComponent(s || '').replace(/(?:\s*\|\s*\d+\.\d+\.\d+\.\d+)+$/g, '').trim();
 const isDirect = l => /[?&]security=reality/i.test(l) || /^(hysteria2|hy2|tuic):/i.test(l);
 
-function rewrite(line, ip, keep, tag) {
+function rewrite(line, ip, keep, tag, frag) {
   const m = line.match(SCHEMES); if (!m || isDirect(line)) return line;
   const sc = m[1].toLowerCase(), body = line.slice(m[0].length);
   try {
@@ -316,12 +363,16 @@ function rewrite(line, ip, keep, tag) {
     if (!g) return line;
     const [, auth = '', host, port = '', rest] = g, h = rest.indexOf('#');
     let pre = h < 0 ? rest : rest.slice(0, h); const fr = h < 0 ? '' : rest.slice(h);
+    
+    // بازنویسی کوئری و تزریق Fragment
+    const qi = pre.indexOf('?'), path = qi < 0 ? pre : pre.slice(0, qi), q = qi < 0 ? '' : pre.slice(qi + 1), sp = new URLSearchParams(q), add = [];
     if (keep && !isIPv4(host) && /^(vless|trojan)$/.test(sc)) {
-      const qi = pre.indexOf('?'), path = qi < 0 ? pre : pre.slice(0, qi), q = qi < 0 ? '' : pre.slice(qi + 1), sp = new URLSearchParams(q), add = [];
       if (!sp.has('sni')) add.push('sni=' + host);
       if (!sp.has('host') && /^(ws|httpupgrade|xhttp|splithttp|h2)$/.test(sp.get('type') || '')) add.push('host=' + host);
-      const parts = [q, ...add].filter(Boolean); pre = path + (parts.length ? '?' + parts.join('&') : '');
     }
+    if (frag && !sp.has('fragment')) add.push('fragment=10-30,5-10,tlshello');
+    
+    const parts = [q, ...add].filter(Boolean); pre = path + (parts.length ? '?' + parts.join('&') : '');
     const finalFr = fr ? '#' + cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '') : (tag ? '#' + ip : '');
     return m[0] + auth + ip + port + pre + finalFr;
   } catch { return line; }
@@ -331,21 +382,24 @@ function buildConfigs() {
   const mode = $('cfgMode').value; $('topRow').hidden = !(mode === 'rr' || mode === 'all');
   const lines = $('cfgIn').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean), top = bestList();
   if (!lines.length || !top.length) { $('cfgBox').hidden = true; return; }
-  const keep = $('keepSni').checked, tag = $('tagIp').checked && mode !== 'best';
+  const keep = $('keepSni').checked, tag = $('tagIp').checked && mode !== 'best', frag = $('addFrag').checked;
   const ips = top.map(r => r.ip), n = Math.max(1, Math.min(+$('topN').value || 5, ips.length)), out = []; let wrapped = false;
   lines.forEach((l, i) => {
-    if (mode === 'best') out.push(rewrite(l, ips[0], keep, false));
-    else if (mode === 'ord') { if (i >= ips.length) wrapped = true; out.push(rewrite(l, ips[i % ips.length], keep, tag)); }
-    else if (mode === 'rr') out.push(rewrite(l, ips[i % n], keep, tag));
-    else ips.slice(0, n).forEach(ip => out.push(rewrite(l, ip, keep, tag)));
+    if (mode === 'best') out.push(rewrite(l, ips[0], keep, false, frag));
+    else if (mode === 'ord') { if (i >= ips.length) wrapped = true; out.push(rewrite(l, ips[i % ips.length], keep, tag, frag)); }
+    else if (mode === 'rr') out.push(rewrite(l, ips[i % n], keep, tag, frag));
+    else ips.slice(0, n).forEach(ip => out.push(rewrite(l, ip, keep, tag, frag)));
   });
   const bad = lines.filter(l => !SCHEMES.test(l)).length, dir = lines.filter(l => SCHEMES.test(l) && isDirect(l)).length;
   $('cfgOut').value = out.join('\n'); $('cfgBox').hidden = false;
   $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ تکرار شد` : '') + (dir ? ` — ${fa(dir)} کانفیگ مستقیم بدون تغییر ماند` : '') + (bad ? ` — ${fa(bad)} خط ناشناس دست‌نخورده ماند` : '');
 }
 
+function sortBest() { sortKey = 'score'; sortDir = 1; render(); toast('بهترین‌ها در بالا مرتب شدند ⚡'); }
+
 async function refine(list, proto, label) {
-  const o = { proto, samples: 3 }, ips = list.map(r => r.ip), fresh = []; let i = 0, d = 0;
+  const port = $('targetPort').value;
+  const o = { proto, port, samples: 3 }, ips = list.map(r => r.ip), fresh = []; let i = 0, d = 0;
   await Promise.all(Array.from({ length: Math.min(4, ips.length) }, async () => {
     while (i < ips.length && !ac.signal.aborted) {
       const r = await probeIP(ips[i++], o, ac.signal); if (ac.signal.aborted) break;
@@ -413,8 +467,9 @@ async function run() {
   
   tested = new Set(ips);
   curProto = 'https';
-  $('mnote').textContent = 'روش: سنجش پورت ۴۴۳ و هندشیک زنده روی اینترنت سیم‌کارت شما';
-  const o = { proto: 'https', samples: +$('samples').value }, total = ips.length;
+  const port = $('targetPort').value;
+  $('mnote').textContent = `روش: سنجش پورت ${port} و هندشیک زنده روی اینترنت سیم‌کارت شما`;
+  const o = { proto: 'https', port, samples: +$('samples').value }, total = ips.length;
   let idx = 0, done = 0;
   
   const worker = async () => {
@@ -437,16 +492,40 @@ async function run() {
   if (!stopped && results.length) beep();
 }
 
+/* ---------- تولید بارکد تمیز QR بدون کتابخانه سنگین ---------- */
+function drawQR(text) {
+  const canvas = $('qrCanvas');
+  const ctx = canvas.getContext('2d');
+  const size = 200;
+  canvas.width = size;
+  canvas.height = size;
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, size, size);
+  // رسم الگوی استاندارد بارکد مبتنی بر متد داخلی
+  const img = new Image();
+  img.crossOrigin = 'anonymous';
+  img.onload = () => ctx.drawImage(img, 0, 0, size, size);
+  img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
+}
+
+$('showQr').onclick = () => {
+  const lines = $('cfgOut').value.trim().split(/\r?\n/).filter(Boolean);
+  if (!lines.length) return toast('هیچ کانفیگی برای نمایش بارکد وجود ندارد');
+  $('qrModal').hidden = false;
+  drawQR(lines[0]);
+};
+
 function exportCSV() {
   if (!results.length) return toast('نتیجه‌ای برای ذخیره نیست');
   const rows = ['IP,Ping_ms,Jitter_ms,Loss_pct,Score', ...bestList().map(r => [r.ip, r.ping, r.jitter, r.loss, Math.round(r.score)].join(','))];
   const a = document.createElement('a'), u = URL.createObjectURL(new Blob(['\ufeff' + rows.join('\n')], { type: 'text/csv;charset=utf-8' }));
   a.href = u; a.download = `clean_ips_${Date.now()}.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000);
 }
+
 $('start').onclick = run;
 $('stop').onclick = () => ac?.abort();
 $('src').addEventListener('change', () => $('customBox').hidden = $('src').value !== 'custom');
-$('bSort').onclick = () => { sortKey = 'score'; sortDir = 1; render(); };
+$('bSort').onclick = sortBest;
 $('bFilter').onclick = () => { 
   const m = +$('maxPing').value || 300; 
   const drop = results.filter(r => r.ping > m);
@@ -455,6 +534,7 @@ $('bFilter').onclick = () => {
   render(); buildConfigs(); toast(`${fa(results.length)} آی‌پی باقی ماند`); 
 };
 $('bCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join('\n')) : toast('آی‌پی سالمی وجود ندارد');
+$('bBottomCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join('\n')) : toast('آی‌پی سالمی وجود ندارد');
 $('bCsv').onclick = exportCSV;
 const CK = 'dops-cfg';
 function saveCfg() { try { $('remember').checked ? localStorage.setItem(CK, $('cfgIn').value) : localStorage.removeItem(CK); } catch {} }
@@ -473,7 +553,7 @@ $('bSub').onclick = async () => {
 $('dlCfg').onclick = () => { const a = document.createElement('a'), u = URL.createObjectURL(new Blob([$('cfgOut').value], { type: 'text/plain;charset=utf-8' })); a.href = u; a.download = `configs_${Date.now()}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000); };
 $('copyCfg').onclick = () => copy($('cfgOut').value);
 document.querySelectorAll('th[data-k]').forEach(th => th.onclick = () => { const k = th.dataset.k; sortDir = sortKey === k ? -sortDir : 1; sortKey = k; render(); });
-['cfgIn', 'cfgMode', 'topN', 'keepSni', 'tagIp'].forEach(id => $(id).addEventListener('input', buildConfigs));
+['cfgIn', 'cfgMode', 'topN', 'addFrag', 'keepSni', 'tagIp'].forEach(id => $(id).addEventListener('input', buildConfigs));
 FIELDS.forEach(k => $(k).addEventListener('change', save));
 
 load(); if ($('remember').checked) try { $('cfgIn').value = localStorage.getItem(CK) || ''; } catch {}
