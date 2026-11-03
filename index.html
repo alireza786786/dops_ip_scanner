@@ -47,7 +47,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS REPO SCANNER V7.1 · PRO</div>
+    <div class="badge">DOPS REPO SCANNER V7.2 · PRO</div>
     <h1>CDN IP 🌐 Scanner</h1>
     <p class="sub">اسکن هم‌زمان با چندنمونه‌گیری، امتیاز کیفیت و بازنویسی هوشمند کانفیگ‌ها</p>
   </div>
@@ -65,6 +65,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
         <option value="outputs/alive_fastly.txt">مخزن: alive_fastly.txt</option>
         <option value="cf_ranges">رنج‌های رسمی کلودفلر (نمونه تصادفی)</option>
         <option value="offline_db">بانک آفلاین داخلی (اینترنت ملی)</option>
+        <option value="favs">آی‌پی‌های ذخیره‌شده (برترین‌های اسکن‌های قبل)</option>
         <option value="custom">لیست دلخواه (IP یا CIDR)</option>
       </select></div>
     <div id="customBox" hidden><textarea id="customIps" placeholder="104.16.0.0/20&#10;162.159.10.5"></textarea></div>
@@ -76,6 +77,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
       <select id="conc"><option value="6">۶ (ملایم)</option><option value="12" selected>۱۲</option><option value="24">۲۴ (سریع)</option></select></div>
     <div class="row"><span>نمونه برای هر آی‌پی:</span>
       <select id="samples"><option value="1">۱</option><option value="3" selected>۳</option><option value="5">۵</option></select></div>
+    <label class="row"><span>مرحلهٔ دوم: تأیید دقیق ۱۵ آی‌پی برتر (۵ نمونه)</span><input type="checkbox" id="refine" checked></label>
     <label class="row"><span>نمونه‌گیری تصادفی از منبع (به‌جای N تای اول)</span><input type="checkbox" id="shuffle" checked></label>
   </div>
 
@@ -88,10 +90,11 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
     <div class="row" id="topRow" hidden><span>N (تعداد آی‌پی برتر):</span><input type="number" id="topN" value="5" min="1" max="50"></div>
     <label class="row"><span>حفظ دامنه اصلی به‌عنوان SNI/Host (ضروری برای CDN)</span><input type="checkbox" id="keepSni" checked></label>
     <label class="row"><span>افزودن آی‌پی به نام هر کانفیگ (برای تشخیص راحت‌تر)</span><input type="checkbox" id="tagIp" checked></label>
+    <label class="row"><span>به‌خاطر سپردن کانفیگ‌ها روی همین گوشی</span><input type="checkbox" id="remember"></label>
     <div id="cfgBox" hidden>
       <p class="hint" style="color:var(--ok)">خروجی: <b id="cfgCount"></b></p>
       <textarea id="cfgOut" readonly style="border-color:var(--ok)"></textarea>
-      <button class="sm" style="margin-top:6px;width:100%" id="copyCfg">📋 کپی تمام کانفیگ‌های جدید</button>
+      <div style="display:flex;gap:6px;margin-top:6px"><button class="sm" style="flex:1" id="copyCfg">📋 کپی تمام کانفیگ‌ها</button><button class="sm" style="flex:1" id="dlCfg">💾 ذخیره فایل</button></div>
     </div>
   </div>
 
@@ -107,6 +110,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
       <button class="sm hi" id="bSort">⚡ بهترین‌ها</button>
       <button class="sm" id="bFilter">🧹 حذف بالاتر از</button>
       <input type="number" id="maxPing" value="250" min="20" step="10" aria-label="حداکثر پینگ"><span class="hint">ms</span>
+      <button class="sm" id="bRetest">🔁 تست مجدد</button>
       <button class="sm" id="bCopy">📋 کپی IPها</button>
       <button class="sm" id="bCsv">📥 CSV</button>
     </div>
@@ -130,9 +134,9 @@ const isIPv4 = s => IPV4.test(s);
 const ip2n = ip => ip.split('.').reduce((a, o) => a * 256 + +o, 0);
 const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join('.');
 const TIMEOUT = 2500, MIN_MS = 10;
-const FIELDS = ['src','limit','proto','conc','samples','shuffle','maxPing','cfgMode','topN','keepSni','tagIp','customIps'];
+const FIELDS = ['src','limit','proto','conc','samples','shuffle','maxPing','cfgMode','topN','keepSni','tagIp','refine','remember','customIps'];
 
-let results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
+let curProto = 'https', results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
 
 /* ---------- ابزارهای عمومی ---------- */
 function toast(m) { const e = $('toast'); e.textContent = m; e.hidden = false; clearTimeout(tt); tt = setTimeout(() => e.hidden = true, 2600); }
@@ -186,10 +190,16 @@ function parseCustom(t) {
   t.split(/[\s,;]+/).forEach(x => { if (isIPv4(x)) ips.add(x); else { const [m, p] = x.split('/'); if (isIPv4(m) && +p >= 8 && +p <= 32) cd.push(x); } });
   return { ips: [...ips], cd };
 }
+const getFavs = () => { try { return JSON.parse(localStorage.getItem('dops-favs') || '[]'); } catch { return []; } };
+function saveFavs() {
+  if (!results.length) return;
+  try { localStorage.setItem('dops-favs', JSON.stringify([...new Set([...bestList().slice(0, 20).map(r => r.ip), ...getFavs()])].slice(0, 100))); } catch {}
+}
 async function loadTargets() {
   const src = $('src').value, lim = +$('limit').value, cap = lim || 500; let ips = [], note = '';
   if (src === 'offline_db') ips = [...OFFLINE];
   else if (src === 'cf_ranges') ips = fromCidrs(CF_CIDRS, cap);
+  else if (src === 'favs') { ips = getFavs(); if (!ips.length) note = 'هنوز آی‌پی ذخیره‌شده‌ای ندارید؛ اول یک اسکن کامل انجام دهید.'; }
   else if (src === 'custom') {
     const p = parseCustom($('customIps').value);
     ips = [...p.ips, ...(p.cd.length ? fromCidrs(p.cd, cap) : [])];
@@ -301,6 +311,25 @@ function buildConfigs() {
   $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ برای بقیه از اول تکرار شد` : '') + (bad ? ` — ${fa(bad)} خط ناشناس بدون تغییر ماند` : '');
 }
 
+/* ---------- تأیید دقیق و تست مجدد ---------- */
+async function refine(list, proto, label) {
+  const o = { proto, samples: 5 }, ips = list.map(r => r.ip), fresh = []; let i = 0, d = 0;
+  await Promise.all(Array.from({ length: Math.min(6, ips.length) }, async () => {
+    while (i < ips.length && !ac.signal.aborted) {
+      const r = await probeIP(ips[i++], o, ac.signal); if (ac.signal.aborted) break;
+      d++; $('ptxt').textContent = `${label}: ${fa(d)} از ${fa(ips.length)}`; if (r) fresh.push(r);
+    }
+  }));
+  if (!ac.signal.aborted) results = results.filter(r => !ips.includes(r.ip)).concat(fresh);   // ناپایدارها حذف می‌شوند
+}
+async function retest() {
+  if (scanning || !results.length) return toast('اول یک اسکن انجام دهید');
+  scanning = true; ac = new AbortController(); setBusy(true);
+  await refine([...results], curProto, 'تست مجدد');
+  const st = ac.signal.aborted; scanning = false; setBusy(false); render(); buildConfigs(); saveFavs();
+  $('ptxt').textContent = st ? 'متوقف شد' : 'تست مجدد تمام شد ✔️'; if (!st) beep();
+}
+
 /* ---------- اجرای اسکن ---------- */
 function setBusy(b) { $('start').disabled = b; $('start').textContent = b ? 'در حال اسکن...' : 'اسکن مجدد'; $('stop').hidden = !b; }
 async function run() {
@@ -314,6 +343,7 @@ async function run() {
   let proto = $('proto').value === 'auto' ? 'http' : $('proto').value;
   if (proto === 'http' && location.protocol === 'https:') { proto = 'https'; toast('صفحه روی HTTPS باز شده و درخواست HTTP مسدود می‌شود؛ روش HTTPS تخمینی استفاده شد.'); }
   $('mnote').textContent = proto === 'http' ? 'روش: HTTP پورت ۸۰ (نتیجه دقیق)' : 'روش: HTTPS تخمینی — علامت ~ یعنی سالم‌بودن حدسی است. برای نتیجه دقیق‌تر فایل را محلی (file://) یا روی HTTP باز کنید.';
+  curProto = proto;
   const o = { proto, samples: +$('samples').value }, total = ips.length;
   let idx = 0, done = 0;
   const worker = async () => {
@@ -326,9 +356,10 @@ async function run() {
     }
   };
   await Promise.all(Array.from({ length: +$('conc').value }, worker));
+  if (!ac.signal.aborted && $('refine').checked && results.length > 3) await refine(bestList().slice(0, 15), proto, 'تأیید نهایی');
   const stopped = ac.signal.aborted;
   scanning = false; setBusy(false); try { wl?.release(); } catch {}
-  render(); buildConfigs();
+  render(); buildConfigs(); saveFavs();
   $('ptxt').textContent = stopped ? 'اسکن متوقف شد' : results.length ? 'اسکن به پایان رسید ✔️' : 'آی‌پی سالمی پیدا نشد؛ منبع یا روش بررسی را عوض کنید.';
   if (!stopped && results.length) beep();
 }
@@ -347,12 +378,18 @@ $('bSort').onclick = () => { sortKey = 'score'; sortDir = 1; render(); };
 $('bFilter').onclick = () => { const m = +$('maxPing').value || 250; results = results.filter(r => r.ping <= m); render(); buildConfigs(); toast(`${fa(results.length)} آی‌پی باقی ماند`); };
 $('bCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join('\n')) : toast('آی‌پی سالمی وجود ندارد');
 $('bCsv').onclick = exportCSV;
+const CK = 'dops-cfg';
+function saveCfg() { try { $('remember').checked ? localStorage.setItem(CK, $('cfgIn').value) : localStorage.removeItem(CK); } catch {} }
+$('cfgIn').addEventListener('input', saveCfg); $('remember').addEventListener('change', saveCfg);
+$('bRetest').onclick = retest;
+$('dlCfg').onclick = () => { const a = document.createElement('a'), u = URL.createObjectURL(new Blob([$('cfgOut').value], { type: 'text/plain;charset=utf-8' })); a.href = u; a.download = `configs_${Date.now()}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000); };
 $('copyCfg').onclick = () => copy($('cfgOut').value);
 document.querySelectorAll('th[data-k]').forEach(th => th.onclick = () => { const k = th.dataset.k; sortDir = sortKey === k ? -sortDir : 1; sortKey = k; render(); });
 ['cfgIn', 'cfgMode', 'topN', 'keepSni', 'tagIp'].forEach(id => $(id).addEventListener('input', buildConfigs));
 FIELDS.forEach(k => $(k).addEventListener('change', save));
 
-load(); $('customBox').hidden = $('src').value !== 'custom'; loadISP();
+load(); if ($('remember').checked) try { $('cfgIn').value = localStorage.getItem(CK) || ''; } catch {}
+$('customBox').hidden = $('src').value !== 'custom'; loadISP();
 </script>
 </body>
 </html>
