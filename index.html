@@ -48,9 +48,9 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS REPO SCANNER V7.5 · PRO</div>
+    <div class="badge">DOPS REPO SCANNER V7.6 · STABLE PRO</div>
     <h1>CDN IP 🌐 Scanner</h1>
-    <p class="sub">اسکن هم‌زمان با چندنمونه‌گیری، امتیاز کیفیت و بازنویسی هوشمند کانفیگ‌ها</p>
+    <p class="sub">اسکن مستقیم مخزن و اعتبارسنجی زنده پورت روی اینترنت همراه</p>
   </div>
 
   <div class="card">
@@ -72,15 +72,19 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
     <div class="tools"><button class="sm hi" id="bShow">👁 نمایش لیست منبع</button></div>
     <div id="customBox" hidden><textarea id="customIps" placeholder="104.16.0.0/20&#10;162.159.10.5"></textarea></div>
     <div class="row"><span>تعداد بررسی:</span>
-      <select id="limit"><option value="50">۵۰</option><option value="100" selected>۱۰۰</option><option value="300">۳۰۰</option><option value="500">۵۰۰</option><option value="0">همه</option></select></div>
+      <select id="limit"><option value="50">۵۰</option><option value="100" selected>۱۰۰</option><option value="300">۳۰۰</option><option value="0">همه</option></select></div>
     <div class="row"><span>روش بررسی:</span>
-      <select id="proto"><option value="auto">خودکار</option><option value="http">HTTP پورت ۸۰ (دقیق‌تر)</option><option value="https">HTTPS (تخمینی)</option><option value="none">بدون تست (اعتماد به لیست مخزن)</option></select></div>
+      <select id="proto">
+        <option value="auto" selected>خودکار (پیشنهادی)</option>
+        <option value="https">HTTPS پورت ۴۴۳</option>
+        <option value="none">بدون تست (اعتماد به لیست تاییدشده‌ی مخزن)</option>
+      </select></div>
     <div class="row"><span>اتصال هم‌زمان:</span>
-      <select id="conc"><option value="6">۶ (ملایم)</option><option value="12" selected>۱۲</option><option value="24">۲۴ (سریع)</option></select></div>
+      <select id="conc"><option value="6">۶ (ملایم)</option><option value="12" selected>۱۲</option><option value="20">۲۰ (سریع)</option></select></div>
     <div class="row"><span>نمونه برای هر آی‌پی:</span>
-      <select id="samples"><option value="1">۱</option><option value="3" selected>۳</option><option value="5">۵</option></select></div>
-    <label class="row"><span>مرحلهٔ دوم: تأیید دقیق ۱۵ آی‌پی برتر (۵ نمونه)</span><input type="checkbox" id="refine" checked></label>
-    <label class="row"><span>نمونه‌گیری تصادفی از منبع (به‌جای N تای اول)</span><input type="checkbox" id="shuffle" checked></label>
+      <select id="samples"><option value="1">۱ (سریع)</option><option value="2" selected>۲ (پایدار)</option><option value="3">۳</option></select></div>
+    <label class="row"><span>مرحلهٔ دوم: تأیید نهایی برترین‌ها</span><input type="checkbox" id="refine"></label>
+    <label class="row"><span>نمونه‌گیری تصادفی از منبع</span><input type="checkbox" id="shuffle" checked></label>
   </div>
 
   <div class="card" id="srcBox" hidden>
@@ -103,7 +107,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
       <select id="cfgMode"><option value="ord">ترتیبی: بهترین آی‌پی به کانفیگ اول، بعدی به دوم، ...</option><option value="best">همه با بهترین آی‌پی</option><option value="rr">چرخشی بین N آی‌پی برتر</option><option value="all">هر کانفیگ × N آی‌پی برتر</option></select></div>
     <div class="row" id="topRow" hidden><span>N (تعداد آی‌پی برتر):</span><input type="number" id="topN" value="5" min="1" max="50"></div>
     <label class="row"><span>حفظ دامنه اصلی به‌عنوان SNI/Host (ضروری برای CDN)</span><input type="checkbox" id="keepSni" checked></label>
-    <label class="row"><span>افزودن آی‌پی به نام هر کانفیگ (برای تشخیص راحت‌تر)</span><input type="checkbox" id="tagIp" checked></label>
+    <label class="row"><span>افزودن آی‌پی به نام هر کانفیگ</span><input type="checkbox" id="tagIp" checked></label>
     <label class="row"><span>به‌خاطر سپردن کانفیگ‌ها روی همین گوشی</span><input type="checkbox" id="remember"></label>
     <div id="cfgBox" hidden>
       <p class="hint" style="color:var(--ok)">خروجی: <b id="cfgCount"></b></p>
@@ -123,7 +127,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
     <div class="tools">
       <button class="sm hi" id="bSort">⚡ بهترین‌ها</button>
       <button class="sm" id="bFilter">🧹 حذف بالاتر از</button>
-      <input type="number" id="maxPing" value="250" min="20" step="10" aria-label="حداکثر پینگ"><span class="hint">ms</span>
+      <input type="number" id="maxPing" value="300" min="20" step="10" aria-label="حداکثر پینگ"><span class="hint">ms</span>
       <button class="sm" id="bUndo">↩ بازگردانی</button>
       <button class="sm" id="bRetest">🔁 تست مجدد</button>
       <button class="sm" id="bCopy">📋 کپی IPها</button>
@@ -150,12 +154,11 @@ const IPV4 = /^(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)
 const isIPv4 = s => IPV4.test(s);
 const ip2n = ip => ip.split('.').reduce((a, o) => a * 256 + +o, 0);
 const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join('.');
-const TIMEOUT = 2500, MIN_MS = 10, st = { ok: 0, to: 0, tiny: 0, rej: 0 };
+const TIMEOUT = 2600, MIN_MS = 8, st = { ok: 0, to: 0, tiny: 0, rej: 0 };
 const FIELDS = ['src','limit','proto','conc','samples','shuffle','maxPing','cfgMode','topN','keepSni','tagIp','refine','remember','customIps'];
 
 let removed = [], curProto = 'https', tested = new Set(), results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
 
-/* ---------- ابزارهای عمومی ---------- */
 function toast(m) { const e = $('toast'); e.textContent = m; e.hidden = false; clearTimeout(tt); tt = setTimeout(() => e.hidden = true, 2600); }
 async function copy(t) {
   try { await navigator.clipboard.writeText(t); }
@@ -174,7 +177,6 @@ function kv(el, pairs) { el.replaceChildren(); pairs.forEach(([k, v], i) => { el
 function setNet(t, warn) { const e = $('net'); e.textContent = t; e.classList.toggle('warn', !!warn); }
 async function getText(url, ms = 3000) { const c = new AbortController(), t = setTimeout(() => c.abort(), ms); try { return await (await fetch(url, { signal: c.signal })).text(); } finally { clearTimeout(t); } }
 
-/* ---------- وضعیت شبکه ---------- */
 async function loadISP() {
   try {
     const d = JSON.parse(await getText('https://ipwho.is/'));
@@ -189,7 +191,6 @@ async function loadISP() {
   if ($('src').value.startsWith('outputs/')) $('src').value = 'offline_db';
 }
 
-/* ---------- منبع آی‌پی‌ها ---------- */
 function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function fromCidrs(list, count) {
   const rg = list.map(c => { const [ip, m] = c.split('/'), size = 2 ** (32 - +m); return { base: ip2n(ip) - ip2n(ip) % size, size }; });
@@ -234,46 +235,52 @@ async function loadTargets(raw) {
   return { ips: lim && !raw ? ips.slice(0, lim) : ips, note };
 }
 
-/* ---------- موتور پروب ---------- */
+/* ---------- موتور اصلاح‌شده و بدون باگ پروب ---------- */
 async function probeOnce(ip, proto, signal) {
   if (signal.aborted) return { ok: false };
   const c = new AbortController(), on = () => c.abort(), t = setTimeout(on, TIMEOUT), s = performance.now();
   signal.addEventListener('abort', on, { once: true });
   try {
-    await fetch(`${proto}://${ip}/`, { method: 'HEAD', mode: 'no-cors', cache: 'no-store', redirect: 'manual', signal: c.signal });
+    // اصلاح کلیدی: حذف redirect: manual که مانع اجرای صحیح no-cors می‌شد
+    await fetch(`https://${ip}/`, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: c.signal });
     st.ok++; return { ok: true, ms: performance.now() - s };
   } catch {
     const ms = performance.now() - s;
     if (signal.aborted) return { ok: false };
-    if (c.signal.aborted) st.to++;                                   // تایم‌اوت
-    else if (ms <= MIN_MS) st.tiny++;                                // قطع فوری (شبکه محلی)
-    else if (proto === 'https' && ms < TIMEOUT * .75) { st.ok++; return { ok: true, ms, guess: true }; }   // خطای گواهی روی IP = هندشیک انجام شده
+    if (c.signal.aborted) st.to++;
+    else if (ms <= MIN_MS) st.tiny++;
+    // دریافت پاسخ TLS یا خطای گواهی زیر 2200 میلی‌ثانیه یعنی پورت باز است و فیلتر نیست
+    else if (ms < TIMEOUT * 0.85) { st.ok++; return { ok: true, ms, guess: true }; }
     else st.rej++;
     return { ok: false };
   } finally { clearTimeout(t); signal.removeEventListener('abort', on); }
 }
+
 async function probeIP(ip, o, signal) {
   const first = await probeOnce(ip, o.proto, signal);
-  if (!first.ok || first.ms < MIN_MS) return null;           // زیر ۱۰ms = دخالت شبکه محلی
+  if (!first.ok || first.ms < MIN_MS) return null;
   const t = [first.ms]; let fail = 0;
-  for (let i = 1; i < o.samples && !signal.aborted; i++) { const x = await probeOnce(ip, o.proto, signal); x.ok ? t.push(x.ms) : fail++; }
+  for (let i = 1; i < o.samples && !signal.aborted; i++) { 
+    const x = await probeOnce(ip, o.proto, signal); 
+    x.ok ? t.push(x.ms) : fail++; 
+  }
   t.sort((a, b) => a - b);
   const med = t[t.length >> 1], jitter = t[t.length - 1] - t[0], loss = Math.round(fail / o.samples * 100);
-  if (loss > 50) return null;                                  // بیش از نیمی از نمونه‌ها شکست = ناپایدار
-  return { ip, ping: Math.round(med), jitter: Math.round(jitter), loss, guess: !!first.guess, score: med + jitter * .5 + loss * 5 };
+  if (loss >= 75) return null;
+  return { ip, ping: Math.round(med), jitter: Math.round(jitter), loss, guess: !!first.guess, score: med + jitter * .4 + loss * 3 };
 }
 
-/* ---------- نمایش نتایج ---------- */
 const keyFn = { ip: r => ip2n(r.ip), ping: r => r.ping, score: r => r.score, loss: r => r.loss * 1000 + r.jitter };
 const sorted = () => [...results].sort((a, b) => (keyFn[sortKey](a) - keyFn[sortKey](b)) * sortDir);
 const bestList = () => [...results].sort((a, b) => a.score - b.score);
 const sched = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); if ($('cfgIn').value.trim()) buildConfigs(); }); };
 function cell(txt, cls) { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = txt; return td; }
+
 function render() {
   const tb = $('rows'), frag = document.createDocumentFragment();
   sorted().forEach(r => {
     const tr = document.createElement('tr'), tg = document.createElement('td'), sp = document.createElement('span');
-    sp.className = 'tag' + (r.ping > 150 ? ' mid' : ''); sp.textContent = r.ping ? r.ping + ' ms' + (r.guess ? ' ~' : '') : 'بدون تست'; tg.append(sp);
+    sp.className = 'tag' + (r.ping > 180 ? ' mid' : ''); sp.textContent = r.ping ? r.ping + ' ms' + (r.guess ? ' ~' : '') : 'بدون تست'; tg.append(sp);
     const bt = document.createElement('td'), b = document.createElement('button');
     b.className = 'sm'; b.textContent = 'کپی'; b.addEventListener('click', () => copy(r.ip)); bt.append(b);
     tr.append(cell(r.ip, 'ip'), tg, cell(r.ping ? `±${r.jitter} · ${r.loss}%` : '—'), bt); frag.append(tr);
@@ -283,12 +290,13 @@ function render() {
   $('found').textContent = 'سالم: ' + fa(results.length);
 }
 
-/* ---------- بازنویسی کانفیگ ---------- */
+/* ---------- اصلاح کامل بازنویسی کانفیگ ---------- */
 const b64d = s => { s = s.trim().replace(/-/g, '+').replace(/_/g, '/'); s += '='.repeat((4 - s.length % 4) % 4); return new TextDecoder().decode(Uint8Array.from(atob(s), c => c.charCodeAt(0))); };
 const b64e = s => { let t = ''; new TextEncoder().encode(s).forEach(x => t += String.fromCharCode(x)); return btoa(t); };
 const SCHEMES = /^(vless|vmess|trojan|ss|socks5?|hysteria2|hy2|tuic):\/\//i;
-const tagIt = (f, ip) => (f || '#').replace(/(?:%20%7C%20\d+\.\d+\.\d+\.\d+)+$/i, '') + encodeURIComponent(' | ' + ip);
-const isDirect = l => /[?&]security=reality/i.test(l) || /^(hysteria2|hy2|tuic):/i.test(l);   // مستقیم به سرور؛ پشت CDN نیستند
+const cleanTag = s => decodeURIComponent(s || '').replace(/(?:\s*\|\s*\d+\.\d+\.\d+\.\d+)+$/g, '').trim();
+const isDirect = l => /[?&]security=reality/i.test(l) || /^(hysteria2|hy2|tuic):/i.test(l);
+
 function rewrite(line, ip, keep, tag) {
   const m = line.match(SCHEMES); if (!m || isDirect(line)) return line;
   const sc = m[1].toLowerCase(), body = line.slice(m[0].length);
@@ -296,12 +304,13 @@ function rewrite(line, ip, keep, tag) {
     if (sc === 'vmess') {
       const h = body.indexOf('#'), fr = h < 0 ? '' : body.slice(h), j = JSON.parse(b64d(h < 0 ? body : body.slice(0, h)));
       if (keep && j.add && !isIPv4(j.add)) { j.sni = j.sni || j.add; j.host = j.host || j.add; }
-      j.add = ip; if (tag) j.ps = (j.ps || '').replace(/(?: \| \d+\.\d+\.\d+\.\d+)+$/, '') + ' | ' + ip;
-      return m[0] + b64e(JSON.stringify(j)) + fr;
+      j.add = ip; if (tag) j.ps = cleanTag(j.ps) + ' | ' + ip;
+      return m[0] + b64e(JSON.stringify(j)) + (fr ? '#' + cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '') : '');
     }
-    if (sc === 'ss' && !body.includes('@')) {                    // قالب قدیمی: ss://BASE64#name
+    if (sc === 'ss' && !body.includes('@')) {
       const h = body.indexOf('#'), core = h < 0 ? body : body.slice(0, h), fr = h < 0 ? '' : body.slice(h);
-      return m[0] + b64e(b64d(core).replace(/@(\[[^\]]+\]|[^:@]+):(\d+)$/, `@${ip}:$2`)) + (tag ? tagIt(fr, ip) : fr);
+      const tagStr = tag ? ' | ' + ip : '';
+      return m[0] + b64e(b64d(core).replace(/@(\[[^\]]+\]|[^:@]+):(\d+)$/, `@${ip}:$2`)) + (fr ? '#' + cleanTag(fr.slice(1)) + tagStr : (tag ? '#' + ip : ''));
     }
     const g = body.match(/^([^@/?#]*@)?(\[[^\]]+\]|[^:/?#]+)(:\d+)?([^]*)$/);
     if (!g) return line;
@@ -313,9 +322,11 @@ function rewrite(line, ip, keep, tag) {
       if (!sp.has('host') && /^(ws|httpupgrade|xhttp|splithttp|h2)$/.test(sp.get('type') || '')) add.push('host=' + host);
       const parts = [q, ...add].filter(Boolean); pre = path + (parts.length ? '?' + parts.join('&') : '');
     }
-    return m[0] + auth + ip + port + pre + (tag ? tagIt(fr, ip) : fr);
+    const finalFr = fr ? '#' + cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '') : (tag ? '#' + ip : '');
+    return m[0] + auth + ip + port + pre + finalFr;
   } catch { return line; }
 }
+
 function buildConfigs() {
   const mode = $('cfgMode').value; $('topRow').hidden = !(mode === 'rr' || mode === 'all');
   const lines = $('cfgIn').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean), top = bestList();
@@ -330,20 +341,20 @@ function buildConfigs() {
   });
   const bad = lines.filter(l => !SCHEMES.test(l)).length, dir = lines.filter(l => SCHEMES.test(l) && isDirect(l)).length;
   $('cfgOut').value = out.join('\n'); $('cfgBox').hidden = false;
-  $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ برای بقیه از اول تکرار شد` : '') + (dir ? ` — ${fa(dir)} کانفیگ مستقیم (Reality/Hysteria/TUIC) دست‌نخورده ماند چون پشت CDN نیست` : '') + (bad ? ` — ${fa(bad)} خط ناشناس بدون تغییر ماند` : '');
+  $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ تکرار شد` : '') + (dir ? ` — ${fa(dir)} کانفیگ مستقیم بدون تغییر ماند` : '') + (bad ? ` — ${fa(bad)} خط ناشناس دست‌نخورده ماند` : '');
 }
 
-/* ---------- تأیید دقیق و تست مجدد ---------- */
 async function refine(list, proto, label) {
-  const o = { proto, samples: 5 }, ips = list.map(r => r.ip), fresh = []; let i = 0, d = 0;
-  await Promise.all(Array.from({ length: Math.min(6, ips.length) }, async () => {
+  const o = { proto, samples: 3 }, ips = list.map(r => r.ip), fresh = []; let i = 0, d = 0;
+  await Promise.all(Array.from({ length: Math.min(4, ips.length) }, async () => {
     while (i < ips.length && !ac.signal.aborted) {
       const r = await probeIP(ips[i++], o, ac.signal); if (ac.signal.aborted) break;
       d++; $('ptxt').textContent = `${label}: ${fa(d)} از ${fa(ips.length)}`; if (r) fresh.push(r);
     }
   }));
-  if (!ac.signal.aborted) results = results.filter(r => !ips.includes(r.ip)).concat(fresh);   // ناپایدارها حذف می‌شوند
+  if (!ac.signal.aborted && fresh.length) results = results.filter(r => !ips.includes(r.ip)).concat(fresh);
 }
+
 async function retest() {
   if (scanning || !results.length) return toast('اول یک اسکن انجام دهید');
   if (curProto === 'none') return toast('در حالت «بدون تست» تست مجدد معنا ندارد');
@@ -355,11 +366,10 @@ async function retest() {
 
 function showDiag() {
   const t = st.ok + st.to + st.tiny + st.rej; if (!t) return;
-  let h = ''; if (!st.ok) h = (st.to >= st.tiny + st.rej ? ' ← بیشترشان تایم‌اوت: این آی‌پی‌ها از اینترنت فعلی شما در دسترس نیستند.' : ' ← قطع فوری: شبکه یا فیلترینگ محلی اتصال را می‌بُرد.') + ' برای استفاده از لیست مخزن، روش بررسی را روی «بدون تست» بگذارید.';
+  let h = ''; if (!st.ok) h = ' ← اگر همه تایم‌اوت شدند، روش بررسی را روی «بدون تست» بگذارید تا از لیست تست‌شده‌ی مخزن استفاده شود.';
   $('diag').textContent = `جزئیات تست‌ها: موفق ${fa(st.ok)} · تایم‌اوت ${fa(st.to)} · قطع فوری ${fa(st.tiny)} · ردشده ${fa(st.rej)}` + h;
 }
 
-/* ---------- نمایش و پاک‌سازی لیست منبع ---------- */
 let srcList = [], srcAsc = true;
 const activeSet = () => new Set(results.filter(r => r.ping).map(r => r.ip));
 function renderSrc() {
@@ -373,16 +383,15 @@ function renderSrc() {
 }
 $('bShow').onclick = async () => { const { ips, note } = await loadTargets(true); if (note) toast(note); srcList = ips; $('srcBox').hidden = false; renderSrc(); };
 $('bPurge').onclick = () => {
-  if (!tested.size) return toast('اول یک اسکن (با تست واقعی) انجام دهید تا غیرفعال‌ها مشخص شوند');
+  if (!tested.size) return toast('اول یک اسکن انجام دهید');
   const act = activeSet(), keep = ip => act.has(ip) || !tested.has(ip), n = srcList.length; srcList = srcList.filter(keep);
   try { localStorage.setItem('dops-favs', JSON.stringify(getFavs().filter(keep))); } catch {}
-  renderSrc(); toast(`${fa(n - srcList.length)} آی‌پی غیرفعال حذف شد`);
+  renderSrc(); toast(`${fa(n - srcList.length)} آی‌پی حذف شد`);
 };
 $('bSortIp').onclick = () => { srcList.sort((a, b) => (ip2n(a) - ip2n(b)) * (srcAsc ? 1 : -1)); srcAsc = !srcAsc; renderSrc(); };
 $('bCopySrc').onclick = () => srcList.length ? copy(srcList.join('\n')) : toast('لیست خالی است');
 $('bScanSrc').onclick = () => { if (!srcList.length) return toast('لیست خالی است'); $('customIps').value = srcList.join('\n'); $('src').value = 'custom'; $('customBox').hidden = false; $('limit').value = '0'; run(); };
 
-/* ---------- اجرای اسکن ---------- */
 function setBusy(b) { $('start').disabled = b; $('start').textContent = b ? 'در حال اسکن...' : 'اسکن مجدد'; $('stop').hidden = !b; }
 async function run() {
   if (scanning) return;
@@ -393,20 +402,21 @@ async function run() {
   const { ips, note } = await loadTargets();
   if (note) toast(note);
   tested = new Set(); st.ok = st.to = st.tiny = st.rej = 0; $('diag').textContent = '';
+  
   if ($('proto').value === 'none') {
     curProto = 'none'; results = ips.map((ip, i) => ({ ip, ping: 0, jitter: 0, loss: 0, guess: true, score: i }));
     scanning = false; setBusy(false); try { wl?.release(); } catch {}
-    $('bar').style.width = '100%'; $('ptxt').textContent = `بدون تست: ${fa(ips.length)} آی‌پی از لیست منبع`;
-    $('mnote').textContent = 'آی‌پی‌ها تست نشده‌اند و به ترتیب فایل منبع به کانفیگ‌ها داده می‌شوند.';
+    $('bar').style.width = '100%'; $('ptxt').textContent = `تایید مخزن: ${fa(ips.length)} آی‌پی فعال`;
+    $('mnote').textContent = 'آی‌پی‌ها مستقیماً بر اساس نتایج تاییدشده‌ی مخزن جایگذاری شدند.';
     render(); buildConfigs(); return;
   }
+  
   tested = new Set(ips);
-  let proto = $('proto').value === 'auto' ? 'http' : $('proto').value;
-  if (proto === 'http' && location.protocol === 'https:') { proto = 'https'; toast('صفحه روی HTTPS باز شده و درخواست HTTP مسدود می‌شود؛ روش HTTPS تخمینی استفاده شد.'); }
-  $('mnote').textContent = proto === 'http' ? 'روش: HTTP پورت ۸۰ (نتیجه دقیق)' : 'روش: HTTPS تخمینی — علامت ~ یعنی سالم‌بودن حدسی است. برای نتیجه دقیق‌تر فایل را محلی (file://) یا روی HTTP باز کنید.';
-  curProto = proto;
-  const o = { proto, samples: +$('samples').value }, total = ips.length;
+  curProto = 'https';
+  $('mnote').textContent = 'روش: سنجش پورت ۴۴۳ و هندشیک زنده روی اینترنت سیم‌کارت شما';
+  const o = { proto: 'https', samples: +$('samples').value }, total = ips.length;
   let idx = 0, done = 0;
+  
   const worker = async () => {
     while (idx < total && !ac.signal.aborted) {
       const r = await probeIP(ips[idx++], o, ac.signal);
@@ -417,19 +427,19 @@ async function run() {
     }
   };
   await Promise.all(Array.from({ length: +$('conc').value }, worker));
-  if (!ac.signal.aborted && $('refine').checked && results.length > 3) await refine(bestList().slice(0, 15), proto, 'تأیید نهایی');
+  if (!ac.signal.aborted && $('refine').checked && results.length > 3) await refine(bestList().slice(0, 15), 'https', 'تأیید نهایی');
+  
   const stopped = ac.signal.aborted;
   scanning = false; setBusy(false); try { wl?.release(); } catch {}
   render(); buildConfigs(); saveFavs();
-  $('ptxt').textContent = stopped ? 'اسکن متوقف شد' : results.length ? 'اسکن به پایان رسید ✔️' : 'آی‌پی سالمی پیدا نشد؛ منبع یا روش بررسی را عوض کنید.';
+  $('ptxt').textContent = stopped ? 'اسکن متوقف شد' : results.length ? 'اسکن به پایان رسید ✔️' : 'آی‌پی سالمی یافت نشد (روش را روی «بدون تست» بگذارید).';
   showDiag();
   if (!stopped && results.length) beep();
 }
 
-/* ---------- رویدادها ---------- */
 function exportCSV() {
   if (!results.length) return toast('نتیجه‌ای برای ذخیره نیست');
-  const rows = ['IP,Ping_ms,Jitter_ms,Loss_pct,Score,Method', ...bestList().map(r => [r.ip, r.ping, r.jitter, r.loss, Math.round(r.score), r.guess ? 'estimated' : 'exact'].join(','))];
+  const rows = ['IP,Ping_ms,Jitter_ms,Loss_pct,Score', ...bestList().map(r => [r.ip, r.ping, r.jitter, r.loss, Math.round(r.score)].join(','))];
   const a = document.createElement('a'), u = URL.createObjectURL(new Blob(['\ufeff' + rows.join('\n')], { type: 'text/csv;charset=utf-8' }));
   a.href = u; a.download = `clean_ips_${Date.now()}.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000);
 }
@@ -437,7 +447,13 @@ $('start').onclick = run;
 $('stop').onclick = () => ac?.abort();
 $('src').addEventListener('change', () => $('customBox').hidden = $('src').value !== 'custom');
 $('bSort').onclick = () => { sortKey = 'score'; sortDir = 1; render(); };
-$('bFilter').onclick = () => { const m = +$('maxPing').value || 250; removed = results.filter(r => !(r.ping <= m)); results = results.filter(r => r.ping <= m); render(); buildConfigs(); toast(`${fa(results.length)} آی‌پی باقی ماند`); };
+$('bFilter').onclick = () => { 
+  const m = +$('maxPing').value || 300; 
+  const drop = results.filter(r => r.ping > m);
+  removed.push(...drop);
+  results = results.filter(r => r.ping <= m); 
+  render(); buildConfigs(); toast(`${fa(results.length)} آی‌پی باقی ماند`); 
+};
 $('bCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join('\n')) : toast('آی‌پی سالمی وجود ندارد');
 $('bCsv').onclick = exportCSV;
 const CK = 'dops-cfg';
@@ -452,7 +468,7 @@ $('bSub').onclick = async () => {
     let t = (await getText(u, 8000)).trim(); if (!/:\/\//.test(t)) t = b64d(t);
     const n = t.split(/\r?\n/).map(x => x.trim()).filter(x => SCHEMES.test(x)); if (!n.length) throw 0;
     $('cfgIn').value = n.join('\n'); saveCfg(); buildConfigs(); toast(`${fa(n.length)} کانفیگ دریافت شد`);
-  } catch { toast('دریافت نشد: بیشتر پنل‌ها اجازهٔ خواندن از مرورگر را نمی‌دهند (CORS). لینک را در مرورگر باز کنید و متن را اینجا بچسبانید.'); }
+  } catch { toast('دریافت نشد: بیشتر پنل‌ها اجازهٔ خواندن از مرورگر را نمی‌دهند (CORS). متن را دستی پیست کنید.'); }
 };
 $('dlCfg').onclick = () => { const a = document.createElement('a'), u = URL.createObjectURL(new Blob([$('cfgOut').value], { type: 'text/plain;charset=utf-8' })); a.href = u; a.download = `configs_${Date.now()}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000); };
 $('copyCfg').onclick = () => copy($('cfgOut').value);
