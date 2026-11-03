@@ -20,7 +20,7 @@ h1{font-size:24px;color:var(--ac);margin-bottom:4px}
 .pill{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(46,213,115,.15);color:var(--ok)}
 .pill.warn{background:rgba(255,165,2,.15);color:var(--wn)}
 .row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;font-size:12px}
-select,input[type=number]{background:#1a263c;color:#fff;border:1px solid var(--bd);padding:6px 10px;border-radius:8px;font-size:12px}
+select,input[type=number],input[type=url]{background:#1a263c;color:#fff;border:1px solid var(--bd);padding:6px 10px;border-radius:8px;font-size:12px}
 input[type=number]{width:70px;text-align:center}
 textarea{width:100%;height:110px;background:var(--bg);color:#fff;border:1px solid var(--bd);border-radius:8px;padding:10px;font-size:11px;font-family:ui-monospace,Consolas,monospace;resize:vertical;margin-top:6px;direction:ltr;text-align:left}
 :focus-visible{outline:2px solid var(--ac);outline-offset:2px}
@@ -48,7 +48,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS REPO SCANNER V7.4 · PRO</div>
+    <div class="badge">DOPS REPO SCANNER V7.5 · PRO</div>
     <h1>CDN IP 🌐 Scanner</h1>
     <p class="sub">اسکن هم‌زمان با چندنمونه‌گیری، امتیاز کیفیت و بازنویسی هوشمند کانفیگ‌ها</p>
   </div>
@@ -97,6 +97,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
   <div class="card">
     <div class="ct">بازنویسی گروهی کانفیگ‌ها</div>
     <p class="hint">VLESS · VMess · Trojan · SS · Socks را زیر هم بچسبانید:</p>
+    <div class="tools"><input type="url" id="subUrl" dir="ltr" placeholder="لینک سابسکریپشن (اختیاری)" style="flex:1;min-width:0"><button class="sm" id="bSub">دریافت</button></div>
     <textarea id="cfgIn" placeholder="vless://...&#10;vmess://...&#10;trojan://..."></textarea>
     <div class="row" style="margin-top:8px"><span>حالت جایگزینی:</span>
       <select id="cfgMode"><option value="ord">ترتیبی: بهترین آی‌پی به کانفیگ اول، بعدی به دوم، ...</option><option value="best">همه با بهترین آی‌پی</option><option value="rr">چرخشی بین N آی‌پی برتر</option><option value="all">هر کانفیگ × N آی‌پی برتر</option></select></div>
@@ -123,12 +124,14 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
       <button class="sm hi" id="bSort">⚡ بهترین‌ها</button>
       <button class="sm" id="bFilter">🧹 حذف بالاتر از</button>
       <input type="number" id="maxPing" value="250" min="20" step="10" aria-label="حداکثر پینگ"><span class="hint">ms</span>
+      <button class="sm" id="bUndo">↩ بازگردانی</button>
       <button class="sm" id="bRetest">🔁 تست مجدد</button>
       <button class="sm" id="bCopy">📋 کپی IPها</button>
+      <button class="sm" id="bCopyCsv">📋 با ویرگول</button>
       <button class="sm" id="bCsv">📥 CSV</button>
     </div>
     <div class="tbl"><table>
-      <thead><tr><th data-k="ip">آی‌پی</th><th data-k="ping">تأخیر</th><th data-k="score">نوسان · افت</th><th></th></tr></thead>
+      <thead><tr><th data-k="ip">آی‌پی</th><th data-k="ping">تأخیر</th><th data-k="loss">نوسان · افت</th><th></th></tr></thead>
       <tbody id="rows"></tbody>
     </table></div>
     <p class="hint" id="mnote" style="margin-top:8px"></p>
@@ -150,7 +153,7 @@ const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join(
 const TIMEOUT = 2500, MIN_MS = 10, st = { ok: 0, to: 0, tiny: 0, rej: 0 };
 const FIELDS = ['src','limit','proto','conc','samples','shuffle','maxPing','cfgMode','topN','keepSni','tagIp','refine','remember','customIps'];
 
-let curProto = 'https', tested = new Set(), results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
+let removed = [], curProto = 'https', tested = new Set(), results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
 
 /* ---------- ابزارهای عمومی ---------- */
 function toast(m) { const e = $('toast'); e.textContent = m; e.hidden = false; clearTimeout(tt); tt = setTimeout(() => e.hidden = true, 2600); }
@@ -261,7 +264,7 @@ async function probeIP(ip, o, signal) {
 }
 
 /* ---------- نمایش نتایج ---------- */
-const keyFn = { ip: r => ip2n(r.ip), ping: r => r.ping, score: r => r.score };
+const keyFn = { ip: r => ip2n(r.ip), ping: r => r.ping, score: r => r.score, loss: r => r.loss * 1000 + r.jitter };
 const sorted = () => [...results].sort((a, b) => (keyFn[sortKey](a) - keyFn[sortKey](b)) * sortDir);
 const bestList = () => [...results].sort((a, b) => a.score - b.score);
 const sched = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); if ($('cfgIn').value.trim()) buildConfigs(); }); };
@@ -284,17 +287,17 @@ function render() {
 const b64d = s => { s = s.trim().replace(/-/g, '+').replace(/_/g, '/'); s += '='.repeat((4 - s.length % 4) % 4); return new TextDecoder().decode(Uint8Array.from(atob(s), c => c.charCodeAt(0))); };
 const b64e = s => { let t = ''; new TextEncoder().encode(s).forEach(x => t += String.fromCharCode(x)); return btoa(t); };
 const SCHEMES = /^(vless|vmess|trojan|ss|socks5?|hysteria2|hy2|tuic):\/\//i;
-const tagIt = (f, ip) => (f || '#') + encodeURIComponent(' | ' + ip);
+const tagIt = (f, ip) => (f || '#').replace(/(?:%20%7C%20\d+\.\d+\.\d+\.\d+)+$/i, '') + encodeURIComponent(' | ' + ip);
 const isDirect = l => /[?&]security=reality/i.test(l) || /^(hysteria2|hy2|tuic):/i.test(l);   // مستقیم به سرور؛ پشت CDN نیستند
 function rewrite(line, ip, keep, tag) {
   const m = line.match(SCHEMES); if (!m || isDirect(line)) return line;
   const sc = m[1].toLowerCase(), body = line.slice(m[0].length);
   try {
     if (sc === 'vmess') {
-      const j = JSON.parse(b64d(body));
+      const h = body.indexOf('#'), fr = h < 0 ? '' : body.slice(h), j = JSON.parse(b64d(h < 0 ? body : body.slice(0, h)));
       if (keep && j.add && !isIPv4(j.add)) { j.sni = j.sni || j.add; j.host = j.host || j.add; }
-      j.add = ip; if (tag) j.ps = (j.ps || '') + ' | ' + ip;
-      return m[0] + b64e(JSON.stringify(j));
+      j.add = ip; if (tag) j.ps = (j.ps || '').replace(/(?: \| \d+\.\d+\.\d+\.\d+)+$/, '') + ' | ' + ip;
+      return m[0] + b64e(JSON.stringify(j)) + fr;
     }
     if (sc === 'ss' && !body.includes('@')) {                    // قالب قدیمی: ss://BASE64#name
       const h = body.indexOf('#'), core = h < 0 ? body : body.slice(0, h), fr = h < 0 ? '' : body.slice(h);
@@ -344,10 +347,10 @@ async function refine(list, proto, label) {
 async function retest() {
   if (scanning || !results.length) return toast('اول یک اسکن انجام دهید');
   if (curProto === 'none') return toast('در حالت «بدون تست» تست مجدد معنا ندارد');
-  scanning = true; ac = new AbortController(); setBusy(true);
+  scanning = true; removed = []; ac = new AbortController(); setBusy(true);
   await refine([...results], curProto, 'تست مجدد');
-  const st = ac.signal.aborted; scanning = false; setBusy(false); render(); buildConfigs(); saveFavs();
-  $('ptxt').textContent = st ? 'متوقف شد' : 'تست مجدد تمام شد ✔️'; if (!st) beep();
+  const wasAborted = ac.signal.aborted; scanning = false; setBusy(false); render(); buildConfigs(); saveFavs();
+  $('ptxt').textContent = wasAborted ? 'متوقف شد' : 'تست مجدد تمام شد ✔️'; if (!wasAborted) beep();
 }
 
 function showDiag() {
@@ -384,7 +387,7 @@ function setBusy(b) { $('start').disabled = b; $('start').textContent = b ? 'د�
 async function run() {
   if (scanning) return;
   scanning = true; ac = new AbortController(); save();
-  results = []; render(); $('res').hidden = false; $('cfgBox').hidden = true; $('bar').style.width = '0';
+  results = []; removed = []; render(); $('res').hidden = false; $('cfgBox').hidden = true; $('bar').style.width = '0';
   setBusy(true); $('ptxt').textContent = 'در حال خواندن منبع داده...';
   try { wl = await navigator.wakeLock?.request('screen'); } catch {}
   const { ips, note } = await loadTargets();
@@ -434,13 +437,23 @@ $('start').onclick = run;
 $('stop').onclick = () => ac?.abort();
 $('src').addEventListener('change', () => $('customBox').hidden = $('src').value !== 'custom');
 $('bSort').onclick = () => { sortKey = 'score'; sortDir = 1; render(); };
-$('bFilter').onclick = () => { const m = +$('maxPing').value || 250; results = results.filter(r => r.ping <= m); render(); buildConfigs(); toast(`${fa(results.length)} آی‌پی باقی ماند`); };
+$('bFilter').onclick = () => { const m = +$('maxPing').value || 250; removed = results.filter(r => !(r.ping <= m)); results = results.filter(r => r.ping <= m); render(); buildConfigs(); toast(`${fa(results.length)} آی‌پی باقی ماند`); };
 $('bCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join('\n')) : toast('آی‌پی سالمی وجود ندارد');
 $('bCsv').onclick = exportCSV;
 const CK = 'dops-cfg';
 function saveCfg() { try { $('remember').checked ? localStorage.setItem(CK, $('cfgIn').value) : localStorage.removeItem(CK); } catch {} }
 $('cfgIn').addEventListener('input', saveCfg); $('remember').addEventListener('change', saveCfg);
 $('bRetest').onclick = retest;
+$('bUndo').onclick = () => { if (!removed.length) return toast('چیزی برای بازگردانی نیست'); results = results.concat(removed); removed = []; render(); buildConfigs(); toast('آی‌پی‌های حذف‌شده برگشتند'); };
+$('bCopyCsv').onclick = () => results.length ? copy(bestList().map(r => r.ip).join(',')) : toast('آی‌پی سالمی وجود ندارد');
+$('bSub').onclick = async () => {
+  const u = $('subUrl').value.trim(); if (!/^https?:\/\//i.test(u)) return toast('لینک معتبر وارد کنید');
+  try {
+    let t = (await getText(u, 8000)).trim(); if (!/:\/\//.test(t)) t = b64d(t);
+    const n = t.split(/\r?\n/).map(x => x.trim()).filter(x => SCHEMES.test(x)); if (!n.length) throw 0;
+    $('cfgIn').value = n.join('\n'); saveCfg(); buildConfigs(); toast(`${fa(n.length)} کانفیگ دریافت شد`);
+  } catch { toast('دریافت نشد: بیشتر پنل‌ها اجازهٔ خواندن از مرورگر را نمی‌دهند (CORS). لینک را در مرورگر باز کنید و متن را اینجا بچسبانید.'); }
+};
 $('dlCfg').onclick = () => { const a = document.createElement('a'), u = URL.createObjectURL(new Blob([$('cfgOut').value], { type: 'text/plain;charset=utf-8' })); a.href = u; a.download = `configs_${Date.now()}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000); };
 $('copyCfg').onclick = () => copy($('cfgOut').value);
 document.querySelectorAll('th[data-k]').forEach(th => th.onclick = () => { const k = th.dataset.k; sortDir = sortKey === k ? -sortDir : 1; sortKey = k; render(); });
