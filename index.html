@@ -47,7 +47,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS REPO SCANNER V7.2 · PRO</div>
+    <div class="badge">DOPS REPO SCANNER V7.3 · PRO</div>
     <h1>CDN IP 🌐 Scanner</h1>
     <p class="sub">اسکن هم‌زمان با چندنمونه‌گیری، امتیاز کیفیت و بازنویسی هوشمند کانفیگ‌ها</p>
   </div>
@@ -239,6 +239,7 @@ async function probeIP(ip, o, signal) {
   for (let i = 1; i < o.samples && !signal.aborted; i++) { const x = await probeOnce(ip, o.proto, signal); x.ok ? t.push(x.ms) : fail++; }
   t.sort((a, b) => a - b);
   const med = t[t.length >> 1], jitter = t[t.length - 1] - t[0], loss = Math.round(fail / o.samples * 100);
+  if (loss > 50) return null;                                  // بیش از نیمی از نمونه‌ها شکست = ناپایدار
   return { ip, ping: Math.round(med), jitter: Math.round(jitter), loss, guess: !!first.guess, score: med + jitter * .5 + loss * 5 };
 }
 
@@ -267,8 +268,9 @@ const b64d = s => { s = s.trim().replace(/-/g, '+').replace(/_/g, '/'); s += '='
 const b64e = s => { let t = ''; new TextEncoder().encode(s).forEach(x => t += String.fromCharCode(x)); return btoa(t); };
 const SCHEMES = /^(vless|vmess|trojan|ss|socks5?|hysteria2|hy2|tuic):\/\//i;
 const tagIt = (f, ip) => (f || '#') + encodeURIComponent(' | ' + ip);
+const isDirect = l => /[?&]security=reality/i.test(l) || /^(hysteria2|hy2|tuic):/i.test(l);   // مستقیم به سرور؛ پشت CDN نیستند
 function rewrite(line, ip, keep, tag) {
-  const m = line.match(SCHEMES); if (!m) return line;
+  const m = line.match(SCHEMES); if (!m || isDirect(line)) return line;
   const sc = m[1].toLowerCase(), body = line.slice(m[0].length);
   try {
     if (sc === 'vmess') {
@@ -306,9 +308,9 @@ function buildConfigs() {
     else if (mode === 'rr') out.push(rewrite(l, ips[i % n], keep, tag));
     else ips.slice(0, n).forEach(ip => out.push(rewrite(l, ip, keep, tag)));
   });
-  const bad = lines.filter(l => !SCHEMES.test(l)).length;
+  const bad = lines.filter(l => !SCHEMES.test(l)).length, dir = lines.filter(l => SCHEMES.test(l) && isDirect(l)).length;
   $('cfgOut').value = out.join('\n'); $('cfgBox').hidden = false;
-  $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ برای بقیه از اول تکرار شد` : '') + (bad ? ` — ${fa(bad)} خط ناشناس بدون تغییر ماند` : '');
+  $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ برای بقیه از اول تکرار شد` : '') + (dir ? ` — ${fa(dir)} کانفیگ مستقیم (Reality/Hysteria/TUIC) دست‌نخورده ماند چون پشت CDN نیست` : '') + (bad ? ` — ${fa(bad)} خط ناشناس بدون تغییر ماند` : '');
 }
 
 /* ---------- تأیید دقیق و تست مجدد ---------- */
