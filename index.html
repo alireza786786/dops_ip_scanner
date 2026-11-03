@@ -47,7 +47,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS REPO SCANNER V7 · PRO</div>
+    <div class="badge">DOPS REPO SCANNER V7.1 · PRO</div>
     <h1>CDN IP 🌐 Scanner</h1>
     <p class="sub">اسکن هم‌زمان با چندنمونه‌گیری، امتیاز کیفیت و بازنویسی هوشمند کانفیگ‌ها</p>
   </div>
@@ -84,9 +84,10 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
     <p class="hint">VLESS · VMess · Trojan · SS · Socks را زیر هم بچسبانید:</p>
     <textarea id="cfgIn" placeholder="vless://...&#10;vmess://...&#10;trojan://..."></textarea>
     <div class="row" style="margin-top:8px"><span>حالت جایگزینی:</span>
-      <select id="cfgMode"><option value="best">همه با بهترین آی‌پی</option><option value="rr">چرخشی بین N آی‌پی برتر</option><option value="all">هر کانفیگ × N آی‌پی برتر</option></select></div>
-    <div class="row"><span>N (تعداد آی‌پی برتر):</span><input type="number" id="topN" value="5" min="1" max="50"></div>
+      <select id="cfgMode"><option value="ord">ترتیبی: بهترین آی‌پی به کانفیگ اول، بعدی به دوم، ...</option><option value="best">همه با بهترین آی‌پی</option><option value="rr">چرخشی بین N آی‌پی برتر</option><option value="all">هر کانفیگ × N آی‌پی برتر</option></select></div>
+    <div class="row" id="topRow" hidden><span>N (تعداد آی‌پی برتر):</span><input type="number" id="topN" value="5" min="1" max="50"></div>
     <label class="row"><span>حفظ دامنه اصلی به‌عنوان SNI/Host (ضروری برای CDN)</span><input type="checkbox" id="keepSni" checked></label>
+    <label class="row"><span>افزودن آی‌پی به نام هر کانفیگ (برای تشخیص راحت‌تر)</span><input type="checkbox" id="tagIp" checked></label>
     <div id="cfgBox" hidden>
       <p class="hint" style="color:var(--ok)">خروجی: <b id="cfgCount"></b></p>
       <textarea id="cfgOut" readonly style="border-color:var(--ok)"></textarea>
@@ -129,7 +130,7 @@ const isIPv4 = s => IPV4.test(s);
 const ip2n = ip => ip.split('.').reduce((a, o) => a * 256 + +o, 0);
 const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join('.');
 const TIMEOUT = 2500, MIN_MS = 10;
-const FIELDS = ['src','limit','proto','conc','samples','shuffle','maxPing','cfgMode','topN','keepSni','customIps'];
+const FIELDS = ['src','limit','proto','conc','samples','shuffle','maxPing','cfgMode','topN','keepSni','tagIp','customIps'];
 
 let results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
 
@@ -235,7 +236,7 @@ async function probeIP(ip, o, signal) {
 const keyFn = { ip: r => ip2n(r.ip), ping: r => r.ping, score: r => r.score };
 const sorted = () => [...results].sort((a, b) => (keyFn[sortKey](a) - keyFn[sortKey](b)) * sortDir);
 const bestList = () => [...results].sort((a, b) => a.score - b.score);
-const sched = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); }); };
+const sched = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); if ($('cfgIn').value.trim()) buildConfigs(); }); };
 function cell(txt, cls) { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = txt; return td; }
 function render() {
   const tb = $('rows'), frag = document.createDocumentFragment();
@@ -284,16 +285,20 @@ function rewrite(line, ip, keep, tag) {
   } catch { return line; }
 }
 function buildConfigs() {
+  const mode = $('cfgMode').value; $('topRow').hidden = !(mode === 'rr' || mode === 'all');
   const lines = $('cfgIn').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean), top = bestList();
   if (!lines.length || !top.length) { $('cfgBox').hidden = true; return; }
-  const mode = $('cfgMode').value, keep = $('keepSni').checked;
-  const ips = top.slice(0, Math.max(1, Math.min(+$('topN').value || 5, top.length))).map(r => r.ip), out = [];
+  const keep = $('keepSni').checked, tag = $('tagIp').checked && mode !== 'best';
+  const ips = top.map(r => r.ip), n = Math.max(1, Math.min(+$('topN').value || 5, ips.length)), out = []; let wrapped = false;
   lines.forEach((l, i) => {
     if (mode === 'best') out.push(rewrite(l, ips[0], keep, false));
-    else if (mode === 'rr') out.push(rewrite(l, ips[i % ips.length], keep, true));
-    else ips.forEach(ip => out.push(rewrite(l, ip, keep, true)));
+    else if (mode === 'ord') { if (i >= ips.length) wrapped = true; out.push(rewrite(l, ips[i % ips.length], keep, tag)); }
+    else if (mode === 'rr') out.push(rewrite(l, ips[i % n], keep, tag));
+    else ips.slice(0, n).forEach(ip => out.push(rewrite(l, ip, keep, tag)));
   });
-  $('cfgOut').value = out.join('\n'); $('cfgCount').textContent = fa(out.length) + ' کانفیگ'; $('cfgBox').hidden = false;
+  const bad = lines.filter(l => !SCHEMES.test(l)).length;
+  $('cfgOut').value = out.join('\n'); $('cfgBox').hidden = false;
+  $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ برای بقیه از اول تکرار شد` : '') + (bad ? ` — ${fa(bad)} خط ناشناس بدون تغییر ماند` : '');
 }
 
 /* ---------- اجرای اسکن ---------- */
@@ -344,7 +349,7 @@ $('bCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join(
 $('bCsv').onclick = exportCSV;
 $('copyCfg').onclick = () => copy($('cfgOut').value);
 document.querySelectorAll('th[data-k]').forEach(th => th.onclick = () => { const k = th.dataset.k; sortDir = sortKey === k ? -sortDir : 1; sortKey = k; render(); });
-['cfgIn', 'cfgMode', 'topN', 'keepSni'].forEach(id => $(id).addEventListener('input', buildConfigs));
+['cfgIn', 'cfgMode', 'topN', 'keepSni', 'tagIp'].forEach(id => $(id).addEventListener('input', buildConfigs));
 FIELDS.forEach(k => $(k).addEventListener('change', save));
 
 load(); $('customBox').hidden = $('src').value !== 'custom'; loadISP();
