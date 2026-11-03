@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DOPS Ultimate CDN Scanner</title>
+<title>DOPS Master CDN Scanner</title>
 <style>
 :root{--bg:#0b111e;--card:#131c2e;--bd:#1f2d47;--ac:#00ffcc;--tx:#e2e8f0;--mu:#8492a6;--ok:#2ed573;--wn:#ffa502;color-scheme:dark}
 *{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn,Tahoma,"Segoe UI",system-ui,sans-serif}
 [hidden]{display:none!important}
-body{background:var(--bg);color:var(--tx);padding:12px;padding-bottom:70px;display:flex;justify-content:center;min-height:100vh}
+body{background:var(--bg);color:var(--tx);padding:12px;padding-bottom:75px;display:flex;justify-content:center;min-height:100vh}
 .wrap{width:100%;max-width:680px;display:flex;flex-direction:column;gap:12px}
 .head{text-align:center;padding:10px 0}
 .badge{display:inline-block;padding:4px 14px;font-size:11px;color:var(--ac);border:1px solid var(--ac);border-radius:20px;margin-bottom:6px;letter-spacing:1px}
@@ -41,25 +41,22 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
 .ip{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace}
 .tag{padding:3px 6px;border-radius:4px;font-size:11px;font-weight:bold;background:rgba(46,213,115,.15);color:var(--ok)}
 .tag.mid{background:rgba(255,165,2,.15);color:var(--wn)}
-#toast{position:fixed;bottom:65px;left:50%;transform:translateX(-50%);background:#1f2d47;border:1px solid var(--ac);padding:8px 16px;border-radius:20px;font-size:12px;z-index:99;max-width:90%}
+#toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#1f2d47;border:1px solid var(--ac);padding:8px 16px;border-radius:20px;font-size:12px;z-index:99;max-width:90%}
 
-/* نوار ابزار شناور چسبان پایین صفحه */
-.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(15,23,42,0.92);backdrop-filter:blur(10px);border-top:1px solid var(--bd);padding:8px 14px;display:flex;justify-content:center;z-index:50}
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(15,23,42,0.94);backdrop-filter:blur(10px);border-top:1px solid var(--bd);padding:8px 14px;display:flex;justify-content:center;z-index:50}
 .bottom-inner{width:100%;max-width:680px;display:flex;justify-content:space-between;align-items:center;gap:6px}
 
-/* مدال پاپ‌آپ QR Code */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
 .modal-box{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;max-width:320px;width:100%;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
 #qrCanvas{background:#fff;padding:8px;border-radius:8px}
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS SCANNER V8.0 · ULTIMATE PRO</div>
+    <div class="badge">DOPS SCANNER V9.0 · MASTER PRO</div>
     <h1>CDN IP 🌐 Scanner</h1>
-    <p class="sub">اسکن اختصاصی مخزن · پشتیبانی از فرگمنت، پورت‌های سفارشی و نوار شناور</p>
+    <p class="sub">اسکن مستقیم مخزن · پشتیبانی از فرگمنت، ورود دستی آی‌پی و اصلاح ملاحظات ویتوری</p>
   </div>
 
   <div class="card">
@@ -67,32 +64,48 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
     <div class="isp" id="isp">در حال بررسی اتصال اینترنت...</div>
   </div>
 
+  <!-- کارت افزودن دستی آی‌پی (امکان جدید) -->
   <div class="card">
-    <div class="ct">تنظیمات اسکن</div>
+    <div class="ct"><span>افزودن دستی آی‌پی (اختیاری)</span><span class="hint">تک‌آی‌پی، چندتایی یا رنج CIDR</span></div>
+    <textarea id="manualIps" style="height:70px;" placeholder="آی‌پی‌های مدنظرتان را اینجا بنویسید یا بچسبانید:&#10;104.16.10.20&#10;162.159.20.0/24"></textarea>
+    <div style="display:flex;gap:6px;margin-top:6px">
+      <button class="sm hi" style="flex:1" id="bMergeManual">➕ ادغام با لیست اسکن</button>
+      <button class="sm" style="flex:1" id="bScanOnlyManual">🎯 فقط اسکن این آی‌پی‌ها</button>
+    </div>
+  </div>
+
+  <!-- تنظیمات اسکن و منبع مخزن -->
+  <div class="card">
+    <div class="ct">تنظیمات منبع و اسکن</div>
     <div class="row"><span>منبع داده:</span>
       <select id="src">
-        <option value="outputs/alive_cloudflare.txt">مخزن: alive_cloudflare.txt</option>
+        <option value="outputs/alive_cloudflare.txt" selected>مخزن: alive_cloudflare.txt</option>
         <option value="outputs/alive_fastly.txt">مخزن: alive_fastly.txt</option>
         <option value="cf_ranges">رنج‌های رسمی کلودفلر (نمونه تصادفی)</option>
         <option value="offline_db">بانک آفلاین داخلی (اینترنت ملی)</option>
         <option value="favs">آی‌پی‌های ذخیره‌شده (برترین‌های قبل)</option>
-        <option value="custom">لیست دلخواه (IP یا CIDR)</option>
+        <option value="custom">لیست دلخواه سفارشی</option>
       </select></div>
-    <div class="tools"><button class="sm hi" id="bShow">👁 نمایش لیست منبع</button></div>
+    <div class="tools"><button class="sm hi" id="bShow">👁 نمایش و مدیریت لیست منبع</button></div>
     <div id="customBox" hidden><textarea id="customIps" placeholder="104.16.0.0/20&#10;162.159.10.5"></textarea></div>
-    <div class="row"><span>پورت هدف کلودفلر:</span>
+    
+    <div class="row"><span>پورت تست هدف:</span>
       <select id="targetPort">
         <option value="443" selected>443 (HTTPS اصلی)</option>
-        <option value="2053">2053 (TLS فرعی)</option>
-        <option value="2083">2083 (TLS فرعی)</option>
-        <option value="8443">8443 (TLS فرعی)</option>
+        <option value="2053">2053 (TLS جانبی)</option>
+        <option value="2083">2083 (TLS جانبی)</option>
+        <option value="2087">2087 (TLS جانبی)</option>
+        <option value="8443">8443 (TLS جانبی)</option>
+        <option value="80">80 (HTTP عمومی)</option>
+        <option value="8080">8080 (HTTP فرعی)</option>
+        <option value="8880">8880 (HTTP فرعی)</option>
       </select></div>
     <div class="row"><span>تعداد بررسی:</span>
-      <select id="limit"><option value="50">۵۰</option><option value="100" selected>۱۰۰</option><option value="300">۳۰۰</option><option value="0">همه</option></select></div>
+      <select id="limit"><option value="50">۵۰</option><option value="100" selected>۱۰۰</option><option value="300">۳۰۰</option><option value="0">همه آی‌پی‌های فایل</option></select></div>
     <div class="row"><span>روش بررسی:</span>
       <select id="proto">
-        <option value="auto" selected>خودکار (سنجش زنده)</option>
-        <option value="none">بدون تست (اعتماد به لیست تاییدشده‌ی مخزن)</option>
+        <option value="auto" selected>خودکار (سنجش زنده خط)</option>
+        <option value="none">بدون تست (اعتماد کامل به لیست مخزن)</option>
       </select></div>
     <div class="row"><span>اتصال هم‌زمان:</span>
       <select id="conc"><option value="6">۶ (ملایم)</option><option value="12" selected>۱۲</option><option value="20">۲۰ (سریع)</option></select></div>
@@ -103,16 +116,17 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
   </div>
 
   <div class="card" id="srcBox" hidden>
-    <div class="ct"><span>لیست منبع</span><span class="hint" id="srcCount"></span></div>
+    <div class="ct"><span>لیست منبع مخزن</span><span class="hint" id="srcCount"></span></div>
     <div class="tools">
       <button class="sm hi" id="bPurge">🧹 حذف غیرفعال‌ها</button>
       <button class="sm" id="bSortIp">↕ مرتب‌سازی IP</button>
       <button class="sm" id="bCopySrc">📋 کپی</button>
       <button class="sm" id="bScanSrc">▶ اسکن این لیست</button>
     </div>
-    <div id="srcRows" style="max-height:320px;overflow-y:auto"></div>
+    <div id="srcRows" style="max-height:300px;overflow-y:auto"></div>
   </div>
 
+  <!-- بازنویسی کانفیگ -->
   <div class="card">
     <div class="ct">بازنویسی گروهی کانفیگ‌ها</div>
     <p class="hint">VLESS · VMess · Trojan · SS · Socks را زیر هم بچسبانید:</p>
@@ -123,8 +137,11 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
     <div class="row" id="topRow" hidden><span>N (تعداد آی‌پی برتر):</span><input type="number" id="topN" value="5" min="1" max="50"></div>
     <label class="row"><span style="color:var(--ac);font-weight:bold">🛡 فعال‌سازی ضد فیلتر Fragment (ضد اختلال TLS در ساعات اوج)</span><input type="checkbox" id="addFrag"></label>
     <label class="row"><span>حفظ دامنه اصلی به‌عنوان SNI/Host (ضروری برای CDN)</span><input type="checkbox" id="keepSni" checked></label>
-    <label class="row"><span>افزودن آی‌پی به نام هر کانفیگ</span><input type="checkbox" id="tagIp" checked></label>
+    
+    <!-- این گزینه پیش‌فرض خاموش شد تا در ویتوری تکراری دیده نشود -->
+    <label class="row"><span>افزودن آی‌پی به نام کانفیگ (در صورت نیاز به نمایش در ملاحظات)</span><input type="checkbox" id="tagIp"></label>
     <label class="row"><span>به‌خاطر سپردن کانفیگ‌ها روی همین گوشی</span><input type="checkbox" id="remember"></label>
+    
     <div id="cfgBox" hidden>
       <p class="hint" style="color:var(--ok)">خروجی: <b id="cfgCount"></b></p>
       <textarea id="cfgOut" readonly style="border-color:var(--ok)"></textarea>
@@ -141,6 +158,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
     <button class="btn stop" id="stop" hidden>■ توقف</button>
   </div>
 
+  <!-- جدول نتایج -->
   <div class="card" id="res" hidden>
     <div class="prog"><span id="ptxt"></span><span id="found" style="color:var(--ok)"></span></div>
     <div class="bar"><i id="bar"></i></div>
@@ -151,7 +169,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
       <button class="sm" id="bUndo">↩ بازگردانی</button>
       <button class="sm" id="bRetest">🔁 تست مجدد</button>
       <button class="sm" id="bCopy">📋 کپی IPها</button>
-      <button class="sm" id="bCopyCsv">📋 با ویرگول</button>
+      <button class="sm" id="bCopyCsv">📋 با ویرگول (v2rayNG)</button>
       <button class="sm" id="bCsv">📥 CSV</button>
     </div>
     <div class="tbl"><table>
@@ -167,7 +185,6 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
   </div>
 </div>
 
-<!-- نوار ابزار چسبان پایین صفحه -->
 <div class="bottom-bar" id="bottomBar" hidden>
   <div class="bottom-inner">
     <span id="bFound" style="font-size:12px;color:var(--ok);font-weight:bold">سالم: ۰</span>
@@ -179,12 +196,11 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
   </div>
 </div>
 
-<!-- پنجره نمایش QR Code -->
 <div class="modal" id="qrModal" hidden>
   <div class="modal-box">
     <h3 style="font-size:14px;color:var(--ac)">بارکد کانفیگ برتر</h3>
     <canvas id="qrCanvas"></canvas>
-    <p class="hint" style="font-size:10px">با دوربین گوشی دیگر یا نرم‌افزار متصل‌شونده اسکن کنید</p>
+    <p class="hint" style="font-size:10px">اسکن با دوربین گوشی دیگر یا نرم‌افزار</p>
     <button class="btn main" style="padding:8px 16px;font-size:12px;width:100%" onclick="$('qrModal').hidden=true">بستن پنجره</button>
   </div>
 </div>
@@ -204,7 +220,7 @@ const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join(
 const TIMEOUT = 2600, MIN_MS = 8, st = { ok: 0, to: 0, tiny: 0, rej: 0 };
 const FIELDS = ['src','limit','proto','targetPort','conc','samples','shuffle','maxPing','cfgMode','topN','addFrag','keepSni','tagIp','refine','remember','customIps'];
 
-let removed = [], curProto = 'https', tested = new Set(), results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
+let manualList = [], removed = [], curProto = 'https', tested = new Set(), results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
 
 function toast(m) { const e = $('toast'); e.textContent = m; e.hidden = false; clearTimeout(tt); tt = setTimeout(() => e.hidden = true, 2600); }
 async function copy(t) {
@@ -212,8 +228,8 @@ async function copy(t) {
   catch { const a = document.createElement('textarea'); a.value = t; a.style.cssText = 'position:fixed;opacity:0'; document.body.append(a); a.select(); try { document.execCommand('copy'); } catch {} a.remove(); }
   toast('کپی شد ✔️');
 }
-function save() { try { const o = {}; FIELDS.forEach(k => { const e = $(k); o[k] = e.type === 'checkbox' ? e.checked : e.value; }); localStorage.setItem('dops-v8', JSON.stringify(o)); } catch {} }
-function load() { try { const o = JSON.parse(localStorage.getItem('dops-v8') || '{}'); FIELDS.forEach(k => { if (k in o) { const e = $(k); e.type === 'checkbox' ? e.checked = o[k] : e.value = o[k]; } }); } catch {} }
+function save() { try { const o = {}; FIELDS.forEach(k => { const e = $(k); o[k] = e.type === 'checkbox' ? e.checked : e.value; }); localStorage.setItem('dops-v9', JSON.stringify(o)); } catch {} }
+function load() { try { const o = JSON.parse(localStorage.getItem('dops-v9') || '{}'); FIELDS.forEach(k => { if (k in o) { const e = $(k); e.type === 'checkbox' ? e.checked = o[k] : e.value = o[k]; } }); } catch {} }
 function beep() {
   try { const c = new (window.AudioContext || window.webkitAudioContext)(), o = c.createOscillator(), g = c.createGain();
     o.connect(g); g.connect(c.destination); o.frequency.setValueAtTime(587, c.currentTime); o.frequency.setValueAtTime(880, c.currentTime + .1);
@@ -258,37 +274,65 @@ function parseCustom(t) {
 const getFavs = () => { try { return JSON.parse(localStorage.getItem('dops-favs') || '[]'); } catch { return []; } };
 function saveFavs() {
   if (!results.length || curProto === 'none') return;
-  try { localStorage.setItem('dops-favs', JSON.stringify([...new Set([...bestList().slice(0, 20).map(r => r.ip), ...getFavs()])].slice(0, 100))); } catch {}
-}
+  try { localStorage.setItem('dops-favs', JSON.stringify([...new Set([...bestList().slice(0, 20).map(r => r.ip), ...getFavs()])].slice(0, 100))); } catch {} }
+
 async function loadTargets(raw) {
-  const src = $('src').value, lim = +$('limit').value, cap = lim || 500; let ips = [], note = '';
-  if (src === 'offline_db') ips = [...OFFLINE];
-  else if (src === 'cf_ranges') ips = fromCidrs(CF_CIDRS, cap);
-  else if (src === 'favs') { ips = getFavs(); if (!ips.length) note = 'هنوز آی‌پی ذخیره‌شده‌ای ندارید؛ اول یک اسکن کامل انجام دهید.'; }
-  else if (src === 'custom') {
-    const p = parseCustom($('customIps').value);
-    ips = [...p.ips, ...(p.cd.length ? fromCidrs(p.cd, cap) : [])];
-    if (!ips.length) note = 'لیست دلخواه خالی یا نامعتبر است.';
+  let ips = [], note = '';
+  if (manualList.length) {
+    ips = [...manualList];
   } else {
-    try {
-      const c = new AbortController(), t = setTimeout(() => c.abort(), 5000);
-      const r = await fetch(src, { signal: c.signal, cache: 'no-store' }); clearTimeout(t);
-      if (!r.ok) throw 0;
-      ips = [...new Set((await r.text()).split(/\r?\n/).map(l => l.trim().split(/[\s,:]/)[0]).filter(isIPv4))];
-      if (!ips.length) throw 0;
-    } catch { ips = [...OFFLINE]; note = 'فایل مخزن خوانده نشد؛ از بانک آفلاین استفاده شد.'; }
+    const src = $('src').value, lim = +$('limit').value, cap = lim || 500;
+    if (src === 'offline_db') ips = [...OFFLINE];
+    else if (src === 'cf_ranges') ips = fromCidrs(CF_CIDRS, cap);
+    else if (src === 'favs') { ips = getFavs(); if (!ips.length) note = 'هنوز آی‌پی ذخیره‌شده‌ای ندارید؛ اول یک اسکن کامل انجام دهید.'; }
+    else if (src === 'custom') {
+      const p = parseCustom($('customIps').value);
+      ips = [...p.ips, ...(p.cd.length ? fromCidrs(p.cd, cap) : [])];
+      if (!ips.length) note = 'لیست دلخواه خالی یا نامعتبر است.';
+    } else {
+      try {
+        const c = new AbortController(), t = setTimeout(() => c.abort(), 5000);
+        const r = await fetch(src, { signal: c.signal, cache: 'no-store' }); clearTimeout(t);
+        if (!r.ok) throw 0;
+        ips = [...new Set((await r.text()).split(/\r?\n/).map(l => l.trim().split(/[\s,:]/)[0]).filter(isIPv4))];
+        if (!ips.length) throw 0;
+      } catch { ips = [...OFFLINE]; note = 'فایل مخزن خوانده نشد؛ از بانک آفلاین استفاده شد.'; }
+    }
+    if (!raw && $('shuffle').checked && $('proto').value !== 'none') shuffle(ips);
+    const limFinal = +$('limit').value;
+    if (limFinal && !raw) ips = ips.slice(0, limFinal);
   }
-  if (!raw && $('shuffle').checked && $('proto').value !== 'none') shuffle(ips);
-  return { ips: lim && !raw ? ips.slice(0, lim) : ips, note };
+  return { ips, note };
 }
 
-/* ---------- پروب چندپورته و هوشمند ---------- */
+/* ---------- افزودن دستی آی‌پی ---------- */
+$('bMergeManual').onclick = () => {
+  const p = parseCustom($('manualIps').value);
+  const extra = [...p.ips, ...(p.cd.length ? fromCidrs(p.cd, 50) : [])];
+  if (!extra.length) return toast('هیچ آی‌پی معتبری در کادر دستی پیدا نشد');
+  manualList = [...new Set([...extra, ...srcList])];
+  toast(`${fa(extra.length)} آی‌پی به لیست اسکن اضافه شد`);
+  run();
+};
+
+$('bScanOnlyManual').onclick = () => {
+  const p = parseCustom($('manualIps').value);
+  const only = [...p.ips, ...(p.cd.length ? fromCidrs(p.cd, 50) : [])];
+  if (!only.length) return toast('هیچ آی‌پی معتبری در کادر دستی وارد نشده');
+  manualList = only;
+  toast(`اسکن اختصاصی ${fa(only.length)} آی‌پی دستی آغاز شد`);
+  run();
+};
+
+/* ---------- پروب پورت‌ها ---------- */
 async function probeOnce(ip, proto, port, signal) {
   if (signal.aborted) return { ok: false };
   const c = new AbortController(), on = () => c.abort(), t = setTimeout(on, TIMEOUT), s = performance.now();
   signal.addEventListener('abort', on, { once: true });
   try {
-    await fetch(`https://${ip}:${port}/`, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: c.signal });
+    const isTls = (port != 80 && port != 8080 && port != 8880);
+    const p = isTls ? 'https' : 'http';
+    await fetch(`${p}://${ip}:${port}/`, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: c.signal });
     st.ok++; return { ok: true, ms: performance.now() - s };
   } catch {
     const ms = performance.now() - s;
@@ -337,10 +381,12 @@ function render() {
   $('bottomBar').hidden = results.length === 0;
 }
 
-/* ---------- موتور بازنویسی کانفیگ با پشتیبانی از Fragment ---------- */
+/* ---------- پاکسازی هوشمند نام و بازنویسی تمیز بدون تکرار ملاحظات ---------- */
 const b64d = s => { s = s.trim().replace(/-/g, '+').replace(/_/g, '/'); s += '='.repeat((4 - s.length % 4) % 4); return new TextDecoder().decode(Uint8Array.from(atob(s), c => c.charCodeAt(0))); };
 const b64e = s => { let t = ''; new TextEncoder().encode(s).forEach(x => t += String.fromCharCode(x)); return btoa(t); };
 const SCHEMES = /^(vless|vmess|trojan|ss|socks5?|hysteria2|hy2|tuic):\/\//i;
+
+// حذف کامل هرگونه آی‌پی قبلی از ملاحظات/نام کانفیگ برای تمیز ماندن در ویتوری
 const cleanTag = s => decodeURIComponent(s || '').replace(/(?:\s*\|\s*\d+\.\d+\.\d+\.\d+)+$/g, '').trim();
 const isDirect = l => /[?&]security=reality/i.test(l) || /^(hysteria2|hy2|tuic):/i.test(l);
 
@@ -351,7 +397,9 @@ function rewrite(line, ip, keep, tag, frag) {
     if (sc === 'vmess') {
       const h = body.indexOf('#'), fr = h < 0 ? '' : body.slice(h), j = JSON.parse(b64d(h < 0 ? body : body.slice(0, h)));
       if (keep && j.add && !isIPv4(j.add)) { j.sni = j.sni || j.add; j.host = j.host || j.add; }
-      j.add = ip; if (tag) j.ps = cleanTag(j.ps) + ' | ' + ip;
+      j.add = ip; 
+      // فقط در صورتی که کاربر چک‌باکس را روشن کند تگ اضافه می‌شود
+      j.ps = cleanTag(j.ps) + (tag ? ' | ' + ip : '');
       return m[0] + b64e(JSON.stringify(j)) + (fr ? '#' + cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '') : '');
     }
     if (sc === 'ss' && !body.includes('@')) {
@@ -364,7 +412,6 @@ function rewrite(line, ip, keep, tag, frag) {
     const [, auth = '', host, port = '', rest] = g, h = rest.indexOf('#');
     let pre = h < 0 ? rest : rest.slice(0, h); const fr = h < 0 ? '' : rest.slice(h);
     
-    // بازنویسی کوئری و تزریق Fragment
     const qi = pre.indexOf('?'), path = qi < 0 ? pre : pre.slice(0, qi), q = qi < 0 ? '' : pre.slice(qi + 1), sp = new URLSearchParams(q), add = [];
     if (keep && !isIPv4(host) && /^(vless|trojan)$/.test(sc)) {
       if (!sp.has('sni')) add.push('sni=' + host);
@@ -373,6 +420,7 @@ function rewrite(line, ip, keep, tag, frag) {
     if (frag && !sp.has('fragment')) add.push('fragment=10-30,5-10,tlshello');
     
     const parts = [q, ...add].filter(Boolean); pre = path + (parts.length ? '?' + parts.join('&') : '');
+    // تمیز نگه داشتن نام کانفیگ و عدم الصاق آی‌پی در صورت خاموش بودن تگ
     const finalFr = fr ? '#' + cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '') : (tag ? '#' + ip : '');
     return m[0] + auth + ip + port + pre + finalFr;
   } catch { return line; }
@@ -382,17 +430,17 @@ function buildConfigs() {
   const mode = $('cfgMode').value; $('topRow').hidden = !(mode === 'rr' || mode === 'all');
   const lines = $('cfgIn').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean), top = bestList();
   if (!lines.length || !top.length) { $('cfgBox').hidden = true; return; }
-  const keep = $('keepSni').checked, tag = $('tagIp').checked && mode !== 'best', frag = $('addFrag').checked;
+  const keep = $('keepSni').checked, tag = $('tagIp').checked, frag = $('addFrag').checked;
   const ips = top.map(r => r.ip), n = Math.max(1, Math.min(+$('topN').value || 5, ips.length)), out = []; let wrapped = false;
   lines.forEach((l, i) => {
-    if (mode === 'best') out.push(rewrite(l, ips[0], keep, false, frag));
+    if (mode === 'best') out.push(rewrite(l, ips[0], keep, tag, frag));
     else if (mode === 'ord') { if (i >= ips.length) wrapped = true; out.push(rewrite(l, ips[i % ips.length], keep, tag, frag)); }
     else if (mode === 'rr') out.push(rewrite(l, ips[i % n], keep, tag, frag));
     else ips.slice(0, n).forEach(ip => out.push(rewrite(l, ip, keep, tag, frag)));
   });
   const bad = lines.filter(l => !SCHEMES.test(l)).length, dir = lines.filter(l => SCHEMES.test(l) && isDirect(l)).length;
   $('cfgOut').value = out.join('\n'); $('cfgBox').hidden = false;
-  $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ تکرار شد` : '') + (dir ? ` — ${fa(dir)} کانفیگ مستقیم بدون تغییر ماند` : '') + (bad ? ` — ${fa(bad)} خط ناشناس دست‌نخورده ماند` : '');
+  $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ تکرار شد` : '') + (dir ? ` — ${fa(dir)} کانفیگ Reality بدون دستکاری ماند` : '') + (bad ? ` — ${fa(bad)} خط ناشناس دست‌نخورده ماند` : '');
 }
 
 function sortBest() { sortKey = 'score'; sortDir = 1; render(); toast('بهترین‌ها در بالا مرتب شدند ⚡'); }
@@ -444,7 +492,7 @@ $('bPurge').onclick = () => {
 };
 $('bSortIp').onclick = () => { srcList.sort((a, b) => (ip2n(a) - ip2n(b)) * (srcAsc ? 1 : -1)); srcAsc = !srcAsc; renderSrc(); };
 $('bCopySrc').onclick = () => srcList.length ? copy(srcList.join('\n')) : toast('لیست خالی است');
-$('bScanSrc').onclick = () => { if (!srcList.length) return toast('لیست خالی است'); $('customIps').value = srcList.join('\n'); $('src').value = 'custom'; $('customBox').hidden = false; $('limit').value = '0'; run(); };
+$('bScanSrc').onclick = () => { if (!srcList.length) return toast('لیست خالی است'); $('customIps').value = srcList.join('\n'); $('src').value = 'custom'; $('customBox').hidden = false; $('limit').value = '0'; manualList = []; run(); };
 
 function setBusy(b) { $('start').disabled = b; $('start').textContent = b ? 'در حال اسکن...' : 'اسکن مجدد'; $('stop').hidden = !b; }
 async function run() {
@@ -468,7 +516,7 @@ async function run() {
   tested = new Set(ips);
   curProto = 'https';
   const port = $('targetPort').value;
-  $('mnote').textContent = `روش: سنجش پورت ${port} و هندشیک زنده روی اینترنت سیم‌کارت شما`;
+  $('mnote').textContent = `روش: سنجش پورت ${port} روی اینترنت خط شما`;
   const o = { proto: 'https', port, samples: +$('samples').value }, total = ips.length;
   let idx = 0, done = 0;
   
@@ -486,24 +534,20 @@ async function run() {
   
   const stopped = ac.signal.aborted;
   scanning = false; setBusy(false); try { wl?.release(); } catch {}
+  manualList = []; // ریست لیست دستی بعد از اسکن
   render(); buildConfigs(); saveFavs();
   $('ptxt').textContent = stopped ? 'اسکن متوقف شد' : results.length ? 'اسکن به پایان رسید ✔️' : 'آی‌پی سالمی یافت نشد (روش را روی «بدون تست» بگذارید).';
   showDiag();
   if (!stopped && results.length) beep();
 }
 
-/* ---------- تولید بارکد تمیز QR بدون کتابخانه سنگین ---------- */
 function drawQR(text) {
   const canvas = $('qrCanvas');
   const ctx = canvas.getContext('2d');
   const size = 200;
-  canvas.width = size;
-  canvas.height = size;
-  ctx.fillStyle = '#fff';
-  ctx.fillRect(0, 0, size, size);
-  // رسم الگوی استاندارد بارکد مبتنی بر متد داخلی
-  const img = new Image();
-  img.crossOrigin = 'anonymous';
+  canvas.width = size; canvas.height = size;
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, size, size);
+  const img = new Image(); img.crossOrigin = 'anonymous';
   img.onload = () => ctx.drawImage(img, 0, 0, size, size);
   img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
 }
