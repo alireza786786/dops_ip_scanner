@@ -54,7 +54,7 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS SCANNER V9.0 · MASTER PRO</div>
+    <div class="badge">DOPS SCANNER V9.1 · MASTER PRO</div>
     <h1>CDN IP 🌐 Scanner</h1>
     <p class="sub">اسکن مستقیم مخزن · پشتیبانی از فرگمنت، ورود دستی آی‌پی و اصلاح ملاحظات ویتوری</p>
   </div>
@@ -220,7 +220,7 @@ const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join(
 const TIMEOUT = 2600, MIN_MS = 8, st = { ok: 0, to: 0, tiny: 0, rej: 0 };
 const FIELDS = ['src','limit','proto','targetPort','conc','samples','shuffle','maxPing','cfgMode','topN','addFrag','keepSni','tagIp','refine','remember','customIps'];
 
-let manualList = [], removed = [], curProto = 'https', tested = new Set(), results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
+let curPort = '443', manualOnly = false, manualList = [], removed = [], curProto = 'https', tested = new Set(), results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
 
 function toast(m) { const e = $('toast'); e.textContent = m; e.hidden = false; clearTimeout(tt); tt = setTimeout(() => e.hidden = true, 2600); }
 async function copy(t) {
@@ -277,10 +277,10 @@ function saveFavs() {
   try { localStorage.setItem('dops-favs', JSON.stringify([...new Set([...bestList().slice(0, 20).map(r => r.ip), ...getFavs()])].slice(0, 100))); } catch {} }
 
 async function loadTargets(raw) {
+  const extra = raw ? [] : manualList, only = !raw && manualOnly;
+  if (!raw) { manualList = []; manualOnly = false; }          // مصرف یک‌باره؛ در اسکن بعدی باقی نمی‌ماند
   let ips = [], note = '';
-  if (manualList.length) {
-    ips = [...manualList];
-  } else {
+  if (!only) {
     const src = $('src').value, lim = +$('limit').value, cap = lim || 500;
     if (src === 'offline_db') ips = [...OFFLINE];
     else if (src === 'cf_ranges') ips = fromCidrs(CF_CIDRS, cap);
@@ -299,52 +299,46 @@ async function loadTargets(raw) {
       } catch { ips = [...OFFLINE]; note = 'فایل مخزن خوانده نشد؛ از بانک آفلاین استفاده شد.'; }
     }
     if (!raw && $('shuffle').checked && $('proto').value !== 'none') shuffle(ips);
-    const limFinal = +$('limit').value;
-    if (limFinal && !raw) ips = ips.slice(0, limFinal);
+    if (lim && !raw) ips = ips.slice(0, lim);
   }
+  if (extra.length) ips = [...new Set([...extra, ...ips])];  // آی‌پی‌های دستی همیشه اول و بدون برش
   return { ips, note };
 }
 
 /* ---------- افزودن دستی آی‌پی ---------- */
-$('bMergeManual').onclick = () => {
-  const p = parseCustom($('manualIps').value);
-  const extra = [...p.ips, ...(p.cd.length ? fromCidrs(p.cd, 50) : [])];
-  if (!extra.length) return toast('هیچ آی‌پی معتبری در کادر دستی پیدا نشد');
-  manualList = [...new Set([...extra, ...srcList])];
-  toast(`${fa(extra.length)} آی‌پی به لیست اسکن اضافه شد`);
-  run();
-};
-
-$('bScanOnlyManual').onclick = () => {
-  const p = parseCustom($('manualIps').value);
-  const only = [...p.ips, ...(p.cd.length ? fromCidrs(p.cd, 50) : [])];
-  if (!only.length) return toast('هیچ آی‌پی معتبری در کادر دستی وارد نشده');
-  manualList = only;
-  toast(`اسکن اختصاصی ${fa(only.length)} آی‌پی دستی آغاز شد`);
-  run();
-};
+function parseManual() {
+  const p = parseCustom($('manualIps').value), out = [...p.ips];
+  p.cd.forEach(c => { const m = +c.split('/')[1]; out.push(...fromCidrs([c], m >= 24 ? 2 ** (32 - m) : 50)); });   // رنج‌های کوچک کامل باز می‌شوند
+  return [...new Set(out)];
+}
+function manualScan(only) {
+  if (scanning) return toast('اسکن در حال اجراست؛ اول متوقفش کنید');
+  const x = parseManual(); if (!x.length) return toast('هیچ آی‌پی معتبری در کادر دستی پیدا نشد');
+  manualList = x; manualOnly = only;
+  toast(only ? `اسکن اختصاصی ${fa(x.length)} آی‌پی دستی آغاز شد` : `${fa(x.length)} آی‌پی دستی به لیست اسکن اضافه شد`); run();
+}
+$('bMergeManual').onclick = () => manualScan(false);
+$('bScanOnlyManual').onclick = () => manualScan(true);
 
 /* ---------- پروب پورت‌ها ---------- */
 async function probeOnce(ip, proto, port, signal) {
   if (signal.aborted) return { ok: false };
+  const isTls = !['80', '8080', '8880'].includes(String(port));
   const c = new AbortController(), on = () => c.abort(), t = setTimeout(on, TIMEOUT), s = performance.now();
   signal.addEventListener('abort', on, { once: true });
   try {
-    const isTls = (port != 80 && port != 8080 && port != 8880);
-    const p = isTls ? 'https' : 'http';
-    await fetch(`${p}://${ip}:${port}/`, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: c.signal });
+    await fetch(`${isTls ? 'https' : 'http'}://${ip}:${port}/`, { method: 'HEAD', mode: 'no-cors', cache: 'no-store', redirect: 'manual', signal: c.signal });
     st.ok++; return { ok: true, ms: performance.now() - s };
   } catch {
     const ms = performance.now() - s;
     if (signal.aborted) return { ok: false };
     if (c.signal.aborted) st.to++;
     else if (ms <= MIN_MS) st.tiny++;
-    else if (ms < TIMEOUT * 0.85) { st.ok++; return { ok: true, ms, guess: true }; }
-    else st.rej++;
+    else if (isTls && ms < TIMEOUT * 0.85) { st.ok++; return { ok: true, ms, guess: true }; }   // فقط پورت TLS: خطای گواهی = هندشیک انجام شده
+    else st.rej++;                                                                             // پورت HTTP: رد/ریست = غیرفعال
     return { ok: false };
   } finally { clearTimeout(t); signal.removeEventListener('abort', on); }
 }
-
 async function probeIP(ip, o, signal) {
   const first = await probeOnce(ip, o.proto, o.port, signal);
   if (!first.ok || first.ms < MIN_MS) return null;
@@ -386,9 +380,12 @@ const b64d = s => { s = s.trim().replace(/-/g, '+').replace(/_/g, '/'); s += '='
 const b64e = s => { let t = ''; new TextEncoder().encode(s).forEach(x => t += String.fromCharCode(x)); return btoa(t); };
 const SCHEMES = /^(vless|vmess|trojan|ss|socks5?|hysteria2|hy2|tuic):\/\//i;
 
-// حذف کامل هرگونه آی‌پی قبلی از ملاحظات/نام کانفیگ برای تمیز ماندن در ویتوری
-const cleanTag = s => decodeURIComponent(s || '').replace(/(?:\s*\|\s*\d+\.\d+\.\d+\.\d+)+$/g, '').trim();
+// حذف تگ آی‌پی قبلی از نام (fr درصدی‌کد‌شده؛ ps وی‌مس متن ساده)
+const TAGRE = /(?:\s*\|\s*\d+\.\d+\.\d+\.\d+)+$/;
+const stripTag = s => (s || '').replace(TAGRE, '').trim();
+const cleanTag = s => { let t = s || ''; try { t = decodeURIComponent(t); } catch {} return stripTag(t); };
 const isDirect = l => /[?&]security=reality/i.test(l) || /^(hysteria2|hy2|tuic):/i.test(l);
+const frOut = (fr, ip, tag) => fr ? '#' + encodeURIComponent(cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '')) : (tag ? '#' + encodeURIComponent(ip) : '');
 
 function rewrite(line, ip, keep, tag, frag) {
   const m = line.match(SCHEMES); if (!m || isDirect(line)) return line;
@@ -397,32 +394,27 @@ function rewrite(line, ip, keep, tag, frag) {
     if (sc === 'vmess') {
       const h = body.indexOf('#'), fr = h < 0 ? '' : body.slice(h), j = JSON.parse(b64d(h < 0 ? body : body.slice(0, h)));
       if (keep && j.add && !isIPv4(j.add)) { j.sni = j.sni || j.add; j.host = j.host || j.add; }
-      j.add = ip; 
-      // فقط در صورتی که کاربر چک‌باکس را روشن کند تگ اضافه می‌شود
-      j.ps = cleanTag(j.ps) + (tag ? ' | ' + ip : '');
-      return m[0] + b64e(JSON.stringify(j)) + (fr ? '#' + cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '') : '');
+      j.add = ip; j.ps = stripTag(j.ps) + (tag ? ' | ' + ip : '');
+      return m[0] + b64e(JSON.stringify(j)) + (fr ? frOut(fr, ip, false) : '');
     }
     if (sc === 'ss' && !body.includes('@')) {
       const h = body.indexOf('#'), core = h < 0 ? body : body.slice(0, h), fr = h < 0 ? '' : body.slice(h);
-      const tagStr = tag ? ' | ' + ip : '';
-      return m[0] + b64e(b64d(core).replace(/@(\[[^\]]+\]|[^:@]+):(\d+)$/, `@${ip}:$2`)) + (fr ? '#' + cleanTag(fr.slice(1)) + tagStr : (tag ? '#' + ip : ''));
+      return m[0] + b64e(b64d(core).replace(/@(\[[^\]]+\]|[^:@]+):(\d+)$/, `@${ip}:$2`)) + frOut(fr, ip, tag);
     }
     const g = body.match(/^([^@/?#]*@)?(\[[^\]]+\]|[^:/?#]+)(:\d+)?([^]*)$/);
     if (!g) return line;
     const [, auth = '', host, port = '', rest] = g, h = rest.indexOf('#');
     let pre = h < 0 ? rest : rest.slice(0, h); const fr = h < 0 ? '' : rest.slice(h);
-    
     const qi = pre.indexOf('?'), path = qi < 0 ? pre : pre.slice(0, qi), q = qi < 0 ? '' : pre.slice(qi + 1), sp = new URLSearchParams(q), add = [];
-    if (keep && !isIPv4(host) && /^(vless|trojan)$/.test(sc)) {
-      if (!sp.has('sni')) add.push('sni=' + host);
-      if (!sp.has('host') && /^(ws|httpupgrade|xhttp|splithttp|h2)$/.test(sp.get('type') || '')) add.push('host=' + host);
+    if (/^(vless|trojan)$/.test(sc)) {
+      if (keep && !isIPv4(host)) {
+        if (!sp.has('sni')) add.push('sni=' + host);
+        if (!sp.has('host') && /^(ws|httpupgrade|xhttp|splithttp|h2)$/.test(sp.get('type') || '')) add.push('host=' + host);
+      }
+      if (frag && !sp.has('fragment')) add.push('fragment=10-30,5-10,tlshello');   // فقط VLESS/Trojan؛ برنامه‌هایی که نشناسند نادیده می‌گیرند
     }
-    if (frag && !sp.has('fragment')) add.push('fragment=10-30,5-10,tlshello');
-    
     const parts = [q, ...add].filter(Boolean); pre = path + (parts.length ? '?' + parts.join('&') : '');
-    // تمیز نگه داشتن نام کانفیگ و عدم الصاق آی‌پی در صورت خاموش بودن تگ
-    const finalFr = fr ? '#' + cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '') : (tag ? '#' + ip : '');
-    return m[0] + auth + ip + port + pre + finalFr;
+    return m[0] + auth + ip + port + pre + frOut(fr, ip, tag);
   } catch { return line; }
 }
 
@@ -430,7 +422,7 @@ function buildConfigs() {
   const mode = $('cfgMode').value; $('topRow').hidden = !(mode === 'rr' || mode === 'all');
   const lines = $('cfgIn').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean), top = bestList();
   if (!lines.length || !top.length) { $('cfgBox').hidden = true; return; }
-  const keep = $('keepSni').checked, tag = $('tagIp').checked, frag = $('addFrag').checked;
+  const keep = $('keepSni').checked, tag = $('tagIp').checked || mode === 'all', frag = $('addFrag').checked;
   const ips = top.map(r => r.ip), n = Math.max(1, Math.min(+$('topN').value || 5, ips.length)), out = []; let wrapped = false;
   lines.forEach((l, i) => {
     if (mode === 'best') out.push(rewrite(l, ips[0], keep, tag, frag));
@@ -446,7 +438,7 @@ function buildConfigs() {
 function sortBest() { sortKey = 'score'; sortDir = 1; render(); toast('بهترین‌ها در بالا مرتب شدند ⚡'); }
 
 async function refine(list, proto, label) {
-  const port = $('targetPort').value;
+  const port = curPort;
   const o = { proto, port, samples: 3 }, ips = list.map(r => r.ip), fresh = []; let i = 0, d = 0;
   await Promise.all(Array.from({ length: Math.min(4, ips.length) }, async () => {
     while (i < ips.length && !ac.signal.aborted) {
@@ -514,8 +506,9 @@ async function run() {
   }
   
   tested = new Set(ips);
-  curProto = 'https';
-  const port = $('targetPort').value;
+  curProto = 'https'; let port = $('targetPort').value;
+  if (location.protocol === 'https:' && ['80', '8080', '8880'].includes(port)) { port = '443'; toast('صفحه روی HTTPS است و پورت‌های HTTP مسدود می‌شوند؛ پورت ۴۴۳ تست شد. برای این پورت‌ها فایل را محلی باز کنید.'); }
+  curPort = port;
   $('mnote').textContent = `روش: سنجش پورت ${port} روی اینترنت خط شما`;
   const o = { proto: 'https', port, samples: +$('samples').value }, total = ips.length;
   let idx = 0, done = 0;
@@ -549,12 +542,14 @@ function drawQR(text) {
   ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, size, size);
   const img = new Image(); img.crossOrigin = 'anonymous';
   img.onload = () => ctx.drawImage(img, 0, 0, size, size);
+  img.onerror = () => { $('qrModal').hidden = true; toast('بارکد ساخته نشد؛ دسترسی به سرویس ممکن نیست.'); };
   img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
 }
 
 $('showQr').onclick = () => {
   const lines = $('cfgOut').value.trim().split(/\r?\n/).filter(Boolean);
   if (!lines.length) return toast('هیچ کانفیگی برای نمایش بارکد وجود ندارد');
+  if (!confirm('برای ساخت بارکد، متن این کانفیگ (شامل UUID/رمز/کلیدها) به سرویس خارجی api.qrserver.com فرستاده می‌شود. ادامه می‌دهید؟')) return;
   $('qrModal').hidden = false;
   drawQR(lines[0]);
 };
