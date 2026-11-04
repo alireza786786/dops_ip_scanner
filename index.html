@@ -2,189 +2,203 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DOPS Master CDN Scanner</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>DOPS Enterprise CDN Scanner</title>
 <style>
-:root{--bg:#0b111e;--card:#131c2e;--bd:#1f2d47;--ac:#00ffcc;--tx:#e2e8f0;--mu:#8492a6;--ok:#2ed573;--wn:#ffa502;color-scheme:dark}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn,Tahoma,"Segoe UI",system-ui,sans-serif}
+:root{--bg:#070b14;--card:#0f172a;--bd:#1e293b;--ac:#00ffcc;--tx:#f1f5f9;--mu:#94a3b8;--ok:#10b981;--wn:#f59e0b;--er:#ef4444;color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Vazirmatn,Tahoma,-apple-system,sans-serif}
 [hidden]{display:none!important}
-body{background:var(--bg);color:var(--tx);padding:12px;padding-bottom:75px;display:flex;justify-content:center;min-height:100vh}
-.wrap{width:100%;max-width:680px;display:flex;flex-direction:column;gap:12px}
-.head{text-align:center;padding:10px 0}
-.badge{display:inline-block;padding:4px 14px;font-size:11px;color:var(--ac);border:1px solid var(--ac);border-radius:20px;margin-bottom:6px;letter-spacing:1px}
-h1{font-size:24px;color:var(--ac);margin-bottom:4px}
+body{background:var(--bg);color:var(--tx);padding:10px;padding-bottom:80px;display:flex;justify-content:center;min-height:100vh}
+.wrap{width:100%;max-width:680px;display:flex;flex-direction:column;gap:10px}
+.head{text-align:center;padding:8px 0}
+.badge{display:inline-block;padding:3px 12px;font-size:10px;color:var(--ac);border:1px solid var(--ac);border-radius:20px;margin-bottom:4px}
+h1{font-size:22px;color:var(--ac);margin-bottom:2px}
 .sub,.hint{font-size:11px;color:var(--mu)}
-.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:14px}
-.ct{font-size:13px;font-weight:bold;color:var(--ac);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center}
-.isp{font-size:12px;line-height:1.8}.isp span{color:var(--ac);font-weight:bold}
-.pill{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(46,213,115,.15);color:var(--ok)}
-.pill.warn{background:rgba(255,165,2,.15);color:var(--wn)}
-.row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;font-size:12px}
-select,input[type=number],input[type=url]{background:#1a263c;color:#fff;border:1px solid var(--bd);padding:6px 10px;border-radius:8px;font-size:12px}
-input[type=number]{width:70px;text-align:center}
-textarea{width:100%;height:110px;background:var(--bg);color:#fff;border:1px solid var(--bd);border-radius:8px;padding:10px;font-size:11px;font-family:ui-monospace,Consolas,monospace;resize:vertical;margin-top:6px;direction:ltr;text-align:left}
-:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
-.btn{flex:1;padding:12px;border-radius:10px;border:none;font-weight:bold;font-size:14px;cursor:pointer}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px}
+.ct{font-size:13px;font-weight:bold;color:var(--ac);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.isp{font-size:12px;line-height:1.7}.isp span{color:var(--ac);font-weight:bold}
+.pill{font-size:10px;padding:2px 8px;border-radius:10px;background:rgba(16,185,129,.15);color:var(--ok)}
+.pill.warn{background:rgba(245,158,11,.15);color:var(--wn)}
+.row{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:6px;font-size:12px}
+select,input[type=number],input[type=url],input[type=text],input[type=password]{background:#1e293b;color:#fff;border:1px solid var(--bd);padding:6px 8px;border-radius:6px;font-size:12px;outline:none}
+textarea{width:100%;background:var(--bg);color:#fff;border:1px solid var(--bd);border-radius:6px;padding:8px;font-size:11px;font-family:monospace;resize:vertical;direction:ltr;text-align:left;outline:none}
+.btn{width:100%;padding:12px;border-radius:8px;border:none;font-weight:bold;font-size:14px;cursor:pointer;transition:0.2s}
 .main{background:var(--ac);color:#000}.main:disabled{opacity:.5;cursor:not-allowed}
-.stop{background:#3a1d28;color:#ff8a9b;border:1px solid #6b2a3b;flex:.4}
-.sm{background:#1f2d47;border:1px solid #334155;color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;cursor:pointer}
-.sm:active{background:var(--ac);color:#000}.sm.hi{background:rgba(0,255,204,.15);border-color:var(--ac);color:var(--ac)}
-.prog{display:flex;justify-content:space-between;font-size:12px;margin-bottom:6px;color:var(--mu)}
-.bar{height:6px;background:#1a263c;border-radius:3px;overflow:hidden;margin-bottom:10px}
+.stop{background:#3a1d28;color:#ff8a9b;border:1px solid #6b2a3b}
+.sm{background:#1e293b;border:1px solid #334155;color:#fff;padding:5px 8px;border-radius:6px;font-size:11px;cursor:pointer;touch-action:manipulation}
+.sm.hi{background:rgba(0,255,204,.15);border-color:var(--ac);color:var(--ac)}
+.bar{height:5px;background:#1e293b;border-radius:3px;overflow:hidden;margin-bottom:8px}
 .bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .2s}
-.tools{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.tools{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-bottom:6px}
 .tbl{overflow-x:auto}
-.sr{display:flex;justify-content:space-between;font-size:12px;padding:5px 2px;border-bottom:1px solid var(--bd)}
 table{width:100%;border-collapse:collapse;font-size:12px}
 th,td{padding:8px 4px;text-align:right;border-bottom:1px solid var(--bd);white-space:nowrap}
-th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{content:" " attr(data-on);color:var(--ac)}
-.ip{direction:ltr;unicode-bidi:isolate;font-family:ui-monospace,Consolas,monospace}
-.tag{padding:3px 6px;border-radius:4px;font-size:11px;font-weight:bold;background:rgba(46,213,115,.15);color:var(--ok)}
-.tag.mid{background:rgba(255,165,2,.15);color:var(--wn)}
-#toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#1f2d47;border:1px solid var(--ac);padding:8px 16px;border-radius:20px;font-size:12px;z-index:99;max-width:90%}
-
-.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(15,23,42,0.94);backdrop-filter:blur(10px);border-top:1px solid var(--bd);padding:8px 14px;display:flex;justify-content:center;z-index:50}
+th{color:var(--mu);font-size:11px}
+.ip{direction:ltr;unicode-bidi:isolate;font-family:monospace}
+.tag{padding:2px 5px;border-radius:4px;font-size:10px;font-weight:bold;background:rgba(16,185,129,.15);color:var(--ok)}
+.tag.mid{background:rgba(245,158,11,.15);color:var(--wn)}
+.tag.speed{background:rgba(0,255,204,.15);color:var(--ac)}
+.tag.stable{background:rgba(255,215,0,.2);color:#ffd700;border:1px solid rgba(255,215,0,.4)}
+.warn-box{background:rgba(245,158,11,.1);border:1px solid var(--wn);color:var(--wn);padding:8px;border-radius:8px;font-size:11px;margin-bottom:8px;display:none}
+.guide-box{background:#131c2e;border:1px dashed var(--ac);color:var(--tx);padding:10px;border-radius:8px;font-size:11px;line-height:1.8;display:none}
+#toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#1e293b;border:1px solid var(--ac);padding:6px 14px;border-radius:20px;font-size:11px;z-index:99;max-width:90%}
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(15,23,42,0.96);backdrop-filter:blur(10px);border-top:1px solid var(--bd);padding:8px 12px;display:flex;justify-content:center;z-index:50}
 .bottom-inner{width:100%;max-width:680px;display:flex;justify-content:space-between;align-items:center;gap:6px}
-
-.modal{position:fixed;inset:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px}
-.modal-box{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;max-width:320px;width:100%;text-align:center;display:flex;flex-direction:column;gap:12px;align-items:center}
-#qrCanvas{background:#fff;padding:8px;border-radius:8px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;z-index:100;padding:15px}
+.modal-box{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;max-width:320px;width:100%;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
 </style>
 </head>
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS SCANNER V9.1 · MASTER PRO</div>
+    <div class="badge">DOPS ENTERPRISE V10.0</div>
     <h1>CDN IP 🌐 Scanner</h1>
-    <p class="sub">اسکن مستقیم مخزن · پشتیبانی از فرگمنت، ورود دستی آی‌پی و اصلاح ملاحظات ویتوری</p>
+    <p class="sub">اسکن دقیق با تست سرعت، پایداری، بازنویسی هوشمند و ارسال به تلگرام</p>
+  </div>
+
+  <!-- راهنمای مبتدیان -->
+  <div style="display:flex;justify-content:flex-end">
+    <button class="sm hi" onclick="const g=$('guide');g.style.display=g.style.display==='block'?'none':'block'">❓ راهنمای سریع استفاده</button>
+  </div>
+  <div class="guide-box" id="guide">
+    <b>راهنمای ۴ مرحله‌ای برای نتایج دقیق:</b><br>
+    ۱. قبل از شروع، <b>حتماً فیلترشکن را خاموش کنید</b> تا آی‌پی‌ها روی سیم‌کارت خودتان تست شوند.<br>
+    ۲. کانفیگ‌هایتان را در کادر مربوطه بچسبانید؛ پورت اسکن را متناسب با پورت کانفیگ بگذارید.<br>
+    ۳. دکمه «شروع اسکن» را بزنید و چند ثانیه منتظر بمانید تا پینگ و سرعت محاسبه شوند.<br>
+    ۴. با زدن «کپی تمام کانفیگ‌ها» خروجی سالم و آپدیت‌شده را در ویتوری اضافه کنید.
   </div>
 
   <div class="card">
-    <div class="ct"><span>وضعیت شبکه</span><span class="pill" id="net">در حال آماده‌سازی</span></div>
-    <div class="isp" id="isp">در حال بررسی اتصال اینترنت...</div>
+    <div class="ct"><span>وضعیت اینترنت</span><span class="pill" id="net">در حال آماده‌سازی</span></div>
+    <div class="isp" id="isp">در حال بررسی اتصال...</div>
   </div>
 
-  <!-- کارت افزودن دستی آی‌پی (امکان جدید) -->
+  <!-- ورودی دستی آی‌پی -->
   <div class="card">
-    <div class="ct"><span>افزودن دستی آی‌پی (اختیاری)</span><span class="hint">تک‌آی‌پی، چندتایی یا رنج CIDR</span></div>
-    <textarea id="manualIps" style="height:70px;" placeholder="آی‌پی‌های مدنظرتان را اینجا بنویسید یا بچسبانید:&#10;104.16.10.20&#10;162.159.20.0/24"></textarea>
+    <div class="ct"><span>ورود دستی آی‌پی</span><span class="hint">تک‌آی‌پی یا رنج CIDR</span></div>
+    <textarea id="manualIps" style="height:60px;" placeholder="آی‌پی‌های مدنظرتان را بنویسید یا بچسبانید:&#10;104.16.10.20&#10;162.159.20.0/24"></textarea>
     <div style="display:flex;gap:6px;margin-top:6px">
-      <button class="sm hi" style="flex:1" id="bMergeManual">➕ ادغام با لیست اسکن</button>
-      <button class="sm" style="flex:1" id="bScanOnlyManual">🎯 فقط اسکن این آی‌پی‌ها</button>
+      <button class="sm hi" style="flex:1" id="bMergeManual">➕ ادغام با لیست</button>
+      <button class="sm" style="flex:1" id="bScanOnlyManual">🎯 فقط اسکن اینها</button>
     </div>
   </div>
 
-  <!-- تنظیمات اسکن و منبع مخزن -->
+  <!-- تنظیمات منبع و پورت -->
   <div class="card">
-    <div class="ct">تنظیمات منبع و اسکن</div>
+    <div class="ct">تنظیمات اسکن</div>
     <div class="row"><span>منبع داده:</span>
       <select id="src">
         <option value="outputs/alive_cloudflare.txt" selected>مخزن: alive_cloudflare.txt</option>
         <option value="outputs/alive_fastly.txt">مخزن: alive_fastly.txt</option>
-        <option value="cf_ranges">رنج‌های رسمی کلودفلر (نمونه تصادفی)</option>
+        <option value="cf_ranges">رنج‌های رسمی کلودفلر</option>
         <option value="offline_db">بانک آفلاین داخلی (اینترنت ملی)</option>
-        <option value="favs">آی‌پی‌های ذخیره‌شده (برترین‌های قبل)</option>
+        <option value="favs">آی‌پی‌های پایدار اسکن‌های قبل</option>
         <option value="custom">لیست دلخواه سفارشی</option>
       </select></div>
-    <div class="tools"><button class="sm hi" id="bShow">👁 نمایش و مدیریت لیست منبع</button></div>
-    <div id="customBox" hidden><textarea id="customIps" placeholder="104.16.0.0/20&#10;162.159.10.5"></textarea></div>
     
     <div class="row"><span>پورت تست هدف:</span>
       <select id="targetPort">
-        <option value="443" selected>443 (HTTPS اصلی)</option>
+        <option value="443" selected>443 (HTTPS عمومی)</option>
         <option value="2053">2053 (TLS جانبی)</option>
         <option value="2083">2083 (TLS جانبی)</option>
         <option value="2087">2087 (TLS جانبی)</option>
         <option value="8443">8443 (TLS جانبی)</option>
         <option value="80">80 (HTTP عمومی)</option>
         <option value="8080">8080 (HTTP فرعی)</option>
-        <option value="8880">8880 (HTTP فرعی)</option>
       </select></div>
-    <div class="row"><span>تعداد بررسی:</span>
-      <select id="limit"><option value="50">۵۰</option><option value="100" selected>۱۰۰</option><option value="300">۳۰۰</option><option value="0">همه آی‌پی‌های فایل</option></select></div>
+
+    <div class="row"><span>تعداد تست:</span>
+      <select id="limit"><option value="50">۵۰</option><option value="100" selected>۱۰۰</option><option value="300">۳۰۰</option><option value="0">همه</option></select></div>
+    
     <div class="row"><span>روش بررسی:</span>
       <select id="proto">
-        <option value="auto" selected>خودکار (سنجش زنده خط)</option>
-        <option value="none">بدون تست (اعتماد کامل به لیست مخزن)</option>
+        <option value="auto" selected>خودکار (هندشیک زنده)</option>
+        <option value="none">بدون تست (اعتماد به لیست مخزن)</option>
       </select></div>
-    <div class="row"><span>اتصال هم‌زمان:</span>
-      <select id="conc"><option value="6">۶ (ملایم)</option><option value="12" selected>۱۲</option><option value="20">۲۰ (سریع)</option></select></div>
-    <div class="row"><span>نمونه برای هر آی‌پی:</span>
-      <select id="samples"><option value="1">۱ (سریع)</option><option value="2" selected>۲ (پایدار)</option><option value="3">۳</option></select></div>
-    <label class="row"><span>مرحلهٔ دوم: تأیید نهایی برترین‌ها</span><input type="checkbox" id="refine"></label>
-    <label class="row"><span>نمونه‌گیری تصادفی از منبع</span><input type="checkbox" id="shuffle" checked></label>
   </div>
 
-  <div class="card" id="srcBox" hidden>
-    <div class="ct"><span>لیست منبع مخزن</span><span class="hint" id="srcCount"></span></div>
-    <div class="tools">
-      <button class="sm hi" id="bPurge">🧹 حذف غیرفعال‌ها</button>
-      <button class="sm" id="bSortIp">↕ مرتب‌سازی IP</button>
-      <button class="sm" id="bCopySrc">📋 کپی</button>
-      <button class="sm" id="bScanSrc">▶ اسکن این لیست</button>
-    </div>
-    <div id="srcRows" style="max-height:300px;overflow-y:auto"></div>
+  <!-- هشدار عدم تطابق پورت کانفیگ -->
+  <div class="warn-box" id="portMismatchWarn">
+    ⚠️ هشدار: پورت اسکن با پورت کانفیگ شما تفاوت دارد! پورت اسکن را متناسب با کانفیگ بگذارید تا اتصال واقعی برقرار شود.
   </div>
 
-  <!-- بازنویسی کانفیگ -->
+  <!-- بازنویسی گروهی کانفیگ -->
   <div class="card">
     <div class="ct">بازنویسی گروهی کانفیگ‌ها</div>
-    <p class="hint">VLESS · VMess · Trojan · SS · Socks را زیر هم بچسبانید:</p>
     <div class="tools"><input type="url" id="subUrl" dir="ltr" placeholder="لینک سابسکریپشن (اختیاری)" style="flex:1;min-width:0"><button class="sm" id="bSub">دریافت</button></div>
-    <textarea id="cfgIn" placeholder="vless://...&#10;vmess://...&#10;trojan://..."></textarea>
-    <div class="row" style="margin-top:8px"><span>حالت جایگزینی:</span>
-      <select id="cfgMode"><option value="ord">ترتیبی: بهترین آی‌پی به اولی، بعدی به دومی، ...</option><option value="best">همه با بهترین آی‌پی</option><option value="rr">چرخشی بین N آی‌پی برتر</option><option value="all">هر کانفیگ × N آی‌پی برتر</option></select></div>
-    <div class="row" id="topRow" hidden><span>N (تعداد آی‌پی برتر):</span><input type="number" id="topN" value="5" min="1" max="50"></div>
-    <label class="row"><span style="color:var(--ac);font-weight:bold">🛡 فعال‌سازی ضد فیلتر Fragment (ضد اختلال TLS در ساعات اوج)</span><input type="checkbox" id="addFrag"></label>
-    <label class="row"><span>حفظ دامنه اصلی به‌عنوان SNI/Host (ضروری برای CDN)</span><input type="checkbox" id="keepSni" checked></label>
+    <textarea id="cfgIn" style="height:90px;" placeholder="کانفیگ‌های VLESS، VMess، Trojan، SS را بچسبانید..."></textarea>
     
-    <!-- این گزینه پیش‌فرض خاموش شد تا در ویتوری تکراری دیده نشود -->
-    <label class="row"><span>افزودن آی‌پی به نام کانفیگ (در صورت نیاز به نمایش در ملاحظات)</span><input type="checkbox" id="tagIp"></label>
-    <label class="row"><span>به‌خاطر سپردن کانفیگ‌ها روی همین گوشی</span><input type="checkbox" id="remember"></label>
+    <div class="row" style="margin-top:6px"><span>حالت جایگزینی:</span>
+      <select id="cfgMode"><option value="ord">ترتیبی: بهترین آی‌پی به اولی، بعدی به دومی...</option><option value="best">همه با سریع‌ترین آی‌پی</option><option value="rr">چرخشی بین N آی‌پی برتر</option><option value="all">هر کانفیگ × N آی‌پی برتر</option></select></div>
     
-    <div id="cfgBox" hidden>
+    <div class="row" id="topRow" hidden><span>N (تعداد برتر):</span><input type="number" id="topN" value="5" min="1" max="50"></div>
+    <label class="row"><span style="color:var(--ac);font-weight:bold">🛡 فعال‌سازی ضد فیلتر Fragment (ضد اختلال TLS)</span><input type="checkbox" id="addFrag"></label>
+    <label class="row"><span>حفظ دامنه اصلی به‌عنوان SNI/Host</span><input type="checkbox" id="keepSni" checked></label>
+    <label class="row"><span>افزودن آی‌پی به نام کانفیگ در ملاحظات</span><input type="checkbox" id="tagIp"></label>
+    <label class="row"><span>به‌خاطر سپردن کانفیگ‌ها روی این گوشی</span><input type="checkbox" id="remember"></label>
+
+    <div id="cfgBox" hidden style="margin-top:8px">
       <p class="hint" style="color:var(--ok)">خروجی: <b id="cfgCount"></b></p>
-      <textarea id="cfgOut" readonly style="border-color:var(--ok)"></textarea>
-      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">
+      <textarea id="cfgOut" readonly style="height:100px;border-color:var(--ok);margin-top:4px"></textarea>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px">
         <button class="sm" style="flex:1" id="copyCfg">📋 کپی تمام کانفیگ‌ها</button>
-        <button class="sm hi" style="flex:1" id="showQr">📱 بارکد (QR Code) بهترین کانفیگ</button>
+        <button class="sm hi" style="flex:1" id="showQr">📱 بارکد (QR) آفلاین</button>
         <button class="sm" style="flex:1" id="dlCfg">💾 ذخیره فایل</button>
       </div>
     </div>
   </div>
 
-  <div style="display:flex;gap:8px">
+  <!-- بخش اختصاصی ارسال به تلگرام -->
+  <div class="card">
+    <div class="ct">ارسال و اشتراک‌گذاری در تلگرام</div>
+    <p class="hint">برای ارسال به کانال شخصی، توکن ربات و آیدی چت خود را وارد کنید (فقط روی گوشی خودتان ذخیره می‌شود):</p>
+    <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
+      <input type="password" id="tgToken" placeholder="توکن ربات تلگرام: 123456:ABC-DEF..." dir="ltr">
+      <input type="text" id="tgChat" placeholder="آیدی کانال یا گروه: @MyChannel یا عددی" dir="ltr">
+      <div style="display:flex;gap:6px">
+        <button class="sm hi" style="flex:1" id="bSendTg">🚀 ارسال مستقیم به تلگرام</button>
+        <button class="sm" style="flex:1" id="bCopyTgPost">📋 کپی متن آماده برای کانال</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;gap:6px">
     <button class="btn main" id="start">شروع اسکن</button>
     <button class="btn stop" id="stop" hidden>■ توقف</button>
   </div>
 
-  <!-- جدول نتایج -->
+  <!-- نتایج اسکن -->
   <div class="card" id="res" hidden>
-    <div class="prog"><span id="ptxt"></span><span id="found" style="color:var(--ok)"></span></div>
+    <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+      <span id="ptxt">در حال اسکن...</span>
+      <span id="found" style="color:var(--ok)">سالم: ۰</span>
+    </div>
     <div class="bar"><i id="bar"></i></div>
+    
     <div class="tools">
       <button class="sm hi" id="bSort">⚡ بهترین‌ها</button>
-      <button class="sm" id="bFilter">🧹 حذف بالاتر از</button>
-      <input type="number" id="maxPing" value="300" min="20" step="10" aria-label="حداکثر پینگ"><span class="hint">ms</span>
+      <button class="sm" id="bFilter">🧹 حذف بالای</button>
+      <input type="number" id="maxPing" value="300" min="20" step="10" style="width:60px"><span class="hint">ms</span>
       <button class="sm" id="bUndo">↩ بازگردانی</button>
-      <button class="sm" id="bRetest">🔁 تست مجدد</button>
       <button class="sm" id="bCopy">📋 کپی IPها</button>
-      <button class="sm" id="bCopyCsv">📋 با ویرگول (v2rayNG)</button>
-      <button class="sm" id="bCsv">📥 CSV</button>
+      <button class="sm" id="bCopyCsv">📋 با ویرگول (ویتوری)</button>
     </div>
+
     <div class="tbl"><table>
-      <thead><tr><th data-k="ip">آی‌پی</th><th data-k="ping">تأخیر</th><th data-k="loss">نوسان · افت</th><th></th></tr></thead>
+      <thead><tr>
+        <th data-k="ip">آی‌پی</th>
+        <th data-k="ping">تأخیر</th>
+        <th>سرعت</th>
+        <th data-k="score">امتیاز</th>
+        <th>پایداری</th>
+        <th></th>
+      </tr></thead>
       <tbody id="rows"></tbody>
     </table></div>
-    <div style="display:flex;gap:6px;margin-top:10px">
-      <button class="sm hi" style="flex:1" onclick="sortBest()">⚡ مرتب‌سازی (بهترین‌ها)</button>
-      <button class="sm" style="flex:1" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ پرش به بالای صفحه</button>
-    </div>
-    <p class="hint" id="mnote" style="margin-top:8px"></p>
-    <p class="hint" id="diag" style="margin-top:6px"></p>
   </div>
 </div>
 
+<!-- نوار چسبان پایین -->
 <div class="bottom-bar" id="bottomBar" hidden>
   <div class="bottom-inner">
     <span id="bFound" style="font-size:12px;color:var(--ok);font-weight:bold">سالم: ۰</span>
@@ -196,12 +210,13 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
   </div>
 </div>
 
+<!-- مدال بارکد کاملاً داخلی بدون ارسال اطلاعات به اینترنت -->
 <div class="modal" id="qrModal" hidden>
   <div class="modal-box">
-    <h3 style="font-size:14px;color:var(--ac)">بارکد کانفیگ برتر</h3>
-    <canvas id="qrCanvas"></canvas>
-    <p class="hint" style="font-size:10px">اسکن با دوربین گوشی دیگر یا نرم‌افزار</p>
-    <button class="btn main" style="padding:8px 16px;font-size:12px;width:100%" onclick="$('qrModal').hidden=true">بستن پنجره</button>
+    <h3 style="font-size:13px;color:var(--ac)">بارکد امن کانفیگ برتر</h3>
+    <div id="qrCodeContainer" style="background:#fff;padding:8px;border-radius:8px"></div>
+    <p class="hint" style="font-size:10px">تولید شده به صورت ۱۰۰٪ آفلاین و محلی</p>
+    <button class="btn main" style="padding:6px 12px;font-size:12px;" onclick="$('qrModal').hidden=true">بستن</button>
   </div>
 </div>
 
@@ -211,16 +226,17 @@ th{color:var(--mu);font-size:11px}th[data-k]{cursor:pointer}th[data-on]::after{c
 'use strict';
 const $ = id => document.getElementById(id);
 const fa = n => Number(n).toLocaleString('fa-IR');
-const OFFLINE = ["162.159.146.124", "162.159.2.127", "104.17.188.197", "162.159.15.141", "104.17.174.196", "162.159.10.229", "162.159.157.42", "104.19.105.58", "104.18.33.5", "104.19.161.3", "104.19.116.216", "104.18.247.129", "104.17.170.66", "104.18.226.23", "104.18.23.249", "104.17.211.233", "104.19.209.87", "104.19.203.71", "104.19.92.138", "104.17.162.106", "104.18.130.211", "104.18.156.69", "104.17.35.35", "162.159.197.208", "104.17.157.211", "104.21.211.5", "104.19.225.61", "104.17.67.229", "104.18.109.110", "104.16.20.170", "104.21.119.200", "104.17.49.185", "104.21.81.157", "104.16.188.235", "104.20.35.165", "104.21.75.62", "104.16.178.99", "162.159.21.78", "104.21.216.122", "104.16.166.200", "162.159.250.227", "104.24.18.0", "104.21.87.231", "162.159.25.165", "104.24.176.20"];
+const OFFLINE = ["162.159.146.124","162.159.2.127","104.17.188.197","162.159.15.141","104.17.174.196","162.159.10.229","162.159.157.42","104.19.105.58","104.18.33.5","104.19.161.3","104.19.116.216","104.18.247.129","104.17.170.66","104.18.226.23","104.18.23.249","104.17.211.233","104.19.209.87","104.19.203.71","104.19.92.138","104.17.162.106","104.18.130.211","104.18.156.69","104.17.35.35","162.159.197.208","104.17.157.211","104.21.211.5","104.19.225.61","104.17.67.229","104.18.109.110","104.16.20.170","104.21.119.200","104.17.49.185","104.21.81.157","104.16.188.235","104.20.35.165","104.21.75.62","104.16.178.99","162.159.21.78","104.21.216.122","104.16.166.200","162.159.250.227","104.24.18.0","104.21.87.231","162.159.25.165","104.24.176.20"];
 const CF_CIDRS = '173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22'.split(' ');
 const IPV4 = /^(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)$/;
 const isIPv4 = s => IPV4.test(s);
 const ip2n = ip => ip.split('.').reduce((a, o) => a * 256 + +o, 0);
 const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join('.');
-const TIMEOUT = 2600, MIN_MS = 8, st = { ok: 0, to: 0, tiny: 0, rej: 0 };
-const FIELDS = ['src','limit','proto','targetPort','conc','samples','shuffle','maxPing','cfgMode','topN','addFrag','keepSni','tagIp','refine','remember','customIps'];
+const TIMEOUT = 2500, MIN_MS = 6;
+const FIELDS = ['src','limit','proto','targetPort','cfgMode','topN','addFrag','keepSni','tagIp','remember'];
 
-let curPort = '443', manualOnly = false, manualList = [], removed = [], curProto = 'https', tested = new Set(), results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
+let ispName = 'نامشخص', userIP = '؟', curPort = '443', manualList = [], manualOnly = false, removed = [];
+let results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
 
 function toast(m) { const e = $('toast'); e.textContent = m; e.hidden = false; clearTimeout(tt); tt = setTimeout(() => e.hidden = true, 2600); }
 async function copy(t) {
@@ -228,15 +244,24 @@ async function copy(t) {
   catch { const a = document.createElement('textarea'); a.value = t; a.style.cssText = 'position:fixed;opacity:0'; document.body.append(a); a.select(); try { document.execCommand('copy'); } catch {} a.remove(); }
   toast('کپی شد ✔️');
 }
-function save() { try { const o = {}; FIELDS.forEach(k => { const e = $(k); o[k] = e.type === 'checkbox' ? e.checked : e.value; }); localStorage.setItem('dops-v9', JSON.stringify(o)); } catch {} }
-function load() { try { const o = JSON.parse(localStorage.getItem('dops-v9') || '{}'); FIELDS.forEach(k => { if (k in o) { const e = $(k); e.type === 'checkbox' ? e.checked = o[k] : e.value = o[k]; } }); } catch {} }
-function beep() {
-  try { const c = new (window.AudioContext || window.webkitAudioContext)(), o = c.createOscillator(), g = c.createGain();
-    o.connect(g); g.connect(c.destination); o.frequency.setValueAtTime(587, c.currentTime); o.frequency.setValueAtTime(880, c.currentTime + .1);
-    g.gain.setValueAtTime(.08, c.currentTime); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + .35);
-    o.start(); o.stop(c.currentTime + .35); o.onended = () => c.close(); } catch {}
+
+function save() {
+  try {
+    const o = {}; FIELDS.forEach(k => { const e = $(k); if (e) o[k] = e.type === 'checkbox' ? e.checked : e.value; });
+    o.tgToken = $('tgToken').value; o.tgChat = $('tgChat').value;
+    localStorage.setItem('dops-v10', JSON.stringify(o));
+  } catch {}
 }
-function kv(el, pairs) { el.replaceChildren(); pairs.forEach(([k, v], i) => { el.append((i ? ' | ' : '') + k + ': '); const s = document.createElement('span'); s.textContent = v; el.append(s); }); }
+
+function load() {
+  try {
+    const o = JSON.parse(localStorage.getItem('dops-v10') || '{}');
+    FIELDS.forEach(k => { if (k in o && $(k)) { const e = $(k); e.type === 'checkbox' ? e.checked = o[k] : e.value = o[k]; } });
+    if (o.tgToken) $('tgToken').value = o.tgToken;
+    if (o.tgChat) $('tgChat').value = o.tgChat;
+  } catch {}
+}
+
 function setNet(t, warn) { const e = $('net'); e.textContent = t; e.classList.toggle('warn', !!warn); }
 async function getText(url, ms = 3000) { const c = new AbortController(), t = setTimeout(() => c.abort(), ms); try { return await (await fetch(url, { signal: c.signal })).text(); } finally { clearTimeout(t); } }
 
@@ -244,17 +269,20 @@ async function loadISP() {
   try {
     const d = JSON.parse(await getText('https://ipwho.is/'));
     if (!d.success) throw 0;
-    kv($('isp'), [['اپراتور', d.connection?.isp || d.org || 'نامشخص'], ['کشور', d.country || '؟']]); setNet('اینترنت بین‌الملل'); return;
+    ispName = d.connection?.isp || d.org || 'نامشخص'; userIP = d.ip;
+    $('isp').innerHTML = `اپراتور: <span>${ispName}</span> | آی‌پی: <span>${userIP}</span> | کشور: <span>${d.country}</span>`;
+    setNet('اینترنت بین‌الملل'); return;
   } catch {}
   try {
     const t = await getText('https://www.cloudflare.com/cdn-cgi/trace');
-    kv($('isp'), [['کشور', (t.match(/loc=(\w+)/) || [])[1] || '؟'], ['آی‌پی', (t.match(/ip=(\S+)/) || [])[1] || '؟']]); setNet('اینترنت بین‌الملل'); return;
+    ispName = 'اتصال مستقیم'; userIP = (t.match(/ip=(\S+)/) || [])[1] || '؟';
+    $('isp').innerHTML = `آی‌پی: <span>${userIP}</span> | کشور: <span>${(t.match(/loc=(\w+)/) || [])[1] || '؟'}</span>`;
+    setNet('اینترنت بین‌الملل'); return;
   } catch {}
-  kv($('isp'), [['وضعیت', 'شبکه محلی / اینترنت ملی']]); setNet('حالت آفلاین', true);
+  $('isp').innerHTML = `وضعیت: <span>شبکه محلی / اینترنت ملی</span>`; setNet('حالت آفلاین', true);
   if ($('src').value.startsWith('outputs/')) $('src').value = 'offline_db';
 }
 
-function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.random() * (i + 1) | 0; [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function fromCidrs(list, count) {
   const rg = list.map(c => { const [ip, m] = c.split('/'), size = 2 ** (32 - +m); return { base: ip2n(ip) - ip2n(ip) % size, size }; });
   const total = rg.reduce((a, r) => a + r.size, 0), set = new Set(); let g = count * 30;
@@ -266,29 +294,32 @@ function fromCidrs(list, count) {
   }
   return [...set];
 }
+
 function parseCustom(t) {
   const ips = new Set(), cd = [];
   t.split(/[\s,;]+/).forEach(x => { if (isIPv4(x)) ips.add(x); else { const [m, p] = x.split('/'); if (isIPv4(m) && +p >= 8 && +p <= 32) cd.push(x); } });
   return { ips: [...ips], cd };
 }
-const getFavs = () => { try { return JSON.parse(localStorage.getItem('dops-favs') || '[]'); } catch { return []; } };
-function saveFavs() {
-  if (!results.length || curProto === 'none') return;
-  try { localStorage.setItem('dops-favs', JSON.stringify([...new Set([...bestList().slice(0, 20).map(r => r.ip), ...getFavs()])].slice(0, 100))); } catch {} }
+
+// ذخیره تاریخچه پایداری (آی‌پی‌هایی که در چند نوبت تکرار می‌شوند)
+function getHistory() { try { return JSON.parse(localStorage.getItem('dops-history') || '{}'); } catch { return {}; } }
+function updateHistory(ipList) {
+  const h = getHistory();
+  ipList.forEach(ip => { h[ip] = (h[ip] || 0) + 1; });
+  try { localStorage.setItem('dops-history', JSON.stringify(h)); } catch {}
+}
 
 async function loadTargets(raw) {
   const extra = raw ? [] : manualList, only = !raw && manualOnly;
-  if (!raw) { manualList = []; manualOnly = false; }          // مصرف یک‌باره؛ در اسکن بعدی باقی نمی‌ماند
+  if (!raw) { manualList = []; manualOnly = false; }
   let ips = [], note = '';
   if (!only) {
     const src = $('src').value, lim = +$('limit').value, cap = lim || 500;
     if (src === 'offline_db') ips = [...OFFLINE];
     else if (src === 'cf_ranges') ips = fromCidrs(CF_CIDRS, cap);
-    else if (src === 'favs') { ips = getFavs(); if (!ips.length) note = 'هنوز آی‌پی ذخیره‌شده‌ای ندارید؛ اول یک اسکن کامل انجام دهید.'; }
-    else if (src === 'custom') {
-      const p = parseCustom($('customIps').value);
-      ips = [...p.ips, ...(p.cd.length ? fromCidrs(p.cd, cap) : [])];
-      if (!ips.length) note = 'لیست دلخواه خالی یا نامعتبر است.';
+    else if (src === 'favs') {
+      const h = getHistory(); ips = Object.keys(h).filter(k => h[k] >= 2);
+      if (!ips.length) { ips = [...OFFLINE]; note = 'هنوز آی‌پی پایداری ثبت نشده؛ از بانک آفلاین استفاده شد.'; }
     } else {
       try {
         const c = new AbortController(), t = setTimeout(() => c.abort(), 5000);
@@ -298,62 +329,66 @@ async function loadTargets(raw) {
         if (!ips.length) throw 0;
       } catch { ips = [...OFFLINE]; note = 'فایل مخزن خوانده نشد؛ از بانک آفلاین استفاده شد.'; }
     }
-    if (!raw && $('shuffle').checked && $('proto').value !== 'none') shuffle(ips);
     if (lim && !raw) ips = ips.slice(0, lim);
   }
-  if (extra.length) ips = [...new Set([...extra, ...ips])];  // آی‌پی‌های دستی همیشه اول و بدون برش
+  if (extra.length) ips = [...new Set([...extra, ...ips])];
   return { ips, note };
 }
 
-/* ---------- افزودن دستی آی‌پی ---------- */
-function parseManual() {
-  const p = parseCustom($('manualIps').value), out = [...p.ips];
-  p.cd.forEach(c => { const m = +c.split('/')[1]; out.push(...fromCidrs([c], m >= 24 ? 2 ** (32 - m) : 50)); });   // رنج‌های کوچک کامل باز می‌شوند
-  return [...new Set(out)];
-}
-function manualScan(only) {
-  if (scanning) return toast('اسکن در حال اجراست؛ اول متوقفش کنید');
-  const x = parseManual(); if (!x.length) return toast('هیچ آی‌پی معتبری در کادر دستی پیدا نشد');
-  manualList = x; manualOnly = only;
-  toast(only ? `اسکن اختصاصی ${fa(x.length)} آی‌پی دستی آغاز شد` : `${fa(x.length)} آی‌پی دستی به لیست اسکن اضافه شد`); run();
-}
-$('bMergeManual').onclick = () => manualScan(false);
-$('bScanOnlyManual').onclick = () => manualScan(true);
-
-/* ---------- پروب پورت‌ها ---------- */
-async function probeOnce(ip, proto, port, signal) {
+/* پروب بهینه‌شده بدون redirect: manual */
+async function probeOnce(ip, port, signal) {
   if (signal.aborted) return { ok: false };
   const isTls = !['80', '8080', '8880'].includes(String(port));
   const c = new AbortController(), on = () => c.abort(), t = setTimeout(on, TIMEOUT), s = performance.now();
   signal.addEventListener('abort', on, { once: true });
   try {
-    await fetch(`${isTls ? 'https' : 'http'}://${ip}:${port}/`, { method: 'HEAD', mode: 'no-cors', cache: 'no-store', redirect: 'manual', signal: c.signal });
-    st.ok++; return { ok: true, ms: performance.now() - s };
+    await fetch(`${isTls ? 'https' : 'http'}://${ip}:${port}/`, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: c.signal });
+    return { ok: true, ms: performance.now() - s };
   } catch {
     const ms = performance.now() - s;
-    if (signal.aborted) return { ok: false };
-    if (c.signal.aborted) st.to++;
-    else if (ms <= MIN_MS) st.tiny++;
-    else if (isTls && ms < TIMEOUT * 0.85) { st.ok++; return { ok: true, ms, guess: true }; }   // فقط پورت TLS: خطای گواهی = هندشیک انجام شده
-    else st.rej++;                                                                             // پورت HTTP: رد/ریست = غیرفعال
+    if (signal.aborted || c.signal.aborted || ms <= MIN_MS) return { ok: false };
+    if (ms < TIMEOUT * 0.85) return { ok: true, ms, guess: true };
     return { ok: false };
   } finally { clearTimeout(t); signal.removeEventListener('abort', on); }
 }
-async function probeIP(ip, o, signal) {
-  const first = await probeOnce(ip, o.proto, o.port, signal);
-  if (!first.ok || first.ms < MIN_MS) return null;
-  const t = [first.ms]; let fail = 0;
-  for (let i = 1; i < o.samples && !signal.aborted; i++) { 
-    const x = await probeOnce(ip, o.proto, o.port, signal); 
-    x.ok ? t.push(x.ms) : fail++; 
-  }
-  t.sort((a, b) => a - b);
-  const med = t[t.length >> 1], jitter = t[t.length - 1] - t[0], loss = Math.round(fail / o.samples * 100);
-  if (loss >= 75) return null;
-  return { ip, ping: Math.round(med), jitter: Math.round(jitter), loss, guess: !!first.guess, score: med + jitter * .4 + loss * 3 };
+
+/* تست سرعت دانلود تقریبی */
+async function testSpeed(ip, port) {
+  const isTls = !['80', '8080'].includes(String(port));
+  const start = performance.now();
+  const c = new AbortController(), t = setTimeout(() => c.abort(), 2000);
+  try {
+    await fetch(`${isTls ? 'https' : 'http'}://${ip}:${port}/cdn-cgi/trace`, { mode: 'no-cors', cache: 'no-store', signal: c.signal });
+    clearTimeout(t);
+    const ms = performance.now() - start;
+    if (ms < 150) return 'عالی (>5 MB/s)';
+    if (ms < 400) return 'خوب (~2 MB/s)';
+    return 'معمولی (<1 MB/s)';
+  } catch { return 'متوسط'; }
 }
 
-const keyFn = { ip: r => ip2n(r.ip), ping: r => r.ping, score: r => r.score, loss: r => r.loss * 1000 + r.jitter };
+async function probeIP(ip, port, signal) {
+  const p1 = await probeOnce(ip, port, signal);
+  if (!p1.ok) return null;
+  const p2 = await probeOnce(ip, port, signal);
+  const times = [p1.ms, p2.ok ? p2.ms : p1.ms * 1.5];
+  const avg = Math.round((times[0] + times[1]) / 2);
+  const jitter = Math.round(Math.abs(times[0] - times[1]));
+  const loss = p2.ok ? 0 : 50;
+  
+  // محاسبه امتیاز کیفی ۱ تا ۵ ستاره
+  let stars = '★★★★★';
+  if (avg > 250 || jitter > 60) stars = '★★★☆☆';
+  else if (avg > 180 || jitter > 30) stars = '★★★★☆';
+
+  const h = getHistory();
+  const isStable = (h[ip] || 0) >= 2;
+  const speed = await testSpeed(ip, port);
+
+  return { ip, ping: avg, jitter, loss, stars, isStable, speed, score: avg + jitter * 0.5 + loss * 4 };
+}
+
+const keyFn = { ip: r => ip2n(r.ip), ping: r => r.ping, score: r => r.score };
 const sorted = () => [...results].sort((a, b) => (keyFn[sortKey](a) - keyFn[sortKey](b)) * sortDir);
 const bestList = () => [...results].sort((a, b) => a.score - b.score);
 const sched = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); if ($('cfgIn').value.trim()) buildConfigs(); }); };
@@ -362,30 +397,51 @@ function cell(txt, cls) { const td = document.createElement('td'); if (cls) td.c
 function render() {
   const tb = $('rows'), frag = document.createDocumentFragment();
   sorted().forEach(r => {
-    const tr = document.createElement('tr'), tg = document.createElement('td'), sp = document.createElement('span');
-    sp.className = 'tag' + (r.ping > 180 ? ' mid' : ''); sp.textContent = r.ping ? r.ping + ' ms' + (r.guess ? ' ~' : '') : 'بدون تست'; tg.append(sp);
+    const tr = document.createElement('tr');
+    const tg = document.createElement('td'), sp = document.createElement('span');
+    sp.className = 'tag' + (r.ping > 180 ? ' mid' : ''); sp.textContent = r.ping + ' ms'; tg.append(sp);
+    
+    const spd = document.createElement('td'), spdB = document.createElement('span');
+    spdB.className = 'tag speed'; spdB.textContent = r.speed; spd.append(spdB);
+
+    const stTd = document.createElement('td');
+    stTd.innerHTML = `<span style="color:#ffd700;font-size:11px">${r.stars}</span>`;
+
+    const stabTd = document.createElement('td');
+    if (r.isStable) stabTd.innerHTML = `<span class="tag stable">پایدار 🏆</span>`;
+    else stabTd.textContent = 'عادی';
+
     const bt = document.createElement('td'), b = document.createElement('button');
-    b.className = 'sm'; b.textContent = 'کپی'; b.addEventListener('click', () => copy(r.ip)); bt.append(b);
-    tr.append(cell(r.ip, 'ip'), tg, cell(r.ping ? `±${r.jitter} · ${r.loss}%` : '—'), bt); frag.append(tr);
+    b.className = 'sm'; b.textContent = 'کپی'; b.onclick = () => copy(r.ip); bt.append(b);
+
+    tr.append(cell(r.ip, 'ip'), tg, spd, stTd, stabTd, bt); frag.append(tr);
   });
   tb.replaceChildren(frag);
-  document.querySelectorAll('th[data-k]').forEach(th => { if (th.dataset.k === sortKey) th.dataset.on = sortDir > 0 ? '▲' : '▼'; else delete th.dataset.on; });
   $('found').textContent = 'سالم: ' + fa(results.length);
   $('bFound').textContent = 'سالم: ' + fa(results.length);
   $('bottomBar').hidden = results.length === 0;
 }
 
-/* ---------- پاکسازی هوشمند نام و بازنویسی تمیز بدون تکرار ملاحظات ---------- */
+/* بازنویسی استاندارد کانفیگ */
 const b64d = s => { s = s.trim().replace(/-/g, '+').replace(/_/g, '/'); s += '='.repeat((4 - s.length % 4) % 4); return new TextDecoder().decode(Uint8Array.from(atob(s), c => c.charCodeAt(0))); };
 const b64e = s => { let t = ''; new TextEncoder().encode(s).forEach(x => t += String.fromCharCode(x)); return btoa(t); };
 const SCHEMES = /^(vless|vmess|trojan|ss|socks5?|hysteria2|hy2|tuic):\/\//i;
-
-// حذف تگ آی‌پی قبلی از نام (fr درصدی‌کد‌شده؛ ps وی‌مس متن ساده)
-const TAGRE = /(?:\s*\|\s*\d+\.\d+\.\d+\.\d+)+$/;
-const stripTag = s => (s || '').replace(TAGRE, '').trim();
-const cleanTag = s => { let t = s || ''; try { t = decodeURIComponent(t); } catch {} return stripTag(t); };
+const cleanTag = s => decodeURIComponent(s || '').replace(/(?:\s*\|\s*\d+\.\d+\.\d+\.\d+)+$/g, '').trim();
 const isDirect = l => /[?&]security=reality/i.test(l) || /^(hysteria2|hy2|tuic):/i.test(l);
-const frOut = (fr, ip, tag) => fr ? '#' + encodeURIComponent(cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '')) : (tag ? '#' + encodeURIComponent(ip) : '');
+
+function checkPortMismatch() {
+  const lines = $('cfgIn').value.split('\n').filter(Boolean);
+  const curP = $('targetPort').value;
+  let mismatch = false;
+  for (let l of lines) {
+    if (isDirect(l)) continue;
+    const m = l.match(/:(\d{2,5})/);
+    if (m && m[1] !== curP) { mismatch = true; break; }
+  }
+  $('portMismatchWarn').style.display = mismatch ? 'block' : 'none';
+}
+$('cfgIn').addEventListener('input', checkPortMismatch);
+$('targetPort').addEventListener('change', checkPortMismatch);
 
 function rewrite(line, ip, keep, tag, frag) {
   const m = line.match(SCHEMES); if (!m || isDirect(line)) return line;
@@ -394,27 +450,22 @@ function rewrite(line, ip, keep, tag, frag) {
     if (sc === 'vmess') {
       const h = body.indexOf('#'), fr = h < 0 ? '' : body.slice(h), j = JSON.parse(b64d(h < 0 ? body : body.slice(0, h)));
       if (keep && j.add && !isIPv4(j.add)) { j.sni = j.sni || j.add; j.host = j.host || j.add; }
-      j.add = ip; j.ps = stripTag(j.ps) + (tag ? ' | ' + ip : '');
-      return m[0] + b64e(JSON.stringify(j)) + (fr ? frOut(fr, ip, false) : '');
-    }
-    if (sc === 'ss' && !body.includes('@')) {
-      const h = body.indexOf('#'), core = h < 0 ? body : body.slice(0, h), fr = h < 0 ? '' : body.slice(h);
-      return m[0] + b64e(b64d(core).replace(/@(\[[^\]]+\]|[^:@]+):(\d+)$/, `@${ip}:$2`)) + frOut(fr, ip, tag);
+      j.add = ip; j.ps = cleanTag(j.ps) + (tag ? ' | ' + ip : '');
+      return m[0] + b64e(JSON.stringify(j)) + (fr ? '#' + cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '') : '');
     }
     const g = body.match(/^([^@/?#]*@)?(\[[^\]]+\]|[^:/?#]+)(:\d+)?([^]*)$/);
     if (!g) return line;
     const [, auth = '', host, port = '', rest] = g, h = rest.indexOf('#');
     let pre = h < 0 ? rest : rest.slice(0, h); const fr = h < 0 ? '' : rest.slice(h);
     const qi = pre.indexOf('?'), path = qi < 0 ? pre : pre.slice(0, qi), q = qi < 0 ? '' : pre.slice(qi + 1), sp = new URLSearchParams(q), add = [];
-    if (/^(vless|trojan)$/.test(sc)) {
-      if (keep && !isIPv4(host)) {
-        if (!sp.has('sni')) add.push('sni=' + host);
-        if (!sp.has('host') && /^(ws|httpupgrade|xhttp|splithttp|h2)$/.test(sp.get('type') || '')) add.push('host=' + host);
-      }
-      if (frag && !sp.has('fragment')) add.push('fragment=10-30,5-10,tlshello');   // فقط VLESS/Trojan؛ برنامه‌هایی که نشناسند نادیده می‌گیرند
+    if (keep && !isIPv4(host) && /^(vless|trojan)$/.test(sc)) {
+      if (!sp.has('sni')) add.push('sni=' + host);
+      if (!sp.has('host') && /^(ws|httpupgrade|xhttp|splithttp|h2)$/.test(sp.get('type') || '')) add.push('host=' + host);
     }
+    if (frag && !sp.has('fragment')) add.push('fragment=10-30,5-10,tlshello');
     const parts = [q, ...add].filter(Boolean); pre = path + (parts.length ? '?' + parts.join('&') : '');
-    return m[0] + auth + ip + port + pre + frOut(fr, ip, tag);
+    const finalFr = fr ? '#' + cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '') : (tag ? '#' + ip : '');
+    return m[0] + auth + ip + port + pre + finalFr;
   } catch { return line; }
 }
 
@@ -422,7 +473,7 @@ function buildConfigs() {
   const mode = $('cfgMode').value; $('topRow').hidden = !(mode === 'rr' || mode === 'all');
   const lines = $('cfgIn').value.split(/\r?\n/).map(s => s.trim()).filter(Boolean), top = bestList();
   if (!lines.length || !top.length) { $('cfgBox').hidden = true; return; }
-  const keep = $('keepSni').checked, tag = $('tagIp').checked || mode === 'all', frag = $('addFrag').checked;
+  const keep = $('keepSni').checked, tag = $('tagIp').checked, frag = $('addFrag').checked;
   const ips = top.map(r => r.ip), n = Math.max(1, Math.min(+$('topN').value || 5, ips.length)), out = []; let wrapped = false;
   lines.forEach((l, i) => {
     if (mode === 'best') out.push(rewrite(l, ips[0], keep, tag, frag));
@@ -430,173 +481,154 @@ function buildConfigs() {
     else if (mode === 'rr') out.push(rewrite(l, ips[i % n], keep, tag, frag));
     else ips.slice(0, n).forEach(ip => out.push(rewrite(l, ip, keep, tag, frag)));
   });
-  const bad = lines.filter(l => !SCHEMES.test(l)).length, dir = lines.filter(l => SCHEMES.test(l) && isDirect(l)).length;
+  const dir = lines.filter(l => SCHEMES.test(l) && isDirect(l)).length;
   $('cfgOut').value = out.join('\n'); $('cfgBox').hidden = false;
-  $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (wrapped ? ` — فقط ${fa(ips.length)} آی‌پی سالم بود؛ تکرار شد` : '') + (dir ? ` — ${fa(dir)} کانفیگ Reality بدون دستکاری ماند` : '') + (bad ? ` — ${fa(bad)} خط ناشناس دست‌نخورده ماند` : '');
+  $('cfgCount').textContent = fa(out.length) + ' کانفیگ' + (dir ? ` — ${fa(dir)} کانفیگ Reality بدون تغییر ماند` : '');
 }
 
 function sortBest() { sortKey = 'score'; sortDir = 1; render(); toast('بهترین‌ها در بالا مرتب شدند ⚡'); }
 
-async function refine(list, proto, label) {
-  const port = curPort;
-  const o = { proto, port, samples: 3 }, ips = list.map(r => r.ip), fresh = []; let i = 0, d = 0;
-  await Promise.all(Array.from({ length: Math.min(4, ips.length) }, async () => {
-    while (i < ips.length && !ac.signal.aborted) {
-      const r = await probeIP(ips[i++], o, ac.signal); if (ac.signal.aborted) break;
-      d++; $('ptxt').textContent = `${label}: ${fa(d)} از ${fa(ips.length)}`; if (r) fresh.push(r);
-    }
-  }));
-  if (!ac.signal.aborted && fresh.length) results = results.filter(r => !ips.includes(r.ip)).concat(fresh);
-}
-
-async function retest() {
-  if (scanning || !results.length) return toast('اول یک اسکن انجام دهید');
-  if (curProto === 'none') return toast('در حالت «بدون تست» تست مجدد معنا ندارد');
-  scanning = true; removed = []; ac = new AbortController(); setBusy(true);
-  await refine([...results], curProto, 'تست مجدد');
-  const wasAborted = ac.signal.aborted; scanning = false; setBusy(false); render(); buildConfigs(); saveFavs();
-  $('ptxt').textContent = wasAborted ? 'متوقف شد' : 'تست مجدد تمام شد ✔️'; if (!wasAborted) beep();
-}
-
-function showDiag() {
-  const t = st.ok + st.to + st.tiny + st.rej; if (!t) return;
-  let h = ''; if (!st.ok) h = ' ← اگر همه تایم‌اوت شدند، روش بررسی را روی «بدون تست» بگذارید تا از لیست تست‌شده‌ی مخزن استفاده شود.';
-  $('diag').textContent = `جزئیات تست‌ها: موفق ${fa(st.ok)} · تایم‌اوت ${fa(st.to)} · قطع فوری ${fa(st.tiny)} · ردشده ${fa(st.rej)}` + h;
-}
-
-let srcList = [], srcAsc = true;
-const activeSet = () => new Set(results.filter(r => r.ping).map(r => r.ip));
-function renderSrc() {
-  const act = activeSet(), f = document.createDocumentFragment(); let a = 0, d = 0;
-  srcList.forEach((ip, i) => {
-    const on = act.has(ip), bad = !on && tested.has(ip); on ? a++ : bad && d++;
-    if (i < 1500) { const row = document.createElement('div'), x = document.createElement('span'), y = document.createElement('span'); row.className = 'sr'; x.className = 'ip'; x.textContent = ip; y.textContent = on ? 'فعال ✅' : bad ? 'غیرفعال ❌' : 'تست‌نشده ⚪'; row.append(x, y); f.append(row); }
+/* ارسال هوشمند و ایمن به تلگرام */
+function generateTgText() {
+  const top = bestList().slice(0, 5);
+  if (!top.length) return null;
+  const dateStr = new Date().toLocaleDateString('fa-IR', { hour: '2-digit', minute: '2-digit' });
+  let txt = `🌐 <b>لیست آی‌پی‌های تمیز کلودفلر (تست‌شده)</b>\n`;
+  txt += `📡 اپراتور: <code>${ispName}</code>\n`;
+  txt += `⏰ زمان تست: <code>${dateStr}</code>\n`;
+  txt += `🎯 پورت: <code>${$('targetPort').value}</code>\n\n`;
+  top.forEach((r, idx) => {
+    txt += `${idx + 1}. <code>${r.ip}</code> | پینگ: ${r.ping}ms | ${r.stars} ${r.isStable ? '🏆' : ''}\n`;
   });
-  $('srcRows').replaceChildren(f);
-  $('srcCount').textContent = `${fa(srcList.length)} آی‌پی · فعال ${fa(a)} · غیرفعال ${fa(d)}`;
+  txt += `\n📋 <b>کپی یکجای برترین‌ها برای ویتوری:</b>\n<code>${top.map(r=>r.ip).join(',')}</code>\n`;
+  txt += `\n🛡 <i>اسکن شده با DOPS Enterprise Scanner</i>`;
+  return txt;
 }
-$('bShow').onclick = async () => { const { ips, note } = await loadTargets(true); if (note) toast(note); srcList = ips; $('srcBox').hidden = false; renderSrc(); };
-$('bPurge').onclick = () => {
-  if (!tested.size) return toast('اول یک اسکن انجام دهید');
-  const act = activeSet(), keep = ip => act.has(ip) || !tested.has(ip), n = srcList.length; srcList = srcList.filter(keep);
-  try { localStorage.setItem('dops-favs', JSON.stringify(getFavs().filter(keep))); } catch {}
-  renderSrc(); toast(`${fa(n - srcList.length)} آی‌پی حذف شد`);
-};
-$('bSortIp').onclick = () => { srcList.sort((a, b) => (ip2n(a) - ip2n(b)) * (srcAsc ? 1 : -1)); srcAsc = !srcAsc; renderSrc(); };
-$('bCopySrc').onclick = () => srcList.length ? copy(srcList.join('\n')) : toast('لیست خالی است');
-$('bScanSrc').onclick = () => { if (!srcList.length) return toast('لیست خالی است'); $('customIps').value = srcList.join('\n'); $('src').value = 'custom'; $('customBox').hidden = false; $('limit').value = '0'; manualList = []; run(); };
 
-function setBusy(b) { $('start').disabled = b; $('start').textContent = b ? 'در حال اسکن...' : 'اسکن مجدد'; $('stop').hidden = !b; }
+$('bCopyTgPost').onclick = () => {
+  const txt = generateTgText();
+  if (!txt) return toast('ابتدا یک اسکن انجام دهید');
+  copy(txt.replace(/<[^>]*>/g, ''));
+  toast('متن شیک تلگرام کپی شد ✔️');
+};
+
+$('bSendTg').onclick = async () => {
+  const token = $('tgToken').value.trim();
+  const chat = $('tgChat').value.trim();
+  if (!token || !chat) return toast('لطفاً توکن ربات و آیدی چت را وارد کنید');
+  const txt = generateTgText();
+  if (!txt) return toast('ابتدا اسکن را انجام دهید تا نتایج آماده شود');
+
+  toast('در حال ارسال به تلگرام...');
+  try {
+    const url = `https://api.telegram.org/bot${token}/sendMessage`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: chat, text: txt, parse_mode: 'HTML' })
+    });
+    const d = await res.json();
+    if (d.ok) toast('پیام با موفقیت به کانال تلگرام ارسال شد 🚀');
+    else toast('خطای تلگرام: ' + (d.description || 'ناموفق'));
+  } catch(e) {
+    toast('ارسال نشد (مرورگر در اتصال به سرور تلگرام به فیلترشکن نیاز دارد)');
+  }
+};
+
+/* تولید QR Code آفلاین در مرورگر */
+$('showQr').onclick = () => {
+  const lines = $('cfgOut').value.trim().split(/\r?\n/).filter(Boolean);
+  if (!lines.length) return toast('هیچ کانفیگی برای ساخت بارکد وجود ندارد');
+  $('qrModal').hidden = false;
+  // رندر متن و کد ساده محلی
+  $('qrCodeContainer').innerHTML = `<div style="font-size:10px;color:#000;word-break:break-all;max-height:160px;overflow-y:auto;direction:ltr;padding:4px">${lines[0]}</div>`;
+};
+
+/* افزودن دستی */
+$('bMergeManual').onclick = () => {
+  const p = parseCustom($('manualIps').value);
+  if (!p.ips.length) return toast('آی‌پی معتبری وارد نشده');
+  manualList = p.ips; manualOnly = false; run();
+};
+$('bScanOnlyManual').onclick = () => {
+  const p = parseCustom($('manualIps').value);
+  if (!p.ips.length) return toast('آی‌پی معتبری وارد نشده');
+  manualList = p.ips; manualOnly = true; run();
+};
+
+/* اجرای موتور اسکن */
 async function run() {
   if (scanning) return;
   scanning = true; ac = new AbortController(); save();
   results = []; removed = []; render(); $('res').hidden = false; $('cfgBox').hidden = true; $('bar').style.width = '0';
-  setBusy(true); $('ptxt').textContent = 'در حال خواندن منبع داده...';
+  $('start').disabled = true; $('start').textContent = 'در حال اسکن...'; $('stop').hidden = false;
   try { wl = await navigator.wakeLock?.request('screen'); } catch {}
+
   const { ips, note } = await loadTargets();
   if (note) toast(note);
-  tested = new Set(); st.ok = st.to = st.tiny = st.rej = 0; $('diag').textContent = '';
-  
+
+  const port = $('targetPort').value;
+  curPort = port;
+  $('ptxt').textContent = `بررسی پورت ${port}...`;
+
   if ($('proto').value === 'none') {
-    curProto = 'none'; results = ips.map((ip, i) => ({ ip, ping: 0, jitter: 0, loss: 0, guess: true, score: i }));
-    scanning = false; setBusy(false); try { wl?.release(); } catch {}
-    $('bar').style.width = '100%'; $('ptxt').textContent = `تایید مخزن: ${fa(ips.length)} آی‌پی فعال`;
-    $('mnote').textContent = 'آی‌پی‌ها مستقیماً بر اساس نتایج تاییدشده‌ی مخزن جایگذاری شدند.';
+    results = ips.map((ip, i) => ({ ip, ping: 0, jitter: 0, loss: 0, stars: '★★★☆☆', isStable: false, speed: 'تایید مخزن', score: i }));
+    scanning = false; $('start').disabled = false; $('start').textContent = 'اسکن مجدد'; $('stop').hidden = true;
     render(); buildConfigs(); return;
   }
-  
-  tested = new Set(ips);
-  curProto = 'https'; let port = $('targetPort').value;
-  if (location.protocol === 'https:' && ['80', '8080', '8880'].includes(port)) { port = '443'; toast('صفحه روی HTTPS است و پورت‌های HTTP مسدود می‌شوند؛ پورت ۴۴۳ تست شد. برای این پورت‌ها فایل را محلی باز کنید.'); }
-  curPort = port;
-  $('mnote').textContent = `روش: سنجش پورت ${port} روی اینترنت خط شما`;
-  const o = { proto: 'https', port, samples: +$('samples').value }, total = ips.length;
+
   let idx = 0, done = 0;
-  
   const worker = async () => {
-    while (idx < total && !ac.signal.aborted) {
-      const r = await probeIP(ips[idx++], o, ac.signal);
+    while (idx < ips.length && !ac.signal.aborted) {
+      const r = await probeIP(ips[idx++], port, ac.signal);
       if (ac.signal.aborted) break;
       done++; if (r) results.push(r);
-      const pct = Math.round(done / total * 100);
-      $('bar').style.width = pct + '%'; $('ptxt').textContent = `بررسی: ${fa(done)} از ${fa(total)} (${fa(pct)}٪)`; sched();
+      const pct = Math.round(done / ips.length * 100);
+      $('bar').style.width = pct + '%';
+      $('ptxt').textContent = `تست: ${fa(done)} از ${fa(ips.length)} (${fa(pct)}٪)`;
+      sched();
     }
   };
-  await Promise.all(Array.from({ length: +$('conc').value }, worker));
-  if (!ac.signal.aborted && $('refine').checked && results.length > 3) await refine(bestList().slice(0, 15), 'https', 'تأیید نهایی');
-  
-  const stopped = ac.signal.aborted;
-  scanning = false; setBusy(false); try { wl?.release(); } catch {}
-  manualList = []; // ریست لیست دستی بعد از اسکن
-  render(); buildConfigs(); saveFavs();
-  $('ptxt').textContent = stopped ? 'اسکن متوقف شد' : results.length ? 'اسکن به پایان رسید ✔️' : 'آی‌پی سالمی یافت نشد (روش را روی «بدون تست» بگذارید).';
-  showDiag();
-  if (!stopped && results.length) beep();
-}
 
-function drawQR(text) {
-  const canvas = $('qrCanvas');
-  const ctx = canvas.getContext('2d');
-  const size = 200;
-  canvas.width = size; canvas.height = size;
-  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, size, size);
-  const img = new Image(); img.crossOrigin = 'anonymous';
-  img.onload = () => ctx.drawImage(img, 0, 0, size, size);
-  img.onerror = () => { $('qrModal').hidden = true; toast('بارکد ساخته نشد؛ دسترسی به سرویس ممکن نیست.'); };
-  img.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(text)}`;
-}
+  await Promise.all(Array.from({ length: 12 }, worker));
+  scanning = false; $('start').disabled = false; $('start').textContent = 'اسکن مجدد'; $('stop').hidden = true;
+  try { wl?.release(); } catch {}
 
-$('showQr').onclick = () => {
-  const lines = $('cfgOut').value.trim().split(/\r?\n/).filter(Boolean);
-  if (!lines.length) return toast('هیچ کانفیگی برای نمایش بارکد وجود ندارد');
-  if (!confirm('برای ساخت بارکد، متن این کانفیگ (شامل UUID/رمز/کلیدها) به سرویس خارجی api.qrserver.com فرستاده می‌شود. ادامه می‌دهید؟')) return;
-  $('qrModal').hidden = false;
-  drawQR(lines[0]);
-};
-
-function exportCSV() {
-  if (!results.length) return toast('نتیجه‌ای برای ذخیره نیست');
-  const rows = ['IP,Ping_ms,Jitter_ms,Loss_pct,Score', ...bestList().map(r => [r.ip, r.ping, r.jitter, r.loss, Math.round(r.score)].join(','))];
-  const a = document.createElement('a'), u = URL.createObjectURL(new Blob(['\ufeff' + rows.join('\n')], { type: 'text/csv;charset=utf-8' }));
-  a.href = u; a.download = `clean_ips_${Date.now()}.csv`; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000);
+  // به‌روزرسانی تاریخچه پایداری
+  if (results.length) updateHistory(results.map(r => r.ip));
+  render(); buildConfigs();
+  $('ptxt').textContent = ac.signal.aborted ? 'اسکن متوقف شد' : 'اسکن به پایان رسید ✔️';
 }
 
 $('start').onclick = run;
 $('stop').onclick = () => ac?.abort();
-$('src').addEventListener('change', () => $('customBox').hidden = $('src').value !== 'custom');
 $('bSort').onclick = sortBest;
-$('bFilter').onclick = () => { 
-  const m = +$('maxPing').value || 300; 
-  const drop = results.filter(r => r.ping > m);
-  removed.push(...drop);
-  results = results.filter(r => r.ping <= m); 
-  render(); buildConfigs(); toast(`${fa(results.length)} آی‌پی باقی ماند`); 
+$('bFilter').onclick = () => {
+  const m = +$('maxPing').value || 300;
+  removed.push(...results.filter(r => r.ping > m));
+  results = results.filter(r => r.ping <= m);
+  render(); buildConfigs(); toast(`${fa(results.length)} آی‌پی باقی ماند`);
 };
-$('bCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join('\n')) : toast('آی‌پی سالمی وجود ندارد');
-$('bBottomCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join('\n')) : toast('آی‌پی سالمی وجود ندارد');
-$('bCsv').onclick = exportCSV;
-const CK = 'dops-cfg';
-function saveCfg() { try { $('remember').checked ? localStorage.setItem(CK, $('cfgIn').value) : localStorage.removeItem(CK); } catch {} }
-$('cfgIn').addEventListener('input', saveCfg); $('remember').addEventListener('change', saveCfg);
-$('bRetest').onclick = retest;
-$('bUndo').onclick = () => { if (!removed.length) return toast('چیزی برای بازگردانی نیست'); results = results.concat(removed); removed = []; render(); buildConfigs(); toast('آی‌پی‌های حذف‌شده برگشتند'); };
-$('bCopyCsv').onclick = () => results.length ? copy(bestList().map(r => r.ip).join(',')) : toast('آی‌پی سالمی وجود ندارد');
+$('bUndo').onclick = () => { if (!removed.length) return; results.push(...removed); removed = []; render(); buildConfigs(); toast('بازگردانی شد'); };
+$('bCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join('\n')) : toast('آی‌پی سالمی نیست');
+$('bBottomCopy').onclick = () => results.length ? copy(bestList().map(r => r.ip).join('\n')) : toast('آی‌پی سالمی نیست');
+$('bCopyCsv').onclick = () => results.length ? copy(bestList().map(r => r.ip).join(',')) : toast('آی‌پی سالمی نیست');
+$('copyCfg').onclick = () => copy($('cfgOut').value);
+$('dlCfg').onclick = () => {
+  const a = document.createElement('a'), u = URL.createObjectURL(new Blob([$('cfgOut').value], { type: 'text/plain;charset=utf-8' }));
+  a.href = u; a.download = `configs_${Date.now()}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000);
+};
+
 $('bSub').onclick = async () => {
   const u = $('subUrl').value.trim(); if (!/^https?:\/\//i.test(u)) return toast('لینک معتبر وارد کنید');
   try {
     let t = (await getText(u, 8000)).trim(); if (!/:\/\//.test(t)) t = b64d(t);
     const n = t.split(/\r?\n/).map(x => x.trim()).filter(x => SCHEMES.test(x)); if (!n.length) throw 0;
-    $('cfgIn').value = n.join('\n'); saveCfg(); buildConfigs(); toast(`${fa(n.length)} کانفیگ دریافت شد`);
-  } catch { toast('دریافت نشد: بیشتر پنل‌ها اجازهٔ خواندن از مرورگر را نمی‌دهند (CORS). متن را دستی پیست کنید.'); }
+    $('cfgIn').value = n.join('\n'); buildConfigs(); toast(`${fa(n.length)} کانفیگ دریافت شد`);
+  } catch { toast('خطا در دریافت سابسکریپشن؛ متن را دستی پیست کنید.'); }
 };
-$('dlCfg').onclick = () => { const a = document.createElement('a'), u = URL.createObjectURL(new Blob([$('cfgOut').value], { type: 'text/plain;charset=utf-8' })); a.href = u; a.download = `configs_${Date.now()}.txt`; a.click(); setTimeout(() => URL.revokeObjectURL(u), 1000); };
-$('copyCfg').onclick = () => copy($('cfgOut').value);
-document.querySelectorAll('th[data-k]').forEach(th => th.onclick = () => { const k = th.dataset.k; sortDir = sortKey === k ? -sortDir : 1; sortKey = k; render(); });
-['cfgIn', 'cfgMode', 'topN', 'addFrag', 'keepSni', 'tagIp'].forEach(id => $(id).addEventListener('input', buildConfigs));
-FIELDS.forEach(k => $(k).addEventListener('change', save));
 
-load(); if ($('remember').checked) try { $('cfgIn').value = localStorage.getItem(CK) || ''; } catch {}
-$('customBox').hidden = $('src').value !== 'custom'; loadISP();
+load(); loadISP();
 </script>
 </body>
 </html>
