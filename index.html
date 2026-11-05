@@ -55,7 +55,7 @@ th{color:var(--mu);font-size:11px}
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS V12.0 · ULTIMATE MASTER</div>
+    <div class="badge">DOPS V12.1 · ULTIMATE MASTER</div>
     <h1>CDN IP 🌐 Scanner</h1>
     <p class="sub">اسکنر دیتاسنترهای کلودفلر با تشخیص موقعیت، سابسکریپشن و ارسال به تلگرام</p>
   </div>
@@ -154,7 +154,8 @@ th{color:var(--mu);font-size:11px}
       <textarea id="cfgOut" readonly style="height:100px;border-color:var(--ok);margin-top:4px"></textarea>
       <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:6px">
         <button class="sm" style="flex:1" id="copyCfg">📋 کپی کانفیگ‌ها</button>
-        <button class="sm hi" style="flex:1" id="copySubLink">🔗 کپی لینک ساب (یکجای ویتوری)</button>
+        <button class="sm hi" style="flex:1" id="copySubLink">📦 کپی Base64 (ساب)</button>
+        <button class="sm" style="flex:1" id="copyClash">📄 کپی Clash (YAML)</button>
         <button class="sm" style="flex:1" id="dlCfg">💾 ذخیره فایل</button>
         <button class="sm" style="flex:1" id="clearCfgOut">🗑 پاک کردن خروجی</button>
       </div>
@@ -251,13 +252,13 @@ th{color:var(--mu);font-size:11px}
       <b>۸. شروع:</b> «شروع اسکن» را بزنید و نوار پیشرفت را دنبال کنید. با «■ توقف» هر زمان می‌شود متوقف کرد و نتایج تا آن لحظه می‌ماند.<br>
       <b>۹. بررسی نتایج:</b> «⚡ بهترین‌ها» مرتب می‌کند. «🧹 حذف بالای ... ms» آی‌پی‌های کند را حذف می‌کند و «↩ بازگردانی» برمی‌گرداند. 🏆 یعنی آی‌پی در چند اسکن پیاپی سالم بوده.<br>
       <b>۱۰. ساخت کانفیگ:</b> «حالت جایگزینی» را انتخاب کنید (ترتیبی، همه با سریع‌ترین، چرخشی، یا هر کانفیگ × N آی‌پی). «حفظ دامنه اصلی به‌عنوان SNI/Host» را روشن نگه دارید. «Fragment» و «افزودن آی‌پی به نام کانفیگ» اختیاری‌اند.<br>
-      <b>۱۱. خروجی:</b> «📋 کپی کانفیگ‌ها»، «🔗 کپی لینک ساب» یا «💾 ذخیره فایل». برای فقط آی‌پی‌ها از دکمهٔ «کپی IPها» پایین صفحه استفاده کنید (تب ۵).<br>
+      <b>۱۱. خروجی:</b> «📋 کپی کانفیگ‌ها»، «📦 کپی Base64»، «📄 کپی Clash (YAML)» یا «💾 ذخیره فایل». برای فقط آی‌پی‌ها از دکمهٔ «کپی IPها» پایین صفحه استفاده کنید (تب ۵).<br>
       <b>۱۲. تلگرام (اختیاری):</b> توکن ربات و آیدی کانال را بنویسید و «ارسال مستقیم» یا «کپی متن آماده» را بزنید. ارسال مستقیم معمولاً به VPN نیاز دارد، پس بعد از پایان اسکن VPN را روشن کنید.
     </div>
     <div id="tab2" class="tab-content" style="display:none;font-size:11px;line-height:1.8;color:var(--tx);margin-top:6px">
       <b>ورود کانفیگ‌ها به ویتوری (v2rayNG) گام‌به‌گام</b><br>
       <b>روش ۱ — کانفیگ‌های ساخته‌شده:</b><br>
-      ۱. در بخش خروجی روی «🔗 کپی لینک ساب» (یا «📋 کپی کانفیگ‌ها») بزنید.<br>
+      ۱. در بخش خروجی روی «📋 کپی کانفیگ‌ها» (متن ساده، مطمئن‌ترین روش) بزنید. «📦 کپی Base64» هم هست ولی بعضی نسخه‌ها آن را نمی‌پذیرند.<br>
       ۲. در ویتوری علامت + بالای صفحه را بزنید.<br>
       ۳. «افزودن از کلیپ‌بورد» را انتخاب کنید؛ تمام کانفیگ‌ها یکجا وارد می‌شوند.<br>
       ۴. بعد از ورود، یکی را انتخاب و «تست اتصال» را بزنید.<br>
@@ -265,7 +266,7 @@ th{color:var(--mu);font-size:11px}
       ۱. با «📋 با ویرگول» یا «کپی IPها» آی‌پی‌ها را بردارید.<br>
       ۲. در ویتوری کانفیگ را باز کنید و در فیلد «نشانی (Address)» یکی از آی‌پی‌ها را بگذارید. SNI و هاست WS را عوض نکنید و پورت را همان پورت کانفیگ بگذارید.<br>
       ۳. ذخیره کنید و وصل شوید. اگر وصل نشد، آی‌پی بعدی را امتحان کنید.<br>
-      <b>نکته:</b> کانفیگ باید پشت کلودفلر (CDN) باشد، وگرنه آی‌پی تمیز جواب نمی‌دهد. کلاینت‌هایی که فیلد جداگانهٔ Clean IP دارند، آی‌پی را همان‌جا می‌پذیرند.
+      <b>نکته:</b> کانفیگ باید پشت کلودفلر (CDN) باشد، وگرنه آی‌پی تمیز جواب نمی‌دهد. کلاینت‌هایی که فیلد جداگانهٔ Clean IP دارند، آی‌پی را همان‌جا می‌پذیرند.<br><b>Clash / Hiddify:</b> دکمهٔ «📄 کپی Clash (YAML)» فرمت proxies می‌سازد؛ در Clash Meta به‌عنوان پروفایل یا Provider وارد کنید. Hiddify لینک‌های ساده را هم می‌پذیرد. نوع‌های پشتیبانی‌نشده (مثل xhttp) حذف می‌شوند و تعدادشان اعلام می‌شود.
     </div>
     <div id="tab3" class="tab-content" style="display:none;font-size:11px;line-height:1.8;color:var(--tx);margin-top:6px">
       <b>علت پینگ منفی یک (-1ms) چیست؟</b><br>
@@ -287,7 +288,7 @@ th{color:var(--mu);font-size:11px}
       • <b>ورود دستی:</b> تک‌آی‌پی و رنج CIDR (مثل 162.159.20.0/24) هر دو پشتیبانی می‌شوند.<br>
       • <b>مرتب‌سازی:</b> روی عنوان ستون‌های آی‌پی، تأخیر و امتیاز بزنید.<br>
       • <b>کیفیت</b> فقط بر اساس تأخیر است نه سرعت دانلود، و <b>موقعیت</b> تخمینی است.<br>
-      • <b>به‌خاطر سپردن:</b> با تیک این گزینه، کانفیگ‌ها و توکن ربات روی همین گوشی ذخیره می‌شوند؛ روی دستگاه مشترک تیک نزنید.
+      • <b>به‌خاطر سپردن:</b> با تیک این گزینه، کانفیگ‌ها و توکن ربات روی همین گوشی ذخیره می‌شوند؛ روی دستگاه مشترک تیک نزنید.<br>• <b>پایداری 🏆</b> برای هر اپراتور جداگانه ثبت می‌شود (اپراتور همان است که بالای صفحه می‌بینید) و داده‌های قدیمی‌تر از ۳۰ روز خودکار پاک می‌شود.
     </div>
   </div>
 </div>
@@ -406,12 +407,30 @@ function getDatacenter(ip) {
   return '🇪🇺 اروپا مرکزی';
 }
 
-function getHistory() { try { return JSON.parse(localStorage.getItem('dops-history') || '{}'); } catch { return {}; } }
-function updateHistory(ipList) {
-  const h = getHistory();
-  ipList.forEach(ip => { h[ip] = (h[ip] || 0) + 1; });
-  try { localStorage.setItem('dops-history', JSON.stringify(h)); } catch {}
+/* تاریخچهٔ پایداری: برای هر اپراتور جدا، با تاریخ آخرین دیده‌شدن؛ دادهٔ قدیمی‌تر از ۳۰ روز پاک می‌شود */
+const HIST_KEY = 'dops-hist2', HIST_DAYS = 30;
+let histCache = null;
+function readHist() { try { return JSON.parse(localStorage.getItem(HIST_KEY) || '{}'); } catch { return {}; } }
+function pruneHist(all) {
+  const lim = Date.now() - HIST_DAYS * 864e5;
+  Object.keys(all).forEach(isp => { const m = all[isp] || {}; Object.keys(m).forEach(ip => { if (!m[ip] || !(m[ip].t >= lim)) delete m[ip]; }); if (!Object.keys(m).length) delete all[isp]; });
+  return all;
 }
+function getHistory() {
+  if (!histCache || histCache.isp !== ispName) {
+    const m = pruneHist(readHist())[ispName] || {}, o = {};
+    Object.keys(m).forEach(ip => { o[ip] = m[ip].n; });
+    histCache = { isp: ispName, map: o };
+  }
+  return histCache.map;
+}
+function updateHistory(ipList) {
+  const all = pruneHist(readHist()), m = all[ispName] = all[ispName] || {}, now = Date.now();
+  ipList.forEach(ip => { m[ip] = { n: (m[ip] ? m[ip].n : 0) + 1, t: now }; });
+  histCache = null;
+  try { localStorage.setItem(HIST_KEY, JSON.stringify(all)); localStorage.removeItem('dops-history'); } catch {}
+}
+try { localStorage.setItem(HIST_KEY, JSON.stringify(pruneHist(readHist()))); localStorage.removeItem('dops-history'); } catch {}
 
 async function loadTargets(raw) {
   const extra = raw ? [] : manualList, only = !raw && manualOnly;
@@ -604,7 +623,73 @@ $('copySubLink').onclick = () => {
   if (!text) return toast('ابتدا کانفیگ‌ها را اسکن کنید');
   const b64 = b64e(text);
   copy(b64);
-  toast('سابسکریپشن کپی شد! در ویتوری گزینه افزودن از کلیپ‌بورد را بزنید 🔗');
+  toast('متن Base64 کپی شد. اگر ویتوری نپذیرفت، «کپی کانفیگ‌ها» (متن ساده) را استفاده کنید.');
+};
+
+/* تبدیل لینک‌های کانفیگ به Clash Meta (YAML) */
+function parseLink(line) {
+  const t = line.trim(), m = t.match(SCHEMES); if (!m) return null;
+  const sc = m[1].toLowerCase(), body = t.slice(m[0].length);
+  if (sc === 'vmess') { try { return { sc, j: JSON.parse(b64d(body.split('#')[0])) }; } catch { return null; } }
+  const hi = body.indexOf('#'), core = hi < 0 ? body : body.slice(0, hi), tag = hi < 0 ? '' : sd(body.slice(hi + 1));
+  const g = core.match(/^(?:([^@/?#]*)@)?(\[[^\]]+\]|[^:/?#]+):(\d+)([^]*)$/); if (!g) return null;
+  const rest = g[4] || '', qi = rest.indexOf('?');
+  return { sc, auth: sd(g[1] || ''), host: g[2].replace(/^\[|\]$/g, ''), port: +g[3], q: new URLSearchParams(qi < 0 ? '' : rest.slice(qi + 1)), tag };
+}
+function toClashProxy(line) {
+  const p = parseLink(line); if (!p) return null;
+  const NETS = ['tcp', 'ws', 'grpc', 'httpupgrade'];
+  if (p.sc === 'vmess') {
+    const j = p.j, net = j.net || 'tcp'; if (!NETS.includes(net)) return null;
+    const o = { name: j.ps || j.add, type: 'vmess', server: j.add, port: +j.port, uuid: j.id, alterId: +j.aid || 0, cipher: j.scy || 'auto', udp: true, network: net === 'httpupgrade' ? 'ws' : net, tls: j.tls === 'tls' };
+    if (o.tls && (j.sni || j.host)) o.servername = j.sni || j.host;
+    if (net === 'ws' || net === 'httpupgrade') { o['ws-opts'] = { path: j.path || '/', headers: { Host: j.host || j.sni || j.add } }; if (net === 'httpupgrade') o['ws-opts']['v2ray-http-upgrade'] = true; }
+    if (net === 'grpc') o['grpc-opts'] = { 'grpc-service-name': j.path || '' };
+    return o;
+  }
+  const q = p.q, base = { name: p.tag || p.host, server: p.host, port: p.port, udp: true };
+  if (p.sc === 'ss') {
+    if (q.get('plugin')) return null;
+    let a = p.auth; if (!a.includes(':')) { try { a = b64d(a); } catch { return null; } }
+    const i = a.indexOf(':'); return i < 0 ? null : { ...base, type: 'ss', cipher: a.slice(0, i), password: a.slice(i + 1) };
+  }
+  if (p.sc !== 'vless' && p.sc !== 'trojan') return null;
+  const type = q.get('type') || 'tcp', sec = q.get('security') || (p.sc === 'trojan' ? 'tls' : '');
+  if (!NETS.includes(type)) return null;
+  const o = { ...base, type: p.sc, network: type === 'httpupgrade' ? 'ws' : type };
+  if (p.sc === 'vless') o.uuid = p.auth; else o.password = p.auth;
+  if (sec === 'tls' || sec === 'reality') {
+    const sni = q.get('sni') || q.get('host'); if (p.sc === 'vless') { o.tls = true; if (sni) o.servername = sni; } else if (sni) o.sni = sni;
+    if (q.get('fp')) o['client-fingerprint'] = q.get('fp');
+    if (q.get('alpn')) o.alpn = q.get('alpn').split(',');
+    if (q.get('allowInsecure') === '1') o['skip-cert-verify'] = true;
+  }
+  if (sec === 'reality') o['reality-opts'] = { 'public-key': q.get('pbk') || '', 'short-id': q.get('sid') || '' };
+  if (p.sc === 'vless' && q.get('flow')) o.flow = q.get('flow');
+  if (type === 'ws' || type === 'httpupgrade') { o['ws-opts'] = { path: q.get('path') || '/', headers: { Host: q.get('host') || q.get('sni') || p.host } }; if (type === 'httpupgrade') o['ws-opts']['v2ray-http-upgrade'] = true; }
+  if (type === 'grpc') o['grpc-opts'] = { 'grpc-service-name': q.get('serviceName') || '' };
+  return o;
+}
+const yv = v => typeof v === 'string' ? JSON.stringify(v) : String(v);
+function toYaml(o, ind) {
+  return Object.entries(o).map(([k, v]) => Array.isArray(v) ? `${ind}${k}: [${v.map(yv).join(', ')}]` : v && typeof v === 'object' ? `${ind}${k}:\n${toYaml(v, ind + '  ')}` : `${ind}${k}: ${yv(v)}`).join('\n');
+}
+function buildClash(lines) {
+  const used = new Set(), out = []; let skip = 0;
+  lines.forEach(l => {
+    let o = null; try { o = toClashProxy(l); } catch {}
+    if (!o) { skip++; return; }
+    const n = String(o.name || o.server); let k = n, i = 2; while (used.has(k)) k = n + ' ' + i++;
+    used.add(k); o.name = k; out.push('  - ' + toYaml(o, '    ').slice(4));
+  });
+  return { text: out.length ? 'proxies:\n' + out.join('\n') + '\n' : '', count: out.length, skip };
+}
+$('copyClash').onclick = () => {
+  const lines = $('cfgOut').value.split(/\r?\n/).filter(l => l.trim());
+  if (!lines.length) return toast('ابتدا کانفیگ‌ها را بسازید');
+  const r = buildClash(lines);
+  if (!r.count) return toast('کانفیگ قابل تبدیل به Clash پیدا نشد');
+  copy(r.text); toast(`${fa(r.count)} پروکسی Clash کپی شد` + (r.skip ? ` (${fa(r.skip)} نوع پشتیبانی‌نشده حذف شد)` : ''));
 };
 
 function generateTgText() {
@@ -706,7 +791,7 @@ async function run() {
     };
     await Promise.all(Array.from({ length: Math.max(3, Math.min(12, Math.floor(24 / ports.length))) }, worker));
     if (results.length) updateHistory(results.map(r => r.ip));
-    finish(ac.signal.aborted ? 'اسکن متوقف شد' : 'اسکن به پایان رسید ✔️');
+    finish(ac.signal.aborted ? 'اسکن متوقف شد' : `اسکن به پایان رسید ✔️ (پایداری برای: ${ispName})`);
     render(); buildConfigs();
   } catch (e) { finish('خطا در اسکن: ' + (e && e.message || e)); }
 }
@@ -748,9 +833,17 @@ $('bSub').onclick = async () => {
     let t = (await getText(u, 8000)).trim(); if (!/:\/\//.test(t)) t = b64d(t);
     const n = t.split(/\r?\n/).map(x => x.trim()).filter(x => SCHEMES.test(x)); if (!n.length) throw 0;
     $('cfgIn').value = n.join('\n'); buildConfigs(); toast(`${fa(n.length)} کانفیگ دریافت شد`);
-  } catch { toast('خطا در دریافت سابسکریپشن؛ متن را دستی پیست کنید.'); }
+  } catch (e) {
+    const mixed = /^http:/i.test(u) && location.protocol === 'https:';
+    toast(e === 0 ? 'لینک دریافت شد ولی کانفیگ معتبری در آن نیست (خالی، منقضی، خطای سرور پنل یا فرمت ناشناخته).'
+      : e && e.name === 'AbortError' ? 'مهلت دریافت تمام شد (۸ ثانیه)؛ اینترنت یا فیلتر مانع است.'
+      : e instanceof TypeError ? (mixed ? 'لینک http از صفحهٔ https مسدود می‌شود؛ از لینک https استفاده کنید یا متن را دستی پیست کنید.' : 'دریافت نشد: اینترنت/فیلتر یا نبودن مجوز CORS در سرور لینک. لینک را در مرورگر باز کنید و متن را در کادر کانفیگ‌ها پیست کنید.')
+      : 'محتوای لینک قابل خواندن نبود (Base64 یا فرمت نامعتبر).');
+  }
 };
 
+$('remember').addEventListener('change', save);
+['cfgIn', 'tgToken', 'tgChat'].forEach(id => $(id).addEventListener('change', () => { if ($('remember').checked) save(); }));
 load(); loadISP(); checkPortMismatch();
 </script>
 </body>
