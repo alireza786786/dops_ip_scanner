@@ -55,7 +55,7 @@ th{color:var(--mu);font-size:11px}
 <body>
 <div class="wrap">
   <div class="head">
-    <div class="badge">DOPS V12.3 · ULTIMATE MASTER</div>
+    <div class="badge">DOPS V12.4 · ULTIMATE MASTER</div>
     <h1>CDN IP 🌐 Scanner</h1>
     <p class="sub">اسکنر دیتاسنترهای کلودفلر با تشخیص موقعیت، سابسکریپشن و ارسال به تلگرام</p>
   </div>
@@ -89,6 +89,7 @@ th{color:var(--mu);font-size:11px}
         <option value="outputs/alive_fastly.txt">مخزن: alive_fastly.txt</option>
         <option value="cf_ranges">رنج‌های رسمی کلودفلر (زنده)</option>
         <option value="fastly_ranges">رنج‌های رسمی Fastly (زنده)</option>
+        <option value="cf2dns">cf2dns (ircfspace) — تست‌شده از چین، فقط کاندیدا</option>
         <option value="url">آدرس فایل دلخواه (خروجی مخزن دیگر)</option>
         <option value="offline_db">بانک آفلاین داخلی (اینترنت ملی)</option>
         <option value="favs">آی‌پی‌های پایدار اسکن‌های قبل</option>
@@ -261,7 +262,7 @@ th{color:var(--mu);font-size:11px}
       <b>۹. بررسی نتایج:</b> «⚡ بهترین‌ها» مرتب می‌کند. «🧹 حذف بالای ... ms» آی‌پی‌های کند را حذف می‌کند و «↩ بازگردانی» برمی‌گرداند. 🏆 یعنی آی‌پی در چند اسکن پیاپی سالم بوده.<br>
       <b>۱۰. ساخت کانفیگ:</b> «حالت جایگزینی» را انتخاب کنید (ترتیبی، همه با سریع‌ترین، چرخشی، یا هر کانفیگ × N آی‌پی). «حفظ دامنه اصلی به‌عنوان SNI/Host» را روشن نگه دارید. «Fragment» و «افزودن آی‌پی به نام کانفیگ» اختیاری‌اند.<br>
       <b>۱۱. خروجی:</b> «📋 کپی کانفیگ‌ها»، «📦 کپی Base64»، «📄 کپی Clash (YAML)» یا «💾 ذخیره فایل». برای فقط آی‌پی‌ها از دکمهٔ «کپی IPها» پایین صفحه استفاده کنید (تب ۵).<br>
-      <b>۱۲. تلگرام (اختیاری):</b> توکن ربات و آیدی کانال را بنویسید و «ارسال مستقیم» یا «کپی متن آماده» را بزنید. ارسال مستقیم معمولاً به VPN نیاز دارد، پس بعد از پایان اسکن VPN را روشن کنید.<br><b>منابع و قابلیت‌های جدید:</b> «رنج‌های رسمی کلودفلر/Fastly (زنده)» فهرست را از منبع رسمی می‌گیرد و اگر نشد از فهرست داخلی استفاده می‌کند. «آدرس فایل دلخواه» فهرست آی‌پی را از هر مخزن دیگر می‌خواند (مثلاً لینک raw فایل txt یا json). «🧠 نمونه‌گیری هوشمند» بلوک‌های /24 که برای اپراتور شما آی‌پی سالم داده‌اند را یاد می‌گیرد و ۷۰٪ نمونه را از آن‌ها برمی‌دارد. «دقت تست» تعداد نمونه‌ها برای محاسبهٔ نوسان و افت را مشخص می‌کند. آی‌پی‌هایی که بیش از نیمی از نمونه‌هایشان شکست بخورد حذف می‌شوند.
+      <b>۱۲. تلگرام (اختیاری):</b> توکن ربات و آیدی کانال را بنویسید و «ارسال مستقیم» یا «کپی متن آماده» را بزنید. ارسال مستقیم معمولاً به VPN نیاز دارد، پس بعد از پایان اسکن VPN را روشن کنید.<br><b>منابع و قابلیت‌های جدید:</b> «رنج‌های رسمی کلودفلر/Fastly (زنده)» فهرست را از منبع رسمی می‌گیرد و اگر نشد از فهرست داخلی استفاده می‌کند. «آدرس فایل دلخواه» فهرست آی‌پی را از هر مخزن دیگر می‌خواند (مثلاً لینک raw فایل txt یا json). «🧠 نمونه‌گیری هوشمند» بلوک‌های /24 که برای اپراتور شما آی‌پی سالم داده‌اند را یاد می‌گیرد و ۷۰٪ نمونه را از آن‌ها برمی‌دارد. «دقت تست» تعداد نمونه‌ها برای محاسبهٔ نوسان و افت را مشخص می‌کند. آی‌پی‌هایی که بیش از نیمی از نمونه‌هایشان شکست بخورد حذف می‌شوند.<br><b>منبع‌های مخزن:</b> فایل‌های «مخزن: alive_...» اول از شاخهٔ data (هر ۳۰ دقیقه تازه می‌شود) خوانده می‌شوند و اگر نشد از کنار صفحه. «cf2dns» یک فهرست عمومی از آی‌پی‌های تست‌شده روی اینترنت چین است؛ فقط به‌عنوان کاندیدا استفاده کنید و حتماً روی اینترنت خودتان تست کنید. فقط آی‌پی‌های داخل رنج رسمی کلودفلر نگه داشته می‌شوند.
     </div>
     <div id="tab2" class="tab-content" style="display:none;font-size:11px;line-height:1.8;color:var(--tx);margin-top:6px">
       <b>ورود کانفیگ‌ها به ویتوری (v2rayNG) گام‌به‌گام</b><br>
@@ -432,6 +433,15 @@ function smartSample(cidrs, cap) {
   return { ips: [...set], hot: hot.length };
 }
 
+/* ---- فایل‌های مخزن: اول شاخهٔ data (به‌روزرسانی هر ۳۰ دقیقه)، بعد کنار صفحه ---- */
+const DATA_BASE = 'https://raw.githubusercontent.com/alireza786786/dops_ip_scanner/data/';
+const CF2DNS_URL = 'https://raw.githubusercontent.com/ircfspace/cf2dns/refs/heads/master/list/ipv4.json';
+async function fetchTimeout(u, ms) { const c = new AbortController(), t = setTimeout(() => c.abort(), ms); try { return await fetch(u, { signal: c.signal, cache: 'no-store' }); } finally { clearTimeout(t); } }
+async function repoFetch(path, ms = 5000) {
+  for (const u of [DATA_BASE + path, path]) { try { const r = await fetchTimeout(u, ms); if (r.ok) return r; } catch {} }
+  throw 0;
+}
+
 function fromCidrs(list, count) {
   const rg = list.map(c => { const [ip, m] = c.split('/'), size = 2 ** (32 - +m); return { base: ip2n(ip) - ip2n(ip) % size, size }; });
   const total = rg.reduce((a, r) => a + r.size, 0), set = new Set(); let g = count * 30;
@@ -511,19 +521,26 @@ async function loadTargets(raw) {
       note = !urls.length ? 'آدرس معتبری وارد نشده؛ از بانک آفلاین استفاده شد.' : !ips.length ? 'هیچ آی‌پی از آدرس‌ها خوانده نشد؛ از بانک آفلاین استفاده شد.' : `${fa(ips.length)} آی‌پی از ${fa(urls.length - fail)} فایل خوانده شد` + (fail ? ` (${fa(fail)} فایل خوانده نشد)` : '');
       if (!ips.length) ips = [...OFFLINE];
     }
+    else if (src === 'cf2dns') {
+      try {
+        const arr = await (await fetchTimeout(CF2DNS_URL, 6000)).json(), rg = (await getRanges('cf')).list;
+        ips = [...new Set(arr.map(x => x && x.ip).filter(ip => isIPv4(ip) && rg.some(c => inCidr(ip, c))))];
+        const ts = arr.map(x => Date.parse(String(x && x.time).replace(' ', 'T') + 'Z')).filter(isFinite), d = ts.length ? Math.round((Date.now() - Math.max(...ts)) / 864e5) : null;
+        note = `cf2dns: ${fa(ips.length)} آی‌پی کاندیدا (تست‌شده از چین)` + (d !== null ? ` · آخرین به‌روزرسانی ≈ ${fa(d)} روز پیش` + (d > 14 ? ' ⚠️ کهنه' : '') : '');
+        if (!ips.length) throw 0;
+      } catch { ips = [...OFFLINE]; note = 'cf2dns خوانده نشد؛ از بانک آفلاین استفاده شد.'; }
+    }
     else if (src === 'favs') {
       const h = getHistory(); ips = Object.keys(h).filter(k => h[k] >= 2);
       if (!ips.length) { ips = [...OFFLINE]; note = 'هنوز آی‌پی پایداری ثبت نشده؛ از بانک آفلاین استفاده شد.'; }
     } else {
       try {
-        const c = new AbortController(), t = setTimeout(() => c.abort(), 5000);
-        const r = await fetch(src, { signal: c.signal, cache: 'no-store' }); clearTimeout(t);
-        if (!r.ok) throw 0;
+        const r = await repoFetch(src);
         ips = [...new Set((await r.text()).split(/\r?\n/).map(l => l.trim().split(/[\s,:]/)[0]).filter(isIPv4))];
         if (!ips.length) throw 0;
-        if (/alive_cloudflare\.txt$/.test(src)) { /* سن لیست از متادیتای اسکن مخزن */
+        if (/alive_(cloudflare|fastly)\.txt$/.test(src)) { /* سن لیست از متادیتای اسکن مخزن */
           try {
-            const j = await (await fetch(src.replace(/\.txt$/, '.json'), { cache: 'no-store' })).json(), h = Math.max(0, Math.round((Date.now() - Date.parse(j.scanned_at)) / 36e5));
+            const j = await (await repoFetch(src.replace(/\.txt$/, '.json'))).json(), h = Math.max(0, Math.round((Date.now() - Date.parse(j.scanned_at)) / 36e5));
             if (isFinite(h)) note = `لیست مخزن ${fa(h)} ساعت پیش تهیه شده (اسکن از ${j.vantage === 'github-actions' ? 'سرور گیت‌هاب، خارج ایران' : 'اجرای محلی'})`;
           } catch {}
         }
