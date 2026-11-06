@@ -2,16 +2,20 @@ name: Auto CDN Scanner & Telegram Sender
 
 on:
   schedule:
-    - cron: '0 */3 * * *'  # اجرا خودکار هر ۳ ساعت یک‌بار
-  workflow_dispatch:        # امکان اجرای دستی از داخل سایت گیت‌هاب
+    - cron: '17 */3 * * *'   # هر ۳ ساعت؛ دقیقهٔ ۱۷ تا از شلوغی ابتدای ساعت دور باشد
+  workflow_dispatch:         # اجرای دستی از داخل سایت گیت‌هاب
 
 permissions:
   contents: write
 
+concurrency:
+  group: cdn-scanner         # دو اجرای هم‌زمان (دستی + زمان‌بندی) روی هم نمی‌افتند
+  cancel-in-progress: false
+
 jobs:
   scan-and-publish:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 20
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -19,26 +23,31 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
 
       - name: Run Cloudflare Scanner
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: |
-          python3 start.py
+        run: python3 start.py
 
       - name: Run Fastly Scanner
+        if: ${{ !cancelled() }}   # حتی اگر اسکن کلودفلر شکست خورد، Fastly اجرا شود
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
-        run: |
-          python3 fastly.py
+        run: python3 fastly.py
 
       - name: Commit and Push Outputs
+        if: ${{ !cancelled() }}
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git add outputs/
-          git commit -m "auto: update scan results [skip ci]" || echo "No changes"
-          git push
+          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
+          git commit -m "auto: update scan results [skip ci]"
+          for i in 1 2 3; do
+            git pull --rebase && git push && exit 0
+            sleep 5
+          done
+          echo "push failed after 3 attempts"; exit 1
