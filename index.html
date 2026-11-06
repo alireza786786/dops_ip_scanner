@@ -6,6 +6,9 @@
 <meta name="theme-color" content="#070b14">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
 <meta name="description" content="DOPS V14 Meridian — Multi-CDN IP Scanner, Config Rewriter & Telegram Dispatcher">
 <title>DOPS V14 Meridian — Multi-CDN Scanner</title>
 <style>
@@ -70,6 +73,7 @@ th[data-k]{cursor:pointer;user-select:none}
 .tab-btn.active{background:var(--ac);color:#000;font-weight:bold}
 .tab-content{font-size:11px;line-height:1.8;color:var(--tx);margin-top:6px}
 </style>
+<base target="_blank">
 </head>
 <body>
 <div class="wrap">
@@ -109,10 +113,6 @@ th[data-k]{cursor:pointer;user-select:none}
     <div class="ct" data-i18n="scanSettings">تنظیمات اسکن و CDN</div>
     <div class="row"><span data-i18n="srcLabel">منبع داده و شبکه:</span>
       <select id="src">
-        <optgroup label="Repositories / مخازن">
-          <option value="outputs/alive_cloudflare.txt">alive_cloudflare.txt (repo)</option>
-          <option value="outputs/alive_fastly.txt">alive_fastly.txt (repo)</option>
-        </optgroup>
         <optgroup label="CDN Presets / رنج‌های رسمی">
           <option value="cf_ranges" selected>Cloudflare (کلودفلر)</option>
           <option value="google">Google Cloud (گوگل)</option>
@@ -572,7 +572,6 @@ async function loadISP() {
   } catch {}
   ispName = t('ispLocal');
   $('isp').innerHTML = `<span>${esc(t('ispLocal'))}</span>`; setNet(t('netOffline'), true);
-  if ($('src').value.startsWith('outputs/')) $('src').value = 'offline_db';
 }
 
 /* ---------------- Ranges: live with internal fallback ---------------- */
@@ -1042,8 +1041,20 @@ $('bSendTg').onclick = async () => {
   } catch { toast(t('tgVpn')); }
 };
 
-function installPWA() { toast(t('pwaToast')); }
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
+function installPWA() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+    return;
+  }
+  toast(t('pwaToast'));
+}
 $('bPwa').onclick = installPWA;
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
+}
 
 /* ---------------- Manual IP input ---------------- */
 function manualGo(only) {
