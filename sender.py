@@ -18,7 +18,7 @@ def format_config_remark(flag="🌐", country="Clean CDN", city="Anycast Edge", 
 
 def send_telegram_file(file_path: str, caption: str = ""):
     if not BOT_TOKEN or not CHAT_ID or not os.path.exists(file_path):
-        return
+        return False
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument"
     boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW"
     with open(file_path, "rb") as f:
@@ -35,5 +35,18 @@ def send_telegram_file(file_path: str, caption: str = ""):
     try:
         with urllib.request.urlopen(req, timeout=30):
             print(f"✅ فایل {filename} با موفقیت به تلگرام ارسال شد.")
+        return True
     except Exception as e:
         print(f"❌ خطا در ارسال تلگرام: {e}")
+        return False
+
+
+if __name__ == "__main__":
+    if not BOT_TOKEN or not CHAT_ID:
+        print("❌ BOT_TOKEN و CHAT_ID تنظیم نشده‌اند.  مثال:  export BOT_TOKEN=... ; export CHAT_ID=@your_channel")
+    else:
+        import tempfile
+        test_file = os.path.join(tempfile.gettempdir(), "dops_test.txt")
+        with open(test_file, "w", encoding="utf-8") as f:
+            f.write("DOPS Scanner - test message\n")
+        send_telegram_file(test_file, caption="✅ تست ارسال از DOPS Scanner")
