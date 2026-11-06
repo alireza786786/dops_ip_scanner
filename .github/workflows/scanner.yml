@@ -2,15 +2,24 @@ name: Auto CDN Scanner & Telegram Sender
 
 on:
   schedule:
-    - cron: '17 */3 * * *'   # هر ۳ ساعت؛ دقیقهٔ ۱۷ تا از شلوغی ابتدای ساعت دور باشد
-  workflow_dispatch:         # اجرای دستی از داخل سایت گیت‌هاب
+    - cron: '7,37 * * * *'      # هر ۳۰ دقیقه (دقیقهٔ ۷ و ۳۷ تا از شلوغی ابتدای ساعت دور باشد)
+  workflow_dispatch:
+    inputs:
+      force_telegram:
+        description: 'ارسال اجباری به تلگرام (بدون توجه به فاصلهٔ ۳ ساعته)'
+        type: boolean
+        default: false
 
 permissions:
   contents: write
 
 concurrency:
-  group: cdn-scanner         # دو اجرای هم‌زمان (دستی + زمان‌بندی) روی هم نمی‌افتند
+  group: cdn-scanner            # دو اجرای هم‌زمان روی هم نمی‌افتند
   cancel-in-progress: false
+
+env:
+  TG_INTERVAL_MIN: '170'        # فاصلهٔ ارسال تلگرام (دقیقه)؛ ۱۷۰ تا با تأخیر زمان‌بندی گیت‌هاب ≈ هر ۳ ساعت بماند
+  TG_FORCE: ${{ inputs.force_telegram && '1' || '' }}
 
 jobs:
   scan-and-publish:
@@ -25,6 +34,18 @@ jobs:
         with:
           python-version: '3.12'
 
+      - name: Restore previous outputs from data branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p outputs
+          if git fetch --depth=1 "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data 2>/dev/null; then
+            git checkout FETCH_HEAD -- outputs || echo "data branch has no outputs yet"
+          else
+            echo "no data branch yet (first run)"
+          fi
+          (cd outputs && find . -type f | sort | xargs -r sha256sum | sha256sum) > /tmp/outputs.before
+
       - name: Run Cloudflare Scanner
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
@@ -38,16 +59,23 @@ jobs:
           CHAT_ID: ${{ secrets.CHAT_ID }}
         run: python3 fastly.py
 
-      - name: Commit and Push Outputs
+      - name: Publish outputs to data branch
         if: ${{ !cancelled() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
+          set -e
+          after=$( (cd outputs && find . -type f | sort | xargs -r sha256sum | sha256sum) )
+          if [ "$after" = "$(cat /tmp/outputs.before)" ]; then echo "No changes"; exit 0; fi
+          rm -rf /tmp/pub && mkdir /tmp/pub && cp -r outputs /tmp/pub/outputs
+          cd /tmp/pub
+          git init -q -b data
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add outputs/
-          if git diff --cached --quiet; then echo "No changes"; exit 0; fi
-          git commit -m "auto: update scan results [skip ci]"
+          git add -A
+          git commit -q -m "data: $(date -u +%Y-%m-%dT%H:%MZ)"
           for i in 1 2 3; do
-            git pull --rebase && git push && exit 0
+            git push -q -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data && exit 0
             sleep 5
           done
           echo "push failed after 3 attempts"; exit 1
