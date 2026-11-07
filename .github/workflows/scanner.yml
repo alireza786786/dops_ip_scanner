@@ -19,7 +19,6 @@ concurrency:
 
 env:
   TG_INTERVAL_MIN: '170'        # فاصلهٔ ارسال تلگرام (دقیقه)؛ ۱۷۰ تا با تأخیر زمان‌بندی گیت‌هاب ≈ هر ۳ ساعت بماند
-  TG_FORCE: ${{ inputs.force_telegram && '1' || '' }}
 
 jobs:
   scan-and-publish:
@@ -50,6 +49,7 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+          TG_FORCE: ${{ github.event.inputs.force_telegram == 'true' && '1' || '' }}
         run: python3 start.py
 
       - name: Run Fastly Scanner
@@ -57,6 +57,7 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+          TG_FORCE: ${{ github.event.inputs.force_telegram == 'true' && '1' || '' }}
         run: python3 fastly.py
 
       - name: Publish outputs to data branch
