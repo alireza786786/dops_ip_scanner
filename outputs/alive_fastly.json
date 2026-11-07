@@ -1,0 +1,6340 @@
+{
+ "scanned_at": "2026-11-07T17:04:39+00:00",
+ "vantage": "github-actions",
+ "port": 443,
+ "tested": 1559,
+ "alive": 527,
+ "verified": 527,
+ "seeds": 0,
+ "failures": {
+  "timeout": 913,
+  "rst": 107,
+  "refused": 12
+ },
+ "ips": [
+  {
+   "ip": "167.82.70.81",
+   "ping_ms": 11.1,
+   "connect_ms": 21.2,
+   "jitter_ms": 2.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.67.189",
+   "ping_ms": 10.4,
+   "connect_ms": 20.8,
+   "jitter_ms": 5.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.15.77",
+   "ping_ms": 12.3,
+   "connect_ms": 22.5,
+   "jitter_ms": 3.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.131.128",
+   "ping_ms": 13.0,
+   "connect_ms": 20.6,
+   "jitter_ms": 7.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.2.228",
+   "ping_ms": 13.3,
+   "connect_ms": 23.3,
+   "jitter_ms": 2.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.1.43",
+   "ping_ms": 11.2,
+   "connect_ms": 23.1,
+   "jitter_ms": 3.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.11.173",
+   "ping_ms": 11.3,
+   "connect_ms": 23.2,
+   "jitter_ms": 2.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.0.107",
+   "ping_ms": 11.9,
+   "connect_ms": 20.6,
+   "jitter_ms": 8.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.15.98",
+   "ping_ms": 12.3,
+   "connect_ms": 24.6,
+   "jitter_ms": 0.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.189.198",
+   "ping_ms": 8.4,
+   "connect_ms": 24.1,
+   "jitter_ms": 1.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.22.72",
+   "ping_ms": 12.7,
+   "connect_ms": 21.6,
+   "jitter_ms": 7.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.189.45",
+   "ping_ms": 10.5,
+   "connect_ms": 24.8,
+   "jitter_ms": 0.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.74.24",
+   "ping_ms": 14.5,
+   "connect_ms": 23.9,
+   "jitter_ms": 2.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.17.243",
+   "ping_ms": 14.0,
+   "connect_ms": 23.9,
+   "jitter_ms": 3.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.185.138",
+   "ping_ms": 12.4,
+   "connect_ms": 22.9,
+   "jitter_ms": 5.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.17.175",
+   "ping_ms": 7.8,
+   "connect_ms": 25.0,
+   "jitter_ms": 1.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.77.26",
+   "ping_ms": 10.8,
+   "connect_ms": 23.5,
+   "jitter_ms": 4.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "23.235.37.194",
+   "ping_ms": 11.1,
+   "connect_ms": 23.1,
+   "jitter_ms": 5.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "23.235.37.151",
+   "ping_ms": 9.7,
+   "connect_ms": 22.0,
+   "jitter_ms": 7.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.0.55",
+   "ping_ms": 11.1,
+   "connect_ms": 23.4,
+   "jitter_ms": 4.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.2.245",
+   "ping_ms": 13.1,
+   "connect_ms": 25.1,
+   "jitter_ms": 1.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.2.17",
+   "ping_ms": 12.4,
+   "connect_ms": 23.5,
+   "jitter_ms": 4.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.19.45",
+   "ping_ms": 10.5,
+   "connect_ms": 24.2,
+   "jitter_ms": 3.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.128.177",
+   "ping_ms": 11.4,
+   "connect_ms": 23.8,
+   "jitter_ms": 4.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.2.151",
+   "ping_ms": 13.4,
+   "connect_ms": 23.6,
+   "jitter_ms": 4.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.100.55",
+   "ping_ms": 11.8,
+   "connect_ms": 25.1,
+   "jitter_ms": 1.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.7.177",
+   "ping_ms": 10.1,
+   "connect_ms": 24.5,
+   "jitter_ms": 2.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.3.183",
+   "ping_ms": 10.1,
+   "connect_ms": 22.4,
+   "jitter_ms": 7.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.102.108",
+   "ping_ms": 12.6,
+   "connect_ms": 23.4,
+   "jitter_ms": 5.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.198.54",
+   "ping_ms": 12.2,
+   "connect_ms": 24.6,
+   "jitter_ms": 3.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.17.75",
+   "ping_ms": 12.3,
+   "connect_ms": 24.9,
+   "jitter_ms": 2.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.21.7",
+   "ping_ms": 15.8,
+   "connect_ms": 23.6,
+   "jitter_ms": 5.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.16.27",
+   "ping_ms": 12.9,
+   "connect_ms": 24.6,
+   "jitter_ms": 3.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.13.143",
+   "ping_ms": 16.5,
+   "connect_ms": 25.4,
+   "jitter_ms": 1.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.77.73",
+   "ping_ms": 12.2,
+   "connect_ms": 23.5,
+   "jitter_ms": 5.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.131.36",
+   "ping_ms": 12.2,
+   "connect_ms": 24.0,
+   "jitter_ms": 4.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.69.189",
+   "ping_ms": 10.0,
+   "connect_ms": 24.2,
+   "jitter_ms": 4.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.50.9",
+   "ping_ms": 8.9,
+   "connect_ms": 24.9,
+   "jitter_ms": 3.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.19.119",
+   "ping_ms": 14.1,
+   "connect_ms": 23.5,
+   "jitter_ms": 5.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.11.199",
+   "ping_ms": 10.9,
+   "connect_ms": 24.2,
+   "jitter_ms": 4.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.20.161",
+   "ping_ms": 14.0,
+   "connect_ms": 25.0,
+   "jitter_ms": 3.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.101.190",
+   "ping_ms": 11.5,
+   "connect_ms": 22.6,
+   "jitter_ms": 7.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.188.179",
+   "ping_ms": 11.1,
+   "connect_ms": 25.4,
+   "jitter_ms": 2.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.96.169",
+   "ping_ms": 12.7,
+   "connect_ms": 24.8,
+   "jitter_ms": 3.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.20.235",
+   "ping_ms": 10.5,
+   "connect_ms": 25.6,
+   "jitter_ms": 2.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.18.68",
+   "ping_ms": 12.4,
+   "connect_ms": 25.0,
+   "jitter_ms": 3.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.186.15",
+   "ping_ms": 12.3,
+   "connect_ms": 25.6,
+   "jitter_ms": 2.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.18.28",
+   "ping_ms": 10.8,
+   "connect_ms": 24.1,
+   "jitter_ms": 6.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.96.138",
+   "ping_ms": 11.1,
+   "connect_ms": 25.0,
+   "jitter_ms": 4.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.78.127",
+   "ping_ms": 13.5,
+   "connect_ms": 25.7,
+   "jitter_ms": 3.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.129.92",
+   "ping_ms": 11.1,
+   "connect_ms": 25.3,
+   "jitter_ms": 3.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.12.182",
+   "ping_ms": 10.4,
+   "connect_ms": 23.6,
+   "jitter_ms": 7.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.68.172",
+   "ping_ms": 14.0,
+   "connect_ms": 24.7,
+   "jitter_ms": 5.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.15.163",
+   "ping_ms": 9.4,
+   "connect_ms": 24.5,
+   "jitter_ms": 5.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.16.99",
+   "ping_ms": 10.6,
+   "connect_ms": 24.1,
+   "jitter_ms": 6.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.86.80",
+   "ping_ms": 10.7,
+   "connect_ms": 25.6,
+   "jitter_ms": 3.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.85.247",
+   "ping_ms": 10.4,
+   "connect_ms": 25.8,
+   "jitter_ms": 3.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.66.209",
+   "ping_ms": 10.4,
+   "connect_ms": 25.7,
+   "jitter_ms": 3.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.129.33",
+   "ping_ms": 11.3,
+   "connect_ms": 25.7,
+   "jitter_ms": 3.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.19.77",
+   "ping_ms": 11.9,
+   "connect_ms": 25.5,
+   "jitter_ms": 4.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "104.156.81.84",
+   "ping_ms": 12.7,
+   "connect_ms": 26.6,
+   "jitter_ms": 2.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.195.55",
+   "ping_ms": 8.2,
+   "connect_ms": 25.7,
+   "jitter_ms": 3.9,
+   "loss": 0,
+   "colo": "KDFW8210027",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.71.145",
+   "ping_ms": 11.4,
+   "connect_ms": 24.9,
+   "jitter_ms": 5.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.74.126",
+   "ping_ms": 13.4,
+   "connect_ms": 25.7,
+   "jitter_ms": 4.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.130.183",
+   "ping_ms": 28.0,
+   "connect_ms": 27.4,
+   "jitter_ms": 0.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.97.63",
+   "ping_ms": 12.8,
+   "connect_ms": 25.0,
+   "jitter_ms": 5.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.96.209",
+   "ping_ms": 12.7,
+   "connect_ms": 26.7,
+   "jitter_ms": 2.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.65.147",
+   "ping_ms": 12.4,
+   "connect_ms": 23.5,
+   "jitter_ms": 8.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.100.4",
+   "ping_ms": 11.5,
+   "connect_ms": 25.8,
+   "jitter_ms": 4.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.198.244",
+   "ping_ms": 8.9,
+   "connect_ms": 26.4,
+   "jitter_ms": 3.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.82.117",
+   "ping_ms": 13.4,
+   "connect_ms": 27.4,
+   "jitter_ms": 1.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.1.54",
+   "ping_ms": 10.7,
+   "connect_ms": 27.2,
+   "jitter_ms": 1.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.86.141",
+   "ping_ms": 11.0,
+   "connect_ms": 24.8,
+   "jitter_ms": 6.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.50.37",
+   "ping_ms": 11.1,
+   "connect_ms": 24.5,
+   "jitter_ms": 6.9,
+   "loss": 0,
+   "colo": "KDFW8210135",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.1.92",
+   "ping_ms": 10.5,
+   "connect_ms": 26.6,
+   "jitter_ms": 3.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.101.2",
+   "ping_ms": 8.4,
+   "connect_ms": 26.1,
+   "jitter_ms": 3.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.198.247",
+   "ping_ms": 11.7,
+   "connect_ms": 24.8,
+   "jitter_ms": 6.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.131.227",
+   "ping_ms": 10.2,
+   "connect_ms": 26.6,
+   "jitter_ms": 3.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.22.128",
+   "ping_ms": 12.3,
+   "connect_ms": 25.7,
+   "jitter_ms": 4.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.0.146",
+   "ping_ms": 12.9,
+   "connect_ms": 25.1,
+   "jitter_ms": 6.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.100.114",
+   "ping_ms": 10.5,
+   "connect_ms": 27.3,
+   "jitter_ms": 1.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.102.162",
+   "ping_ms": 10.3,
+   "connect_ms": 27.1,
+   "jitter_ms": 2.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.26.53",
+   "ping_ms": 12.1,
+   "connect_ms": 25.7,
+   "jitter_ms": 5.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.64.66",
+   "ping_ms": 11.1,
+   "connect_ms": 25.3,
+   "jitter_ms": 5.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.1.116",
+   "ping_ms": 12.7,
+   "connect_ms": 25.0,
+   "jitter_ms": 6.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.202.128",
+   "ping_ms": 20.7,
+   "connect_ms": 25.8,
+   "jitter_ms": 5.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.19.91",
+   "ping_ms": 13.7,
+   "connect_ms": 25.5,
+   "jitter_ms": 5.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.21.216",
+   "ping_ms": 14.4,
+   "connect_ms": 27.7,
+   "jitter_ms": 1.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.187.255",
+   "ping_ms": 9.7,
+   "connect_ms": 26.5,
+   "jitter_ms": 3.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.185.85",
+   "ping_ms": 13.5,
+   "connect_ms": 26.0,
+   "jitter_ms": 4.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.17.143",
+   "ping_ms": 8.2,
+   "connect_ms": 24.0,
+   "jitter_ms": 8.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.26.211",
+   "ping_ms": 11.9,
+   "connect_ms": 26.1,
+   "jitter_ms": 4.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.187.176",
+   "ping_ms": 13.1,
+   "connect_ms": 25.6,
+   "jitter_ms": 5.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.0.231",
+   "ping_ms": 12.5,
+   "connect_ms": 27.7,
+   "jitter_ms": 1.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.49.253",
+   "ping_ms": 10.1,
+   "connect_ms": 27.5,
+   "jitter_ms": 2.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.22.20",
+   "ping_ms": 11.4,
+   "connect_ms": 26.8,
+   "jitter_ms": 3.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.66.6",
+   "ping_ms": 11.1,
+   "connect_ms": 26.0,
+   "jitter_ms": 5.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.19.216",
+   "ping_ms": 9.2,
+   "connect_ms": 26.9,
+   "jitter_ms": 3.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.37.243",
+   "ping_ms": 15.1,
+   "connect_ms": 25.4,
+   "jitter_ms": 6.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.77.70",
+   "ping_ms": 13.0,
+   "connect_ms": 26.4,
+   "jitter_ms": 4.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.14.227",
+   "ping_ms": 9.7,
+   "connect_ms": 26.9,
+   "jitter_ms": 3.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.63.156",
+   "ping_ms": 12.9,
+   "connect_ms": 23.1,
+   "jitter_ms": 11.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.68.86",
+   "ping_ms": 12.3,
+   "connect_ms": 27.4,
+   "jitter_ms": 2.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.63.248",
+   "ping_ms": 10.1,
+   "connect_ms": 26.6,
+   "jitter_ms": 4.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.11.95",
+   "ping_ms": 9.9,
+   "connect_ms": 26.5,
+   "jitter_ms": 4.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.18.197",
+   "ping_ms": 10.6,
+   "connect_ms": 27.7,
+   "jitter_ms": 2.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.101.232",
+   "ping_ms": 11.9,
+   "connect_ms": 27.2,
+   "jitter_ms": 3.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.0.176",
+   "ping_ms": 15.6,
+   "connect_ms": 26.0,
+   "jitter_ms": 5.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.16.194",
+   "ping_ms": 13.0,
+   "connect_ms": 24.8,
+   "jitter_ms": 8.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.118.108",
+   "ping_ms": 12.7,
+   "connect_ms": 25.3,
+   "jitter_ms": 7.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.17.195",
+   "ping_ms": 13.8,
+   "connect_ms": 26.0,
+   "jitter_ms": 5.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.102.186",
+   "ping_ms": 12.9,
+   "connect_ms": 27.5,
+   "jitter_ms": 3.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.99.203",
+   "ping_ms": 12.1,
+   "connect_ms": 25.7,
+   "jitter_ms": 6.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.98.99",
+   "ping_ms": 12.7,
+   "connect_ms": 25.6,
+   "jitter_ms": 6.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.131.213",
+   "ping_ms": 12.6,
+   "connect_ms": 24.7,
+   "jitter_ms": 8.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.172.4",
+   "ping_ms": 13.8,
+   "connect_ms": 22.6,
+   "jitter_ms": 12.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.77.47",
+   "ping_ms": 12.7,
+   "connect_ms": 25.2,
+   "jitter_ms": 7.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.13.116",
+   "ping_ms": 10.0,
+   "connect_ms": 25.2,
+   "jitter_ms": 7.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.11.11",
+   "ping_ms": 11.3,
+   "connect_ms": 27.3,
+   "jitter_ms": 3.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.12.119",
+   "ping_ms": 11.0,
+   "connect_ms": 24.9,
+   "jitter_ms": 8.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.200.246",
+   "ping_ms": 16.9,
+   "connect_ms": 27.0,
+   "jitter_ms": 4.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.12.114",
+   "ping_ms": 10.1,
+   "connect_ms": 26.5,
+   "jitter_ms": 5.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.19.245",
+   "ping_ms": 15.7,
+   "connect_ms": 24.3,
+   "jitter_ms": 9.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.191.127",
+   "ping_ms": 10.3,
+   "connect_ms": 25.6,
+   "jitter_ms": 7.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "104.156.81.194",
+   "ping_ms": 9.7,
+   "connect_ms": 27.1,
+   "jitter_ms": 4.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.101.58",
+   "ping_ms": 9.3,
+   "connect_ms": 27.4,
+   "jitter_ms": 3.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.82.136",
+   "ping_ms": 11.8,
+   "connect_ms": 26.9,
+   "jitter_ms": 4.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.16.208",
+   "ping_ms": 12.4,
+   "connect_ms": 26.2,
+   "jitter_ms": 6.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.185.123",
+   "ping_ms": 10.3,
+   "connect_ms": 24.6,
+   "jitter_ms": 9.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.18.251",
+   "ping_ms": 9.0,
+   "connect_ms": 27.1,
+   "jitter_ms": 4.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.8.191",
+   "ping_ms": 11.8,
+   "connect_ms": 28.7,
+   "jitter_ms": 1.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.16.74",
+   "ping_ms": 11.0,
+   "connect_ms": 28.1,
+   "jitter_ms": 2.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.98.24",
+   "ping_ms": 13.0,
+   "connect_ms": 23.3,
+   "jitter_ms": 12.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.97.221",
+   "ping_ms": 11.7,
+   "connect_ms": 29.1,
+   "jitter_ms": 1.0,
+   "loss": 0,
+   "colo": "KDAL2120111",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.97.101",
+   "ping_ms": 12.6,
+   "connect_ms": 26.2,
+   "jitter_ms": 6.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.1.107",
+   "ping_ms": 11.4,
+   "connect_ms": 27.0,
+   "jitter_ms": 5.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.14.161",
+   "ping_ms": 12.5,
+   "connect_ms": 27.3,
+   "jitter_ms": 4.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.30.177",
+   "ping_ms": 17.9,
+   "connect_ms": 26.9,
+   "jitter_ms": 5.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.20.63",
+   "ping_ms": 18.0,
+   "connect_ms": 25.9,
+   "jitter_ms": 8.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.129.239",
+   "ping_ms": 10.9,
+   "connect_ms": 27.4,
+   "jitter_ms": 4.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.39.246",
+   "ping_ms": 10.0,
+   "connect_ms": 28.6,
+   "jitter_ms": 2.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.187.126",
+   "ping_ms": 15.4,
+   "connect_ms": 28.4,
+   "jitter_ms": 3.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.50.30",
+   "ping_ms": 11.3,
+   "connect_ms": 27.1,
+   "jitter_ms": 5.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.19.125",
+   "ping_ms": 10.6,
+   "connect_ms": 28.8,
+   "jitter_ms": 2.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.85.85",
+   "ping_ms": 11.4,
+   "connect_ms": 26.3,
+   "jitter_ms": 7.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.53.253",
+   "ping_ms": 8.9,
+   "connect_ms": 29.1,
+   "jitter_ms": 2.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.99.176",
+   "ping_ms": 11.0,
+   "connect_ms": 28.6,
+   "jitter_ms": 3.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.197.207",
+   "ping_ms": 12.7,
+   "connect_ms": 24.3,
+   "jitter_ms": 11.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.2.75",
+   "ping_ms": 12.1,
+   "connect_ms": 27.2,
+   "jitter_ms": 5.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.97.195",
+   "ping_ms": 12.1,
+   "connect_ms": 24.8,
+   "jitter_ms": 10.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.184.24",
+   "ping_ms": 10.3,
+   "connect_ms": 25.1,
+   "jitter_ms": 10.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.3.194",
+   "ping_ms": 18.6,
+   "connect_ms": 26.6,
+   "jitter_ms": 7.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.12.236",
+   "ping_ms": 12.9,
+   "connect_ms": 27.8,
+   "jitter_ms": 4.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.185.89",
+   "ping_ms": 12.4,
+   "connect_ms": 28.6,
+   "jitter_ms": 3.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.43.88",
+   "ping_ms": 31.3,
+   "connect_ms": 27.0,
+   "jitter_ms": 6.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.79.151",
+   "ping_ms": 21.4,
+   "connect_ms": 26.1,
+   "jitter_ms": 8.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.39.151",
+   "ping_ms": 11.4,
+   "connect_ms": 29.1,
+   "jitter_ms": 2.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "23.235.33.159",
+   "ping_ms": 11.0,
+   "connect_ms": 28.5,
+   "jitter_ms": 3.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.73.47",
+   "ping_ms": 11.1,
+   "connect_ms": 28.3,
+   "jitter_ms": 4.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.32.123",
+   "ping_ms": 11.4,
+   "connect_ms": 27.8,
+   "jitter_ms": 5.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.98.156",
+   "ping_ms": 10.0,
+   "connect_ms": 27.2,
+   "jitter_ms": 6.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.39.60",
+   "ping_ms": 9.8,
+   "connect_ms": 24.6,
+   "jitter_ms": 11.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.17.234",
+   "ping_ms": 9.1,
+   "connect_ms": 27.6,
+   "jitter_ms": 5.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.56.232",
+   "ping_ms": 14.4,
+   "connect_ms": 30.3,
+   "jitter_ms": 0.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.76.6",
+   "ping_ms": 19.7,
+   "connect_ms": 28.8,
+   "jitter_ms": 3.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.4.201",
+   "ping_ms": 14.2,
+   "connect_ms": 30.6,
+   "jitter_ms": 0.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.4.41",
+   "ping_ms": 30.4,
+   "connect_ms": 28.8,
+   "jitter_ms": 3.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "104.156.85.188",
+   "ping_ms": 12.9,
+   "connect_ms": 28.7,
+   "jitter_ms": 4.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.20.169",
+   "ping_ms": 17.4,
+   "connect_ms": 27.6,
+   "jitter_ms": 6.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.128.185",
+   "ping_ms": 12.8,
+   "connect_ms": 29.1,
+   "jitter_ms": 3.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.220.14",
+   "ping_ms": 17.5,
+   "connect_ms": 29.4,
+   "jitter_ms": 3.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.11.62",
+   "ping_ms": 9.9,
+   "connect_ms": 27.0,
+   "jitter_ms": 8.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.201.253",
+   "ping_ms": 17.8,
+   "connect_ms": 28.3,
+   "jitter_ms": 5.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.67.57",
+   "ping_ms": 10.8,
+   "connect_ms": 26.3,
+   "jitter_ms": 9.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.12.242",
+   "ping_ms": 12.5,
+   "connect_ms": 28.4,
+   "jitter_ms": 5.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.21.229",
+   "ping_ms": 10.9,
+   "connect_ms": 29.1,
+   "jitter_ms": 4.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.130.98",
+   "ping_ms": 13.1,
+   "connect_ms": 25.4,
+   "jitter_ms": 11.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.102.90",
+   "ping_ms": 11.1,
+   "connect_ms": 28.3,
+   "jitter_ms": 6.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.49.31",
+   "ping_ms": 11.7,
+   "connect_ms": 28.4,
+   "jitter_ms": 5.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.34.51",
+   "ping_ms": 18.0,
+   "connect_ms": 26.4,
+   "jitter_ms": 9.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.11.16",
+   "ping_ms": 9.2,
+   "connect_ms": 29.1,
+   "jitter_ms": 4.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.189.217",
+   "ping_ms": 10.4,
+   "connect_ms": 27.1,
+   "jitter_ms": 8.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.13.239",
+   "ping_ms": 11.5,
+   "connect_ms": 26.9,
+   "jitter_ms": 9.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.169.89",
+   "ping_ms": 8.7,
+   "connect_ms": 29.1,
+   "jitter_ms": 4.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.194.206",
+   "ping_ms": 11.3,
+   "connect_ms": 26.8,
+   "jitter_ms": 9.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.32.53",
+   "ping_ms": 11.6,
+   "connect_ms": 27.8,
+   "jitter_ms": 7.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.96.83",
+   "ping_ms": 11.4,
+   "connect_ms": 28.0,
+   "jitter_ms": 7.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.73.99",
+   "ping_ms": 11.6,
+   "connect_ms": 28.8,
+   "jitter_ms": 6.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.10.96",
+   "ping_ms": 11.0,
+   "connect_ms": 28.2,
+   "jitter_ms": 7.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.131.9",
+   "ping_ms": 20.1,
+   "connect_ms": 29.5,
+   "jitter_ms": 5.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.96.242",
+   "ping_ms": 12.8,
+   "connect_ms": 29.9,
+   "jitter_ms": 4.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.200.195",
+   "ping_ms": 24.4,
+   "connect_ms": 28.0,
+   "jitter_ms": 8.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.80.153",
+   "ping_ms": 11.6,
+   "connect_ms": 29.5,
+   "jitter_ms": 5.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.100.251",
+   "ping_ms": 13.2,
+   "connect_ms": 28.0,
+   "jitter_ms": 8.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.57.62",
+   "ping_ms": 11.5,
+   "connect_ms": 25.8,
+   "jitter_ms": 13.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.54.35",
+   "ping_ms": 9.3,
+   "connect_ms": 29.4,
+   "jitter_ms": 6.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.131.40",
+   "ping_ms": 8.4,
+   "connect_ms": 27.6,
+   "jitter_ms": 9.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.39.4",
+   "ping_ms": 11.8,
+   "connect_ms": 28.3,
+   "jitter_ms": 8.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.2.225",
+   "ping_ms": 10.0,
+   "connect_ms": 30.7,
+   "jitter_ms": 3.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.78.29",
+   "ping_ms": 13.7,
+   "connect_ms": 30.3,
+   "jitter_ms": 5.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.65.253",
+   "ping_ms": 12.4,
+   "connect_ms": 30.8,
+   "jitter_ms": 4.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.78.154",
+   "ping_ms": 18.8,
+   "connect_ms": 28.1,
+   "jitter_ms": 9.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.23.147",
+   "ping_ms": 17.0,
+   "connect_ms": 27.9,
+   "jitter_ms": 10.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.79.147",
+   "ping_ms": 15.1,
+   "connect_ms": 28.3,
+   "jitter_ms": 9.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.103.14",
+   "ping_ms": 9.4,
+   "connect_ms": 29.8,
+   "jitter_ms": 6.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.57.238",
+   "ping_ms": 14.1,
+   "connect_ms": 28.1,
+   "jitter_ms": 10.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.32.197",
+   "ping_ms": 17.9,
+   "connect_ms": 30.1,
+   "jitter_ms": 6.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.97.142",
+   "ping_ms": 10.5,
+   "connect_ms": 26.1,
+   "jitter_ms": 14.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.63.253",
+   "ping_ms": 13.0,
+   "connect_ms": 24.0,
+   "jitter_ms": 19.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.37.162",
+   "ping_ms": 17.7,
+   "connect_ms": 27.7,
+   "jitter_ms": 12.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.25.54",
+   "ping_ms": 13.7,
+   "connect_ms": 30.6,
+   "jitter_ms": 6.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.67.159",
+   "ping_ms": 10.5,
+   "connect_ms": 28.7,
+   "jitter_ms": 10.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.194.152",
+   "ping_ms": 9.3,
+   "connect_ms": 32.0,
+   "jitter_ms": 4.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.76.7",
+   "ping_ms": 12.5,
+   "connect_ms": 28.8,
+   "jitter_ms": 10.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.35.215",
+   "ping_ms": 22.0,
+   "connect_ms": 29.4,
+   "jitter_ms": 9.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.29.129",
+   "ping_ms": 13.1,
+   "connect_ms": 28.5,
+   "jitter_ms": 11.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.130.151",
+   "ping_ms": 16.0,
+   "connect_ms": 32.1,
+   "jitter_ms": 4.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.233.90",
+   "ping_ms": 15.6,
+   "connect_ms": 33.6,
+   "jitter_ms": 1.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.213.224",
+   "ping_ms": 12.1,
+   "connect_ms": 29.8,
+   "jitter_ms": 9.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.14.255",
+   "ping_ms": 9.0,
+   "connect_ms": 26.0,
+   "jitter_ms": 16.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.58.26",
+   "ping_ms": 12.9,
+   "connect_ms": 30.4,
+   "jitter_ms": 8.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.249.9",
+   "ping_ms": 10.3,
+   "connect_ms": 30.4,
+   "jitter_ms": 8.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.235.7",
+   "ping_ms": 13.7,
+   "connect_ms": 25.9,
+   "jitter_ms": 17.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.202.215",
+   "ping_ms": 23.2,
+   "connect_ms": 28.8,
+   "jitter_ms": 11.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.11.138",
+   "ping_ms": 17.9,
+   "connect_ms": 29.6,
+   "jitter_ms": 10.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.175.67",
+   "ping_ms": 17.6,
+   "connect_ms": 30.7,
+   "jitter_ms": 7.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.8.13",
+   "ping_ms": 13.2,
+   "connect_ms": 28.3,
+   "jitter_ms": 12.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.130.27",
+   "ping_ms": 25.5,
+   "connect_ms": 25.2,
+   "jitter_ms": 19.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.76.238",
+   "ping_ms": 10.6,
+   "connect_ms": 25.6,
+   "jitter_ms": 18.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.232.124",
+   "ping_ms": 11.5,
+   "connect_ms": 29.5,
+   "jitter_ms": 11.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.204.1",
+   "ping_ms": 23.4,
+   "connect_ms": 25.6,
+   "jitter_ms": 19.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.204.186",
+   "ping_ms": 21.8,
+   "connect_ms": 32.4,
+   "jitter_ms": 5.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.47.161",
+   "ping_ms": 14.3,
+   "connect_ms": 28.9,
+   "jitter_ms": 13.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.18.123",
+   "ping_ms": 12.5,
+   "connect_ms": 30.3,
+   "jitter_ms": 10.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.44.248",
+   "ping_ms": 25.1,
+   "connect_ms": 29.8,
+   "jitter_ms": 11.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.174.94",
+   "ping_ms": 17.6,
+   "connect_ms": 29.2,
+   "jitter_ms": 13.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.33.99",
+   "ping_ms": 13.8,
+   "connect_ms": 25.2,
+   "jitter_ms": 21.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.97.199",
+   "ping_ms": 11.7,
+   "connect_ms": 31.0,
+   "jitter_ms": 10.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.254.59",
+   "ping_ms": 12.8,
+   "connect_ms": 31.3,
+   "jitter_ms": 9.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.59.75",
+   "ping_ms": 12.9,
+   "connect_ms": 31.4,
+   "jitter_ms": 9.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.38.244",
+   "ping_ms": 17.0,
+   "connect_ms": 27.8,
+   "jitter_ms": 17.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.181.42",
+   "ping_ms": 17.0,
+   "connect_ms": 35.5,
+   "jitter_ms": 2.0,
+   "loss": 0,
+   "colo": "IAH",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.23.199",
+   "ping_ms": 9.6,
+   "connect_ms": 29.4,
+   "jitter_ms": 14.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.54.27",
+   "ping_ms": 9.8,
+   "connect_ms": 34.7,
+   "jitter_ms": 4.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.47.14",
+   "ping_ms": 12.4,
+   "connect_ms": 27.9,
+   "jitter_ms": 18.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.85.78",
+   "ping_ms": 11.4,
+   "connect_ms": 36.1,
+   "jitter_ms": 1.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.22.64",
+   "ping_ms": 15.6,
+   "connect_ms": 34.5,
+   "jitter_ms": 5.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.33.14",
+   "ping_ms": 11.6,
+   "connect_ms": 32.8,
+   "jitter_ms": 8.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.203.201",
+   "ping_ms": 21.9,
+   "connect_ms": 29.9,
+   "jitter_ms": 14.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.55.225",
+   "ping_ms": 12.9,
+   "connect_ms": 26.3,
+   "jitter_ms": 21.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.108.117",
+   "ping_ms": 13.9,
+   "connect_ms": 33.3,
+   "jitter_ms": 7.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.197.129",
+   "ping_ms": 11.2,
+   "connect_ms": 35.7,
+   "jitter_ms": 3.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.126.254",
+   "ping_ms": 11.6,
+   "connect_ms": 29.3,
+   "jitter_ms": 16.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.60.126",
+   "ping_ms": 13.1,
+   "connect_ms": 29.5,
+   "jitter_ms": 15.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.202.87",
+   "ping_ms": 22.9,
+   "connect_ms": 29.4,
+   "jitter_ms": 16.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.204.12",
+   "ping_ms": 21.5,
+   "connect_ms": 31.2,
+   "jitter_ms": 12.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.57.247",
+   "ping_ms": 12.6,
+   "connect_ms": 34.3,
+   "jitter_ms": 6.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.254.98",
+   "ping_ms": 13.1,
+   "connect_ms": 30.9,
+   "jitter_ms": 13.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.53.246",
+   "ping_ms": 12.6,
+   "connect_ms": 36.1,
+   "jitter_ms": 4.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.36.41",
+   "ping_ms": 8.6,
+   "connect_ms": 34.3,
+   "jitter_ms": 7.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.193.104",
+   "ping_ms": 12.7,
+   "connect_ms": 38.0,
+   "jitter_ms": 0.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.4.241",
+   "ping_ms": 13.1,
+   "connect_ms": 30.3,
+   "jitter_ms": 16.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.54.213",
+   "ping_ms": 15.2,
+   "connect_ms": 31.6,
+   "jitter_ms": 14.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.222.225",
+   "ping_ms": 13.8,
+   "connect_ms": 36.4,
+   "jitter_ms": 4.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.210.81",
+   "ping_ms": 21.1,
+   "connect_ms": 31.9,
+   "jitter_ms": 13.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.238.237",
+   "ping_ms": 12.0,
+   "connect_ms": 29.1,
+   "jitter_ms": 19.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.112.151",
+   "ping_ms": 11.4,
+   "connect_ms": 26.5,
+   "jitter_ms": 24.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.50.61",
+   "ping_ms": 12.5,
+   "connect_ms": 36.6,
+   "jitter_ms": 4.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.39.116",
+   "ping_ms": 12.9,
+   "connect_ms": 33.7,
+   "jitter_ms": 10.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.169.150",
+   "ping_ms": 12.5,
+   "connect_ms": 31.9,
+   "jitter_ms": 14.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.221.254",
+   "ping_ms": 15.3,
+   "connect_ms": 35.6,
+   "jitter_ms": 7.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.154.13",
+   "ping_ms": 18.9,
+   "connect_ms": 39.2,
+   "jitter_ms": 0.7,
+   "loss": 0,
+   "colo": "PHX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.60.75",
+   "ping_ms": 13.1,
+   "connect_ms": 30.1,
+   "jitter_ms": 18.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "104.156.85.79",
+   "ping_ms": 11.5,
+   "connect_ms": 35.7,
+   "jitter_ms": 8.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.58.59",
+   "ping_ms": 13.8,
+   "connect_ms": 33.8,
+   "jitter_ms": 12.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.53.94",
+   "ping_ms": 10.9,
+   "connect_ms": 33.0,
+   "jitter_ms": 14.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.154.8",
+   "ping_ms": 18.6,
+   "connect_ms": 39.7,
+   "jitter_ms": 0.8,
+   "loss": 0,
+   "colo": "PHX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.152.148",
+   "ping_ms": 19.0,
+   "connect_ms": 40.1,
+   "jitter_ms": 0.5,
+   "loss": 0,
+   "colo": "PHX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.244.141",
+   "ping_ms": 12.2,
+   "connect_ms": 32.6,
+   "jitter_ms": 15.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.37.70",
+   "ping_ms": 8.3,
+   "connect_ms": 30.4,
+   "jitter_ms": 20.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.125.253",
+   "ping_ms": 11.5,
+   "connect_ms": 36.9,
+   "jitter_ms": 7.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.45.41",
+   "ping_ms": 10.9,
+   "connect_ms": 33.9,
+   "jitter_ms": 13.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.223.20",
+   "ping_ms": 12.5,
+   "connect_ms": 36.4,
+   "jitter_ms": 8.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.182.111",
+   "ping_ms": 18.0,
+   "connect_ms": 38.6,
+   "jitter_ms": 4.7,
+   "loss": 0,
+   "colo": "IAH",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.35.86",
+   "ping_ms": 9.4,
+   "connect_ms": 34.5,
+   "jitter_ms": 13.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "23.235.42.51",
+   "ping_ms": 19.0,
+   "connect_ms": 40.6,
+   "jitter_ms": 1.2,
+   "loss": 0,
+   "colo": "QRO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.56.152",
+   "ping_ms": 10.5,
+   "connect_ms": 33.6,
+   "jitter_ms": 15.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.0.249",
+   "ping_ms": 11.8,
+   "connect_ms": 40.0,
+   "jitter_ms": 3.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.206.215",
+   "ping_ms": 17.5,
+   "connect_ms": 37.2,
+   "jitter_ms": 8.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.206.26",
+   "ping_ms": 18.2,
+   "connect_ms": 33.7,
+   "jitter_ms": 15.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "23.235.42.210",
+   "ping_ms": 19.7,
+   "connect_ms": 41.4,
+   "jitter_ms": 0.5,
+   "loss": 0,
+   "colo": "QRO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.203.179",
+   "ping_ms": 20.3,
+   "connect_ms": 35.7,
+   "jitter_ms": 12.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "23.235.42.84",
+   "ping_ms": 20.0,
+   "connect_ms": 41.2,
+   "jitter_ms": 1.5,
+   "loss": 0,
+   "colo": "QRO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.154.252",
+   "ping_ms": 18.6,
+   "connect_ms": 40.8,
+   "jitter_ms": 2.5,
+   "loss": 0,
+   "colo": "PHX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.110.37",
+   "ping_ms": 13.9,
+   "connect_ms": 36.6,
+   "jitter_ms": 11.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.36.200",
+   "ping_ms": 11.2,
+   "connect_ms": 37.3,
+   "jitter_ms": 9.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.82.171",
+   "ping_ms": 10.2,
+   "connect_ms": 33.3,
+   "jitter_ms": 18.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.203.14",
+   "ping_ms": 19.6,
+   "connect_ms": 38.0,
+   "jitter_ms": 9.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.45.241",
+   "ping_ms": 9.6,
+   "connect_ms": 34.4,
+   "jitter_ms": 16.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.158.126",
+   "ping_ms": 19.6,
+   "connect_ms": 42.0,
+   "jitter_ms": 1.4,
+   "loss": 0,
+   "colo": "QRO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.10.118",
+   "ping_ms": 12.8,
+   "connect_ms": 36.7,
+   "jitter_ms": 12.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "23.235.42.220",
+   "ping_ms": 19.5,
+   "connect_ms": 41.4,
+   "jitter_ms": 3.2,
+   "loss": 0,
+   "colo": "QRO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.109.36",
+   "ping_ms": 13.3,
+   "connect_ms": 36.3,
+   "jitter_ms": 13.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.59.215",
+   "ping_ms": 13.9,
+   "connect_ms": 36.3,
+   "jitter_ms": 14.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.6.129",
+   "ping_ms": 12.4,
+   "connect_ms": 35.8,
+   "jitter_ms": 15.9,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.14.103",
+   "ping_ms": 9.3,
+   "connect_ms": 41.3,
+   "jitter_ms": 5.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.82.174",
+   "ping_ms": 10.2,
+   "connect_ms": 36.0,
+   "jitter_ms": 16.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.33.35",
+   "ping_ms": 12.8,
+   "connect_ms": 33.9,
+   "jitter_ms": 20.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.59.194",
+   "ping_ms": 13.9,
+   "connect_ms": 37.4,
+   "jitter_ms": 13.8,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.203.184",
+   "ping_ms": 18.7,
+   "connect_ms": 36.9,
+   "jitter_ms": 15.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.209.35",
+   "ping_ms": 19.1,
+   "connect_ms": 35.0,
+   "jitter_ms": 18.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.161.78",
+   "ping_ms": 16.8,
+   "connect_ms": 41.4,
+   "jitter_ms": 6.6,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "23.235.42.107",
+   "ping_ms": 19.1,
+   "connect_ms": 41.9,
+   "jitter_ms": 6.0,
+   "loss": 0,
+   "colo": "QRO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "90.98.48.250",
+   "ping_ms": 8.3,
+   "connect_ms": 35.9,
+   "jitter_ms": 18.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.223.227",
+   "ping_ms": 14.9,
+   "connect_ms": 37.8,
+   "jitter_ms": 15.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.162.223",
+   "ping_ms": 9.7,
+   "connect_ms": 38.8,
+   "jitter_ms": 15.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.204.17",
+   "ping_ms": 18.1,
+   "connect_ms": 40.9,
+   "jitter_ms": 11.3,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.34.144",
+   "ping_ms": 13.5,
+   "connect_ms": 35.4,
+   "jitter_ms": 22.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.126.29",
+   "ping_ms": 21.8,
+   "connect_ms": 42.9,
+   "jitter_ms": 7.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.32.128",
+   "ping_ms": 12.2,
+   "connect_ms": 40.6,
+   "jitter_ms": 13.7,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.1.131",
+   "ping_ms": 13.0,
+   "connect_ms": 41.0,
+   "jitter_ms": 14.1,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "157.52.103.255",
+   "ping_ms": 20.7,
+   "connect_ms": 45.4,
+   "jitter_ms": 5.3,
+   "loss": 0,
+   "colo": "QRO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.126.174",
+   "ping_ms": 22.1,
+   "connect_ms": 40.3,
+   "jitter_ms": 16.2,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.26.171",
+   "ping_ms": 12.3,
+   "connect_ms": 41.1,
+   "jitter_ms": 17.0,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "104.156.81.242",
+   "ping_ms": 11.2,
+   "connect_ms": 42.0,
+   "jitter_ms": 18.5,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.54.114",
+   "ping_ms": 24.5,
+   "connect_ms": 51.5,
+   "jitter_ms": 4.0,
+   "loss": 0,
+   "colo": "PDK",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.173.206",
+   "ping_ms": 28.3,
+   "connect_ms": 53.0,
+   "jitter_ms": 3.0,
+   "loss": 0,
+   "colo": "MFE",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.253.171",
+   "ping_ms": 11.6,
+   "connect_ms": 50.0,
+   "jitter_ms": 11.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.204.237",
+   "ping_ms": 13.7,
+   "connect_ms": 42.1,
+   "jitter_ms": 28.4,
+   "loss": 0,
+   "colo": "DFW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.53.222",
+   "ping_ms": 25.1,
+   "connect_ms": 54.0,
+   "jitter_ms": 6.2,
+   "loss": 0,
+   "colo": "PDK",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.18.151",
+   "ping_ms": 24.3,
+   "connect_ms": 51.3,
+   "jitter_ms": 11.8,
+   "loss": 0,
+   "colo": "PDK",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.17.230",
+   "ping_ms": 26.1,
+   "connect_ms": 56.9,
+   "jitter_ms": 0.8,
+   "loss": 0,
+   "colo": "PDK",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.92.172",
+   "ping_ms": 25.7,
+   "connect_ms": 55.7,
+   "jitter_ms": 7.4,
+   "loss": 0,
+   "colo": "BUR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.154.1",
+   "ping_ms": 18.8,
+   "connect_ms": 58.8,
+   "jitter_ms": 1.4,
+   "loss": 0,
+   "colo": "",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.174.17",
+   "ping_ms": 27.8,
+   "connect_ms": 58.9,
+   "jitter_ms": 1.2,
+   "loss": 0,
+   "colo": "MFE",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.14.26",
+   "ping_ms": 28.1,
+   "connect_ms": 58.4,
+   "jitter_ms": 3.2,
+   "loss": 0,
+   "colo": "PDK",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.174.240",
+   "ping_ms": 29.5,
+   "connect_ms": 59.5,
+   "jitter_ms": 5.0,
+   "loss": 0,
+   "colo": "MFE400053",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.174.13",
+   "ping_ms": 27.7,
+   "connect_ms": 61.3,
+   "jitter_ms": 2.9,
+   "loss": 0,
+   "colo": "MFE",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.70.112",
+   "ping_ms": 32.0,
+   "connect_ms": 67.2,
+   "jitter_ms": 2.0,
+   "loss": 0,
+   "colo": "PAO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.41.207",
+   "ping_ms": 32.9,
+   "connect_ms": 70.6,
+   "jitter_ms": 1.1,
+   "loss": 0,
+   "colo": "SJC",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.70.93",
+   "ping_ms": 32.2,
+   "connect_ms": 68.8,
+   "jitter_ms": 7.2,
+   "loss": 0,
+   "colo": "PAO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.121.149",
+   "ping_ms": 32.0,
+   "connect_ms": 71.4,
+   "jitter_ms": 3.4,
+   "loss": 0,
+   "colo": "BUR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.121.160",
+   "ping_ms": 36.6,
+   "connect_ms": 71.4,
+   "jitter_ms": 4.0,
+   "loss": 0,
+   "colo": "BUR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.122.213",
+   "ping_ms": 32.5,
+   "connect_ms": 70.6,
+   "jitter_ms": 9.8,
+   "loss": 0,
+   "colo": "BUR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.146.9",
+   "ping_ms": 36.9,
+   "connect_ms": 76.7,
+   "jitter_ms": 0.6,
+   "loss": 0,
+   "colo": "CHI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.69.141",
+   "ping_ms": 34.3,
+   "connect_ms": 71.3,
+   "jitter_ms": 12.5,
+   "loss": 0,
+   "colo": "STL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.86.237",
+   "ping_ms": 35.7,
+   "connect_ms": 75.7,
+   "jitter_ms": 8.2,
+   "loss": 0,
+   "colo": "ORD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.113.229",
+   "ping_ms": 38.7,
+   "connect_ms": 80.8,
+   "jitter_ms": 1.5,
+   "loss": 0,
+   "colo": "EWR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.82.203",
+   "ping_ms": 34.9,
+   "connect_ms": 80.2,
+   "jitter_ms": 5.5,
+   "loss": 0,
+   "colo": "CHI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.80.152",
+   "ping_ms": 35.4,
+   "connect_ms": 81.0,
+   "jitter_ms": 5.6,
+   "loss": 0,
+   "colo": "CHI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.36.238",
+   "ping_ms": 34.8,
+   "connect_ms": 78.4,
+   "jitter_ms": 11.3,
+   "loss": 0,
+   "colo": "IAD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.93.105",
+   "ping_ms": 27.6,
+   "connect_ms": 87.6,
+   "jitter_ms": 1.4,
+   "loss": 0,
+   "colo": "BUR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.92.138",
+   "ping_ms": 27.6,
+   "connect_ms": 87.0,
+   "jitter_ms": 7.5,
+   "loss": 0,
+   "colo": "BUR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.50.226",
+   "ping_ms": 41.5,
+   "connect_ms": 88.9,
+   "jitter_ms": 4.7,
+   "loss": 0,
+   "colo": "WVI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.232.255",
+   "ping_ms": 41.3,
+   "connect_ms": 90.2,
+   "jitter_ms": 3.7,
+   "loss": 0,
+   "colo": "DTW",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.123.1",
+   "ping_ms": 45.9,
+   "connect_ms": 93.4,
+   "jitter_ms": 5.1,
+   "loss": 0,
+   "colo": "PIT",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.106.4",
+   "ping_ms": 47.4,
+   "connect_ms": 98.3,
+   "jitter_ms": 0.5,
+   "loss": 0,
+   "colo": "PDX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.106.91",
+   "ping_ms": 47.2,
+   "connect_ms": 97.8,
+   "jitter_ms": 5.7,
+   "loss": 0,
+   "colo": "PDX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.149.224",
+   "ping_ms": 33.1,
+   "connect_ms": 98.6,
+   "jitter_ms": 4.5,
+   "loss": 0,
+   "colo": "IAD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.150.250",
+   "ping_ms": 41.4,
+   "connect_ms": 94.9,
+   "jitter_ms": 12.1,
+   "loss": 0,
+   "colo": "MSP",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.163.37",
+   "ping_ms": 48.8,
+   "connect_ms": 100.3,
+   "jitter_ms": 1.6,
+   "loss": 0,
+   "colo": "YYZ",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.156.84",
+   "ping_ms": 48.6,
+   "connect_ms": 101.0,
+   "jitter_ms": 0.5,
+   "loss": 0,
+   "colo": "YYZ",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.157.148",
+   "ping_ms": 48.8,
+   "connect_ms": 102.7,
+   "jitter_ms": 2.4,
+   "loss": 0,
+   "colo": "YYZ",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.106.167",
+   "ping_ms": 47.3,
+   "connect_ms": 99.1,
+   "jitter_ms": 10.2,
+   "loss": 0,
+   "colo": "PDX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.145.70",
+   "ping_ms": 47.3,
+   "connect_ms": 104.9,
+   "jitter_ms": 5.9,
+   "loss": 0,
+   "colo": "CMH",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.137.35",
+   "ping_ms": 50.2,
+   "connect_ms": 106.4,
+   "jitter_ms": 3.3,
+   "loss": 0,
+   "colo": "YUL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.197.86",
+   "ping_ms": 35.1,
+   "connect_ms": 107.2,
+   "jitter_ms": 2.2,
+   "loss": 0,
+   "colo": "LAX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.161.199",
+   "ping_ms": 48.6,
+   "connect_ms": 104.7,
+   "jitter_ms": 8.9,
+   "loss": 0,
+   "colo": "YYZ",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.42.97",
+   "ping_ms": 50.6,
+   "connect_ms": 109.1,
+   "jitter_ms": 4.6,
+   "loss": 0,
+   "colo": "",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.42.242",
+   "ping_ms": 51.3,
+   "connect_ms": 107.6,
+   "jitter_ms": 12.9,
+   "loss": 0,
+   "colo": "BFI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.145.255",
+   "ping_ms": 37.1,
+   "connect_ms": 113.4,
+   "jitter_ms": 2.0,
+   "loss": 0,
+   "colo": "CHI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.121.224",
+   "ping_ms": 34.3,
+   "connect_ms": 111.1,
+   "jitter_ms": 10.0,
+   "loss": 0,
+   "colo": "BUR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.78.123",
+   "ping_ms": 34.9,
+   "connect_ms": 110.8,
+   "jitter_ms": 14.4,
+   "loss": 0,
+   "colo": "CHI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.40.153",
+   "ping_ms": 48.7,
+   "connect_ms": 111.6,
+   "jitter_ms": 14.1,
+   "loss": 0,
+   "colo": "BFI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.114.70",
+   "ping_ms": 38.1,
+   "connect_ms": 129.3,
+   "jitter_ms": 6.0,
+   "loss": 0,
+   "colo": "EWR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.29.184",
+   "ping_ms": 31.7,
+   "connect_ms": 112.7,
+   "jitter_ms": 44.9,
+   "loss": 0,
+   "colo": "IAD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.154.82",
+   "ping_ms": 63.3,
+   "connect_ms": 130.2,
+   "jitter_ms": 17.8,
+   "loss": 0,
+   "colo": "YVR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.154.66",
+   "ping_ms": 60.8,
+   "connect_ms": 139.0,
+   "jitter_ms": 7.7,
+   "loss": 0,
+   "colo": "YVR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.106.105",
+   "ping_ms": 46.8,
+   "connect_ms": 144.0,
+   "jitter_ms": 1.6,
+   "loss": 0,
+   "colo": "PDX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.182.198",
+   "ping_ms": 44.0,
+   "connect_ms": 135.1,
+   "jitter_ms": 19.6,
+   "loss": 0,
+   "colo": "AZP",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.155.48",
+   "ping_ms": 62.8,
+   "connect_ms": 144.2,
+   "jitter_ms": 9.1,
+   "loss": 0,
+   "colo": "YVR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.105.223",
+   "ping_ms": 46.5,
+   "connect_ms": 146.4,
+   "jitter_ms": 5.1,
+   "loss": 0,
+   "colo": "PDX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.217.142",
+   "ping_ms": 46.9,
+   "connect_ms": 147.1,
+   "jitter_ms": 5.0,
+   "loss": 0,
+   "colo": "PDX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.156.80",
+   "ping_ms": 49.2,
+   "connect_ms": 157.3,
+   "jitter_ms": 5.3,
+   "loss": 0,
+   "colo": "CYTZ480079",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.109.239",
+   "ping_ms": 75.5,
+   "connect_ms": 156.9,
+   "jitter_ms": 16.3,
+   "loss": 0,
+   "colo": "YYC",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.42.105",
+   "ping_ms": 50.9,
+   "connect_ms": 165.2,
+   "jitter_ms": 12.1,
+   "loss": 0,
+   "colo": "BFI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.6.214",
+   "ping_ms": 97.0,
+   "connect_ms": 195.4,
+   "jitter_ms": 5.0,
+   "loss": 0,
+   "colo": "FOR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.153.63",
+   "ping_ms": 64.9,
+   "connect_ms": 189.4,
+   "jitter_ms": 19.1,
+   "loss": 0,
+   "colo": "YVR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.5.147",
+   "ping_ms": 97.9,
+   "connect_ms": 200.6,
+   "jitter_ms": 1.0,
+   "loss": 0,
+   "colo": "FOR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.98.145",
+   "ping_ms": 99.6,
+   "connect_ms": 200.3,
+   "jitter_ms": 19.7,
+   "loss": 0,
+   "colo": "HNL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.118.254",
+   "ping_ms": 110.7,
+   "connect_ms": 221.0,
+   "jitter_ms": 0.3,
+   "loss": 0,
+   "colo": "LHR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.38.152",
+   "ping_ms": 110.7,
+   "connect_ms": 224.4,
+   "jitter_ms": 4.0,
+   "loss": 0,
+   "colo": "PAR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.39.220",
+   "ping_ms": 113.3,
+   "connect_ms": 224.8,
+   "jitter_ms": 6.6,
+   "loss": 0,
+   "colo": "PAR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.138.224",
+   "ping_ms": 113.2,
+   "connect_ms": 227.9,
+   "jitter_ms": 2.2,
+   "loss": 0,
+   "colo": "AMS",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.22.221",
+   "ping_ms": 113.1,
+   "connect_ms": 228.5,
+   "jitter_ms": 1.9,
+   "loss": 0,
+   "colo": "RTM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.134.143",
+   "ping_ms": 115.9,
+   "connect_ms": 226.7,
+   "jitter_ms": 10.8,
+   "loss": 0,
+   "colo": "LHR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.21.53",
+   "ping_ms": 112.9,
+   "connect_ms": 231.1,
+   "jitter_ms": 2.5,
+   "loss": 0,
+   "colo": "IAD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.74.163",
+   "ping_ms": 106.7,
+   "connect_ms": 222.0,
+   "jitter_ms": 21.1,
+   "loss": 0,
+   "colo": "LCY",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.58.232",
+   "ping_ms": 115.9,
+   "connect_ms": 231.9,
+   "jitter_ms": 1.7,
+   "loss": 0,
+   "colo": "LON4221",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.134.182",
+   "ping_ms": 111.6,
+   "connect_ms": 232.2,
+   "jitter_ms": 3.1,
+   "loss": 0,
+   "colo": "LHR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.207.49",
+   "ping_ms": 113.6,
+   "connect_ms": 231.7,
+   "jitter_ms": 6.0,
+   "loss": 0,
+   "colo": "RTM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.205.51",
+   "ping_ms": 112.4,
+   "connect_ms": 234.6,
+   "jitter_ms": 1.0,
+   "loss": 0,
+   "colo": "RTM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.178.228",
+   "ping_ms": 76.5,
+   "connect_ms": 226.0,
+   "jitter_ms": 22.8,
+   "loss": 0,
+   "colo": "BOG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.121.234",
+   "ping_ms": 116.1,
+   "connect_ms": 234.3,
+   "jitter_ms": 13.3,
+   "loss": 0,
+   "colo": "PAR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.169.93",
+   "ping_ms": 120.9,
+   "connect_ms": 239.0,
+   "jitter_ms": 4.8,
+   "loss": 0,
+   "colo": "PAR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.170.206",
+   "ping_ms": 115.8,
+   "connect_ms": 237.6,
+   "jitter_ms": 10.9,
+   "loss": 0,
+   "colo": "PAR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.117.155",
+   "ping_ms": 113.6,
+   "connect_ms": 239.0,
+   "jitter_ms": 10.8,
+   "loss": 0,
+   "colo": "FRA",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.120.194",
+   "ping_ms": 116.6,
+   "connect_ms": 237.2,
+   "jitter_ms": 16.9,
+   "loss": 0,
+   "colo": "PAR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.116.133",
+   "ping_ms": 114.4,
+   "connect_ms": 240.8,
+   "jitter_ms": 16.2,
+   "loss": 0,
+   "colo": "FRA",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.37.251",
+   "ping_ms": 117.4,
+   "connect_ms": 242.9,
+   "jitter_ms": 14.7,
+   "loss": 0,
+   "colo": "FRA",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.141.217",
+   "ping_ms": 120.2,
+   "connect_ms": 246.8,
+   "jitter_ms": 10.6,
+   "loss": 0,
+   "colo": "BGY",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.54.116",
+   "ping_ms": 121.9,
+   "connect_ms": 239.4,
+   "jitter_ms": 25.6,
+   "loss": 0,
+   "colo": "MAN",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.69.254",
+   "ping_ms": 125.3,
+   "connect_ms": 252.8,
+   "jitter_ms": 4.9,
+   "loss": 0,
+   "colo": "CPH",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.150.32",
+   "ping_ms": 124.6,
+   "connect_ms": 251.7,
+   "jitter_ms": 7.2,
+   "loss": 0,
+   "colo": "NRT",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.240.82",
+   "ping_ms": 125.2,
+   "connect_ms": 253.5,
+   "jitter_ms": 4.4,
+   "loss": 0,
+   "colo": "MXP",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.3.35",
+   "ping_ms": 122.3,
+   "connect_ms": 252.7,
+   "jitter_ms": 8.5,
+   "loss": 0,
+   "colo": "FRA",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.177.64",
+   "ping_ms": 128.2,
+   "connect_ms": 256.6,
+   "jitter_ms": 2.4,
+   "loss": 0,
+   "colo": "GIG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.112.159",
+   "ping_ms": 124.5,
+   "connect_ms": 253.4,
+   "jitter_ms": 13.0,
+   "loss": 0,
+   "colo": "NRT",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.178.249",
+   "ping_ms": 127.2,
+   "connect_ms": 255.9,
+   "jitter_ms": 8.1,
+   "loss": 0,
+   "colo": "GIG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.178.63",
+   "ping_ms": 126.4,
+   "connect_ms": 256.2,
+   "jitter_ms": 8.9,
+   "loss": 0,
+   "colo": "GIG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.54.15",
+   "ping_ms": 123.1,
+   "connect_ms": 251.5,
+   "jitter_ms": 18.6,
+   "loss": 0,
+   "colo": "LIN",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.6.26",
+   "ping_ms": 127.9,
+   "connect_ms": 258.4,
+   "jitter_ms": 7.1,
+   "loss": 0,
+   "colo": "BER",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.178.127",
+   "ping_ms": 126.9,
+   "connect_ms": 257.4,
+   "jitter_ms": 10.0,
+   "loss": 0,
+   "colo": "GIG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.242.207",
+   "ping_ms": 129.2,
+   "connect_ms": 260.8,
+   "jitter_ms": 10.0,
+   "loss": 0,
+   "colo": "MXP",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.54.225",
+   "ping_ms": 123.4,
+   "connect_ms": 251.5,
+   "jitter_ms": 29.3,
+   "loss": 0,
+   "colo": "LIN",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.118.82",
+   "ping_ms": 113.8,
+   "connect_ms": 249.5,
+   "jitter_ms": 35.7,
+   "loss": 0,
+   "colo": "FRA",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.245.0",
+   "ping_ms": 132.9,
+   "connect_ms": 268.3,
+   "jitter_ms": 2.1,
+   "loss": 0,
+   "colo": "HEL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.94.126",
+   "ping_ms": 134.2,
+   "connect_ms": 271.2,
+   "jitter_ms": 1.3,
+   "loss": 0,
+   "colo": "GRU",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.245.135",
+   "ping_ms": 132.7,
+   "connect_ms": 271.6,
+   "jitter_ms": 5.0,
+   "loss": 0,
+   "colo": "HEL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.245.241",
+   "ping_ms": 131.8,
+   "connect_ms": 271.6,
+   "jitter_ms": 7.3,
+   "loss": 0,
+   "colo": "HEL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.175.192",
+   "ping_ms": 129.6,
+   "connect_ms": 270.8,
+   "jitter_ms": 9.1,
+   "loss": 0,
+   "colo": "BMA",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.251.56",
+   "ping_ms": 133.5,
+   "connect_ms": 274.8,
+   "jitter_ms": 6.6,
+   "loss": 0,
+   "colo": "GRU",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.83.37",
+   "ping_ms": 136.0,
+   "connect_ms": 277.2,
+   "jitter_ms": 11.5,
+   "loss": 0,
+   "colo": "MRS",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.89.255",
+   "ping_ms": 134.3,
+   "connect_ms": 274.5,
+   "jitter_ms": 21.6,
+   "loss": 0,
+   "colo": "GRU",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.62.9",
+   "ping_ms": 134.0,
+   "connect_ms": 275.8,
+   "jitter_ms": 21.1,
+   "loss": 0,
+   "colo": "FCO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.3.57",
+   "ping_ms": 140.8,
+   "connect_ms": 285.2,
+   "jitter_ms": 15.4,
+   "loss": 0,
+   "colo": "IAD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.166.30",
+   "ping_ms": 146.6,
+   "connect_ms": 295.1,
+   "jitter_ms": 2.1,
+   "loss": 0,
+   "colo": "AKL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.51.60",
+   "ping_ms": 145.1,
+   "connect_ms": 293.9,
+   "jitter_ms": 8.0,
+   "loss": 0,
+   "colo": "ICN",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.97.114",
+   "ping_ms": 99.2,
+   "connect_ms": 298.8,
+   "jitter_ms": 7.5,
+   "loss": 0,
+   "colo": "HNL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.121.240",
+   "ping_ms": 147.0,
+   "connect_ms": 305.4,
+   "jitter_ms": 11.0,
+   "loss": 0,
+   "colo": "AMS",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.127.182",
+   "ping_ms": 164.8,
+   "connect_ms": 320.4,
+   "jitter_ms": 0.8,
+   "loss": 0,
+   "colo": "SYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.127.73",
+   "ping_ms": 158.9,
+   "connect_ms": 321.9,
+   "jitter_ms": 9.2,
+   "loss": 0,
+   "colo": "SYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.30.48",
+   "ping_ms": 164.7,
+   "connect_ms": 321.0,
+   "jitter_ms": 11.4,
+   "loss": 0,
+   "colo": "SYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.43.18",
+   "ping_ms": 159.3,
+   "connect_ms": 322.1,
+   "jitter_ms": 10.7,
+   "loss": 0,
+   "colo": "SYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.139.60",
+   "ping_ms": 159.8,
+   "connect_ms": 325.6,
+   "jitter_ms": 11.1,
+   "loss": 0,
+   "colo": "WSI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.43.195",
+   "ping_ms": 164.7,
+   "connect_ms": 331.3,
+   "jitter_ms": 11.6,
+   "loss": 0,
+   "colo": "SYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.74.78",
+   "ping_ms": 109.4,
+   "connect_ms": 334.1,
+   "jitter_ms": 11.3,
+   "loss": 0,
+   "colo": "LCY",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.49.89",
+   "ping_ms": 172.9,
+   "connect_ms": 343.2,
+   "jitter_ms": 4.4,
+   "loss": 0,
+   "colo": "BNE",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.21.60",
+   "ping_ms": 112.7,
+   "connect_ms": 342.6,
+   "jitter_ms": 9.2,
+   "loss": 0,
+   "colo": "RTM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.169.171",
+   "ping_ms": 116.3,
+   "connect_ms": 348.4,
+   "jitter_ms": 5.9,
+   "loss": 0,
+   "colo": "PAR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.225.208",
+   "ping_ms": 114.7,
+   "connect_ms": 348.0,
+   "jitter_ms": 12.6,
+   "loss": 0,
+   "colo": "LHR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.133.176",
+   "ping_ms": 112.6,
+   "connect_ms": 349.1,
+   "jitter_ms": 11.9,
+   "loss": 0,
+   "colo": "LHR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.21.166",
+   "ping_ms": 176.6,
+   "connect_ms": 356.3,
+   "jitter_ms": 5.0,
+   "loss": 0,
+   "colo": "KBUR8200058",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.140.230",
+   "ping_ms": 115.9,
+   "connect_ms": 355.4,
+   "jitter_ms": 13.6,
+   "loss": 0,
+   "colo": "DUS",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.168.217",
+   "ping_ms": 115.8,
+   "connect_ms": 357.8,
+   "jitter_ms": 10.8,
+   "loss": 0,
+   "colo": "PAR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.121.209",
+   "ping_ms": 115.2,
+   "connect_ms": 355.2,
+   "jitter_ms": 17.5,
+   "loss": 0,
+   "colo": "FRA",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.21.51",
+   "ping_ms": 180.2,
+   "connect_ms": 364.8,
+   "jitter_ms": 1.9,
+   "loss": 0,
+   "colo": "MNL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.50.159",
+   "ping_ms": 170.8,
+   "connect_ms": 358.9,
+   "jitter_ms": 18.1,
+   "loss": 0,
+   "colo": "BNE",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.33.186",
+   "ping_ms": 120.9,
+   "connect_ms": 367.7,
+   "jitter_ms": 4.4,
+   "loss": 0,
+   "colo": "TOJ",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.189.211",
+   "ping_ms": 122.9,
+   "connect_ms": 369.1,
+   "jitter_ms": 4.9,
+   "loss": 0,
+   "colo": "MUC",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.40.203",
+   "ping_ms": 129.8,
+   "connect_ms": 378.9,
+   "jitter_ms": 3.6,
+   "loss": 0,
+   "colo": "CPH",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.142.178",
+   "ping_ms": 124.1,
+   "connect_ms": 373.2,
+   "jitter_ms": 16.0,
+   "loss": 0,
+   "colo": "BGY",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.66.190",
+   "ping_ms": 188.0,
+   "connect_ms": 378.9,
+   "jitter_ms": 5.0,
+   "loss": 0,
+   "colo": "DXB",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.114.194",
+   "ping_ms": 124.1,
+   "connect_ms": 377.5,
+   "jitter_ms": 11.6,
+   "loss": 0,
+   "colo": "NRT",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.177.62",
+   "ping_ms": 126.8,
+   "connect_ms": 382.8,
+   "jitter_ms": 1.4,
+   "loss": 0,
+   "colo": "GIG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.123.34",
+   "ping_ms": 193.6,
+   "connect_ms": 374.7,
+   "jitter_ms": 40.5,
+   "loss": 0,
+   "colo": "RUH",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.45.46",
+   "ping_ms": 194.7,
+   "connect_ms": 394.3,
+   "jitter_ms": 17.9,
+   "loss": 0,
+   "colo": "SIN",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.173.154",
+   "ping_ms": 131.8,
+   "connect_ms": 398.9,
+   "jitter_ms": 9.4,
+   "loss": 0,
+   "colo": "BMA",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.18.162",
+   "ping_ms": 131.2,
+   "connect_ms": 401.2,
+   "jitter_ms": 6.8,
+   "loss": 0,
+   "colo": "VIE",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.45.54",
+   "ping_ms": 198.4,
+   "connect_ms": 396.3,
+   "jitter_ms": 21.8,
+   "loss": 0,
+   "colo": "SIN",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.235.255",
+   "ping_ms": 199.8,
+   "connect_ms": 402.6,
+   "jitter_ms": 17.1,
+   "loss": 0,
+   "colo": "KUL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.27.40",
+   "ping_ms": 196.0,
+   "connect_ms": 407.2,
+   "jitter_ms": 13.7,
+   "loss": 0,
+   "colo": "KUL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.80.228",
+   "ping_ms": 134.6,
+   "connect_ms": 409.8,
+   "jitter_ms": 12.1,
+   "loss": 0,
+   "colo": "MRS",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.62.41",
+   "ping_ms": 133.4,
+   "connect_ms": 415.2,
+   "jitter_ms": 3.1,
+   "loss": 0,
+   "colo": "FCO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.61.173",
+   "ping_ms": 134.1,
+   "connect_ms": 416.1,
+   "jitter_ms": 12.2,
+   "loss": 0,
+   "colo": "FCO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.71.34",
+   "ping_ms": 210.5,
+   "connect_ms": 419.9,
+   "jitter_ms": 13.8,
+   "loss": 0,
+   "colo": "PER",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.71.53",
+   "ping_ms": 209.7,
+   "connect_ms": 421.7,
+   "jitter_ms": 10.3,
+   "loss": 0,
+   "colo": "PER",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.238.79",
+   "ping_ms": 136.6,
+   "connect_ms": 417.5,
+   "jitter_ms": 27.0,
+   "loss": 0,
+   "colo": "OSL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.14.65",
+   "ping_ms": 149.4,
+   "connect_ms": 434.1,
+   "jitter_ms": 2.7,
+   "loss": 0,
+   "colo": "CWB",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.109.43",
+   "ping_ms": 217.5,
+   "connect_ms": 437.9,
+   "jitter_ms": 0.6,
+   "loss": 0,
+   "colo": "BOM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.45.21",
+   "ping_ms": 214.5,
+   "connect_ms": 432.3,
+   "jitter_ms": 19.5,
+   "loss": 0,
+   "colo": "ACC",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.12.174",
+   "ping_ms": 144.3,
+   "connect_ms": 436.1,
+   "jitter_ms": 14.5,
+   "loss": 0,
+   "colo": "CWB",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.165.184",
+   "ping_ms": 146.9,
+   "connect_ms": 443.1,
+   "jitter_ms": 3.8,
+   "loss": 0,
+   "colo": "AKL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.50.41",
+   "ping_ms": 144.9,
+   "connect_ms": 443.1,
+   "jitter_ms": 9.2,
+   "loss": 0,
+   "colo": "ICN",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.61.250",
+   "ping_ms": 219.2,
+   "connect_ms": 451.3,
+   "jitter_ms": 4.1,
+   "loss": 0,
+   "colo": "NRT",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.110.158",
+   "ping_ms": 221.3,
+   "connect_ms": 438.2,
+   "jitter_ms": 40.3,
+   "loss": 0,
+   "colo": "BOM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.1.178",
+   "ping_ms": 147.8,
+   "connect_ms": 452.9,
+   "jitter_ms": 12.7,
+   "loss": 0,
+   "colo": "SOF",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.211.210",
+   "ping_ms": 236.2,
+   "connect_ms": 462.4,
+   "jitter_ms": 7.5,
+   "loss": 0,
+   "colo": "BOM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.167.113",
+   "ping_ms": 247.1,
+   "connect_ms": 447.5,
+   "jitter_ms": 60.1,
+   "loss": 0,
+   "colo": "BKK",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.106.52",
+   "ping_ms": 240.6,
+   "connect_ms": 471.9,
+   "jitter_ms": 13.9,
+   "loss": 0,
+   "colo": "QAI",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.61.49",
+   "ping_ms": 236.3,
+   "connect_ms": 475.4,
+   "jitter_ms": 8.1,
+   "loss": 0,
+   "colo": "HYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.58.99",
+   "ping_ms": 237.9,
+   "connect_ms": 481.6,
+   "jitter_ms": 0.9,
+   "loss": 0,
+   "colo": "HYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.209.59",
+   "ping_ms": 228.3,
+   "connect_ms": 475.1,
+   "jitter_ms": 31.2,
+   "loss": 0,
+   "colo": "BOM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.166.85",
+   "ping_ms": 215.2,
+   "connect_ms": 501.6,
+   "jitter_ms": 4.8,
+   "loss": 0,
+   "colo": "BKK",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.217.184",
+   "ping_ms": 159.0,
+   "connect_ms": 486.0,
+   "jitter_ms": 46.7,
+   "loss": 0,
+   "colo": "EZE",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.87.45",
+   "ping_ms": 247.1,
+   "connect_ms": 496.0,
+   "jitter_ms": 31.8,
+   "loss": 0,
+   "colo": "NBO",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.102.116",
+   "ping_ms": 252.9,
+   "connect_ms": 509.4,
+   "jitter_ms": 6.1,
+   "loss": 0,
+   "colo": "CCU",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.165.115",
+   "ping_ms": 178.6,
+   "connect_ms": 508.3,
+   "jitter_ms": 11.0,
+   "loss": 0,
+   "colo": "HKG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.165.182",
+   "ping_ms": 172.9,
+   "connect_ms": 509.5,
+   "jitter_ms": 9.1,
+   "loss": 0,
+   "colo": "HKG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.81.36",
+   "ping_ms": 171.2,
+   "connect_ms": 513.8,
+   "jitter_ms": 1.0,
+   "loss": 0,
+   "colo": "MEL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.211.6",
+   "ping_ms": 236.5,
+   "connect_ms": 501.7,
+   "jitter_ms": 25.9,
+   "loss": 0,
+   "colo": "BOM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.105.47",
+   "ping_ms": 249.9,
+   "connect_ms": 512.6,
+   "jitter_ms": 16.2,
+   "loss": 0,
+   "colo": "QAD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.106.241",
+   "ping_ms": 242.6,
+   "connect_ms": 502.2,
+   "jitter_ms": 44.3,
+   "loss": 0,
+   "colo": "DEL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.81.212",
+   "ping_ms": 170.9,
+   "connect_ms": 516.3,
+   "jitter_ms": 19.2,
+   "loss": 0,
+   "colo": "MEL",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.165.221",
+   "ping_ms": 214.6,
+   "connect_ms": 497.2,
+   "jitter_ms": 67.8,
+   "loss": 0,
+   "colo": "BKK2280029",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.103.183",
+   "ping_ms": 264.2,
+   "connect_ms": 512.6,
+   "jitter_ms": 40.6,
+   "loss": 0,
+   "colo": "CCU",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.217.138",
+   "ping_ms": 161.9,
+   "connect_ms": 523.8,
+   "jitter_ms": 25.4,
+   "loss": 0,
+   "colo": "EZE",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.50.118",
+   "ping_ms": 175.8,
+   "connect_ms": 533.7,
+   "jitter_ms": 16.5,
+   "loss": 0,
+   "colo": "BNE",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.65.169",
+   "ping_ms": 185.8,
+   "connect_ms": 570.1,
+   "jitter_ms": 3.2,
+   "loss": 0,
+   "colo": "DXB",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.85.97",
+   "ping_ms": 273.5,
+   "connect_ms": 556.4,
+   "jitter_ms": 43.3,
+   "loss": 0,
+   "colo": "AMS",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.142.199",
+   "ping_ms": 192.0,
+   "connect_ms": 577.0,
+   "jitter_ms": 3.6,
+   "loss": 0,
+   "colo": "FJR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.104.128",
+   "ping_ms": 271.4,
+   "connect_ms": 578.9,
+   "jitter_ms": 47.1,
+   "loss": 0,
+   "colo": "QAX",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "140.248.129.36",
+   "ping_ms": 205.3,
+   "connect_ms": 600.4,
+   "jitter_ms": 44.2,
+   "loss": 0,
+   "colo": "SIN",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.46.25",
+   "ping_ms": 211.1,
+   "connect_ms": 611.2,
+   "jitter_ms": 24.7,
+   "loss": 0,
+   "colo": "QPG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.34.95",
+   "ping_ms": 212.6,
+   "connect_ms": 640.6,
+   "jitter_ms": 4.0,
+   "loss": 0,
+   "colo": "BOM",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.46.87",
+   "ping_ms": 212.3,
+   "connect_ms": 648.3,
+   "jitter_ms": 7.6,
+   "loss": 0,
+   "colo": "ACC",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.226.103",
+   "ping_ms": 230.4,
+   "connect_ms": 696.4,
+   "jitter_ms": 9.0,
+   "loss": 0,
+   "colo": "CPT",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.61.99",
+   "ping_ms": 247.2,
+   "connect_ms": 709.6,
+   "jitter_ms": 1.9,
+   "loss": 0,
+   "colo": "HYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "167.82.58.195",
+   "ping_ms": 239.0,
+   "connect_ms": 710.2,
+   "jitter_ms": 2.2,
+   "loss": 0,
+   "colo": "HYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.13.244",
+   "ping_ms": 235.8,
+   "connect_ms": 710.9,
+   "jitter_ms": 2.9,
+   "loss": 0,
+   "colo": "CHC",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.104.207",
+   "ping_ms": 236.1,
+   "connect_ms": 720.0,
+   "jitter_ms": 8.2,
+   "loss": 0,
+   "colo": "HYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.104.65",
+   "ping_ms": 238.6,
+   "connect_ms": 711.6,
+   "jitter_ms": 34.8,
+   "loss": 0,
+   "colo": "HYD",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "146.75.15.181",
+   "ping_ms": 243.2,
+   "connect_ms": 724.1,
+   "jitter_ms": 18.4,
+   "loss": 0,
+   "colo": "CHC",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.102.174",
+   "ping_ms": 257.1,
+   "connect_ms": 757.6,
+   "jitter_ms": 33.3,
+   "loss": 0,
+   "colo": "CCU",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.100.201",
+   "ping_ms": 251.0,
+   "connect_ms": 806.1,
+   "jitter_ms": 7.9,
+   "loss": 0,
+   "colo": "CCU",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "199.232.45.202",
+   "ping_ms": 199.9,
+   "connect_ms": 626.0,
+   "jitter_ms": 672.4,
+   "loss": 0,
+   "colo": "QPG",
+   "ports": [
+    443
+   ],
+   "verified": true
+  },
+  {
+   "ip": "151.101.141.184",
+   "ping_ms": 189.0,
+   "connect_ms": 576.6,
+   "jitter_ms": 1043.5,
+   "loss": 0,
+   "colo": "FJR",
+   "ports": [
+    443
+   ],
+   "verified": true
+  }
+ ]
+}
