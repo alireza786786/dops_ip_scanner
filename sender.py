@@ -9,6 +9,7 @@ INLINE_KEYBOARD = {
     "inline_keyboard": [
         [{"text": "✨ کانال:", "url": "https://t.me/Goodbaye_filtering"}],
         [{"text": "💬 گروه:", "url": "https://t.me/CONFIG_V2RAY_VIP"}],
+        [{"text": "🌐 اسکنر آنلاین (تست روی اینترنت شما)", "url": "https://alireza786786.github.io/dops_ip_scanner/"}],
         [{"text": "بفرست واسه رفقا", "url": "https://t.me/share/url?url=https://t.me/Goodbaye_filtering"}]
     ]
 }

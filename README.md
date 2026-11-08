@@ -35,7 +35,7 @@
 
 ---
 
-## ✨ اسکنر وب (V14.1 Meridian)
+## ✨ اسکنر وب (V14.2 Meridian)
 
 - 🌍 **منبع‌ها:** مخزن (از شاخهٔ data)، cf2dns (کاندیدا)، رنج‌های رسمی کلودفلر و Fastly، پریست Google، CloudFront، Azure، Gcore، ArvanCloud، WARP، بانک آفلاین، آی‌پی‌های پایدار، فهرست دلخواه و آدرس فایل
 - 🔌 **پورت هوشمند:** خودکار (پورت کانفیگ‌ها یا همهٔ پورت‌های TLS)، ۶ پورت TLS و ۷ پورت HTTP، تست چندپورتی و پورت دلخواه
@@ -43,7 +43,9 @@
 - 📊 تأخیر، نوسان، افت، ستاره، نشان «پایدار» برای هر اپراتور جدا
 - 🧩 بازنویسی گروهی VLESS، VMess، Trojan، SS (Reality دست‌نخورده می‌ماند) و خروجی **Clash (YAML)**، Base64 و فایل
 - 📋 کپی آی‌پی‌های سبز یا همه، 🗑 پاک کردن ورودی و خروجی، 📨 تلگرام
-- 🌗 تم روز و شب، 🌐 فارسی و انگلیسی، 📲 نصب به‌عنوان برنامه (PWA) و کار آفلاین
+- 🌗 تم روز و شب، 🌐 فارسی و انگلیسی (دکمه‌های آیکونی بالای صفحه، کنار دکمهٔ رفتن به مخزن گیت‌هاب)
+- 🌀 صفحهٔ آغازین با کرهٔ چرخان (در بازدید بعدی کوتاه‌تر؛ برای کاربران «کاهش حرکت» ثابت)
+- 📲 نصب به‌عنوان برنامه (PWA) و کار آفلاین
 
 **محدودیت‌های مهم**
 - مرورگر فقط **زمان پاسخ** را می‌سنجد؛ آی‌پی نهایی را در کلاینت واقعی (مثل v2rayNG) امتحان کنید.
@@ -91,7 +93,7 @@ python main.py
 | `index.html`، `sw.js`، `manifest.json`، `icon-*.png` | اسکنر وب و PWA (نام صفحهٔ اصلی باید دقیقاً `index.html` باشد، وگرنه آدرس اصلی سایت ۴۰۴ می‌دهد) |
 | `scanlib.py` | موتور مشترک اسکن (TLS، تأیید، پورت‌ها، یادگیری بلوک‌ها، فاصلهٔ تلگرام) |
 | `start.py`، `fastly.py` | پروفایل Cloudflare و Fastly |
-| `sender.py` | ارسال فایل به تلگرام |
+| `sender.py` | ارسال فایل به تلگرام (زیر هر فایل ۴ دکمه: کانال، گروه، اسکنر آنلاین، اشتراک‌گذاری) |
 | `dnstt_scanner.py` | تست ریزالور برای DNSTT |
 | `test_local.py`، `main.py` | تست محلی و منو |
 | `.github/workflows/scanner.yml` | اسکن ۳۰ دقیقه‌ای و انتشار روی data |
@@ -110,7 +112,7 @@ python main.py
 
 ```bash
 pip install playwright==1.63.0 PyYAML==6.0.3 && python -m playwright install chromium
-for t in engine dnstt workflow web pwa; do python tests/test_$t.py; done
+for t in engine dnstt workflow web pwa ui; do python tests/test_$t.py; done
 ```
 
 ## ⚠️ نکتهٔ اخلاقی
@@ -121,6 +123,7 @@ for t in engine dnstt workflow web pwa; do python tests/test_$t.py; done
 
 - فهرست رسمی رنج‌ها: Cloudflare (`ips-v4`) و Fastly (`public-ip-list`)
 - فهرست کاندیدای cf2dns: [ircfspace/cf2dns](https://github.com/ircfspace/cf2dns)
+- آیکون‌های هدر (GitHub، ماه، خورشید، ترجمه): [Lucide](https://lucide.dev) (لایسنس ISC)
 
 ## 📄 لایسنس
 
