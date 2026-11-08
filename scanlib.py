@@ -30,6 +30,7 @@ MIN_ALIVE = 5           # below this the scan is considered broken -> keep old f
 TG_INTERVAL_MIN = int(os.environ.get("TG_INTERVAL_MIN", "170"))
 TG_FORCE = os.environ.get("TG_FORCE", "").lower() in ("1", "true", "yes")
 SHOW_VANTAGE_NOTE = True
+MIN_GAP_MIN = int(os.environ.get("SCAN_MIN_GAP_MIN", "0") or 0)   # scheduled runs skip a scan if the last one is younger than this
 
 _CTX = ssl.create_default_context()
 _CTX.check_hostname = False
@@ -242,6 +243,16 @@ async def add_ports(top, p, sem):
         r["ports"].sort()
 
 
+def last_scan_age_min(p):
+    """Minutes since the last published scan of this profile (None if unknown)."""
+    try:
+        with open(os.path.join(OUTPUT_DIR, p.out_name + ".json"), encoding="utf-8") as f:
+            t = datetime.fromisoformat(json.load(f)["scanned_at"])
+        return (datetime.now(timezone.utc) - t).total_seconds() / 60
+    except Exception:
+        return None
+
+
 # ---------------------------------------------------------------- output / telegram
 def write_outputs(p, pool, meta):
     lines = "".join(f"{r['ip']} ping={r['ping_ms']}ms connect={r['connect_ms']}ms jitter={r['jitter_ms']}ms "
@@ -272,6 +283,11 @@ def send_telegram(p, pool, txt):
 
 async def run_profile(p):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+    if MIN_GAP_MIN > 0:
+        age = last_scan_age_min(p)
+        if age is not None and age < MIN_GAP_MIN:
+            print(f"⏭️ {p.key}: last scan was {age:.0f} min ago (< {MIN_GAP_MIN}); skipping this scheduled slot")
+            return 0
     state, cidrs = load_state(p), p.fetch_ranges()
     seeds = []
     if p.seeds:
