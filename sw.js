@@ -1,6 +1,6 @@
 /* DOPS Scanner service worker: network-first for the app itself, offline fallback from cache.
    It never touches cross-origin requests (IP probes, data branch, Telegram), so scan results are never cached. */
-const CACHE = 'dops-v14-1';
+const CACHE = 'dops-v14-2';
 const SHELL = ['./', 'index.html', 'manifest.json', 'icon-192.png', 'icon-512.png', 'icon-512-maskable.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', e => {
