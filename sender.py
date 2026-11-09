@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Copyright (c) 2026 alireza786786 (DOPS). All rights reserved. See LICENSE.
 import os, sys, json, urllib.request, urllib.parse
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN", "")
 CHAT_ID = os.environ.get("CHAT_ID", "")
+ADMIN_CHAT_ID = os.environ.get("ADMIN_CHAT_ID", "")   # optional private chat for health alerts
 
 INLINE_KEYBOARD = {
     "inline_keyboard": [
@@ -41,6 +43,20 @@ def send_telegram_file(file_path: str, caption: str = ""):
         print(f"❌ خطا در ارسال تلگرام: {e}")
         return False
 
+
+def send_telegram_message(text: str, chat_id: str = "") -> bool:
+    """Plain HTML message (used for admin health alerts). Needs BOT_TOKEN and ADMIN_CHAT_ID (or chat_id)."""
+    cid = chat_id or ADMIN_CHAT_ID
+    if not BOT_TOKEN or not cid:
+        return False
+    data = json.dumps({"chat_id": cid, "text": text[:4000], "parse_mode": "HTML", "disable_web_page_preview": True}).encode("utf-8")
+    req = urllib.request.Request(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage", data=data, headers={"Content-Type": "application/json"})
+    try:
+        with urllib.request.urlopen(req, timeout=30):
+            return True
+    except Exception as e:
+        print(f"❌ خطا در ارسال هشدار تلگرام: {e}")
+        return False
 
 if __name__ == "__main__":
     if not BOT_TOKEN or not CHAT_ID:

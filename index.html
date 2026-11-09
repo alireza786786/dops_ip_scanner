@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
+<!-- Copyright (c) 2026 alireza786786 (DOPS). All rights reserved. See LICENSE. -->
+<meta name="copyright" content="© 2026 alireza786786 (DOPS). All rights reserved.">
 <script>try{if(sessionStorage.getItem("dops-seen"))document.documentElement.classList.add("quick");sessionStorage.setItem("dops-seen","1")}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src https: http:; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'">
+<meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#070b14">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -11,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="description" content="DOPS V14 Meridian — Multi-CDN IP Scanner, Config Rewriter & Telegram Dispatcher">
-<title>DOPS V14.2 Meridian — Multi-CDN Scanner</title>
+<title>DOPS V14.3 Meridian — Multi-CDN Scanner</title>
 <style>
 :root{
   --bg:#070b14;--card:#0f172a;--bd:#1e293b;--ac:#00ffcc;--tx:#f1f5f9;--mu:#94a3b8;
@@ -76,6 +80,15 @@ th[data-k]{cursor:pointer;user-select:none}
 .tab-btn{background:var(--in-bg);color:var(--tx);border:1px solid var(--bd);padding:5px 8px;border-radius:6px;font-size:11px;cursor:pointer}
 .tab-btn.active{background:var(--ac);color:#000;font-weight:bold}
 .tab-content{font-size:11px;line-height:1.8;color:var(--tx);margin-top:6px}
+.fake-warn{position:sticky;top:0;z-index:1000;background:#b91c1c;color:#fff;padding:10px 12px;font-size:12.5px;line-height:1.8;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.4)}
+.fake-warn[hidden]{display:none}
+.fake-warn a{color:#fff;font-weight:800;text-decoration:underline;margin-inline-start:6px;white-space:nowrap}
+.age-badge{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:999px;font-size:11.5px;border:1px solid var(--bd)}
+.age-badge.ok{color:var(--ok);border-color:var(--ok)}.age-badge.warn{color:#eab308;border-color:#eab308}.age-badge.bad{color:#ef4444;border-color:#ef4444}
+.q-ip{font:800 26px/1.2 ui-monospace,Menlo,Consolas,monospace;color:var(--ok);direction:ltr;text-align:center;margin:10px 0 2px;word-break:break-all}
+.q-meta{text-align:center;color:var(--mu);font-size:12px;margin-bottom:8px}
+.qr-box{display:flex;justify-content:center;margin:8px 0}.qr-box svg{max-width:100%;height:auto;border-radius:8px}
+.priv li{margin:6px 0;font-size:12px;line-height:1.8}.priv summary{cursor:pointer;font-weight:700}
 /* ---- splash ---- */
 #splash{position:fixed;inset:0;z-index:99999;background:radial-gradient(circle at 50% 38%,#0d1b30,#070b14 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;animation:sp-out .55s ease 1.4s forwards}
 html.quick #splash{animation-delay:.45s}
@@ -114,9 +127,10 @@ html.quick #splash{animation-delay:.45s}
   <div class="sp-title">DOPS SCANNER</div>
   <div class="sp-bar"><i></i></div>
 </div>
+<div id="fakeWarn" class="fake-warn" role="alert" hidden><b data-i18n="fakeTitle">⚠️ نسخهٔ غیررسمی!</b> <span data-i18n="fakeBody"></span> <a id="fakeLink" href="https://alireza786786.github.io/dops_ip_scanner/" rel="noopener" data-i18n="fakeGo"></a></div>
 <div class="wrap">
   <div class="top-nav">
-    <div class="badge">DOPS V14.2 · MERIDIAN</div>
+    <div class="badge">DOPS V14.3 · MERIDIAN</div>
     <div class="nav-actions">
       <a class="icon-btn" id="ghBtn" href="https://github.com/alireza786786/dops_ip_scanner" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
       <button class="icon-btn" id="themeToggle" aria-label="Theme" title="Theme"><span id="themeIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span></button>
@@ -137,7 +151,31 @@ html.quick #splash{animation-delay:.45s}
   <div class="card">
     <div class="ct"><span data-i18n="netStatus">وضعیت اینترنت</span><span class="pill" id="net" data-i18n="netPreparing">در حال آماده‌سازی</span></div>
     <div class="isp" id="isp" data-i18n="ispChecking">در حال بررسی اتصال...</div>
+    <span class="age-badge" id="repoAge" hidden></span>
   </div>
+
+  <div class="card" id="quickCard">
+    <div class="ct"><span data-i18n="quickTitle">🚀 حالت سریع</span><span class="hint" data-i18n="quickHint"></span></div>
+    <button class="btn main" id="quickBtn" style="width:100%" data-i18n="quickBtn">🚀 بهترین آی‌پی را پیدا کن</button>
+    <div id="quickOut" hidden>
+      <div class="q-ip" id="qIp"></div><div class="q-meta" id="qMeta"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px">
+        <button class="sm hi" style="flex:1 1 auto" id="qCopyIp" data-i18n="qCopyIp">📋 کپی آی‌پی</button>
+        <button class="sm" style="flex:1 1 auto" id="qCopyCfg" data-i18n="qCopyCfg">📋 کپی کانفیگ‌ها</button>
+        <button class="sm" style="flex:1 1 auto" id="qQr" data-i18n="qQr">📷 QR</button>
+      </div>
+      <p class="hint" id="qNoCfg" data-i18n="qNoCfg" style="margin-top:6px"></p>
+    </div>
+  </div>
+
+  <details class="card priv" id="privacy">
+    <summary data-i18n="privTitle">🔒 حریم خصوصی و امنیت</summary>
+    <ul>
+      <li data-i18n="privStore"></li><li data-i18n="privNet"></li><li data-i18n="privToken"></li>
+      <li><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="noIsp"> <span data-i18n="privNoIsp"></span></label></li>
+    </ul>
+    <button class="sm" id="wipeAll" style="width:100%" data-i18n="wipeAll">🧹 پاک‌سازی همه‌چیز (حافظه، کش و برنامهٔ نصب‌شده)</button>
+  </details>
 
   <div class="card">
     <div class="ct"><span data-i18n="manualTitle">ورود دستی آی‌پی</span><span class="hint" data-i18n="manualHint">تک‌آی‌پی یا رنج CIDR</span></div>
@@ -213,7 +251,7 @@ html.quick #splash{animation-delay:.45s}
         <option value="none" data-i18n="optNoProto">بدون تست (اعتماد به لیست مخزن)</option>
       </select></div>
     <div class="row"><span data-i18n="samplesLabel">دقت تست:</span>
-      <select id="samples"><option value="2">2 fast</option><option value="3" selected>3 balanced</option><option value="5">5 accurate</option></select></div>
+      <select id="samples"><option value="2" data-i18n="optS2">2 fast</option><option value="3" selected data-i18n="optS3">3 balanced</option><option value="5" data-i18n="optS5">5 accurate</option></select></div>
   </div>
 
   <div class="warn-box" id="portMismatchWarn" data-i18n="portWarn">⚠️ پورت اسکن با پورت کانفیگ شما تفاوت دارد! برای جلوگیری از قطعی، پورت اسکن را متناسب با کانفیگ بگذارید.</div>
@@ -246,6 +284,7 @@ html.quick #splash{animation-delay:.45s}
         <button class="sm" style="flex:1" id="copyCfg" data-i18n="bCopyCfg">📋 کپی کانفیگ‌ها</button>
         <button class="sm hi" style="flex:1" id="copySubLink" data-i18n="bCopySub">📦 کپی Base64 (ساب)</button>
         <button class="sm" style="flex:1" id="copyClash" data-i18n="bCopyClash">📄 کپی Clash (YAML)</button>
+        <button class="sm" style="flex:1" id="qrBtn" data-i18n="bQr">📷 QR</button>
         <button class="sm" style="flex:1" id="dlCfg" data-i18n="bSaveFile">💾 ذخیره فایل</button>
         <button class="sm" style="flex:1" id="clearCfgOut" data-i18n="clearOut">🗑 پاک کردن خروجی</button>
       </div>
@@ -256,7 +295,7 @@ html.quick #splash{animation-delay:.45s}
     <div class="ct" data-i18n="tgTitle">ارسال و اشتراک‌گذاری در تلگرام</div>
     <p class="hint" data-i18n="tgHint">توکن ربات و آیدی کانال/گروه را وارد کنید (فقط با تیک «به‌خاطر سپردن» ذخیره می‌شود):</p>
     <div style="display:flex;flex-direction:column;gap:6px;margin-top:6px">
-      <input type="password" id="tgToken" placeholder="bot token: 123456:ABC-DEF..." dir="ltr" autocomplete="off">
+      <input type="password" id="tgToken" placeholder="bot token: 123456:ABC-DEF..." dir="ltr" autocomplete="off" spellcheck="false" autocapitalize="off">
       <input type="text" id="tgChat" placeholder="chat id: @MyChannel" dir="ltr" autocomplete="off">
       <div style="display:flex;gap:6px">
         <button class="sm hi" style="flex:1" id="bSendTg" data-i18n="bTgSend">🚀 ارسال مستقیم به تلگرام</button>
@@ -312,6 +351,18 @@ html.quick #splash{animation-delay:.45s}
   </div>
 </div>
 
+<div class="modal" id="qrModal" hidden>
+  <div class="modal-box">
+    <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:14px;color:var(--ac)" data-i18n="qrTitle">QR</h3><button class="sm" id="qrClose">✕</button></div>
+    <div class="qr-box" id="qrBox"></div>
+    <div style="display:flex;gap:6px;align-items:center;justify-content:center;margin:4px 0">
+      <button class="sm" id="qrPrev">◀</button><b id="qrCount" style="direction:ltr"></b><button class="sm" id="qrNext">▶</button>
+    </div>
+    <p class="hint" id="qrHint" style="text-align:center"></p>
+    <button class="btn main" id="qrCopy" style="width:100%" data-i18n="qrCopy">📋 کپی همین کانفیگ</button>
+  </div>
+</div>
+
 <div class="modal" id="copyModal" hidden>
   <div class="modal-box">
     <div style="display:flex;justify-content:space-between;align-items:center">
@@ -362,6 +413,62 @@ const fa = n => currentLang === 'fa' ? Number(n).toLocaleString('fa-IR') : Strin
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
 /* ---------------- i18n ---------------- */
+/* ---------------- QR code encoder (byte mode, error-correction level L, versions 1-40; no external code) ---------------- */
+const QR = (() => {
+  const ECC = [-1, 7, 10, 15, 20, 26, 18, 20, 24, 30, 18, 20, 24, 26, 30, 22, 24, 28, 30, 28, 28, 28, 28, 30, 30, 26, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30];
+  const BLK = [-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 7, 8, 8, 9, 9, 10, 12, 12, 12, 13, 14, 15, 16, 17, 18, 19, 19, 20, 21, 22, 24, 25];
+  const rawModules = v => { let r = (16 * v + 128) * v + 64; if (v >= 2) { const n = Math.floor(v / 7) + 2; r -= (25 * n - 10) * n - 55; if (v >= 7) r -= 36; } return r; };
+  const dataCodewords = v => Math.floor(rawModules(v) / 8) - ECC[v] * BLK[v];
+  const alignPos = v => { if (v === 1) return []; const n = Math.floor(v / 7) + 2, step = v === 32 ? 26 : Math.ceil((v * 4 + 4) / (n * 2 - 2)) * 2, r = [6]; for (let p = v * 4 + 10; r.length < n; p -= step) r.splice(1, 0, p); return r; };
+  const gfMul = (x, y) => { let z = 0; for (let i = 7; i >= 0; i--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> i) & 1) * x; } return z; };
+  const rsDivisor = deg => { const r = new Array(deg).fill(0); r[deg - 1] = 1; let root = 1; for (let i = 0; i < deg; i++) { for (let j = 0; j < r.length; j++) { r[j] = gfMul(r[j], root); if (j + 1 < r.length) r[j] ^= r[j + 1]; } root = gfMul(root, 0x02); } return r; };
+  const rsRemainder = (data, div) => { const r = div.map(() => 0); for (const b of data) { const f = b ^ r.shift(); r.push(0); div.forEach((c, i) => { r[i] ^= gfMul(c, f); }); } return r; };
+  function encode(text) {
+    const bytes = [...new TextEncoder().encode(text)];
+    let ver = 1;
+    for (; ; ver++) { if (ver > 40) throw new Error('too long'); const cc = ver <= 9 ? 8 : 16; if (4 + cc + bytes.length * 8 <= dataCodewords(ver) * 8) break; }
+    const bits = []; const put = (val, len) => { for (let i = len - 1; i >= 0; i--) bits.push((val >>> i) & 1); };
+    put(4, 4); put(bytes.length, ver <= 9 ? 8 : 16); bytes.forEach(b => put(b, 8));
+    const cap = dataCodewords(ver) * 8; put(0, Math.min(4, cap - bits.length)); while (bits.length % 8) bits.push(0);
+    for (let pad = 0xEC; bits.length < cap; pad ^= 0xEC ^ 0x11) put(pad, 8);
+    const data = []; for (let i = 0; i < bits.length; i += 8) data.push(parseInt(bits.slice(i, i + 8).join(''), 2));
+    const nb = BLK[ver], eccLen = ECC[ver], raw = Math.floor(rawModules(ver) / 8), nShort = nb - raw % nb, shortLen = Math.floor(raw / nb), div = rsDivisor(eccLen), blocks = [];
+    for (let i = 0, k = 0; i < nb; i++) { const len = shortLen - eccLen + (i < nShort ? 0 : 1), d = data.slice(k, k + len); k += len; const e = rsRemainder(d, div); if (i < nShort) d.push(0); blocks.push(d.concat(e)); }
+    const all = []; for (let i = 0; i < blocks[0].length; i++) blocks.forEach((b, j) => { if (i !== shortLen - eccLen || j >= nShort) all.push(b[i]); });
+    const size = ver * 4 + 17, mod = Array.from({ length: size }, () => new Array(size).fill(false)), fn = Array.from({ length: size }, () => new Array(size).fill(false));
+    const setF = (x, y, dark) => { mod[y][x] = dark; fn[y][x] = true; };
+    for (let i = 0; i < size; i++) { setF(6, i, i % 2 === 0); setF(i, 6, i % 2 === 0); }
+    const finder = (cx, cy) => { for (let dy = -4; dy <= 4; dy++) for (let dx = -4; dx <= 4; dx++) { const d = Math.max(Math.abs(dx), Math.abs(dy)), x = cx + dx, y = cy + dy; if (x >= 0 && x < size && y >= 0 && y < size) setF(x, y, d !== 2 && d !== 4); } };
+    finder(3, 3); finder(size - 4, 3); finder(3, size - 4);
+    const ap = alignPos(ver), na = ap.length;
+    for (let i = 0; i < na; i++) for (let j = 0; j < na; j++) { if ((i === 0 && j === 0) || (i === 0 && j === na - 1) || (i === na - 1 && j === 0)) continue; for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) setF(ap[i] + dx, ap[j] + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1); }
+    const drawFormat = mask => { const d = (1 << 3) | mask; let rem = d; for (let i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537); const b = ((d << 10) | rem) ^ 0x5412, g = i => ((b >>> i) & 1) !== 0;
+      for (let i = 0; i <= 5; i++) setF(8, i, g(i)); setF(8, 7, g(6)); setF(8, 8, g(7)); setF(7, 8, g(8)); for (let i = 9; i < 15; i++) setF(14 - i, 8, g(i));
+      for (let i = 0; i < 8; i++) setF(size - 1 - i, 8, g(i)); for (let i = 8; i < 15; i++) setF(8, size - 15 + i, g(i)); setF(8, size - 8, true); };
+    drawFormat(0);
+    if (ver >= 7) { let rem = ver; for (let i = 0; i < 12; i++) rem = (rem << 1) ^ ((rem >>> 11) * 0x1F25); const b = (ver << 12) | rem; for (let i = 0; i < 18; i++) { const bit = ((b >>> i) & 1) !== 0, a = size - 11 + i % 3, c = Math.floor(i / 3); setF(a, c, bit); setF(c, a, bit); } }
+    let i = 0; for (let right = size - 1; right >= 1; right -= 2) { if (right === 6) right = 5; for (let vert = 0; vert < size; vert++) for (let j = 0; j < 2; j++) { const x = right - j, y = ((right + 1) & 2) === 0 ? size - 1 - vert : vert; if (!fn[y][x] && i < all.length * 8) { mod[y][x] = ((all[i >>> 3] >>> (7 - (i & 7))) & 1) !== 0; i++; } } }
+    const masks = [(x, y) => (x + y) % 2 === 0, (x, y) => y % 2 === 0, (x, y) => x % 3 === 0, (x, y) => (x + y) % 3 === 0, (x, y) => (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0, (x, y) => x * y % 2 + x * y % 3 === 0, (x, y) => (x * y % 2 + x * y % 3) % 2 === 0, (x, y) => ((x + y) % 2 + x * y % 3) % 2 === 0];
+    const apply = m => { for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) if (!fn[y][x] && masks[m](x, y)) mod[y][x] = !mod[y][x]; };
+    const runPenalty = line => { let p = 0, run = 1; for (let k = 1; k <= line.length; k++) { if (k < line.length && line[k] === line[k - 1]) run++; else { if (run >= 5) p += 3 + run - 5; run = 1; } }
+      for (let k = 0; k + 11 <= line.length; k++) { const s = line.slice(k, k + 11).map(b => (b ? 1 : 0)).join(''); if (s === '10111010000' || s === '00001011101') p += 40; } return p; };
+    const penalty = () => { let p = 0; for (let y = 0; y < size; y++) p += runPenalty(mod[y]); for (let x = 0; x < size; x++) p += runPenalty(mod.map(r => r[x]));
+      for (let y = 0; y < size - 1; y++) for (let x = 0; x < size - 1; x++) { const c = mod[y][x]; if (c === mod[y][x + 1] && c === mod[y + 1][x] && c === mod[y + 1][x + 1]) p += 3; }
+      let dark = 0; mod.forEach(r => r.forEach(c => { if (c) dark++; })); p += Math.floor(Math.abs(dark * 20 - size * size * 10) / (size * size)) * 10; return p; };
+    let best = 0, bestP = Infinity; for (let m = 0; m < 8; m++) { apply(m); drawFormat(m); const p = penalty(); if (p < bestP) { best = m; bestP = p; } apply(m); }
+    apply(best); drawFormat(best);
+    return { version: ver, size, modules: mod };
+  }
+  function svg(text, px) {
+    const { size, modules } = encode(text), q = 4, n = size + q * 2; let d = '';
+    for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) { if (!modules[y][x]) continue; let e = x; while (e + 1 < size && modules[y][e + 1]) e++; d += `M${x + q} ${y + q}h${e - x + 1}v1h-${e - x + 1}z`; x = e; }
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" width="${px || 260}" height="${px || 260}" shape-rendering="crispEdges" role="img"><rect width="${n}" height="${n}" fill="#fff"/><path d="${d}" fill="#000"/></svg>`;
+  }
+  return { encode, svg };
+})();
+
+const OFFICIAL_HOSTS = ['alireza786786.github.io'];   // add your custom domain here if you ever get one
+const IS_OFFICIAL = location.protocol === 'file:' || ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname) || (OFFICIAL_HOSTS.includes(location.hostname) && location.pathname.startsWith('/dops_ip_scanner'));
 const ICON_MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>', ICON_SUN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>';
 let currentLang = 'fa', currentTheme = 'dark';
 const I18N = {
@@ -417,7 +524,18 @@ fa: {
   tgCopied:'متن تلگرام کپی شد ✔️', tgListTitle:'لیست آی‌پی‌های تمیز CDN (تست‌شده)',
   tgIsp:'اپراتور', tgTime:'زمان تست', tgForClient:'برای کلاینت (Clean IP)', tgFooter:'اسکن شده با DOPS Meridian',
   tgDirectIntact:'کانفیگ Reality دست‌نخورده ماند', tgConfigs:'کانفیگ',
-  bClearManual:'🗑 پاک کردن اینها', manualCleared:'آی‌پی‌های دستی پاک شد',
+  bClearManual:'🗑 پاک کردن اینها', optS2:'۲ نمونه — سریع', optS3:'۳ نمونه — متعادل', optS5:'۵ نمونه — دقیق', fakeTitle:'⚠️ نسخهٔ غیررسمی!', fakeBody:'این صفحه از آدرس رسمی اسکنر باز نشده است. توکن ربات و کانفیگ‌هایتان را اینجا وارد نکنید (ورود و ذخیره‌شان غیرفعال شد).', fakeGo:'رفتن به آدرس رسمی ◀',
+  quickTitle:'🚀 حالت سریع', quickHint:'یک لمس، بدون تنظیمات', quickBtn:'🚀 بهترین آی‌پی را پیدا کن',
+  qCopyIp:'📋 کپی آی‌پی', qCopyCfg:'📋 کپی کانفیگ‌ها', qQr:'📷 QR', bQr:'📷 QR',
+  qNoCfg:'برای ساخت کانفیگ، کانفیگ خودتان را در بخش «بازنویسی گروهی» بچسبانید و دوباره بزنید.',
+  quickNone:'آی‌پی سالمی پیدا نشد؛ چند دقیقه بعد دوباره امتحان کنید', quickBest:'بهترین آی‌پی روی اینترنت شما', quickMeta:'پینگ {ping}ms · {n} آی‌پی سالم', quickBusy:'اسکن در حال اجراست',
+  qrTitle:'📷 QR کانفیگ', qrCopy:'📋 کپی همین کانفیگ', qrHint:'روی دستگاه دیگر در v2rayNG «اسکن QR» را بزنید', qrNone:'ابتدا کانفیگ بسازید', qrTooLong:'این کانفیگ برای QR بیش از حد طولانی است',
+  repoAge:'لیست مخزن: {h} ساعت پیش', repoStale:'ممکن است اسکن خودکار متوقف شده باشد', repoAgeUnknown:'سن لیست مخزن نامعلوم است',
+  privTitle:'🔒 حریم خصوصی و امنیت', privStore:'فقط روی همین گوشی ذخیره می‌شود: تنظیمات، تاریخچهٔ آی‌پی‌ها و (فقط با تیک «به‌خاطر سپردن») کانفیگ و توکن. هیچ‌چیز به سرور ما فرستاده نمی‌شود.',
+  privNet:'درخواست‌های بیرونی: ipwho.is (تشخیص اپراتور؛ آی‌پی شما را می‌بیند)، فهرست رسمی رنج‌ها از Cloudflare و Fastly، فایل‌های مخزن از GitHub، آی‌پی‌هایی که تست می‌کنید، و api.telegram.org فقط وقتی خودتان ارسال بزنید.',
+  privToken:'توکن ربات را فقط روی دستگاه شخصی وارد کنید و تیک «به‌خاطر سپردن» را روی دستگاه مشترک نزنید. پیشنهاد: ارسال به کانال را از طریق Actions انجام دهید، نه مرورگر.',
+  privNoIsp:'تشخیص اپراتور غیرفعال باشد (بدون تماس با ipwho.is)', wipeAll:'🧹 پاک‌سازی همه‌چیز (حافظه، کش و برنامهٔ نصب‌شده)', wipeConfirm:'همهٔ داده‌های این برنامه روی این دستگاه پاک شود؟', ispOff:'تشخیص اپراتور غیرفعال است',
+manualCleared:'آی‌پی‌های دستی پاک شد',
   optCf2dns:'cf2dns (ircfspace) — کاندیدا، تست‌شده از چین', optFavs:'آی‌پی‌های پایدار اسکن‌های قبل 🏆', optUrl:'آدرس فایل دلخواه (URL)', optCustomSrc:'لیست دلخواه سفارشی ✏️',
   optAutoPort:'🤖 خودکار (تشخیص هوشمند پورت)', optAllTls:'همه پورت‌های TLS (۶ پورت)', optAllHttp:'همه پورت‌های HTTP (۷ پورت)', optCustomPort:'✏️ پورت دلخواه...',
   cdnWarnOther:'⚠️ این CDN فقط برای کانفیگ‌هایی کار می‌کند که دامنهٔ سرورشان پشت همین CDN باشد. مرورگر فقط زمان پاسخ را می‌سنجد و نتیجه تقریبی است؛ آی‌پی نهایی را در کلاینت واقعی تست کنید.',
@@ -480,7 +598,18 @@ en: {
   tgCopied:'Telegram post copied ✔️', tgListTitle:'Clean CDN IP list (tested)',
   tgIsp:'ISP', tgTime:'Tested at', tgForClient:'For client (Clean IP)', tgFooter:'Scanned with DOPS Meridian',
   tgDirectIntact:'Reality config(s) left intact', tgConfigs:'configs',
-  bClearManual:'🗑 Clear These', manualCleared:'Manual IPs cleared',
+  bClearManual:'🗑 Clear These', optS2:'2 samples — fast', optS3:'3 samples — balanced', optS5:'5 samples — accurate', fakeTitle:'⚠️ Unofficial copy!', fakeBody:'This page was not opened from the official scanner address. Do not enter your bot token or configs here (entering and saving them is disabled).', fakeGo:'Go to the official address ▶',
+  quickTitle:'🚀 Quick mode', quickHint:'one tap, no settings', quickBtn:'🚀 Find the best IP',
+  qCopyIp:'📋 Copy IP', qCopyCfg:'📋 Copy configs', qQr:'📷 QR', bQr:'📷 QR',
+  qNoCfg:'To build configs, paste your config in "Batch rewrite" and tap again.',
+  quickNone:'No healthy IP found; try again in a few minutes', quickBest:'Best IP on your network', quickMeta:'ping {ping}ms · {n} healthy IPs', quickBusy:'A scan is already running',
+  qrTitle:'📷 Config QR', qrCopy:'📋 Copy this config', qrHint:'On another device use "Scan QR" in v2rayNG', qrNone:'Build configs first', qrTooLong:'This config is too long for a QR code',
+  repoAge:'Repo list: {h} h ago', repoStale:'the automatic scan may have stopped', repoAgeUnknown:'Repo list age unknown',
+  privTitle:'🔒 Privacy & security', privStore:'Stored only on this phone: settings, IP history and (only with "remember" ticked) configs and token. Nothing is sent to our servers.',
+  privNet:'External requests: ipwho.is (operator detection; it sees your IP), official range lists from Cloudflare and Fastly, repo files from GitHub, the IPs you test, and api.telegram.org only when you press send.',
+  privToken:'Enter the bot token only on a personal device and do not tick "remember" on shared devices. Better: let Actions post to the channel, not the browser.',
+  privNoIsp:'Disable operator detection (no request to ipwho.is)', wipeAll:'🧹 Wipe everything (storage, cache and installed app)', wipeConfirm:'Erase all data of this app on this device?', ispOff:'Operator detection is off',
+manualCleared:'Manual IPs cleared',
   optCf2dns:'cf2dns (ircfspace) — candidates tested from China', optFavs:'Stable IPs from previous scans 🏆', optUrl:'Custom file URL', optCustomSrc:'Custom list ✏️',
   optAutoPort:'🤖 Auto (detect port)', optAllTls:'All TLS ports (6)', optAllHttp:'All HTTP ports (7)', optCustomPort:'✏️ Custom port...',
   cdnWarnOther:'⚠️ This CDN only works for configs whose server domain is behind the same CDN. The browser only measures response time, so results are approximate; verify the final IP in a real client.',
@@ -516,7 +645,7 @@ function applyI18n() {
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
   $('langLabel').textContent = currentLang === 'fa' ? 'EN' : 'FA';
-  renderTut(); render(); checkPortMismatch(); srcUi();
+  renderTut(); render(); checkPortMismatch(); srcUi(); renderRepoAge();
 }
 function toggleTheme() {
   currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -560,7 +689,7 @@ const ip2n = ip => ip.split('.').reduce((a, o) => a * 256 + +o, 0);
 const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join('.');
 const TIMEOUT = 2500, MIN_MS = 6, FRAG = '10-30,5-10,tlshello';
 const TLS_PORTS = [443, 2053, 2083, 2087, 2096, 8443], HTTP_PORTS = [80, 8080, 8880, 2052, 2082, 2086, 2095];
-const FIELDS = ['src','limit','proto','targetPort','cfgMode','topN','addFrag','keepSni','tagIp','remember','customSni','customPort','samples','srcUrl','smart','customSrc'];
+const FIELDS = ['src','limit','proto','targetPort','cfgMode','topN','addFrag','keepSni','tagIp','remember','noIsp','customSni','customPort','samples','srcUrl','smart','customSrc'];
 
 let ispName = '?', userIP = '?', manualList = [], manualOnly = false, removed = [];
 let results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
@@ -594,7 +723,7 @@ function save() {
   try {
     const o = {}; FIELDS.forEach(k => { const e = $(k); if (e) o[k] = e.type === 'checkbox' ? e.checked : e.value; });
     o.remember = $('remember').checked;
-    if (o.remember) { o.tgToken = $('tgToken').value; o.tgChat = $('tgChat').value; o.cfgIn = $('cfgIn').value; }
+    if (o.remember && IS_OFFICIAL) { o.tgToken = $('tgToken').value; o.tgChat = $('tgChat').value; o.cfgIn = $('cfgIn').value; }
     else { delete o.tgToken; delete o.tgChat; delete o.cfgIn; }
     localStorage.setItem(STORE_KEY, JSON.stringify(o));
   } catch {}
@@ -1262,7 +1391,77 @@ $('remember').addEventListener('change', save);
 ['cfgIn', 'tgToken', 'tgChat'].forEach(id => $(id).addEventListener('change', () => { if ($('remember').checked) save(); }));
 
 /* ---------------- Init ---------------- */
-load(); loadISP(); checkPortMismatch(); srcUi(); applyI18n();
+
+/* ---------------- Operator detection opt-out ---------------- */
+const loadISP_orig = loadISP;
+loadISP = async function () {
+  if ($('noIsp').checked) { ispName = t('ispDirect'); userIP = '?'; $('isp').textContent = t('ispOff'); setNet(t('netOnline')); return; }
+  return loadISP_orig();
+};
+$('noIsp').addEventListener('change', () => { save(); loadISP(); });
+
+/* ---------------- Repo list freshness badge ---------------- */
+let repoAgeState = null;
+function renderRepoAge() {
+  const el = $('repoAge'); if (!repoAgeState) { el.hidden = true; return; }
+  const { h } = repoAgeState, cls = h === null ? 'bad' : h < 1.5 ? 'ok' : h < 3 ? 'warn' : 'bad';
+  el.className = 'age-badge ' + cls;
+  el.textContent = h === null ? t('repoAgeUnknown') : t('repoAge', { h: fa(Math.round(h * 10) / 10) }) + (cls === 'bad' ? ' · ' + t('repoStale') : '');
+  el.hidden = false;
+}
+async function loadRepoAge() {
+  try { const j = await (await repoFetch('outputs/alive_cloudflare.json')).json(), h = (Date.now() - Date.parse(j.scanned_at)) / 36e5; repoAgeState = { h: isFinite(h) ? Math.max(0, h) : null }; }
+  catch { repoAgeState = { h: null }; }
+  renderRepoAge();
+}
+
+/* ---------------- Wipe everything ---------------- */
+$('wipeAll').onclick = async () => {
+  if (!confirm(t('wipeConfirm'))) return;
+  try { localStorage.clear(); sessionStorage.clear(); } catch {}
+  try {
+    if (window.caches) for (const k of await caches.keys()) await caches.delete(k);
+    if (navigator.serviceWorker) for (const r of await navigator.serviceWorker.getRegistrations()) await r.unregister();
+  } catch {}
+  location.reload();
+};
+
+/* ---------------- QR modal (configs) ---------------- */
+let qrLines = [], qrIdx = 0;
+function qrShow() {
+  if (!qrLines.length) return toast(t('qrNone'));
+  qrIdx = (qrIdx + qrLines.length) % qrLines.length;
+  const line = qrLines[qrIdx]; let html;
+  try { html = QR.svg(line, 260); } catch { html = ''; toast(t('qrTooLong')); }
+  $('qrBox').innerHTML = html; $('qrCount').textContent = `${qrIdx + 1} / ${qrLines.length}`; $('qrHint').textContent = t('qrHint'); $('qrModal').hidden = false;
+}
+const cfgLines = () => $('cfgOut').value.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+$('qrBtn').onclick = () => { qrLines = cfgLines(); qrIdx = 0; qrShow(); };
+$('qrPrev').onclick = () => { qrIdx--; qrShow(); }; $('qrNext').onclick = () => { qrIdx++; qrShow(); };
+$('qrClose').onclick = () => { $('qrModal').hidden = true; };
+$('qrModal').addEventListener('click', e => { if (e.target === $('qrModal')) $('qrModal').hidden = true; });
+$('qrCopy').onclick = () => copy(qrLines[qrIdx] || '');
+
+/* ---------------- Quick mode: one tap ---------------- */
+async function quickRun() {
+  if (scanning) return toast(t('quickBusy'));
+  const ids = ['src', 'limit', 'proto', 'samples', 'targetPort'], keep = {}; ids.forEach(i => { keep[i] = $(i).value; }); const keepSmart = $('smart').checked;
+  $('src').value = 'outputs/alive_cloudflare.txt'; $('limit').value = '50'; $('proto').value = 'auto'; $('samples').value = '2'; $('targetPort').value = 'auto'; $('smart').checked = true; srcUi();
+  $('quickBtn').disabled = true;
+  try { await run(); } finally { ids.forEach(i => { $(i).value = keep[i]; }); $('smart').checked = keepSmart; srcUi(); save(); $('quickBtn').disabled = false; }
+  const b = bestList()[0], out = $('quickOut');
+  if (!b) { out.hidden = true; return toast(t('quickNone')); }
+  $('qIp').textContent = `${b.ip}:${b.port}`;
+  $('qMeta').textContent = t('quickBest') + ' · ' + t('quickMeta', { ping: b.ping, n: fa(results.length) });
+  const has = cfgLines().length > 0; $('qCopyCfg').hidden = !has; $('qQr').hidden = !has; $('qNoCfg').hidden = has; out.hidden = false;
+}
+$('quickBtn').onclick = quickRun;
+$('qCopyIp').onclick = () => { const b = bestList()[0]; if (b) copy(b.ip); };
+$('qCopyCfg').onclick = () => copy(cfgLines().join('\n'));
+$('qQr').onclick = () => { qrLines = cfgLines(); qrIdx = 0; qrShow(); };
+
+load(); loadISP(); loadRepoAge(); checkPortMismatch(); srcUi();
+if (!IS_OFFICIAL) { $('fakeWarn').hidden = false; $('tgToken').value = ''; $('tgToken').disabled = true; $('remember').checked = false; $('remember').disabled = true; } applyI18n();
 </script>
 <script>setTimeout(function(){var e=document.getElementById('splash');if(e)e.remove()},2600);</script>
 </body>

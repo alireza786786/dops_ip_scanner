@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Copyright (c) 2026 alireza786786 (DOPS). All rights reserved. See LICENSE.
 """Shared CDN clean-IP scan engine (stdlib only; GitHub Actions / Termux / PC).
 
 Used by start.py (Cloudflare) and fastly.py. Per profile it writes, inside OUTPUT_DIR:
@@ -10,14 +11,20 @@ Used by start.py (Cloudflare) and fastly.py. Per profile it writes, inside OUTPU
 Exit code 0 = lists updated, 1 = scan looked broken (previous lists are kept untouched).
 Telegram is sent at most every TG_INTERVAL_MIN minutes (default 170) unless TG_FORCE=1.
 """
-import asyncio, ipaddress, json, math, os, random, re, ssl, time
+import asyncio, html, ipaddress, json, math, os, random, re, ssl, time
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from statistics import median
 from typing import Callable, List, Optional
 from urllib.request import urlopen, Request
-from sender import send_telegram_file, format_config_remark
+try:
+    from sender import send_telegram_file, format_config_remark, send_telegram_message
+except ImportError:      # an older sender.py without admin alerts: alerts are simply off
+    from sender import send_telegram_file, format_config_remark
+
+    def send_telegram_message(text, chat_id=""):
+        return False
 
 OUTPUT_DIR = os.environ.get("OUTPUT_DIR", "outputs")
 ROUNDS = 3              # TLS handshakes per IP (jitter / loss)
@@ -30,6 +37,8 @@ MIN_ALIVE = 5           # below this the scan is considered broken -> keep old f
 TG_INTERVAL_MIN = int(os.environ.get("TG_INTERVAL_MIN", "170"))
 TG_FORCE = os.environ.get("TG_FORCE", "").lower() in ("1", "true", "yes")
 SHOW_VANTAGE_NOTE = True
+STALE_HOURS = 6         # a recovery message is sent when a scan succeeds after the previous one was older than this
+ALERT_GAP_MIN = 360     # at most one "scan is broken" alert per profile in this window
 MIN_GAP_MIN = int(os.environ.get("SCAN_MIN_GAP_MIN", "0") or 0)   # scheduled runs skip a scan if the last one is younger than this
 
 _CTX = ssl.create_default_context()
@@ -265,6 +274,16 @@ def write_outputs(p, pool, meta):
     return txt
 
 
+def alert(p, state, text):
+    """Admin health alert (needs ADMIN_CHAT_ID); rate-limited per profile."""
+    if time.time() - state.get("alert_at", 0) < ALERT_GAP_MIN * 60:
+        return False
+    if send_telegram_message(f"⚠️ <b>{p.key}</b>\n{text}"):
+        state["alert_at"] = time.time()
+        return True
+    return False
+
+
 def telegram_due(state):
     return TG_FORCE or time.time() - state.get("tg_at", 0) >= TG_INTERVAL_MIN * 60
 
@@ -288,6 +307,7 @@ async def run_profile(p):
         if age is not None and age < MIN_GAP_MIN:
             print(f"⏭️ {p.key}: last scan was {age:.0f} min ago (< {MIN_GAP_MIN}); skipping this scheduled slot")
             return 0
+    prev_age = last_scan_age_min(p)
     state, cidrs = load_state(p), p.fetch_ranges()
     seeds = []
     if p.seeds:
@@ -312,6 +332,8 @@ async def run_profile(p):
         print("⚠️ HTTP verification matched no IP; falling back to TLS-only results")
     if len(pool) < MIN_ALIVE:
         print(f"❌ only {len(pool)} usable IPs (< {MIN_ALIVE}); keeping previous lists. Failures: {dict(fails)}")
+        alert(p, state, f"اسکن خراب است؛ فقط {len(pool)} آی‌پی قابل‌استفاده (حداقل {MIN_ALIVE}). لیست قبلی حفظ شد.\nشکست‌ها: {html.escape(str(dict(fails)))}")
+        _atomic(state_path(p), json.dumps(state, ensure_ascii=False))
         return 1
     pool.sort(key=lambda r: r["score"])
     await add_ports(pool[:PORT_CHECK_TOP], p, sem)
@@ -321,6 +343,8 @@ async def run_profile(p):
             "port": p.port, "tested": len(targets), "alive": len(alive), "verified": len(verified),
             "seeds": len(seeds), "failures": dict(fails)}
     txt = write_outputs(p, pool, meta)
+    if prev_age is not None and prev_age > STALE_HOURS * 60:
+        send_telegram_message(f"✅ <b>{p.key}</b>\nاسکن دوباره کار می‌کند. آخرین اسکن موفق {prev_age / 60:.1f} ساعت پیش بود.")
     print(f"\n✅ {p.key} scan done: {len(pool)} usable ({len(verified)} verified). Failures: {dict(fails)}")
     if telegram_due(state):
         if send_telegram(p, pool, txt):
