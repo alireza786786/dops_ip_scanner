@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Copyright (c) 2026 alireza786786 (DOPS). All rights reserved. See LICENSE.
 """Cloudflare clean-IP scanner. Engine lives in scanlib.py."""
 import asyncio, ipaddress, os, re, sys
 import scanlib as sl

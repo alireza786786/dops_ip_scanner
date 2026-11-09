@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+# Copyright (c) 2026 alireza786786 (DOPS). All rights reserved. See LICENSE.
 """DNSTT resolver tester (stdlib only). Run it on the network you will tunnel from (e.g. phone/Termux inside Iran).
 
   python dnstt_scanner.py                       # basic reachability + validity test
