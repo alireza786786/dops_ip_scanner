@@ -53,6 +53,7 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+          ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
           TG_FORCE: ${{ github.event.inputs.force_telegram == 'true' && '1' || '' }}
         run: python3 start.py
 
@@ -61,6 +62,7 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
           CHAT_ID: ${{ secrets.CHAT_ID }}
+          ADMIN_CHAT_ID: ${{ secrets.ADMIN_CHAT_ID }}
           TG_FORCE: ${{ github.event.inputs.force_telegram == 'true' && '1' || '' }}
         run: python3 fastly.py
 
