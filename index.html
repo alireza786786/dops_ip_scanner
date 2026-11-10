@@ -531,7 +531,7 @@ fa: {
   quickNone:'آی‌پی سالمی پیدا نشد؛ چند دقیقه بعد دوباره امتحان کنید', quickBest:'بهترین آی‌پی روی اینترنت شما', quickMeta:'پینگ {ping}ms · {n} آی‌پی سالم', quickBusy:'اسکن در حال اجراست',
   qrTitle:'📷 QR کانفیگ', qrCopy:'📋 کپی همین کانفیگ', qrHint:'روی دستگاه دیگر در v2rayNG «اسکن QR» را بزنید', qrNone:'ابتدا کانفیگ بسازید', qrTooLong:'این کانفیگ برای QR بیش از حد طولانی است',
   repoAge:'لیست مخزن: {h} ساعت پیش', repoStale:'ممکن است اسکن خودکار متوقف شده باشد', repoAgeUnknown:'سن لیست مخزن نامعلوم است',
-  privTitle:'🔒 حریم خصوصی و امنیت', privStore:'فقط روی همین گوشی ذخیره می‌شود: تنظیمات، تاریخچهٔ آی‌پی‌ها و (فقط با تیک «به‌خاطر سپردن») کانفیگ و توکن. هیچ‌چیز به سرور ما فرستاده نمی‌شود.',
+  privTitle:'🔒 حریم خصوصی و امنیت', privStore:'فقط روی همین گوشی ذخیره می‌شود: تنظیمات، تاریخچهٔ آی‌پی‌ها و (فقط با تیک «به‌خاطر سپردن») کانفیگ‌ها، توکن و آیدی تلگرام، دامنهٔ SNI و فهرست‌های دلخواه. این‌ها به‌صورت متن ساده در حافظهٔ مرورگر خودتان می‌مانند و هیچ‌چیز به سرور ما فرستاده نمی‌شود.',
   privNet:'درخواست‌های بیرونی: ipwho.is (تشخیص اپراتور؛ آی‌پی شما را می‌بیند)، فهرست رسمی رنج‌ها از Cloudflare و Fastly، فایل‌های مخزن از GitHub، آی‌پی‌هایی که تست می‌کنید، و api.telegram.org فقط وقتی خودتان ارسال بزنید.',
   privToken:'توکن ربات را فقط روی دستگاه شخصی وارد کنید و تیک «به‌خاطر سپردن» را روی دستگاه مشترک نزنید. پیشنهاد: ارسال به کانال را از طریق Actions انجام دهید، نه مرورگر.',
   privNoIsp:'تشخیص اپراتور غیرفعال باشد (بدون تماس با ipwho.is)', wipeAll:'🧹 پاک‌سازی همه‌چیز (حافظه، کش و برنامهٔ نصب‌شده)', wipeConfirm:'همهٔ داده‌های این برنامه روی این دستگاه پاک شود؟', ispOff:'تشخیص اپراتور غیرفعال است',
@@ -605,7 +605,7 @@ en: {
   quickNone:'No healthy IP found; try again in a few minutes', quickBest:'Best IP on your network', quickMeta:'ping {ping}ms · {n} healthy IPs', quickBusy:'A scan is already running',
   qrTitle:'📷 Config QR', qrCopy:'📋 Copy this config', qrHint:'On another device use "Scan QR" in v2rayNG', qrNone:'Build configs first', qrTooLong:'This config is too long for a QR code',
   repoAge:'Repo list: {h} h ago', repoStale:'the automatic scan may have stopped', repoAgeUnknown:'Repo list age unknown',
-  privTitle:'🔒 Privacy & security', privStore:'Stored only on this phone: settings, IP history and (only with "remember" ticked) configs and token. Nothing is sent to our servers.',
+  privTitle:'🔒 Privacy & security', privStore:'Stored only on this phone: settings, IP history and (only with "remember" ticked) configs, token, Telegram chat id, custom SNI domain and custom lists. They are kept as plain text in your own browser and nothing is sent to our servers.',
   privNet:'External requests: ipwho.is (operator detection; it sees your IP), official range lists from Cloudflare and Fastly, repo files from GitHub, the IPs you test, and api.telegram.org only when you press send.',
   privToken:'Enter the bot token only on a personal device and do not tick "remember" on shared devices. Better: let Actions post to the channel, not the browser.',
   privNoIsp:'Disable operator detection (no request to ipwho.is)', wipeAll:'🧹 Wipe everything (storage, cache and installed app)', wipeConfirm:'Erase all data of this app on this device?', ispOff:'Operator detection is off',
@@ -725,6 +725,7 @@ function save() {
     o.remember = $('remember').checked;
     if (o.remember && IS_OFFICIAL) { o.tgToken = $('tgToken').value; o.tgChat = $('tgChat').value; o.cfgIn = $('cfgIn').value; }
     else { delete o.tgToken; delete o.tgChat; delete o.cfgIn; }
+    if (!(o.remember && IS_OFFICIAL)) { delete o.customSni; delete o.srcUrl; delete o.customSrc; }   /* private values (your domain, your URL, your lists) are kept only with 'remember' */
     localStorage.setItem(STORE_KEY, JSON.stringify(o));
   } catch {}
 }
