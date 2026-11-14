@@ -9,6 +9,10 @@ on:
         description: 'ارسال اجباری به تلگرام (بدون توجه به فاصلهٔ ۳ ساعته)'
         type: boolean
         default: false
+      from:
+        description: 'مبدأ اجرا (worker = ماشهٔ Cloudflare Worker؛ پیش‌فرض manual)'
+        type: string
+        default: 'manual'
 
 permissions:
   contents: write
@@ -18,7 +22,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  SCAN_MIN_GAP_MIN: ${{ github.event_name == 'schedule' && '25' || '0' }}   # اجرای دستی همیشه اسکن می‌کند
+  SCAN_MIN_GAP_MIN: ${{ (github.event_name == 'schedule' || github.event.inputs.from == 'worker') && '25' || '0' }}   # زمان‌بندی گیت‌هاب و ماشهٔ Worker حداکثر هر ۲۵ دقیقه اسکن می‌کنند؛ اجرای دستی همیشه
   TG_INTERVAL_MIN: '170'        # فاصلهٔ ارسال تلگرام (دقیقه)؛ ۱۷۰ تا با تأخیر زمان‌بندی گیت‌هاب ≈ هر ۳ ساعت بماند
 
 jobs:
