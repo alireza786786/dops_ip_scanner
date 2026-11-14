@@ -1,0 +1,87 @@
+DOPS IP Scanner - Proprietary License (All Rights Reserved)
+
+Copyright (c) 2026 alireza786786 (DOPS). All rights reserved.
+
+1. OWNERSHIP
+   This repository - the source code, scripts, web application, documentation,
+   workflows, icons created for the project and the data files it publishes (the
+   "Software") - is the exclusive property of the copyright holder. No license or
+   other right is granted except as expressly stated in this document.
+
+2. PERMITTED USE (no permission needed)
+   You may:
+   (a) open and use the hosted web scanner (https://alireza786786.github.io/dops_ip_scanner/)
+       and the files published in this repository for your own personal,
+       non-commercial purposes;
+   (b) read the source code for personal study and security review;
+   (c) report bugs and security problems to the copyright holder;
+   (d) fork this repository on GitHub only to the extent GitHub's Terms of Service
+       allow, for the purpose of proposing changes back to this repository. A fork
+       must not be published or used as a modified, rebranded or competing version;
+   (e) share the IP lists produced by the Software (for example the alive_*.txt files
+       and the Telegram posts) for NON-COMMERCIAL purposes, provided that you (i) keep
+       the values unchanged, (ii) credit "DOPS IP Scanner" and link to
+       https://alireza786786.github.io/dops_ip_scanner/, and (iii) do not present
+       the lists as your own scan results. This permission covers the lists only,
+       not the code or the web application.
+
+3. NOT PERMITTED without prior written permission of the copyright holder
+   You may not:
+   (a) copy, redistribute, republish, mirror or host the Software, or any substantial
+       part of it (including the web application and the scripts), on any website,
+       repository, channel or product;
+   (b) modify, translate, rebrand or create derivative works for distribution;
+   (c) use the Software, or the lists it produces, commercially (see the definition
+       below);
+   (d) remove or alter copyright notices, credits, links or the project name, or
+       present the Software as your own work;
+   (e) use the Software or its output for unlawful purposes, to harm, deceive or
+       attack any person or service, or to distribute other people's proxy
+       configurations without their permission;
+   (f) run automated or excessive access that burdens the resources hosting the
+       Software (the repository, GitHub Pages, the data branch, the Telegram channel);
+   (g) host or distribute a copy of the web application that could be mistaken for
+       the official one, or collect users' configurations, tokens or other data
+       through any copy.
+
+   "Commercial use" means any use intended for, or resulting in, direct or indirect
+   payment, profit or advantage, including: selling, renting or bundling the Software,
+   the lists or proxy configurations built with them; paid, subscription or
+   donation-gated access; advertising, sponsorship or affiliate links on a page,
+   channel or group that distributes them; use inside a paid product or service; and
+   using them to promote a paid service or channel.
+
+4. CONTRIBUTIONS
+   If you submit a contribution (for example a pull request), you grant the copyright
+   holder a perpetual, worldwide, royalty-free, irrevocable right to use, modify and
+   distribute it as part of the Software, and you confirm that you have the right to
+   do so.
+
+5. THIRD-PARTY MATERIAL
+   Third-party components (for example icons from Lucide, under the ISC license)
+   remain under their own licenses; see THIRD_PARTY_NOTICES.md. Lists that the
+   Software reads from third-party sources at run time (for example cf2dns) belong
+   to their owners and are not part of the Software.
+
+6. NO WARRANTY
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A PARTICULAR
+   PURPOSE AND NON-INFRINGEMENT. SCAN RESULTS ARE APPROXIMATE AND DEPEND ON THE
+   NETWORK AND THE TIME. IN NO EVENT SHALL THE COPYRIGHT HOLDER BE LIABLE FOR ANY
+   CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THE SOFTWARE.
+
+7. TERMINATION
+   The rights in section 2 end automatically if you breach this license.
+
+8. OFFICIAL SOURCE
+   The only official sources are this repository and
+   https://alireza786786.github.io/dops_ip_scanner/ . Copies hosted anywhere else are
+   unofficial and not endorsed by the copyright holder.
+
+9. PERMISSION REQUESTS
+   To ask for permission to do something that section 3 does not allow, contact the
+   copyright holder through https://t.me/Goodbaye_filtering
+
+10. SEVERABILITY
+   If any provision of this license is found to be unenforceable, the remaining
+   provisions stay in effect.
