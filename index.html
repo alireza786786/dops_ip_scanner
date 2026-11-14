@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="description" content="DOPS V14 Meridian — Multi-CDN IP Scanner, Config Rewriter & Telegram Dispatcher">
-<title>DOPS V14.3 Meridian — Multi-CDN Scanner</title>
+<title>DOPS V15.0 Meridian — Multi-CDN Scanner</title>
 <style>
 :root{
   --bg:#070b14;--card:#0f172a;--bd:#1e293b;--ac:#00ffcc;--tx:#f1f5f9;--mu:#94a3b8;
@@ -23,8 +23,8 @@
   color-scheme:dark;
 }
 [data-theme="light"]{
-  --bg:#f8fafc;--card:#ffffff;--bd:#e2e8f0;--ac:#0284c7;--tx:#0f172a;--mu:#64748b;
-  --ok:#059669;--wn:#d97706;--er:#dc2626;--in-bg:#f1f5f0;--bar-bg:#e2e8f0;
+  --bg:#f8fafc;--card:#ffffff;--bd:#e2e8f0;--ac:#0369a1;--tx:#0f172a;--mu:#5b6b82;
+  --ok:#047857;--wn:#92400e;--er:#b91c1c;--in-bg:#f1f5f0;--bar-bg:#e2e8f0;
   color-scheme:light;
 }
 [data-theme="light"]{--in-bg:#f1f5f9}
@@ -37,7 +37,7 @@ body{background:var(--bg);color:var(--tx);padding:10px;padding-bottom:80px;displ
 .icon-btn{position:relative;background:var(--card);color:var(--tx);border:1px solid var(--bd);width:40px;height:40px;padding:0;border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none}
 .icon-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .icon-btn #themeIcon{display:flex}
-.lang-badge{position:absolute;inset-inline-start:-6px;bottom:-7px;background:#10b981;color:#fff;font-size:9px;font-weight:800;line-height:1;padding:3px 5px;border-radius:6px;letter-spacing:.3px}
+.lang-badge{position:absolute;inset-inline-start:-6px;bottom:-7px;background:#047857;color:#fff;font-size:9px;font-weight:800;line-height:1;padding:3px 5px;border-radius:6px;letter-spacing:.3px}
 .icon-btn:hover{border-color:var(--ac);color:var(--ac)}
 .head{text-align:center;padding:4px 0 8px}
 .badge{display:inline-block;padding:3px 12px;font-size:10px;color:var(--ac);border:1px solid var(--ac);border-radius:20px;margin-bottom:4px;letter-spacing:1px}
@@ -83,8 +83,15 @@ th[data-k]{cursor:pointer;user-select:none}
 .fake-warn{position:sticky;top:0;z-index:1000;background:#b91c1c;color:#fff;padding:10px 12px;font-size:12.5px;line-height:1.8;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,.4)}
 .fake-warn[hidden]{display:none}
 .fake-warn a{color:#fff;font-weight:800;text-decoration:underline;margin-inline-start:6px;white-space:nowrap}
+.fb{display:inline-flex;gap:3px;margin-inline-start:4px}.fb button{padding:2px 6px;min-width:30px}
+.fb button[aria-pressed="true"].okb{background:rgba(34,197,94,.25);border-color:var(--ok)}.fb button[aria-pressed="true"].badb{background:rgba(239,68,68,.25);border-color:var(--er)}
+.trend svg{width:100%;height:auto;display:block}.trend .tl{font-size:11px;color:var(--mu);margin:4px 0}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+[data-theme="light"] .btn.main,[data-theme="light"] .btn.main:disabled{color:#fff}
+summary{padding:6px 0;min-height:28px}
+.fake-warn a{display:inline-block;padding:4px 6px}
 .age-badge{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:999px;font-size:11.5px;border:1px solid var(--bd)}
-.age-badge.ok{color:var(--ok);border-color:var(--ok)}.age-badge.warn{color:#eab308;border-color:#eab308}.age-badge.bad{color:#ef4444;border-color:#ef4444}
+.age-badge.ok{color:var(--ok);border-color:var(--ok)}.age-badge.warn{color:var(--wn);border-color:var(--wn)}.age-badge.bad{color:var(--er);border-color:var(--er)}
 .q-ip{font:800 26px/1.2 ui-monospace,Menlo,Consolas,monospace;color:var(--ok);direction:ltr;text-align:center;margin:10px 0 2px;word-break:break-all}
 .q-meta{text-align:center;color:var(--mu);font-size:12px;margin-bottom:8px}
 .qr-box{display:flex;justify-content:center;margin:8px 0}.qr-box svg{max-width:100%;height:auto;border-radius:8px}
@@ -130,7 +137,7 @@ html.quick #splash{animation-delay:.45s}
 <div id="fakeWarn" class="fake-warn" role="alert" hidden><b data-i18n="fakeTitle">⚠️ نسخهٔ غیررسمی!</b> <span data-i18n="fakeBody"></span> <a id="fakeLink" href="https://alireza786786.github.io/dops_ip_scanner/" rel="noopener" data-i18n="fakeGo"></a></div>
 <div class="wrap">
   <div class="top-nav">
-    <div class="badge">DOPS V14.3 · MERIDIAN</div>
+    <div class="badge">DOPS V15.0 · MERIDIAN</div>
     <div class="nav-actions">
       <a class="icon-btn" id="ghBtn" href="https://github.com/alireza786786/dops_ip_scanner" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
       <button class="icon-btn" id="themeToggle" aria-label="Theme" title="Theme"><span id="themeIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span></button>
@@ -168,11 +175,17 @@ html.quick #splash{animation-delay:.45s}
     </div>
   </div>
 
+  <details class="card trend" id="trend">
+    <summary data-i18n="trendTitle">📈 روند و الگوی ساعتی</summary>
+    <div id="trendBody"></div>
+  </details>
+
   <details class="card priv" id="privacy">
     <summary data-i18n="privTitle">🔒 حریم خصوصی و امنیت</summary>
     <ul>
       <li data-i18n="privStore"></li><li data-i18n="privNet"></li><li data-i18n="privToken"></li>
       <li><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="noIsp"> <span data-i18n="privNoIsp"></span></label></li>
+      <li><label style="display:flex;gap:8px;align-items:flex-start"><input type="checkbox" id="shareOpt"> <span data-i18n="privShare"></span></label></li>
     </ul>
     <button class="sm" id="wipeAll" style="width:100%" data-i18n="wipeAll">🧹 پاک‌سازی همه‌چیز (حافظه، کش و برنامهٔ نصب‌شده)</button>
   </details>
@@ -194,17 +207,19 @@ html.quick #splash{animation-delay:.45s}
         <optgroup label="Repositories / مخازن">
           <option value="outputs/alive_cloudflare.txt">alive_cloudflare.txt (repo)</option>
           <option value="outputs/alive_fastly.txt">alive_fastly.txt (repo)</option>
+          <option value="community" data-i18n="optCommunity">جمعی</option>
           <option value="cf2dns" data-i18n="optCf2dns">cf2dns (ircfspace)</option>
         </optgroup>
         <optgroup label="CDN Presets / رنج‌های رسمی">
           <option value="cf_ranges" selected>Cloudflare (کلودفلر)</option>
-          <option value="google">Google Cloud (گوگل)</option>
-          <option value="cloudfront">Amazon CloudFront (آمازون)</option>
+        <option value="cf_ranges_v6" data-i18n="optV6">Cloudflare IPv6 ⚠️</option>
+          <option value="google">Google Cloud (گوگل) ⚠️ آزمایشی / exp</option>
+          <option value="cloudfront">Amazon CloudFront (آمازون) ⚠️ آزمایشی / exp</option>
           <option value="fastly_ranges">Fastly (فستلی)</option>
-          <option value="azure">Microsoft Azure (آژور)</option>
-          <option value="gcore">Gcore (جی‌کور)</option>
-          <option value="arvancloud">ArvanCloud (آروان)</option>
-          <option value="warp">Cloudflare WARP (وایرگارد)</option>
+          <option value="azure">Microsoft Azure (آژور) ⚠️ آزمایشی / exp</option>
+          <option value="gcore">Gcore (جی‌کور) ⚠️ آزمایشی / exp</option>
+          <option value="arvancloud">ArvanCloud (آروان) ⚠️ آزمایشی / exp</option>
+          <option value="warp">Cloudflare WARP (وایرگارد) ⚠️ آزمایشی / exp</option>
         </optgroup>
         <option value="offline_db" data-i18n="optOffline">بانک آفلاین داخلی (اینترنت ملی)</option>
         <option value="favs" data-i18n="optFavs">آی‌پی‌های پایدار اسکن‌های قبل 🏆</option>
@@ -315,6 +330,7 @@ html.quick #splash{animation-delay:.45s}
       <span id="found" style="color:var(--ok)">۰</span>
     </div>
     <div class="bar"><i id="bar"></i></div>
+      <div class="hint" id="fbStats" hidden style="margin:6px 0"></div>
     <div class="tools">
       <button class="sm hi" id="bSort" data-i18n="bSortBest">⚡ بهترین‌ها</button>
       <button class="sm" id="bFilter" data-i18n="bFilterBtn">🧹 حذف بالای</button>
@@ -351,7 +367,7 @@ html.quick #splash{animation-delay:.45s}
   </div>
 </div>
 
-<div class="modal" id="qrModal" hidden>
+<div class="modal" role="dialog" aria-modal="true" id="qrModal" hidden>
   <div class="modal-box">
     <div style="display:flex;justify-content:space-between;align-items:center"><h3 style="font-size:14px;color:var(--ac)" data-i18n="qrTitle">QR</h3><button class="sm" id="qrClose">✕</button></div>
     <div class="qr-box" id="qrBox"></div>
@@ -363,7 +379,7 @@ html.quick #splash{animation-delay:.45s}
   </div>
 </div>
 
-<div class="modal" id="copyModal" hidden>
+<div class="modal" role="dialog" aria-modal="true" id="copyModal" hidden>
   <div class="modal-box">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <h3 style="font-size:14px;color:var(--ac)" data-i18n="modalTitle">کپی آی‌پی‌ها</h3>
@@ -375,7 +391,7 @@ html.quick #splash{animation-delay:.45s}
   </div>
 </div>
 
-<div class="modal" id="tutorialModal" hidden>
+<div class="modal" role="dialog" aria-modal="true" id="tutorialModal" hidden>
   <div class="modal-box">
     <div style="display:flex;justify-content:space-between;align-items:center">
       <h3 style="font-size:14px;color:var(--ac)" data-i18n="tutTitle">آموزش کامل کار با اسکنر</h3>
@@ -524,7 +540,14 @@ fa: {
   tgCopied:'متن تلگرام کپی شد ✔️', tgListTitle:'لیست آی‌پی‌های تمیز CDN (تست‌شده)',
   tgIsp:'اپراتور', tgTime:'زمان تست', tgForClient:'برای کلاینت (Clean IP)', tgFooter:'اسکن شده با DOPS Meridian',
   tgDirectIntact:'کانفیگ Reality دست‌نخورده ماند', tgConfigs:'کانفیگ',
-  bClearManual:'🗑 پاک کردن اینها', optS2:'۲ نمونه — سریع', optS3:'۳ نمونه — متعادل', optS5:'۵ نمونه — دقیق', fakeTitle:'⚠️ نسخهٔ غیررسمی!', fakeBody:'این صفحه از آدرس رسمی اسکنر باز نشده است. توکن ربات و کانفیگ‌هایتان را اینجا وارد نکنید (ورود و ذخیره‌شان غیرفعال شد).', fakeGo:'رفتن به آدرس رسمی ◀',
+  bClearManual:'🗑 پاک کردن اینها', optCommunity:'جمعی — گزارش کاربران همین اپراتور (کاندیدا)', optV6:'Cloudflare IPv6 ⚠️ آزمایشی',
+  privShare:'اشتراک ناشناس نتایج با کاربران همین اپراتور (اختیاری، پیش‌فرض خاموش): فقط نام اپراتور، حداکثر ۱۰ آی‌پی سالم کلودفلر با پینگ و یک شناسهٔ تصادفی فرستاده می‌شود؛ بدون آی‌پی شما، کانفیگ یا توکن. هنگام فعال بودن سرویس جمعی در دسترس است.',
+  communityNote:'جمعی: {n} آی‌پی گزارش‌شده توسط چند کاربر همین اپراتور (کاندیدا)', communityFail:'فهرست جمعی در دسترس نیست؛ از بانک آفلاین استفاده شد', v6Note:'IPv6 آزمایشی: آدرس‌های نگاشت‌شدهٔ کلودفلر',
+  cdnWarnCommunity:'⚠️ این آی‌پی‌ها را کاربران دیگر گزارش کرده‌اند؛ فقط کاندیدا هستند و روی اینترنت شما دوباره تست می‌شوند.',
+  cdnWarnV6:'⚠️ IPv6 فقط روی اینترنت‌های دارای IPv6 کار می‌کند و این گزینه آزمایشی است؛ اگر اینترنت شما IPv6 ندارد، همهٔ آی‌پی‌ها ناموفق می‌شوند.',
+fbOk:'کار کرد', fbBad:'کار نکرد', fbRate:'✅ نرخ موفقیت واقعی روی اینترنت شما: {p}٪ ({n} بازخورد: {ok} کار کرد، {bad} کار نکرد)',
+  trendTitle:'📈 روند و الگوی ساعتی', trendNone:'هنوز داده کافی نیست؛ چند بار در ساعت‌های مختلف اسکن کنید.', trendHour:'نسبت آی‌پی‌های سالم در هر ساعت (ساعت محلی شما)', trendPing:'میانهٔ پینگ در آخرین اسکن‌ها', trendBest:'بهترین ساعت‌ها: {h}',
+optS2:'۲ نمونه — سریع', optS3:'۳ نمونه — متعادل', optS5:'۵ نمونه — دقیق', fakeTitle:'⚠️ نسخهٔ غیررسمی!', fakeBody:'این صفحه از آدرس رسمی اسکنر باز نشده است. توکن ربات و کانفیگ‌هایتان را اینجا وارد نکنید (ورود و ذخیره‌شان غیرفعال شد).', fakeGo:'رفتن به آدرس رسمی ◀',
   quickTitle:'🚀 حالت سریع', quickHint:'یک لمس، بدون تنظیمات', quickBtn:'🚀 بهترین آی‌پی را پیدا کن',
   qCopyIp:'📋 کپی آی‌پی', qCopyCfg:'📋 کپی کانفیگ‌ها', qQr:'📷 QR', bQr:'📷 QR',
   qNoCfg:'برای ساخت کانفیگ، کانفیگ خودتان را در بخش «بازنویسی گروهی» بچسبانید و دوباره بزنید.',
@@ -598,7 +621,14 @@ en: {
   tgCopied:'Telegram post copied ✔️', tgListTitle:'Clean CDN IP list (tested)',
   tgIsp:'ISP', tgTime:'Tested at', tgForClient:'For client (Clean IP)', tgFooter:'Scanned with DOPS Meridian',
   tgDirectIntact:'Reality config(s) left intact', tgConfigs:'configs',
-  bClearManual:'🗑 Clear These', optS2:'2 samples — fast', optS3:'3 samples — balanced', optS5:'5 samples — accurate', fakeTitle:'⚠️ Unofficial copy!', fakeBody:'This page was not opened from the official scanner address. Do not enter your bot token or configs here (entering and saving them is disabled).', fakeGo:'Go to the official address ▶',
+  bClearManual:'🗑 Clear These', optCommunity:'Community — reports from users on your operator (candidates)', optV6:'Cloudflare IPv6 ⚠️ experimental',
+  privShare:'Share results anonymously with users on the same operator (optional, off by default): only the operator name, up to 10 healthy Cloudflare IPs with ping and a random id are sent; never your IP, configs or token. Available when the community service is enabled.',
+  communityNote:'Community: {n} IPs reported by several users on your operator (candidates)', communityFail:'Community list unavailable; offline bank used', v6Note:'Experimental IPv6: mapped Cloudflare addresses',
+  cdnWarnCommunity:'⚠️ These IPs were reported by other users; treat them as candidates, they are re-tested on your network.',
+  cdnWarnV6:'⚠️ IPv6 only works on networks that have IPv6 and this option is experimental; without IPv6 every IP will fail.',
+fbOk:'Worked', fbBad:'Did not work', fbRate:'✅ Real success rate on your network: {p}% ({n} feedback: {ok} worked, {bad} failed)',
+  trendTitle:'📈 Trend & hourly pattern', trendNone:'Not enough data yet; scan a few times at different hours.', trendHour:'Share of healthy IPs per hour (your local time)', trendPing:'Median ping of the latest scans', trendBest:'Best hours: {h}',
+optS2:'2 samples — fast', optS3:'3 samples — balanced', optS5:'5 samples — accurate', fakeTitle:'⚠️ Unofficial copy!', fakeBody:'This page was not opened from the official scanner address. Do not enter your bot token or configs here (entering and saving them is disabled).', fakeGo:'Go to the official address ▶',
   quickTitle:'🚀 Quick mode', quickHint:'one tap, no settings', quickBtn:'🚀 Find the best IP',
   qCopyIp:'📋 Copy IP', qCopyCfg:'📋 Copy configs', qQr:'📷 QR', bQr:'📷 QR',
   qNoCfg:'To build configs, paste your config in "Batch rewrite" and tap again.',
@@ -645,7 +675,7 @@ function applyI18n() {
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'fa' ? 'rtl' : 'ltr';
   $('langLabel').textContent = currentLang === 'fa' ? 'EN' : 'FA';
-  renderTut(); render(); checkPortMismatch(); srcUi(); renderRepoAge();
+  renderTut(); render(); checkPortMismatch(); srcUi(); renderRepoAge(); renderTrend();
 }
 function toggleTheme() {
   currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
@@ -689,7 +719,7 @@ const ip2n = ip => ip.split('.').reduce((a, o) => a * 256 + +o, 0);
 const n2ip = n => [n / 16777216 | 0, n >> 16 & 255, n >> 8 & 255, n & 255].join('.');
 const TIMEOUT = 2500, MIN_MS = 6, FRAG = '10-30,5-10,tlshello';
 const TLS_PORTS = [443, 2053, 2083, 2087, 2096, 8443], HTTP_PORTS = [80, 8080, 8880, 2052, 2082, 2086, 2095];
-const FIELDS = ['src','limit','proto','targetPort','cfgMode','topN','addFrag','keepSni','tagIp','remember','noIsp','customSni','customPort','samples','srcUrl','smart','customSrc'];
+const FIELDS = ['src','limit','proto','targetPort','cfgMode','topN','addFrag','keepSni','tagIp','remember','noIsp','shareOpt','customSni','customPort','samples','srcUrl','smart','customSrc'];
 
 let ispName = '?', userIP = '?', manualList = [], manualOnly = false, removed = [];
 let results = [], sortKey = 'score', sortDir = 1, ac = null, scanning = false, raf = 0, wl = null, tt;
@@ -801,7 +831,7 @@ function inCidr(ip, c) { const [b, m] = c.split('/'), z = 2 ** (32 - +m), s0 = i
 /* ---------------- Smart /24 block learning (per ISP, 30 days, capped) ---------------- */
 const BLK_KEY = 'dops-blocks', BLK_MAX = 3000;
 const readBlocks = () => { try { return JSON.parse(localStorage.getItem(BLK_KEY) || '{}'); } catch { return {}; } };
-const blkOf = ip => ip.slice(0, ip.lastIndexOf('.'));
+const blkOf = ip => ip.includes(':') ? ip.split(':').slice(0, 4).join(':') : ip.slice(0, ip.lastIndexOf('.'));
 const pruneByAge = (all, days) => {
   const lim = Date.now() - days * 864e5;
   Object.keys(all).forEach(k => {
@@ -845,10 +875,25 @@ function fromCidrs(list, count) {
   }
   return [...set];
 }
+const ipSort = ip => ip.includes(':') ? 4294967296 + (parseInt(ip.replace(/[^0-9a-f]/gi, '').slice(0, 10) || '0', 16) % 1e9) : ip2n(ip);
+/* ---- IPv6 (experimental) ---- */
+function v6ToBig(s) {
+  if (typeof s !== 'string' || !s.includes(':') || !/^[0-9a-f:]+$/i.test(s)) return null;
+  s = s.toLowerCase(); const parts = s.split('::'); if (parts.length > 2) return null;
+  const head = parts[0] ? parts[0].split(':') : [], tail = parts.length === 2 ? (parts[1] ? parts[1].split(':') : []) : null;
+  let g; if (tail === null) g = head; else { const miss = 8 - head.length - tail.length; if (miss < 1) return null; g = [...head, ...Array(miss).fill('0'), ...tail]; }
+  if (g.length !== 8 || g.some(x => !/^[0-9a-f]{1,4}$/.test(x))) return null;
+  return g.reduce((a, x) => (a << 16n) | BigInt(parseInt(x, 16)), 0n);
+}
+const isIPv6 = s => v6ToBig(s) !== null;
+/* Cloudflare maps the IPv4 anycast space 104.16.0.0/13 and 104.24.0.0/14 into 2606:4700::<a.b>:<c.d>; random sampling of the whole /32 would almost never hit a live address */
+function fromCf6(count) { return fromCidrs(['104.16.0.0/13', '104.24.0.0/14'], count).map(ip => { const [a, b, c, d] = ip.split('.').map(Number); return `2606:4700::${((a << 8) | b).toString(16)}:${((c << 8) | d).toString(16)}`; }); }
+const urlHost = ip => ip.includes(':') ? '[' + ip + ']' : ip;
 function parseCustom(txt) {
   const ips = new Set(), cd = [];
   txt.split(/[\s,;]+/).forEach(x => {
     if (isIPv4(x)) ips.add(x);
+    else if (isIPv6(x)) ips.add(x.toLowerCase());
     else { const [m, p] = x.split('/'); if (isIPv4(m) && +p >= 8 && +p <= 32) cd.push(x); }
   });
   return { ips: [...ips], cd };
@@ -941,6 +986,15 @@ async function loadTargets() {
     } else if (src === 'favs') {
       const h = getHistory(); ips = Object.keys(h).filter(k => h[k] >= 2);
       if (!ips.length) { ips = [...OFFLINE]; note = t('favsEmpty'); }
+    } else if (src === 'cf_ranges_v6') {
+      ips = fromCf6(cap); note = t('v6Note');
+    } else if (src === 'community') {
+      try {
+        if (!COMMUNITY_URL) throw 0;
+        const j = await (await fetchTimeout(`${COMMUNITY_URL}/best?isp=${encodeURIComponent(cleanIsp())}`, 6000)).json(), rg = (await getRanges('cf')).list;
+        ips = [...new Set((j.ips || []).map(x => x && x.ip).filter(ip => isIPv4(ip) && rg.some(c => inCidr(ip, c))))];
+        if (!ips.length) throw 0; note = t('communityNote', { n: fa(ips.length) });
+      } catch { ips = [...OFFLINE]; note = t('communityFail'); }
     } else if (src === 'cf2dns') {
       try {
         const arr = await (await fetchTimeout(CF2DNS_URL, 6000)).json(), rg = (await getRanges('cf')).list;
@@ -978,7 +1032,7 @@ async function probeOnce(ip, port, signal) {
   const c = new AbortController(), on = () => c.abort(), x = setTimeout(on, TIMEOUT), s = performance.now();
   signal.addEventListener('abort', on, { once: true });
   try {
-    await fetch(`${isTls ? 'https' : 'http'}://${ip}:${port}/`, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: c.signal });
+    await fetch(`${isTls ? 'https' : 'http'}://${urlHost(ip)}:${port}/`, { method: 'GET', mode: 'no-cors', cache: 'no-store', signal: c.signal });
     return { ok: true, ms: performance.now() - s };
   } catch {
     const ms = performance.now() - s;
@@ -1008,9 +1062,27 @@ async function probeIP(ip, ports, signal, srcKey) {
 }
 
 /* ---------------- Results table ---------------- */
-const keyFn = { ip: r => ip2n(r.ip), ping: r => r.ping, score: r => r.score };
+const keyFn = { ip: r => ipSort(r.ip), ping: r => r.ping, score: r => rankScore(r) };
 const sorted = () => [...results].sort((a, b) => (keyFn[sortKey](a) - keyFn[sortKey](b)) * sortDir);
-const bestList = () => [...results].sort((a, b) => a.score - b.score);
+/* ---- feedback ("worked / did not work"), per operator, 30 days, local only ---- */
+const FB_KEY = 'dops-fb'; let fbCache = null;
+const readFb = () => { try { return JSON.parse(localStorage.getItem(FB_KEY) || '{}'); } catch { return {}; } };
+function fbPrune(all) { const lim = Date.now() - 30 * 864e5; Object.keys(all).forEach(isp => { const m = all[isp] || {}; Object.keys(m).forEach(ip => { if (!(m[ip] && m[ip].t >= lim)) delete m[ip]; }); if (!Object.keys(m).length) delete all[isp]; }); return all; }
+const fbMap = () => { if (!fbCache || fbCache.isp !== ispName) fbCache = { isp: ispName, map: fbPrune(readFb())[ispName] || {} }; return fbCache.map; };
+const fbOf = ip => (fbMap()[ip] || {}).v || '';
+function fbSet(ip, v) {
+  const all = fbPrune(readFb()), m = all[ispName] = all[ispName] || {};
+  if (m[ip] && m[ip].v === v) delete m[ip]; else m[ip] = { v, t: Date.now() };
+  if (!Object.keys(m).length) delete all[ispName];
+  try { localStorage.setItem(FB_KEY, JSON.stringify(all)); } catch {} fbCache = null;
+}
+const rankScore = r => r.score + (fbOf(r.ip) === 'bad' ? 1000 : fbOf(r.ip) === 'ok' ? -80 : 0);
+const bestList = () => [...results].sort((a, b) => rankScore(a) - rankScore(b));
+function renderFbStats() {
+  const v = Object.values(fbMap()), ok = v.filter(x => x.v === 'ok').length, el = $('fbStats');
+  if (!v.length) { el.hidden = true; return; }
+  el.textContent = t('fbRate', { p: fa(Math.round(ok / v.length * 100)), n: fa(v.length), ok: fa(ok), bad: fa(v.length - ok) }); el.hidden = false;
+}
 const sched = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; render(); if ($('cfgIn').value.trim()) buildConfigs(); }); };
 function cell(txt, cls) { const td = document.createElement('td'); if (cls) td.className = cls; td.textContent = txt; return td; }
 
@@ -1027,9 +1099,14 @@ function render() {
     stTd.innerHTML = `<span style="color:#eab308;font-size:11px">${r.stars}</span>`;
     const stabTd = document.createElement('td');
     if (r.isStable) stabTd.innerHTML = `<span class="tag stable">${t('stable')}</span>`; else stabTd.textContent = t('normal');
-    const scTd = document.createElement('td'); scTd.innerHTML = `<span style="font-size:11px;color:var(--mu)">${Math.round(r.score)}</span>`;
+    const scTd = document.createElement('td'); scTd.innerHTML = `<span style="font-size:11px;color:var(--mu)">${Math.round(rankScore(r))}</span>`;
     const bt = document.createElement('td'), b = document.createElement('button');
     b.className = 'sm'; b.textContent = t('copy'); b.onclick = () => copy(r.ip); bt.append(b);
+    const fbw = document.createElement('span'); fbw.className = 'fb';
+    [['ok', '👍', 'okb', 'fbOk'], ['bad', '👎', 'badb', 'fbBad']].forEach(([v, ic, cl, key]) => {
+      const fb = document.createElement('button'); fb.className = 'sm ' + cl; fb.textContent = ic; fb.setAttribute('aria-label', t(key)); fb.title = t(key); fb.setAttribute('aria-pressed', fbOf(r.ip) === v ? 'true' : 'false');
+      fb.onclick = () => { fbSet(r.ip, v); render(); buildConfigs(); }; fbw.append(fb);
+    }); bt.append(fbw);
     tr.append(cell(r.ip, 'ip'), cell(r.port + (r.ports && r.ports.length > 1 ? ' (+' + (r.ports.length - 1) + ')' : ''), 'ip'), dcTd, tg, spd, stTd, scTd, stabTd, bt);
     frag.append(tr);
   });
@@ -1037,6 +1114,7 @@ function render() {
   $('found').textContent = t('alive') + ': ' + fa(results.length);
   $('bFound').textContent = t('alive') + ': ' + fa(results.length);
   $('bottomBar').hidden = results.length === 0;
+  renderFbStats();
 }
 document.querySelectorAll('th[data-k]').forEach(th => th.addEventListener('click', () => {
   const k = th.dataset.k;
@@ -1122,7 +1200,7 @@ function rewrite(line, ip, keep, tag, frag, srcKey) {
     if (frag && !sp.has('fragment')) add.push('fragment=' + FRAG);
     const parts = [q, ...add].filter(Boolean); pre = path + (parts.length ? '?' + parts.join('&') : '');
     const finalFr = fr ? '#' + encodeURIComponent(cleanTag(fr.slice(1)) + (tag ? ' | ' + ip : '')) : (tag ? '#' + ip : '');
-    return m[0] + auth + ip + port + pre + finalFr;
+    return m[0] + auth + urlHost(ip) + port + pre + finalFr;
   } catch { return line; }
 }
 
@@ -1330,6 +1408,7 @@ async function run() {
     await Promise.all(Array.from({ length: workers }, worker));
     if (tested.length >= 5) learnBlocks(tested, results.map(r => r.ip));
     if (results.length) updateHistory(results.map(r => r.ip));
+    if (!ac.signal.aborted) { recordTrend(tested.length, results); communityReport(); }
     finish(ac.signal.aborted ? t('scanStopped') : `${t('scanDone')} ${ispName})`);
     render(); buildConfigs();
   } catch (e) { finish(t('scanError') + (e && e.message || e)); }
@@ -1384,7 +1463,7 @@ function srcUi() {
   $('srcUrlHint').hidden = v !== 'url';
   $('customSrcRow').hidden = v !== 'custom';
   if (PROBE_HOSTS[v] && !$('customSni').value) $('customSni').placeholder = PROBE_HOSTS[v];
-  const w = v === 'warp' ? 'cdnWarnWarp' : v === 'cf2dns' ? 'cdnWarnCf2dns' : ['fastly_ranges', 'google', 'cloudfront', 'azure', 'gcore', 'arvancloud', 'outputs/alive_fastly.txt'].includes(v) ? 'cdnWarnOther' : '';
+  const w = v === 'warp' ? 'cdnWarnWarp' : v === 'cf2dns' ? 'cdnWarnCf2dns' : v === 'community' ? 'cdnWarnCommunity' : v === 'cf_ranges_v6' ? 'cdnWarnV6' : ['fastly_ranges', 'google', 'cloudfront', 'azure', 'gcore', 'arvancloud', 'outputs/alive_fastly.txt'].includes(v) ? 'cdnWarnOther' : '';
   $('cdnWarn').textContent = w ? t(w) : ''; $('cdnWarn').style.display = w ? 'block' : 'none';
 }
 $('src').addEventListener('change', srcUi);
@@ -1393,6 +1472,48 @@ $('remember').addEventListener('change', save);
 
 /* ---------------- Init ---------------- */
 
+/* ---------------- Community results (opt-in; needs the Worker URL) ---------------- */
+const COMMUNITY_URL = '';   /* after deploying worker/index.js set e.g. 'https://dops-worker.<your-subdomain>.workers.dev' */
+const cleanIsp = () => String(ispName || '').replace(/[^\p{L}\p{N} .,&()\-_/'’]/gu, ' ').replace(/\s+/g, ' ').trim().slice(0, 64);
+function installId() {
+  let id = null; try { id = localStorage.getItem('dops-id'); } catch {}
+  if (!/^[0-9a-f]{32}$/.test(id || '')) { id = [...crypto.getRandomValues(new Uint8Array(16))].map(b => b.toString(16).padStart(2, '0')).join(''); try { localStorage.setItem('dops-id', id); } catch {} }
+  return id;
+}
+async function communityReport() {
+  if (!COMMUNITY_URL || !$('shareOpt').checked || !IS_OFFICIAL || $('noIsp').checked || cleanIsp().length < 2) return false;
+  const top = bestList().filter(r => isIPv4(r.ip) && fbOf(r.ip) !== 'bad').slice(0, 10).map(r => ({ ip: r.ip, ms: Math.max(0, Math.min(5000, Math.round(r.ping))) }));
+  if (!top.length) return false;
+  try { const r = await fetch(COMMUNITY_URL + '/report', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ v: 1, isp: cleanIsp(), id: installId(), ips: top }), keepalive: true }); return r.ok; } catch { return false; }
+}
+
+/* ---------------- Trend & hourly pattern (local only) ---------------- */
+const TREND_KEY = 'dops-trend';
+const readTrend = () => { try { return JSON.parse(localStorage.getItem(TREND_KEY) || '{}'); } catch { return {}; } };
+function recordTrend(tested, list) {
+  if (tested < 5) return;
+  const all = readTrend(), lim = Date.now() - 30 * 864e5, arr = (all[ispName] = (all[ispName] || []).filter(e => e.t >= lim)), p = list.map(r => r.ping).sort((a, b) => a - b);
+  arr.push({ t: Date.now(), h: new Date().getHours(), n: tested, k: list.length, m: p.length ? Math.round(p[Math.floor(p.length / 2)]) : 0 });
+  if (arr.length > 200) arr.splice(0, arr.length - 200);
+  try { localStorage.setItem(TREND_KEY, JSON.stringify(all)); } catch {} renderTrend();
+}
+function renderTrend() {
+  const box = $('trendBody'), arr = readTrend()[ispName] || [];
+  if (arr.length < 3) { box.textContent = t('trendNone'); return; }
+  const agg = Array.from({ length: 24 }, () => ({ n: 0, k: 0 }));
+  arr.forEach(e => { agg[e.h].n += e.n; agg[e.h].k += e.k; });
+  const ratio = agg.map(a => a.n ? a.k / a.n : null), vals = ratio.filter(x => x !== null), max = Math.max(...vals, 0.0001), cur = new Date().getHours();
+  let bars = '';
+  ratio.forEach((r, h) => { const bh = r === null ? 2 : Math.max(2, Math.round(r / max * 70)); bars += `<rect x="${h * 12 + 2}" y="${80 - bh}" width="9" height="${bh}" rx="2" fill="${r === null ? 'var(--bd)' : h === cur ? 'var(--ac)' : 'var(--ok)'}"><title>${h}:00 — ${r === null ? '–' : Math.round(r * 100) + '%'}</title></rect>`; });
+  bars += [0, 6, 12, 18, 23].map(h => `<text x="${h * 12 + 6}" y="94" font-size="8" text-anchor="middle" fill="currentColor">${h}</text>`).join('');
+  const top = ratio.map((r, h) => [r, h]).filter(x => x[0] !== null).sort((a, b) => b[0] - a[0]).slice(0, 3).map(x => x[1] + ':00').join('، ');
+  const last = arr.slice(-24), mx = Math.max(...last.map(e => e.m), 1);
+  const pts = last.map((e, i) => `${last.length === 1 ? 0 : Math.round(i / (last.length - 1) * 286) + 1},${46 - Math.round(e.m / mx * 40)}`).join(' ');
+  box.innerHTML = `<div class="tl">${esc(t('trendHour'))}</div><svg viewBox="0 0 290 98" role="img" aria-label="${esc(t('trendHour'))}">${bars}</svg><div class="tl">${esc(t('trendBest', { h: top }))}</div>
+    <div class="tl">${esc(t('trendPing'))} (max ${mx}ms)</div><svg viewBox="0 0 290 50" role="img" aria-label="${esc(t('trendPing'))}"><polyline points="${pts}" fill="none" stroke="var(--ac)" stroke-width="2" stroke-linejoin="round"/></svg>`;
+}
+$('trend').addEventListener('toggle', renderTrend);
+
 /* ---------------- Operator detection opt-out ---------------- */
 const loadISP_orig = loadISP;
 loadISP = async function () {
@@ -1400,6 +1521,8 @@ loadISP = async function () {
   return loadISP_orig();
 };
 $('noIsp').addEventListener('change', () => { save(); loadISP(); });
+$('shareOpt').addEventListener('change', save);
+if (!COMMUNITY_URL) { $('shareOpt').disabled = true; $('shareOpt').checked = false; const oc = document.querySelector('#src option[value="community"]'); if (oc) oc.disabled = true; }
 
 /* ---------------- Repo list freshness badge ---------------- */
 let repoAgeState = null;
