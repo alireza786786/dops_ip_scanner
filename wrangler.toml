@@ -1,0 +1,18 @@
+# Optional: only needed if you deploy with the wrangler CLI instead of the dashboard.
+name = "dops-worker"
+main = "index.js"
+compatibility_date = "2025-01-01"
+
+[triggers]
+crons = ["*/30 * * * *"]
+
+[vars]
+GH_REPO = "alireza786786/dops_ip_scanner"
+GH_WORKFLOW = "scanner.yml"
+GH_REF = "main"
+ALLOWED_ORIGIN = "https://alireza786786.github.io"
+
+# [[kv_namespaces]]
+# binding = "KV"
+# id = "<your KV namespace id>"
+# Secrets (set with: wrangler secret put NAME): GH_TOKEN, SALT, BOT_TOKEN, ADMIN_CHAT_ID
