@@ -19,9 +19,19 @@ INLINE_KEYBOARD = {
 def format_config_remark(flag="🌐", country="Clean CDN", city="Anycast Edge", ping="0", feature="High Speed"):
     return f"👉🆔@Goodbaye_filtering\n📡{flag} {country}\n®️{city}\n🅿️ping:{ping}ms\n⚡{feature}"
 
-def send_telegram_file(file_path: str, caption: str = ""):
+def send_telegram_file(file_path: str, caption: str = "", extra_buttons=None):
+    """extra_buttons: optional list of rows (each row a list of {"text","url"} dicts) inserted right
+    after the channel/group/online-scanner rows and before the "share with friends" row. The shared
+    INLINE_KEYBOARD constant is never mutated, so calls without extra_buttons keep the original keyboard."""
     if not BOT_TOKEN or not CHAT_ID or not os.path.exists(file_path):
         return False
+    keyboard = INLINE_KEYBOARD
+    if extra_buttons:
+        rows = [list(row) for row in INLINE_KEYBOARD["inline_keyboard"]]
+        insert_at = min(3, len(rows))  # after channel/group/online-scanner, before the share row
+        for offset, row in enumerate(extra_buttons):
+            rows.insert(insert_at + offset, list(row))
+        keyboard = {"inline_keyboard": rows}
     url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendDocument"
     boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW"
     with open(file_path, "rb") as f:
@@ -31,7 +41,7 @@ def send_telegram_file(file_path: str, caption: str = ""):
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"chat_id\"\r\n\r\n{CHAT_ID}\r\n"
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"caption\"\r\n\r\n{caption}\r\n"
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"parse_mode\"\r\n\r\nHTML\r\n"
-        f"--{boundary}\r\nContent-Disposition: form-data; name=\"reply_markup\"\r\n\r\n{json.dumps(INLINE_KEYBOARD)}\r\n"
+        f"--{boundary}\r\nContent-Disposition: form-data; name=\"reply_markup\"\r\n\r\n{json.dumps(keyboard)}\r\n"
         f"--{boundary}\r\nContent-Disposition: form-data; name=\"document\"; filename=\"{filename}\"\r\nContent-Type: text/plain\r\n\r\n"
     ).encode("utf-8") + file_bytes + f"\r\n--{boundary}--\r\n".encode("utf-8")
     req = urllib.request.Request(url, data=body, headers={"Content-Type": f"multipart/form-data; boundary={boundary}"})

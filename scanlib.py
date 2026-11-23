@@ -17,6 +17,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from statistics import median
 from typing import Callable, List, Optional
+from urllib.parse import quote
 from urllib.request import urlopen, Request
 try:
     from sender import send_telegram_file, format_config_remark, send_telegram_message
@@ -288,15 +289,31 @@ def telegram_due(state):
     return TG_FORCE or time.time() - state.get("tg_at", 0) >= TG_INTERVAL_MIN * 60
 
 
+WEB_SCANNER_URL = "https://alireza786786.github.io/dops_ip_scanner/"
+
+
 def send_telegram(p, pool, txt):
     best = pool[0]
     cap = format_config_remark(flag=p.flag, country=p.country, city=p.city, ping=str(int(best["ping_ms"])),
                                feature=f"تعداد: {len(pool)} آی‌پی سالم")
-    top = "\n".join(f"🔹 <code>{x['ip']}</code> (⚡ {int(x['ping_ms'])}ms · پورت‌ها: {','.join(map(str, x['ports']))})" for x in pool[:5])
+    top5 = pool[:5]
+    top = "\n".join(f"🔹 <code>{x['ip']}</code> (⚡ {int(x['ping_ms'])}ms · پورت‌ها: {','.join(map(str, x['ports']))})" for x in top5)
     note = "\n\nℹ️ این تست از سرور گیت‌هاب (خارج ایران) انجام شده؛ برای نتیجهٔ دقیق روی اینترنت خودتان از اسکنر وب استفاده کنید." \
         if SHOW_VANTAGE_NOTE and os.environ.get("GITHUB_ACTIONS") else ""
-    ok = send_telegram_file(txt, caption=f"{cap}\n\n👑 <b>۵ آی‌پی برتر (کلیک روی آی‌پی = کپی):</b>\n{top}\n\n"
-                                         f"📁 لیست کامل {len(pool)} آی‌پی در فایل بالا قرار دارد.{note}")
+    # one-tap link: preloads these same IPs into the web scanner's manual-IP box so the user can
+    # retest them on their own network without retyping anything (extra_buttons is a sender.py feature;
+    # an older sender.py without it silently ignores the kwarg via **_).
+    ips_param = quote(",".join(x["ip"] for x in top5), safe="")
+    test_url = f"{WEB_SCANNER_URL}?ips={ips_param}&src=tg"
+    extra_buttons = [[{"text": "🚀 تست این آی‌پی‌ها روی اینترنت خودم", "url": test_url}]]
+    try:
+        ok = send_telegram_file(txt, caption=f"{cap}\n\n👑 <b>۵ آی‌پی برتر (کلیک روی آی‌پی = کپی):</b>\n{top}\n\n"
+                                             f"📁 لیست کامل {len(pool)} آی‌پی در فایل بالا قرار دارد.{note}",
+                                 extra_buttons=extra_buttons)
+    except TypeError:
+        # sender.py predates extra_buttons support -> fall back to the plain call
+        ok = send_telegram_file(txt, caption=f"{cap}\n\n👑 <b>۵ آی‌پی برتر (کلیک روی آی‌پی = کپی):</b>\n{top}\n\n"
+                                             f"📁 لیست کامل {len(pool)} آی‌پی در فایل بالا قرار دارد.{note}")
     return ok is not False      # older sender.py returned None -> treat as sent
 
 

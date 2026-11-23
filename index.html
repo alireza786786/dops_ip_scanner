@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="description" content="DOPS V14 Meridian — Multi-CDN IP Scanner, Config Rewriter & Telegram Dispatcher">
-<title>DOPS V15.1 Meridian — Multi-CDN Scanner</title>
+<title>DOPS V15.2 Meridian — Multi-CDN Scanner</title>
 <style>
 :root{
   --bg:#070b14;--card:#0f172a;--bd:#1e293b;--ac:#00ffcc;--tx:#f1f5f9;--mu:#94a3b8;
@@ -90,6 +90,8 @@ th[data-k]{cursor:pointer;user-select:none}
 [data-theme="light"] .btn.main,[data-theme="light"] .btn.main:disabled{color:#fff}
 summary{padding:6px 0;min-height:28px}
 .fake-warn a{display:inline-block;padding:4px 6px}
+#manualCard.flash{animation:cardFlash 1.3s ease 2}
+@keyframes cardFlash{0%,100%{box-shadow:none}50%{box-shadow:0 0 0 3px var(--ac)}}
 .age-badge{display:inline-block;margin-top:8px;padding:4px 10px;border-radius:999px;font-size:11.5px;border:1px solid var(--bd)}
 .age-badge.ok{color:var(--ok);border-color:var(--ok)}.age-badge.warn{color:var(--wn);border-color:var(--wn)}.age-badge.bad{color:var(--er);border-color:var(--er)}
 .q-ip{font:800 26px/1.2 ui-monospace,Menlo,Consolas,monospace;color:var(--ok);direction:ltr;text-align:center;margin:10px 0 2px;word-break:break-all}
@@ -137,7 +139,7 @@ html.quick #splash{animation-delay:.45s}
 <div id="fakeWarn" class="fake-warn" role="alert" hidden><b data-i18n="fakeTitle">⚠️ نسخهٔ غیررسمی!</b> <span data-i18n="fakeBody"></span> <a id="fakeLink" href="https://alireza786786.github.io/dops_ip_scanner/" rel="noopener" data-i18n="fakeGo"></a></div>
 <div class="wrap">
   <div class="top-nav">
-    <div class="badge">DOPS V15.1 · MERIDIAN</div>
+    <div class="badge">DOPS V15.2 · MERIDIAN</div>
     <div class="nav-actions">
       <a class="icon-btn" id="ghBtn" href="https://github.com/alireza786786/dops_ip_scanner" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a>
       <button class="icon-btn" id="themeToggle" aria-label="Theme" title="Theme"><span id="themeIcon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg></span></button>
@@ -190,7 +192,7 @@ html.quick #splash{animation-delay:.45s}
     <button class="sm" id="wipeAll" style="width:100%" data-i18n="wipeAll">🧹 پاک‌سازی همه‌چیز (حافظه، کش و برنامهٔ نصب‌شده)</button>
   </details>
 
-  <div class="card">
+  <div class="card" id="manualCard">
     <div class="ct"><span data-i18n="manualTitle">ورود دستی آی‌پی</span><span class="hint" data-i18n="manualHint">تک‌آی‌پی یا رنج CIDR</span></div>
     <textarea id="manualIps" style="height:60px;" placeholder="104.16.10.20&#10;162.159.20.0/24"></textarea>
     <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
@@ -198,6 +200,7 @@ html.quick #splash{animation-delay:.45s}
       <button class="sm" style="flex:1 1 auto" id="bScanOnlyManual" data-i18n="bScanOnly">🎯 فقط اسکن اینها</button>
       <button class="sm" style="flex:1 1 auto" id="clearManual" data-i18n="bClearManual">🗑 پاک کردن اینها</button>
     </div>
+    <p class="hint" id="tgPrefillNote" hidden data-i18n="tgPrefillNote"></p>
   </div>
 
   <div class="card">
@@ -553,7 +556,7 @@ fa: {
   tgCopied:'متن تلگرام کپی شد ✔️', tgListTitle:'لیست آی‌پی‌های تمیز CDN (تست‌شده)',
   tgIsp:'اپراتور', tgTime:'زمان تست', tgForClient:'برای کلاینت (Clean IP)', tgFooter:'اسکن شده با DOPS Meridian',
   tgDirectIntact:'کانفیگ Reality دست‌نخورده ماند', tgConfigs:'کانفیگ',
-  bClearManual:'🗑 پاک کردن اینها', cpFieldHint:'یا فقط یک مورد را برای کپی انتخاب کنید (آی‌پی + همان مقدار، به تعداد لیست بالا):', optTopNAuto:'خودکار: به تعداد همهٔ آی‌پی‌های سالم', topNAutoHint:'الان یعنی {n} آی‌پی (همهٔ آی‌پی‌های سالم فعلی).', optCommunity:'جمعی — گزارش کاربران همین اپراتور (کاندیدا)', optV6:'Cloudflare IPv6 ⚠️ آزمایشی',
+  bClearManual:'🗑 پاک کردن اینها', tgPrefillNote:'ℹ️ این آی‌پی‌ها از پیام تلگرام شما وارد شدند؛ برای تست روی اینترنت خودتان «🎯 فقط اسکن اینها» را بزنید.', cpFieldHint:'یا فقط یک مورد را برای کپی انتخاب کنید (آی‌پی + همان مقدار، به تعداد لیست بالا):', optTopNAuto:'خودکار: به تعداد همهٔ آی‌پی‌های سالم', topNAutoHint:'الان یعنی {n} آی‌پی (همهٔ آی‌پی‌های سالم فعلی).', optCommunity:'جمعی — گزارش کاربران همین اپراتور (کاندیدا)', optV6:'Cloudflare IPv6 ⚠️ آزمایشی',
   privShare:'اشتراک ناشناس نتایج با کاربران همین اپراتور (اختیاری، پیش‌فرض خاموش): فقط نام اپراتور، حداکثر ۱۰ آی‌پی سالم کلودفلر با پینگ و یک شناسهٔ تصادفی فرستاده می‌شود؛ بدون آی‌پی شما، کانفیگ یا توکن. هنگام فعال بودن سرویس جمعی در دسترس است.',
   communityNote:'جمعی: {n} آی‌پی گزارش‌شده توسط چند کاربر همین اپراتور (کاندیدا)', communityFail:'فهرست جمعی در دسترس نیست؛ از بانک آفلاین استفاده شد', v6Note:'IPv6 آزمایشی: آدرس‌های نگاشت‌شدهٔ کلودفلر',
   cdnWarnCommunity:'⚠️ این آی‌پی‌ها را کاربران دیگر گزارش کرده‌اند؛ فقط کاندیدا هستند و روی اینترنت شما دوباره تست می‌شوند.',
@@ -634,7 +637,7 @@ en: {
   tgCopied:'Telegram post copied ✔️', tgListTitle:'Clean CDN IP list (tested)',
   tgIsp:'ISP', tgTime:'Tested at', tgForClient:'For client (Clean IP)', tgFooter:'Scanned with DOPS Meridian',
   tgDirectIntact:'Reality config(s) left intact', tgConfigs:'configs',
-  bClearManual:'🗑 Clear These', cpFieldHint:'Or copy just one field (IP + that value, for the list picked above):', optTopNAuto:'Automatic: as many as all healthy IPs', topNAutoHint:'Right now that means {n} IPs (all currently healthy).', optCommunity:'Community — reports from users on your operator (candidates)', optV6:'Cloudflare IPv6 ⚠️ experimental',
+  bClearManual:'🗑 Clear These', tgPrefillNote:'ℹ️ These IPs were loaded from your Telegram message; tap “🎯 Scan only these” to test them on your own network.', cpFieldHint:'Or copy just one field (IP + that value, for the list picked above):', optTopNAuto:'Automatic: as many as all healthy IPs', topNAutoHint:'Right now that means {n} IPs (all currently healthy).', optCommunity:'Community — reports from users on your operator (candidates)', optV6:'Cloudflare IPv6 ⚠️ experimental',
   privShare:'Share results anonymously with users on the same operator (optional, off by default): only the operator name, up to 10 healthy Cloudflare IPs with ping and a random id are sent; never your IP, configs or token. Available when the community service is enabled.',
   communityNote:'Community: {n} IPs reported by several users on your operator (candidates)', communityFail:'Community list unavailable; offline bank used', v6Note:'Experimental IPv6: mapped Cloudflare addresses',
   cdnWarnCommunity:'⚠️ These IPs were reported by other users; treat them as candidates, they are re-tested on your network.',
@@ -1613,7 +1616,20 @@ $('qCopyIp').onclick = () => { const b = bestList()[0]; if (b) copy(b.ip); };
 $('qCopyCfg').onclick = () => copy(cfgLines().join('\n'));
 $('qQr').onclick = () => { qrLines = cfgLines(); qrIdx = 0; qrShow(); };
 
-load(); loadISP(); loadRepoAge(); checkPortMismatch(); srcUi();
+function prefillFromLink() {
+  let ips;
+  try { ips = new URLSearchParams(location.search).get('ips'); } catch { return; }
+  if (!ips) return;
+  const list = [...new Set(ips.split(',').map(s => s.trim()).filter(ip => isIPv4(ip) || isIPv6(ip)))].slice(0, 20);
+  if (!list.length) return;
+  $('manualIps').value = list.join('\n');
+  $('tgPrefillNote').hidden = false;
+  $('manualCard').classList.add('flash');
+  setTimeout(() => $('manualCard').classList.remove('flash'), 2600);
+  $('manualCard').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+load(); loadISP(); loadRepoAge(); checkPortMismatch(); srcUi(); prefillFromLink();
 if (!IS_OFFICIAL) { $('fakeWarn').hidden = false; $('tgToken').value = ''; $('tgToken').disabled = true; $('remember').checked = false; $('remember').disabled = true; } applyI18n();
 </script>
 <script>setTimeout(function(){var e=document.getElementById('splash');if(e)e.remove()},2600);</script>
